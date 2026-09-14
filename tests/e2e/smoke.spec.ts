@@ -6,6 +6,14 @@ test.describe("smoke", () => {
     expect(response?.status()).toBe(200)
     await expect(page.getByTestId("section-welcome")).toBeVisible()
     await expect(page.getByTestId("welcome-heading")).toBeVisible()
+    await expect(page.getByTestId("section-welcome")).toHaveAttribute(
+      "data-bf-id",
+      "home.welcome.shell",
+    )
+    await expect(page.getByTestId("welcome-heading")).toHaveAttribute(
+      "data-bf-id",
+      "home.welcome.heading",
+    )
   })
 
   test("welcome accordion expands the second step", async ({ page }) => {

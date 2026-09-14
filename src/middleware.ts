@@ -1,4 +1,5 @@
 import { defineMiddleware } from "astro:middleware"
+import { lookupLegacyRedirect } from "~/lib/legacy-redirects"
 
 /**
  * Mandatory cache + robots + baseline security headers.
@@ -10,13 +11,22 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const pathname = context.url.pathname
   const isApi = pathname.startsWith("/api/")
 
+  if (!isApi) {
+    const legacy = lookupLegacyRedirect(pathname)
+    if (legacy) {
+      return context.redirect(legacy.to, 301)
+    }
+  }
+
   if (context.cache.enabled && isApi) {
     context.cache.set(false)
   }
 
   const response = await next()
 
-  if (isApi) {
+  // API + Astro-handled 404s must not be CDN-cached. Static `/_astro` 404s may
+  // still bypass this middleware — skew + short HTML swr + check:asset-links.
+  if (isApi || response.status === 404) {
     response.headers.set("Cache-Control", "no-store")
     response.headers.set("CDN-Cache-Control", "no-store")
     response.headers.set("Vercel-CDN-Cache-Control", "no-store")

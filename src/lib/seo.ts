@@ -5,11 +5,11 @@ import { localePath } from "~/lib/i18n"
 import { stripHtml } from "~/lib/sanitize"
 import {
   absoluteUrl,
+  getSiteUrl,
   organizationLogo,
   organizationName,
   siteDescription,
   siteName,
-  siteUrl,
 } from "~/lib/site"
 import type { Page } from "~/types/page"
 import type { Post } from "~/types/post"
@@ -111,7 +111,7 @@ export function buildPageSeo(options: {
       isPartOf: {
         "@type": "WebSite",
         name: siteName(),
-        url: siteUrl(),
+        url: getSiteUrl(),
       },
       publisher: {
         "@type": "Organization",

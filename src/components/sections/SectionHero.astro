@@ -1,16 +1,9 @@
 ---
 // SectionHero.astro
-//
-// CMS JSON:
-// {
-//   "title":    { "en": "Headline", "de": "Titel" },
-//   "lead":     { "en": "Lead text", "de": "Lead" },
-//   "ctaLabel": { "en": "Get started", "de": "Loslegen" },
-//   "ctaHref":  "/posts",
-//   "img":      "",
-//   "_orbi":    { "component": "SectionHero" }
-// }
 import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
+import { resolveReservationHref } from "~/lib/reservation"
+import type { ReservationMode } from "~/lib/reservation"
 import type { I18nString } from "~/types/i18n"
 import type { Locale } from "~/config/locales"
 
@@ -19,31 +12,59 @@ interface Props {
   lead?: I18nString
   ctaLabel?: I18nString
   ctaHref?: string
+  reservationMode?: ReservationMode
+  reservationTarget?: string
   img?: string
   locale: Locale
 }
 
-const { title, lead, ctaLabel, ctaHref, img, locale } = Astro.props
+const {
+  title,
+  lead,
+  ctaLabel,
+  ctaHref,
+  reservationMode,
+  reservationTarget,
+  img,
+  locale,
+} = Astro.props
 const heading = translate(title, locale)
 const cta = translate(ctaLabel, locale)
+const href = resolveReservationHref({
+  reservationMode,
+  reservationTarget,
+  ctaHref,
+})
 ---
 
-<section class="container-wide py-section">
+<section
+  class="container-wide py-section"
+  {...bf("home.hero.shell", "container", "hero")}
+>
   <div class="grid items-center gap-10 lg:grid-cols-2">
     <div>
       {
         heading && (
-          <h1 class="mb-4 text-4xl font-semibold tracking-tight text-balance md:text-5xl">
+          <h1
+            class="mb-4 text-4xl font-semibold tracking-tight text-balance md:text-5xl"
+            {...bf("home.hero.heading", "style_target", "hero")}
+          >
             {heading}
           </h1>
         )
       }
-      <p class="mb-8 text-lg text-neutral-600">{translate(lead, locale)}</p>
+      <p
+        class="mb-8 text-lg text-neutral-600"
+        {...bf("home.hero.body", "style_target", "hero")}
+      >
+        {translate(lead, locale)}
+      </p>
       {
-        cta && ctaHref && (
+        cta && href && (
           <a
-            href={ctaHref}
+            href={href}
             class="bg-brand-900 inline-flex rounded-lg px-5 py-2.5 text-sm font-medium text-white"
+            {...bf("home.hero.cta", "chrome_denied", "hero")}
           >
             {cta}
           </a>
@@ -57,6 +78,7 @@ const cta = translate(ctaLabel, locale)
           alt=""
           class="w-full rounded-2xl object-cover shadow-sm"
           loading="eager"
+          {...bf("home.hero.image", "image", "hero")}
         />
       )
     }

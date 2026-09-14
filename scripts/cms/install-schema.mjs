@@ -6,6 +6,7 @@ import {
   orbitypeSql,
   sqlConfigured,
 } from "../lib/orbitype-sql.mjs"
+import { assertExpectedContext } from "../lib/assert-expected-context.mjs"
 import {
   CMS_SCHEMA_SQL_SAFE,
   CREATE_UID_FUNCTION_SQL,
@@ -47,6 +48,13 @@ async function main() {
       "• could not probe connector context:",
       error instanceof Error ? error.message : error,
     )
+  }
+
+  try {
+    assertExpectedContext(context)
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : error)
+    process.exit(1)
   }
 
   console.log("• about to install CMS schema")

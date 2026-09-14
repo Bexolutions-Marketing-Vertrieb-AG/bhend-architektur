@@ -24,18 +24,21 @@ flowchart LR
    - `X-Robots-Tag` is `noindex, nofollow` on preview
    - No `localhost` in HTML/sitemap/canonical
    - `/api/health/cache-probe` is `no-store`
+   - `pnpm run check:asset-links -- <preview-url>` — every linked `/_astro/*.css` returns CSS 200
    - Optional: mutate a preview connector value → `POST /api/revalidate` → HTML updates
 4. Record deployment URL, commit SHA, checklist results.
 5. Promote that deployment to production (`vercel promote <url>`).
-6. Smoke production: home, form (if enabled), sitemap, health.
+6. Smoke production: home, form (if enabled), sitemap, health, and `pnpm run check:asset-links -- <prod-url>`.
 7. Practice rollback: promote the previous production deployment.
+
+Do **not** treat “revalidate after every Production deploy” as the CSS health fix. Use skew protection + short HTML `swr` + asset-link assert (see `docs/template/CACHE.md`). Keep `/api/revalidate` for CMS Workflows.
 
 ## Security headers (production)
 
 `vercel.json` ships baseline headers. Middleware adds:
 
 - `noindex` on non-production / `NOINDEX=true` / `/api/**`
-- `no-store` on `/api/**`
+- `no-store` on `/api/**` and Astro-handled 404 responses
 
 For HSTS and CSP:
 

@@ -1,15 +1,10 @@
 ---
 // SectionCta.astro
 //
-// CMS JSON:
-// {
-//   "title":    { "en": "Ready?", "de": "Bereit?" },
-//   "text":     { "en": "…", "de": "…" },
-//   "ctaLabel": { "en": "Contact", "de": "Kontakt" },
-//   "ctaHref":  "/#contact",
-//   "_orbi":    { "component": "SectionCta" }
-// }
+// Prefer reservationMode + reservationTarget over label heuristics.
 import { translate } from "~/lib/i18n"
+import { resolveReservationHref } from "~/lib/reservation"
+import type { ReservationMode } from "~/lib/reservation"
 import type { I18nString } from "~/types/i18n"
 import type { Locale } from "~/config/locales"
 
@@ -18,12 +13,27 @@ interface Props {
   text?: I18nString
   ctaLabel?: I18nString
   ctaHref?: string
+  reservationMode?: ReservationMode
+  reservationTarget?: string
   locale: Locale
 }
 
-const { title, text, ctaLabel, ctaHref = "#", locale } = Astro.props
+const {
+  title,
+  text,
+  ctaLabel,
+  ctaHref = "#",
+  reservationMode,
+  reservationTarget,
+  locale,
+} = Astro.props
 const heading = translate(title, locale)
 const cta = translate(ctaLabel, locale)
+const href = resolveReservationHref({
+  reservationMode,
+  reservationTarget,
+  ctaHref,
+})
 ---
 
 <section class="py-section">
@@ -45,7 +55,7 @@ const cta = translate(ctaLabel, locale)
     {
       cta && (
         <a
-          href={ctaHref}
+          href={href}
           class="text-brand-900 inline-flex rounded-lg bg-white px-5 py-2.5 text-sm font-medium"
         >
           {cta}

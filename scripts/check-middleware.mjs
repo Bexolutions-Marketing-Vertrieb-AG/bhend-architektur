@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Fail if src/middleware.ts is missing or no longer disables /api cache.
+ * Fail if src/middleware.ts is missing or no longer disables /api + 404 cache.
  */
 import fs from "node:fs"
 
@@ -19,5 +19,9 @@ if (!content.includes("cache.set(false)") && !content.includes("no-store")) {
   console.error("FAIL  middleware does not disable API caching")
   process.exit(1)
 }
+if (!content.includes("status === 404") && !content.includes("status == 404")) {
+  console.error("FAIL  middleware does not no-store Astro 404 responses")
+  process.exit(1)
+}
 
-console.log("ok    middleware API cache guard present")
+console.log("ok    middleware API + 404 cache guard present")

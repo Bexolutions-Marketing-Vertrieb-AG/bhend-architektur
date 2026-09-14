@@ -1,5 +1,12 @@
 # Astro + Orbitype repository instructions
 
+## Hardening playbook
+
+Operator and agent lessons from client ships live under [`docs/template/`](docs/template/):
+[LESSONS](docs/template/LESSONS.md), [CACHE](docs/template/CACHE.md), [SEO](docs/template/SEO.md),
+[BSI](docs/template/BSI.md), [ENV](docs/template/ENV.md), [PROMPTS](docs/template/PROMPTS.md),
+[PORT](docs/template/PORT.md). Prefer those over inventing cache/SEO/BSI workflows.
+
 ## Required workflows
 
 - For Figma inspection, use `.agents/skills/figma-rest-design-reader`.

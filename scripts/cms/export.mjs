@@ -10,6 +10,7 @@ import {
   sqlConfigured,
 } from "../lib/orbitype-sql.mjs"
 import { confirm, hasYesFlag } from "../lib/confirm.mjs"
+import { assertExpectedContext } from "../lib/assert-expected-context.mjs"
 
 loadEnvFile()
 
@@ -20,26 +21,10 @@ async function main() {
   }
 
   const context = await getConnectorContext().catch(() => ({}))
-  const expectedProject = process.env.ORBITYPE_EXPECTED_PROJECT_ID
-  const expectedConnector = process.env.ORBITYPE_EXPECTED_CONNECTOR_ID
-  if (
-    expectedProject &&
-    context.projectId &&
-    context.projectId !== expectedProject
-  ) {
-    console.error(
-      `FAIL  projectId ${context.projectId} !== ORBITYPE_EXPECTED_PROJECT_ID`,
-    )
-    process.exit(1)
-  }
-  if (
-    expectedConnector &&
-    context.connectorId &&
-    context.connectorId !== expectedConnector
-  ) {
-    console.error(
-      `FAIL  connectorId ${context.connectorId} !== ORBITYPE_EXPECTED_CONNECTOR_ID`,
-    )
+  try {
+    assertExpectedContext(context)
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : error)
     process.exit(1)
   }
 

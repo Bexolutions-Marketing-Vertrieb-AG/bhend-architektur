@@ -47,10 +47,19 @@ jobs:
       - run: pnpm run typecheck
       - run: pnpm run check:leakage
       - run: pnpm run check:cms-routes
+      - run: pnpm run check:cms-setup
+      - run: pnpm run check:bsi
+      - run: pnpm run check:dx
       - run: pnpm run check:section-contracts
       - run: pnpm run check:content-placeholders
       - run: pnpm run check:docs
       - run: pnpm run check:assets
+      - run: pnpm run check:cache-config
+      - run: pnpm run check:asset-links -- --fixture tests/fixtures/asset-links
+      - run: pnpm run check:production-site-url
+      - run: pnpm run check:legacy-redirects
+      - run: pnpm run check:no-localhost -- --fixture tests/fixtures/no-localhost/clean
+      - run: pnpm run check:no-localhost -- --fixture tests/fixtures/no-localhost/dirty --expect-fail
       - run: pnpm run check:middleware
       - run: pnpm run check:no-ddl-in-api
       - run: pnpm run cms:validate

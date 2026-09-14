@@ -71,26 +71,34 @@ There is **no** `astro preview` script: `@astrojs/vercel` does not support it. U
 
 ## Documentation
 
-| Document                                                       | Contents                                     |
-| -------------------------------------------------------------- | -------------------------------------------- |
-| [docs/00-TEMPLATE-BLUEPRINT.md](docs/00-TEMPLATE-BLUEPRINT.md) | Architecture and Orbitype contract           |
-| [docs/01-orbitype-cms.md](docs/01-orbitype-cms.md)             | Operator CMS guide                           |
-| [docs/03-deployment.md](docs/03-deployment.md)                 | Vercel, render modes, revalidate             |
-| [docs/preview-promote.md](docs/preview-promote.md)             | Preview checks → promote → rollback          |
-| [docs/vercel-linking.md](docs/vercel-linking.md)               | Linking Vercel without committing `.vercel/` |
-| [docs/DEVIATIONS.md](docs/DEVIATIONS.md)                       | Verified departures                          |
-| `docs/adr/`                                                    | Architecture decision records                |
+| Document                                                       | Contents                                       |
+| -------------------------------------------------------------- | ---------------------------------------------- |
+| [docs/00-TEMPLATE-BLUEPRINT.md](docs/00-TEMPLATE-BLUEPRINT.md) | Architecture and Orbitype contract             |
+| [docs/01-orbitype-cms.md](docs/01-orbitype-cms.md)             | Operator CMS guide                             |
+| [docs/03-deployment.md](docs/03-deployment.md)                 | Vercel, render modes, revalidate               |
+| [docs/preview-promote.md](docs/preview-promote.md)             | Preview checks → promote → rollback            |
+| [docs/vercel-linking.md](docs/vercel-linking.md)               | Linking Vercel without committing `.vercel/`   |
+| [docs/DEVIATIONS.md](docs/DEVIATIONS.md)                       | Verified departures                            |
+| `docs/adr/`                                                    | Architecture decision records                  |
+| [docs/template/LESSONS.md](docs/template/LESSONS.md)           | Hardening lessons from first client ships      |
+| [docs/template/CACHE.md](docs/template/CACHE.md)               | Skew protection, short SWR, asset checks       |
+| [docs/template/SEO.md](docs/template/SEO.md)                   | Canonicals, 301 cutover, no-localhost gates    |
+| [docs/template/BSI.md](docs/template/BSI.md)                   | Binflow surface inventory + `data-bf-*`        |
+| [docs/template/ENV.md](docs/template/ENV.md)                   | Env tiers and key dualism                      |
+| [docs/template/PROMPTS.md](docs/template/PROMPTS.md)           | Agent/operator prompt pack                     |
+| [docs/template/PORT.md](docs/template/PORT.md)                 | How this playbook was ported into the template |
 
 ## Configuring a project
 
-1. `pnpm run bootstrap` (or manually set `name` in `package.json`).
-2. Replace `public/favicon.svg` (bootstrap fails if the template hash remains).
-3. Fill in the `PUBLIC_*` variables in `.env` — production must use `https://`, never localhost.
-4. Create an Orbitype SQL connector key; set `ORBITYPE_API_SQL_KEY`; set `ORBITYPE_MOCK=false`.
-5. Run `pnpm run cms:install` then `pnpm run cms:seed` from an authorized machine (**never** via HTTP).
-6. Export authoring keys for Cursor MCP (`pnpm run mcp:env -- --write-file …`), reload MCP.
-7. Set design tokens in `src/styles/global.css`.
-8. Confirm locale in `src/config/locales.ts`.
+1. `pnpm run setup`
+2. `pnpm run project:init` (alias: `pnpm run bootstrap`) — or pass flags for agents; refuses `My Site` / template package name.
+3. Replace `public/favicon.svg` (bootstrap fails if the template hash remains).
+4. Fill in remaining `.env` secrets — production `PUBLIC_SITE_URL` must be `https://` on a real domain (never localhost or `*.vercel.app`). See [`docs/template/ENV.md`](docs/template/ENV.md).
+5. Create an Orbitype SQL connector key; set `ORBITYPE_API_SQL_KEY` (and locally `ORBITYPE_SQL_API_KEY`); set `ORBITYPE_MOCK=false`.
+6. Run `pnpm run cms:setup` (install + seed) — or `cms:install` then `cms:seed` — from an authorized machine (**never** via HTTP). Set `ORBITYPE_EXPECTED_PROJECT_ID` / `ORBITYPE_EXPECTED_CONNECTOR_ID` to fail closed on the wrong connector.
+7. Export authoring keys for Cursor MCP (`pnpm run mcp:env -- --write-file …`), reload MCP.
+8. Set design tokens in `src/styles/global.css`.
+9. Confirm locale in `src/config/locales.ts`.
 
 ## Rendering modes
 
