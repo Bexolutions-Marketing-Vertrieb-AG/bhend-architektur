@@ -1,9 +1,12 @@
 {
   "repository": "arrobabeto/orbitype-astro-template",
   "version": "0.1.0",
-  "commit": null,
-  "createdAt": null,
-  "owner": null,
+  "commit": "393fade6f3d5686ac0856ca4310e21f5bfbfdddd",
+  "createdAt": "2026-09-14T23:53:37.614Z",
+  "owner": "Bexolutions AG",
   "productionBranch": "main",
-  "notes": "Filled by pnpm run bootstrap when cloning into a client project."
+  "connectorId": "b4619cf8-38b0-46c9-8fa7-c43ae17d1ced",
+  "domain": "https://www.bhend-architektur.ch/",
+  "locale": "de",
+  "siteName": "Bhend Architektur"
 }

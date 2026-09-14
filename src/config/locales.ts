@@ -10,11 +10,11 @@
  * needs, so this template derives the locale from URL segments itself.
  * See docs/00-TEMPLATE-BLUEPRINT.md §7.6 and ADR-0006.
  */
-export const LOCALES = ["en"] as const
+export const LOCALES = ["de"] as const
 
 export type Locale = (typeof LOCALES)[number]
 
-export const DEFAULT_LOCALE: Locale = "en"
+export const DEFAULT_LOCALE: Locale = "de"
 
 export function isLocale(value: string): value is Locale {
   return (LOCALES as readonly string[]).includes(value)

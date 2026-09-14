@@ -1,10 +1,10 @@
-# Orbitype Astro Template
+# Bhend Architektur
 
 A zero-JavaScript-by-default Astro starter for [Orbitype](https://www.orbitype.com)-powered websites. Pages are composed from CMS-authored JSON sections, SEO is server-rendered, and CDN caching uses native Astro/`@astrojs/vercel` tags.
 
 Use it for landing pages, marketing sites, brochure sites and documentation sites — anywhere content dominates and interactivity is incidental.
 
-> Independent Astro counterpart to a Nuxt/Vue Orbitype CMS template. Same `pages` / `posts` / `settings` schema and `sections` JSON convention.
+> Architekturbüro in Oftringen für Wohn-, Gewerbe- und öffentliche Bauprojekte. Massgeschneidert geplant, nachhaltig realisiert. Kontaktieren Sie uns.
 
 ---
 
@@ -113,6 +113,10 @@ Caching is inert under `astro dev`. Observe CDN behaviour on a Vercel preview/pr
 - Cursor: `.cursor/mcp.json` + `.cursor/rules` + `.cursor/skills` (symlinks into `.agents/skills`).
 - Codex / ChatGPT desktop: `AGENTS.md` + `.agents/skills`.
 - ChatGPT web needs a platform connector/plugin — a local `.env` alone is not enough.
+
+## Credits
+
+Template built for performance, SEO, and GEO by [arrobabeto](https://github.com/arrobabeto).
 
 ## License
 
