@@ -17,6 +17,58 @@
     "ueber-uns/mitgliedschaften": {
       "components": ["SectionLogoGrid"]
     },
+    "ueber-uns/presse-extern": {
+      "components": ["SectionPressList"]
+    },
+    "planung": {
+      "components": [
+        "SectionServiceIntro",
+        "SectionTextColumns",
+        "SectionChecklistSplit",
+        "SectionCta"
+      ]
+    },
+    "beratung": {
+      "components": [
+        "SectionServiceIntro",
+        "SectionTextColumns",
+        "SectionChecklistSplit",
+        "SectionCta"
+      ]
+    },
+    "brandschutz": {
+      "components": [
+        "SectionServiceIntro",
+        "SectionTextColumns",
+        "SectionChecklistSplit",
+        "SectionCta"
+      ]
+    },
+    "realisierung": {
+      "components": [
+        "SectionServiceIntro",
+        "SectionTextColumns",
+        "SectionChecklistSplit",
+        "SectionCta"
+      ]
+    },
+    "energieberatung": {
+      "components": [
+        "SectionServiceIntro",
+        "SectionTextColumns",
+        "SectionChecklistSplit",
+        "SectionCta"
+      ]
+    },
+    "bauherrenberatung": {
+      "components": [
+        "SectionServiceIntro",
+        "SectionTextColumns",
+        "SectionChecklistSplit",
+        "SectionInkSplit",
+        "SectionCta"
+      ]
+    },
     "setup": {
       "components": ["SectionWelcome"]
     }

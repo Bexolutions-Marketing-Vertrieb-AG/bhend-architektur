@@ -8,16 +8,36 @@ interface Props {
 
 const { locale: _locale } = Astro.props
 
-const menu = [
-  { href: "/ueber-uns/team", label: "Team" },
-  { href: "/ueber-uns/mitgliedschaften", label: "Mitgliedschaften" },
-  { href: "/ueber-uns/presse", label: "Presse / Extern" },
-  { href: "/leistungen", label: "Leistungen" },
+type MenuChild = { href: string; label: string }
+type MenuItem =
+  | { label: string; href: string; children?: undefined }
+  | { label: string; href?: undefined; children: MenuChild[] }
+
+const menu: MenuItem[] = [
+  {
+    label: "Über uns",
+    children: [
+      { href: "/ueber-uns/team", label: "Team" },
+      { href: "/ueber-uns/mitgliedschaften", label: "Mitgliedschaften" },
+      { href: "/ueber-uns/presse-extern", label: "Presse / Extern" },
+    ],
+  },
+  {
+    label: "Leistungen",
+    children: [
+      { href: "/planung", label: "Planung" },
+      { href: "/beratung", label: "Beratung" },
+      { href: "/brandschutz", label: "Brandschutz" },
+      { href: "/realisierung", label: "Realisierung" },
+      { href: "/energieberatung", label: "Energieberatung" },
+      { href: "/bauherrenberatung", label: "Bauherrenberatung" },
+    ],
+  },
   { href: "/aktuell", label: "Aktuell" },
   { href: "/referenzen", label: "Referenzen" },
   { href: "/bei-uns-arbeiten", label: "Bei uns arbeiten" },
   { href: "mailto:info@bhend-architektur.ch", label: "Kontakt" },
-] as const
+]
 ---
 
 <footer
@@ -41,16 +61,50 @@ const menu = [
       <h2 class="font-display mb-6 text-2xl font-bold">Menu</h2>
       <ul class="space-y-3 text-sm">
         {
-          menu.map((item) => (
-            <li>
-              <a
-                class="enter:text-brand-200 transition-colors"
-                href={item.href}
-              >
-                {item.label}
-              </a>
-            </li>
-          ))
+          menu.map((item) =>
+            item.children ? (
+              <li>
+                <details class="group">
+                  <summary class="enter:text-brand-200 flex cursor-pointer list-none items-center gap-2 transition-colors [&::-webkit-details-marker]:hidden">
+                    <span>{item.label}</span>
+                    <span
+                      class="text-brand-200 group-open:hidden"
+                      aria-hidden="true"
+                    >
+                      +
+                    </span>
+                    <span
+                      class="text-brand-200 hidden group-open:inline"
+                      aria-hidden="true"
+                    >
+                      –
+                    </span>
+                  </summary>
+                  <ul class="border-brand-700 mt-2 ml-1 space-y-2 border-l pl-3">
+                    {item.children.map((child) => (
+                      <li>
+                        <a
+                          class="enter:text-brand-200 text-brand-200 transition-colors"
+                          href={child.href}
+                        >
+                          {child.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              </li>
+            ) : (
+              <li>
+                <a
+                  class="enter:text-brand-200 transition-colors"
+                  href={item.href}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ),
+          )
         }
       </ul>
     </div>

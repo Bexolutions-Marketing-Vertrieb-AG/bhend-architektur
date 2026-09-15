@@ -1,0 +1,111 @@
+---
+// SectionPressList.astro — Presse / Extern clippings (title + source + image stack)
+import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
+import type { I18nString } from "~/types/i18n"
+import type { Locale } from "~/config/locales"
+
+interface PressImage {
+  src?: string
+  alt?: I18nString
+}
+
+interface PressPost {
+  id?: string
+  title?: I18nString
+  source?: I18nString
+  body?: I18nString
+  images?: PressImage[]
+}
+
+interface Props {
+  id?: string
+  title?: I18nString
+  heading?: I18nString
+  items?: PressPost[]
+  locale: Locale
+}
+
+const { id = "pressList", title, heading, items = [], locale } = Astro.props
+const section = id
+const headline = translate(heading ?? title, locale)
+---
+
+<section class="bg-white" {...bf(`${section}.shell`, "container", section)}>
+  <div class="container-wide py-section-sm md:pb-section">
+    {
+      headline && (
+        <h1
+          class="font-display mb-12 text-4xl font-bold tracking-tight uppercase md:mb-16 md:text-5xl"
+          {...bf(`${section}.heading`, "style_target", section)}
+        >
+          {headline}
+        </h1>
+      )
+    }
+    <ul class="flex flex-col gap-16 md:gap-20">
+      {
+        items.map((item) => {
+          const itemId = (item.id ?? "").trim() || "item"
+          const label = translate(item.title, locale)
+          const source = translate(item.source, locale)
+          const body = translate(item.body, locale)
+          const images = (item.images ?? []).filter((img) => img.src)
+          const itemSection = `${section}.press.${itemId}`
+          return (
+            <li
+              class="grid gap-8 md:grid-cols-[minmax(16rem,22rem)_minmax(0,1fr)] md:gap-12 lg:gap-16"
+              {...bf(`${itemSection}.shell`, "container", section)}
+            >
+              <div class="flex flex-col gap-3">
+                {label && (
+                  <h2
+                    class="font-display text-2xl font-bold tracking-tight"
+                    {...bf(`${itemSection}.title`, "style_target", section)}
+                  >
+                    {label}
+                  </h2>
+                )}
+                {source && (
+                  <p
+                    class="text-muted text-sm"
+                    {...bf(`${itemSection}.source`, "style_target", section)}
+                  >
+                    {source}
+                  </p>
+                )}
+                {body && (
+                  <p
+                    class="text-ink mt-2 text-sm leading-relaxed whitespace-pre-line"
+                    {...bf(`${itemSection}.body`, "style_target", section)}
+                  >
+                    {body}
+                  </p>
+                )}
+              </div>
+              {images.length > 0 && (
+                <div class="flex flex-col gap-4">
+                  {images.map((img, index) => {
+                    const n = index + 1
+                    const alt =
+                      translate(img.alt, locale) ||
+                      (label ? `${label} ${n}` : "")
+                    return (
+                      <img
+                        src={img.src}
+                        alt={alt}
+                        class="w-full object-cover"
+                        loading="lazy"
+                        {...bf(`${itemSection}.image${n}`, "image", section)}
+                      />
+                    )
+                  })}
+                </div>
+              )}
+            </li>
+          )
+        })
+      }
+    </ul>
+  </div>
+</section>

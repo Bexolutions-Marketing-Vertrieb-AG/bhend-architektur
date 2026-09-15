@@ -1,0 +1,188 @@
+---
+// SectionChecklistSplit.astro — body + image | checklist with check icons
+import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
+import type { I18nString } from "~/types/i18n"
+import type { Locale } from "~/config/locales"
+
+interface Item {
+  title?: I18nString
+  text?: I18nString
+  body?: I18nString
+}
+
+interface Props {
+  id?: string
+  title?: I18nString
+  heading?: I18nString
+  body?: I18nString
+  lead?: I18nString
+  image?: string
+  imageAlt?: I18nString
+  imageCaption?: I18nString
+  tone?: "light" | "dark"
+  items?: Item[]
+  locale: Locale
+}
+
+const {
+  id = "checklist",
+  title,
+  heading,
+  body,
+  lead,
+  image,
+  imageAlt,
+  imageCaption,
+  tone = "light",
+  items = [],
+  locale,
+} = Astro.props
+const section = id
+const dark = tone === "dark"
+const headline = translate(heading ?? title, locale)
+const copy = translate(body, locale)
+const listLead = translate(lead, locale)
+const alt = translate(imageAlt, locale)
+const caption = translate(imageCaption, locale)
+---
+
+<section
+  class:list={[dark ? "bg-brand-900 text-white" : "text-ink bg-white"]}
+  {...bf(`${section}.shell`, "container", section)}
+>
+  <div class="container-wide py-section-sm md:py-section">
+    <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+      <div class="flex flex-col gap-8">
+        {
+          headline && (
+            <h2
+              class:list={[
+                "font-display text-3xl font-bold tracking-tight md:text-4xl",
+                dark && "text-brand-100",
+              ]}
+              {...bf(`${section}.heading`, "style_target", section)}
+            >
+              {headline}
+            </h2>
+          )
+        }
+        {
+          copy && (
+            <p
+              class:list={[
+                "section-lead",
+                dark ? "text-brand-200" : "text-ink",
+              ]}
+              {...bf(`${section}.body`, "style_target", section)}
+            >
+              {copy}
+            </p>
+          )
+        }
+        {
+          image && (
+            <figure>
+              <img
+                src={image}
+                alt={alt}
+                class="w-full object-cover"
+                loading="lazy"
+                {...bf(`${section}.image`, "image", section)}
+              />
+              {caption && (
+                <figcaption
+                  class:list={[
+                    "mt-3 text-sm",
+                    dark ? "text-brand-200" : "text-muted",
+                  ]}
+                  {...bf(`${section}.imageCaption`, "style_target", section)}
+                >
+                  {caption}
+                </figcaption>
+              )}
+            </figure>
+          )
+        }
+      </div>
+      <div class="flex flex-col gap-8">
+        {
+          listLead && (
+            <p
+              class:list={[
+                "section-lead font-semibold",
+                dark ? "text-brand-100" : "text-ink",
+              ]}
+              {...bf(`${section}.lead`, "style_target", section)}
+            >
+              {listLead}
+            </p>
+          )
+        }
+        <ul class="space-y-6">
+          {
+            items.map((item, index) => {
+              const n = index + 1
+              const itemTitle = translate(item.title, locale)
+              const itemBody = translate(item.text ?? item.body, locale)
+              return (
+                <li class="flex gap-4">
+                  <span
+                    class="border-brand-500 text-brand-500 mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2"
+                    aria-hidden="true"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </span>
+                  <div class="flex flex-col gap-1">
+                    {itemTitle && (
+                      <h3
+                        class:list={[
+                          "font-display text-lg font-bold whitespace-pre-line",
+                          dark ? "text-brand-100" : "text-ink",
+                        ]}
+                        {...bf(
+                          `${section}.item${n}Title`,
+                          "style_target",
+                          section,
+                        )}
+                      >
+                        {itemTitle}
+                      </h3>
+                    )}
+                    {itemBody && (
+                      <p
+                        class:list={[
+                          "section-lead text-base md:text-base",
+                          dark ? "text-brand-200" : "text-ink",
+                        ]}
+                        {...bf(
+                          `${section}.item${n}Body`,
+                          "style_target",
+                          section,
+                        )}
+                      >
+                        {itemBody}
+                      </p>
+                    )}
+                  </div>
+                </li>
+              )
+            })
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

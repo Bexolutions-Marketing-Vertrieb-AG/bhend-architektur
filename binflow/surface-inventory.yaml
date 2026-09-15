@@ -136,7 +136,7 @@ surfaces:
     publication_target: orbitype_pages
     sample: /images/home/challenges.jpg
 
-  - bf_id: home.ctaBand.shell
+  - bf_id: ctaBand.shell
     kind: container
     area: home
     section: ctaBand
@@ -146,7 +146,7 @@ surfaces:
     publication_target: orbitype_pages
     sample: ""
 
-  - bf_id: home.ctaBand.heading
+  - bf_id: ctaBand.heading
     kind: style_target
     area: home
     section: ctaBand
@@ -156,7 +156,7 @@ surfaces:
     publication_target: orbitype_pages
     sample: "Machen Sie den ersten Schritt zu Ihrem erfolgreichen Bauprojekt!"
 
-  - bf_id: home.ctaBand.cta
+  - bf_id: ctaBand.cta
     kind: chrome_denied
     area: home
     section: ctaBand
@@ -321,3 +321,378 @@ surfaces:
     publication_target: orbitype_pages
     sample: "Energieberatung Aargau"
     notes: "Logo href opens in new tab; URLs provided by client"
+
+  # Presse / Extern — each clipping uses stable item.id in bf_id (never sections[] / items[] index)
+  - bf_id: pressList.shell
+    kind: container
+    area: presse-extern
+    section: pressList
+    path: src/components/sections/SectionPressList.astro
+    locator: orbitype:pages/ueber-uns/presse-extern/sections/pressList
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: pressList.heading
+    kind: style_target
+    area: presse-extern
+    section: pressList
+    path: src/components/sections/SectionPressList.astro
+    locator: orbitype:pages/ueber-uns/presse-extern/sections/pressList/title@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "PRESSE / EXTERN"
+
+  - bf_id: pressList.press.baureportage-bornapark.shell
+    kind: container
+    area: presse-extern
+    section: pressList
+    path: src/components/sections/SectionPressList.astro
+    locator: orbitype:pages/ueber-uns/presse-extern/sections/pressList/items@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+    notes: "bf_id pattern pressList.press.{itemId}.*; manage via .agents/skills/press-post"
+
+  - bf_id: pressList.press.baureportage-bornapark.title
+    kind: style_target
+    area: presse-extern
+    section: pressList
+    path: src/components/sections/SectionPressList.astro
+    locator: orbitype:pages/ueber-uns/presse-extern/sections/pressList/items@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Baureportage Bornapark"
+
+  - bf_id: pressList.press.baureportage-bornapark.source
+    kind: style_target
+    area: presse-extern
+    section: pressList
+    path: src/components/sections/SectionPressList.astro
+    locator: orbitype:pages/ueber-uns/presse-extern/sections/pressList/items@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Wiggertaler, September 2025"
+
+  - bf_id: pressList.press.baureportage-bornapark.image1
+    kind: image
+    area: presse-extern
+    section: pressList
+    path: src/components/sections/SectionPressList.astro
+    locator: orbitype:pages/ueber-uns/presse-extern/sections/pressList/items@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: /images/presse-extern/baureportage-bornapark-1.jpg
+
+  # Leistungen > Planung
+  - bf_id: planungIntro.shell
+    kind: container
+    area: planung
+    section: planungIntro
+    path: src/components/sections/SectionServiceIntro.astro
+    locator: orbitype:pages/planung/sections/planungIntro
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: planungIntro.heading
+    kind: style_target
+    area: planung
+    section: planungIntro
+    path: src/components/sections/SectionServiceIntro.astro
+    locator: orbitype:pages/planung/sections/planungIntro/title@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "PLANUNG"
+
+  - bf_id: planungIntro.lead
+    kind: style_target
+    area: planung
+    section: planungIntro
+    path: src/components/sections/SectionServiceIntro.astro
+    locator: orbitype:pages/planung/sections/planungIntro/lead@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "BRANDSCHUTZPLANUNG UND QUALITÄTSSICHERUNG BRANDSCHUTZ"
+
+  - bf_id: planungIntro.body
+    kind: style_target
+    area: planung
+    section: planungIntro
+    path: src/components/sections/SectionServiceIntro.astro
+    locator: orbitype:pages/planung/sections/planungIntro/body@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Bei Bhend Architektur steht eine massgeschneiderte und präzise Planung"
+
+  - bf_id: planungIntro.image
+    kind: image
+    area: planung
+    section: planungIntro
+    path: src/components/sections/SectionServiceIntro.astro
+    locator: orbitype:pages/planung/sections/planungIntro/image@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: /images/planung/hero.jpg
+
+  - bf_id: planungPillars.shell
+    kind: container
+    area: planung
+    section: planungPillars
+    path: src/components/sections/SectionTextColumns.astro
+    locator: orbitype:pages/planung/sections/planungPillars
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: planungPillars.item1Title
+    kind: style_target
+    area: planung
+    section: planungPillars
+    path: src/components/sections/SectionTextColumns.astro
+    locator: orbitype:pages/planung/sections/planungPillars/items@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Präzise Kostenplanung"
+
+  - bf_id: planungProcess.shell
+    kind: container
+    area: planung
+    section: planungProcess
+    path: src/components/sections/SectionChecklistSplit.astro
+    locator: orbitype:pages/planung/sections/planungProcess
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: planungProcess.image
+    kind: image
+    area: planung
+    section: planungProcess
+    path: src/components/sections/SectionChecklistSplit.astro
+    locator: orbitype:pages/planung/sections/planungProcess/image@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: /images/planung/process.jpg
+
+  - bf_id: planungProcess.item1Title
+    kind: style_target
+    area: planung
+    section: planungProcess
+    path: src/components/sections/SectionChecklistSplit.astro
+    locator: orbitype:pages/planung/sections/planungProcess/items@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Analyse und Entwurf"
+
+  - bf_id: planungCta.shell
+    kind: container
+    area: planung
+    section: planungCta
+    path: src/components/sections/SectionCta.astro
+    locator: orbitype:pages/planung/sections/planungCta
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: planungCta.heading
+    kind: style_target
+    area: planung
+    section: planungCta
+    path: src/components/sections/SectionCta.astro
+    locator: orbitype:pages/planung/sections/planungCta/title@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "PLANUNG"
+
+  - bf_id: planungCta.cta
+    kind: chrome_denied
+    area: planung
+    section: planungCta
+    path: src/components/sections/SectionCta.astro
+    locator: orbitype:pages/planung/sections/planungCta/ctaLabel@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "+41 62 798 00 00"
+    notes: "tel:+41627980000 via reservationMode url"
+
+  - bf_id: beratungIntro.shell
+    kind: container
+    area: beratung
+    section: beratungIntro
+    path: src/components/sections/SectionServiceIntro.astro
+    locator: orbitype:pages/beratung/sections/beratungIntro
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: beratungIntro.heading
+    kind: style_target
+    area: beratung
+    section: beratungIntro
+    path: src/components/sections/SectionServiceIntro.astro
+    locator: orbitype:pages/beratung/sections/beratungIntro/title@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "BERATUNG"
+
+  - bf_id: beratungIntro.image
+    kind: image
+    area: beratung
+    section: beratungIntro
+    path: src/components/sections/SectionServiceIntro.astro
+    locator: orbitype:pages/beratung/sections/beratungIntro/image@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: /images/beratung/hero.jpg
+
+  - bf_id: brandschutzIntro.shell
+    kind: container
+    area: brandschutz
+    section: brandschutzIntro
+    path: src/components/sections/SectionServiceIntro.astro
+    locator: orbitype:pages/brandschutz/sections/brandschutzIntro
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: brandschutzIntro.heading
+    kind: style_target
+    area: brandschutz
+    section: brandschutzIntro
+    path: src/components/sections/SectionServiceIntro.astro
+    locator: orbitype:pages/brandschutz/sections/brandschutzIntro/title@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "BRANDSCHUTZ"
+
+  - bf_id: brandschutzIntro.image
+    kind: image
+    area: brandschutz
+    section: brandschutzIntro
+    path: src/components/sections/SectionServiceIntro.astro
+    locator: orbitype:pages/brandschutz/sections/brandschutzIntro/image@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: /images/brandschutz/hero.jpg
+
+  - bf_id: realisierungIntro.shell
+    kind: container
+    area: realisierung
+    section: realisierungIntro
+    path: src/components/sections/SectionServiceIntro.astro
+    locator: orbitype:pages/realisierung/sections/realisierungIntro
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: realisierungIntro.heading
+    kind: style_target
+    area: realisierung
+    section: realisierungIntro
+    path: src/components/sections/SectionServiceIntro.astro
+    locator: orbitype:pages/realisierung/sections/realisierungIntro/title@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "REALISIERUNG"
+
+  - bf_id: realisierungIntro.image
+    kind: image
+    area: realisierung
+    section: realisierungIntro
+    path: src/components/sections/SectionServiceIntro.astro
+    locator: orbitype:pages/realisierung/sections/realisierungIntro/image@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: /images/realisierung/hero.jpg
+
+  - bf_id: energieberatungIntro.shell
+    kind: container
+    area: energieberatung
+    section: energieberatungIntro
+    path: src/components/sections/SectionServiceIntro.astro
+    locator: orbitype:pages/energieberatung/sections/energieberatungIntro
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: energieberatungIntro.heading
+    kind: style_target
+    area: energieberatung
+    section: energieberatungIntro
+    path: src/components/sections/SectionServiceIntro.astro
+    locator: orbitype:pages/energieberatung/sections/energieberatungIntro/title@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "ENERGIEBERATUNG"
+
+  - bf_id: energieberatungIntro.image
+    kind: image
+    area: energieberatung
+    section: energieberatungIntro
+    path: src/components/sections/SectionServiceIntro.astro
+    locator: orbitype:pages/energieberatung/sections/energieberatungIntro/image@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: /images/energieberatung/hero.jpg
+
+  - bf_id: bauherrenberatungIntro.shell
+    kind: container
+    area: bauherrenberatung
+    section: bauherrenberatungIntro
+    path: src/components/sections/SectionServiceIntro.astro
+    locator: orbitype:pages/bauherrenberatung/sections/bauherrenberatungIntro
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: bauherrenberatungIntro.heading
+    kind: style_target
+    area: bauherrenberatung
+    section: bauherrenberatungIntro
+    path: src/components/sections/SectionServiceIntro.astro
+    locator: orbitype:pages/bauherrenberatung/sections/bauherrenberatungIntro/title@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "BAUHERRENBERATUNG"
+
+  - bf_id: bauherrenberatungIntro.image
+    kind: image
+    area: bauherrenberatung
+    section: bauherrenberatungIntro
+    path: src/components/sections/SectionServiceIntro.astro
+    locator: orbitype:pages/bauherrenberatung/sections/bauherrenberatungIntro/image@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: /images/bauherrenberatung/hero.jpg
+
+  - bf_id: bauherrenberatungProcess.shell
+    kind: container
+    area: bauherrenberatung
+    section: bauherrenberatungProcess
+    path: src/components/sections/SectionChecklistSplit.astro
+    locator: orbitype:pages/bauherrenberatung/sections/bauherrenberatungProcess
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+    notes: "tone=dark band"
+
+  - bf_id: bauherrenberatungInvite.shell
+    kind: container
+    area: bauherrenberatung
+    section: bauherrenberatungInvite
+    path: src/components/sections/SectionInkSplit.astro
+    locator: orbitype:pages/bauherrenberatung/sections/bauherrenberatungInvite
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: bauherrenberatungInvite.heading
+    kind: style_target
+    area: bauherrenberatung
+    section: bauherrenberatungInvite
+    path: src/components/sections/SectionInkSplit.astro
+    locator: orbitype:pages/bauherrenberatung/sections/bauherrenberatungInvite/title@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Jetzt beraten lassen"

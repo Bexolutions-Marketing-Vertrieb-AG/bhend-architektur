@@ -213,10 +213,19 @@ async function main() {
   ).trim()
 
   if (!flags.skipFavicon && !flags.dryRun) {
-    const faviconHash = sha256File("public/favicon.svg")
-    if (faviconHash === TEMPLATE_FAVICON_SHA256) {
+    if (!fs.existsSync("public/favicon.png")) {
       console.error(
-        "FAIL  public/favicon.svg still matches the template hash. Replace it before bootstrap completes.",
+        "FAIL  public/favicon.png is missing. Add the project favicon before bootstrap completes.",
+      )
+      process.exit(1)
+    }
+    const faviconHash = sha256File("public/favicon.svg")
+    if (
+      fs.existsSync("public/favicon.svg") &&
+      faviconHash === TEMPLATE_FAVICON_SHA256
+    ) {
+      console.error(
+        "FAIL  public/favicon.svg still matches the template hash. Remove or replace it; use public/favicon.png.",
       )
       process.exit(1)
     }

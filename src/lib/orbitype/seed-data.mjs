@@ -1,5 +1,7 @@
 /** Starter CMS rows — single source for mock mode and `pnpm run cms:seed`. */
 
+import { buildLeistungenSeedPages } from "./seed-leistungen.mjs"
+
 const now = () => new Date().toISOString()
 
 const API_KEYS_URL = "https://app.orbitype.com/settings/api-keys"
@@ -495,6 +497,353 @@ function membershipSections() {
   ]
 }
 
+function pressPost({ id, title, source, body, images }) {
+  return {
+    id,
+    title: de(title),
+    source: source ? de(source) : undefined,
+    body: body ? de(body) : undefined,
+    images: (images ?? []).map((img) => ({
+      src: img.src,
+      alt: de(img.alt ?? title),
+    })),
+  }
+}
+
+function pressSections() {
+  return [
+    {
+      id: "pressList",
+      title: de("PRESSE / EXTERN"),
+      items: [
+        pressPost({
+          id: "baureportage-bornapark",
+          title: "Baureportage Bornapark",
+          source: "Wiggertaler, September 2025",
+          images: [
+            { src: "/images/presse-extern/baureportage-bornapark-1.jpg" },
+            { src: "/images/presse-extern/baureportage-bornapark-2.jpg" },
+          ],
+        }),
+        pressPost({
+          id: "bornapark-uebernahme",
+          title: "Offizielle Übernahme der Bornapark-Neubauten",
+          source: "Borna Wiggertaler, August 2025",
+          images: [
+            {
+              src: "/images/presse-extern/offizielle-uebernahme-der-bornapark-neubauten.jpg",
+            },
+          ],
+        }),
+        pressPost({
+          id: "firmen-umwandlung-und-neue-partner",
+          title: "Firmen-Umwandlung und neue Partner",
+          source: "Wiggertaler 19.09.2024",
+          images: [
+            {
+              src: "/images/presse-extern/firmen-umwandlung-und-neue-partner.jpg",
+            },
+          ],
+        }),
+        pressPost({
+          id: "spatenstich-lindenpark-ofringen",
+          title: "Spatenstich Lindenpark Ofringen",
+          source: "Zofinger Tagblatt 19.09.2024",
+          images: [
+            {
+              src: "/images/presse-extern/spatenstich-lindenpark-ofringen.jpg",
+            },
+          ],
+        }),
+        pressPost({
+          id: "einweihung-kindergarten-kuengoldingen",
+          title: "Einweihung Kindergarten Küngoldingen",
+          source: "Wiggertaler 02.11.2023",
+          images: [
+            {
+              src: "/images/presse-extern/einweihung-kindergarten-kuengoldingen-1.jpg",
+            },
+            {
+              src: "/images/presse-extern/einweihung-kindergarten-kuengoldingen-2.jpg",
+            },
+          ],
+        }),
+        pressPost({
+          id: "lernende-baustelle-safenwil",
+          title: "Lernende Baustelle – Safenwil",
+          source: "Zofinger Tagblatt 30.06.2023",
+          images: [
+            { src: "/images/presse-extern/lernende-baustelle-safenwil.jpg" },
+          ],
+        }),
+        pressPost({
+          id: "pilotprojekt-luftkissen",
+          title: "Pilotprojekt Arbeitssicherheit mit Luftkissen",
+          source: "Modernisierung Kath. Kirche Schöftland AZ 15.06.2023",
+          images: [
+            {
+              src: "/images/presse-extern/pilotprojekt-arbeitssicherheit-mit-luftkissen.jpg",
+            },
+          ],
+        }),
+        pressPost({
+          id: "baureportage-sennhof",
+          title: "Baureportage Sennhof",
+          source: "Wiggertaler Mai 2023",
+          images: [
+            { src: "/images/presse-extern/baureportage-sennhof-1.jpg" },
+            { src: "/images/presse-extern/baureportage-sennhof-2.jpg" },
+            { src: "/images/presse-extern/baureportage-sennhof-3.jpg" },
+          ],
+        }),
+        pressPost({
+          id: "spatenstich-doppelkindergarten-oftringen",
+          title: "Spatenstich Doppelkindergarten Oftringen",
+          source: "Zofinger Tagblatt, September 2022",
+          images: [
+            {
+              src: "/images/presse-extern/spatenstich-doppelkindergarten-oftringen.jpg",
+            },
+          ],
+        }),
+        pressPost({
+          id: "kirchensanierung-schoeftland",
+          title: "Katholische Kirche –Kirchensanierung teurer als gedacht",
+          source: "Zofinger Tagblatt, März 2022",
+          images: [
+            {
+              src: "/images/presse-extern/katholische-kirche-kirchensanierung-teurer-als-g.jpg",
+            },
+          ],
+        }),
+        pressPost({
+          id: "sennhof-erweiterung",
+          title: "Sennhof in Vordemwald erweitert den geschützten Wohnbereich",
+          source: "Zofinger Tagblatt, März 2022",
+          images: [
+            {
+              src: "/images/presse-extern/sennhof-in-vordemwald-erweitert-den-geschuetzten.jpg",
+            },
+          ],
+        }),
+        pressPost({
+          id: "sennhof-beim-umbau-geht-s-zuegig-voran",
+          title: "Sennhof – Beim Umbau geht’s zügig voran",
+          source: "Sennhof Spiegel Oktober 2021",
+          images: [
+            {
+              src: "/images/presse-extern/sennhof-beim-umbau-geht-s-zuegig-voran.jpg",
+            },
+          ],
+        }),
+        pressPost({
+          id: "sennhof-bauarbeiten-sind-auf-kurs",
+          title: "Sennhof – Bauarbeiten sind auf Kurs",
+          source: "Wiggertaler und Aarauer Nachrichten April 2021",
+          images: [
+            {
+              src: "/images/presse-extern/sennhof-bauarbeiten-sind-auf-kurs-1.jpg",
+            },
+            {
+              src: "/images/presse-extern/sennhof-bauarbeiten-sind-auf-kurs-2.jpg",
+            },
+          ],
+        }),
+        pressPost({
+          id: "sennhof-umbau-ist-im-zeitplan",
+          title: "Sennhof – Umbau ist im Zeitplan",
+          source: "Sennhof Spiegel März 2021",
+          images: [
+            {
+              src: "/images/presse-extern/sennhof-umbau-ist-im-zeitplan-1.jpg",
+            },
+            {
+              src: "/images/presse-extern/sennhof-umbau-ist-im-zeitplan-2.jpg",
+            },
+            {
+              src: "/images/presse-extern/sennhof-umbau-ist-im-zeitplan-3.jpg",
+            },
+          ],
+        }),
+        pressPost({
+          id: "efh-ghana-lehrlingsprojekt",
+          title: "Einfamilienhaus für Ghana Lehrlingsprojekt",
+          source: "Wiggertaler Anzeiger Januar 2021",
+          images: [
+            {
+              src: "/images/presse-extern/einfamilienhaus-fuer-ghana-lehrlingsprojekt.jpg",
+            },
+          ],
+        }),
+        pressPost({
+          id: "zukunft-sennhof-baustart",
+          title: "Zukunft Sennhof – Baustart",
+          source: "Sennhof Spiegel September 2020",
+          images: [
+            { src: "/images/presse-extern/zukunft-sennhof-baustart.jpg" },
+          ],
+        }),
+        pressPost({
+          id: "pflegeheim-sennhof-2023",
+          title: "Pflegeheim Sennhof – Im Jahr 2023 beginnt die Zukunft",
+          source: "Zofinger Tagblatt August 2020",
+          body: "Bericht vom Zofinger Tagblatt über den vergangen Informationsanlass zum projektierten Anbau und den Start der ersten Bauetappe.",
+          images: [
+            {
+              src: "/images/presse-extern/pflegeheim-sennhof-im-jahr-2023-beginnt-die-zuku.jpg",
+            },
+          ],
+        }),
+        pressPost({
+          id: "zukunft-sennhof-die-naechste-bauetappe",
+          title: "Zukunft Sennhof – Die nächste Bauetappe",
+          source: "Sennhof Spiegel Februar 2020",
+          body: "Bericht der Sennhof Hauszeitung über den bevorstehenden Umbau.",
+          images: [
+            {
+              src: "/images/presse-extern/zukunft-sennhof-die-naechste-bauetappe-1.jpg",
+            },
+            {
+              src: "/images/presse-extern/zukunft-sennhof-die-naechste-bauetappe-2.jpg",
+            },
+            {
+              src: "/images/presse-extern/zukunft-sennhof-die-naechste-bauetappe-3.jpg",
+            },
+          ],
+        }),
+        pressPost({
+          id: "neubau-b-b-allegra-kuengoldingen",
+          title: "Neubau B&B Allegra Küngoldingen",
+          source: "Zofinger Tagblatt 07.10.2019",
+          images: [
+            {
+              src: "/images/presse-extern/neubau-b-b-allegra-kuengoldingen.jpg",
+            },
+          ],
+        }),
+        pressPost({
+          id: "einbau-hoehenrettungszentrum",
+          title: "Einbau Höhenrettungszentrum",
+          source: "Zofinger Tagblatt 17.10.2018",
+          body: "Der Firmenmix im Trilapark an der Unteren Brühlstrasse 11 in Zofingen ist um eine Sparte reicher. In der alten Farbenfabrik ist neu auch ein Ausbildungszentrum für Höhenrettungen beheimatet.\nDas deutsche Unternehmen Bornack hat sich die Thutstadt als neuen Schweizer Firmensitz ausgesucht.\n«Es war Liebe auf den ersten Blick», sagt Geschäftsführer Markus Hobi. «Als ich diese leerstehende Halle sah, wusste ich, das ist es, wonach ich schon lange suchte.»",
+          images: [
+            { src: "/images/presse-extern/einbau-hoehenrettungszentrum.jpg" },
+          ],
+        }),
+        pressPost({
+          id: "spatenstich-b-b-allegra",
+          title: "Spatenstich B&B Allegra",
+          source: "Zofinger Tagblatt 09.10.2018",
+          body: "Jetzt kann die Familie von Anneliese und Martin Gaberthüel aus Küngoldingen wieder lachen. In wenigen Tagen fällt der Startschuss zum Wiederaufbau ihres im Sommer 2016 abgebrannten Hofes.\nRückblick: Mittwoch, 8. Juni 2016, ein Unwetter zieht über die Region Zofingen. Immer wieder gehen Blitze nieder. Um 15.15 Uhr schlägt einer direkt in den Scheunenteil der Familie Gaberthüel an der Oberen Hauptstrasse 44 in Küngoldingen ein. Innerhalb von wenigen Sekunden steht der Holzbau in Vollbrand.\n«Ich war nicht zu Hause, ich arbeitete auswärts, als der Blitz einschlug», erinnert sich Landwirt Martin Gaberthüel.\n«Die Tiere waren auf der Weide.» Tatenlos musste er zuschauen, wie die Scheune bis auf die Grundmauern niederbrannte. Gegen 100 Feuerwehrleute aus Oftringen, Zofingen und Aarburg kämpften gegen die Flammen und retteten den Wohnteil. Trotzdem beträgt der Sachschaden mehrere hunderttausend Franken.\n«Zum Glück sind keine Menschen und Tiere zu Schaden gekommen, der Rest ist ersetzbar», bilanziert Gaberthüel am Tag nach dem Brand. Über dem Wohnhausteil wurde ein Notdach erstellt. Bereits einen Tag nach dem Brand kehrte die sechsköpfige Familie in ihre Wohnung zurück.\nNach dem Brand liess sich das Paar viel Zeit, denn die Situation bot plötzlich viele neue Optionen. «Wir planten mit dem Familienrat die Zukunft des Hofs», sagt Martin Gaberthüel. «Schnell wurde klar, dass wir am bisherigen Standort keine Tiere mehr wollen.» In der Zwischenzeit sind mehr als zwei Jahre vergangen, alle Brandspuren beseitigt und die Familie Gaberthüel setzt die Zukunftspläne in die Tat um. «Wir werden ein Bed & Breakfast (B&B) mit vier Zimmern eröffnen», verraten Anneliese und Martin Gaberthüel. Das innovative Paar wog zuvor verschiedene Möglichkeiten ab. «Nun hat der Brand die Idee beschleunigt», sagt Martin Gaberthüel.\n\nWiederaufbau des Hofladens\nArchitektonisch wird der Anbau gleich wie bisher aussehen und auch auf den bisherigen Grundmauern aufgebaut. Über den vier B&B-Zimmern wird es zudem eine Zweizimmerwohnung mit Balkon Richtung Westen geben. Alles wird behindertengerecht gebaut, so wird es auch einen Lift geben. Im Erdgeschoss wird der Hofladen einquartiert. «Die Landwirtschaft soll immer ein Standbein unserer Familie bleiben», sagt Martin Gaberthüel. Die Familie baut mit dem einheimischen Architekturbüro von Ueli Bhend. «Wir haben nach dem Brand sehr grosse Solidarität in der Gemeinde erleben dürfen», sagt die Familie Gaberthüel, «deshalb ist es auch klar, dass wir mit regionalen Handwerkern unseren Neubau realisieren werden.»\nDer symbolische Spatenstich ist bereits vor den Herbstferien gefeiert worden. Die Bauarbeiten beginnen in wenigen Tagen. Der Anbau soll in rund einem Jahr fertig sein. «Wenn dann die ersten Gäste ins B&B einziehen, geht ein grosser Traum für uns in Erfüllung», betont Anneliese Gaberthüel. Bis dahin gibt es aber noch eine Menge Arbeit zu erledigen.",
+          images: [
+            { src: "/images/presse-extern/spatenstich-b-b-allegra-1.jpg" },
+            { src: "/images/presse-extern/spatenstich-b-b-allegra-2.jpg" },
+          ],
+        }),
+        pressPost({
+          id: "shed-dachsanierung-trilapark",
+          title: "Shed-Dachsanierung Trilapark",
+          source: "Architektur und Technik April 2018",
+          images: [
+            { src: "/images/presse-extern/shed-dachsanierung-trilapark.jpg" },
+          ],
+        }),
+      ],
+      _orbi: { component: "SectionPressList" },
+    },
+  ]
+}
+
+function planungSections() {
+  return [
+    {
+      id: "planungIntro",
+      title: de("PLANUNG"),
+      lead: de("BRANDSCHUTZPLANUNG UND QUALITÄTSSICHERUNG BRANDSCHUTZ"),
+      body: de(
+        "Bei Bhend Architektur steht eine massgeschneiderte und präzise Planung im Zentrum unserer Arbeit, um optimale Ergebnisse für Ihr Bauvorhaben zu gewährleisten. Unser Ziel ist es, Ihre Vision mit höchster Sorgfalt und Genauigkeit in die Realität umzusetzen.",
+      ),
+      image: "/images/planung/hero.jpg",
+      imageAlt: de("Team von Bhend Architektur bei der Planung"),
+      _orbi: { component: "SectionServiceIntro" },
+    },
+    {
+      id: "planungPillars",
+      items: [
+        {
+          title: de("Präzise Kostenplanung"),
+          text: de(
+            "Bei jedem Bauprojekt ist eine sorgfältige Kostenplanung von entscheidender Bedeutung, um sicherzustellen, dass das Budget eingehalten wird. Durch kontinuierliche Überwachung und transparente Kommunikation können potenzielle Kostenüberschreitungen vermieden werden. Die richtige Balance zwischen Qualität und Wirtschaftlichkeit ist dabei essentiell, um ein erfolgreiches und finanzierbares Bauprojekt zu realisieren.",
+          ),
+        },
+        {
+          title: de(
+            "Innovative Lösungen und Frühzeitige Herausforderungserkennung",
+          ),
+          text: de(
+            "Unser Team aus erfahrenen Architekten und Bauleitern setzt auf innovative Lösungen und kreative Konzepte. Wir planen Ihr Projekt effizient und erkennen potenzielle Herausforderungen frühzeitig, um optimale Lösungswege zu entwickeln.",
+          ),
+        },
+        {
+          title: de("Detaillierte Entwürfe nach Höchsten Standards"),
+          text: de(
+            "Mit grosser Aufmerksamkeit für Details erstellen wir Entwürfe und Pläne, die alle Aspekte Ihres Bauvorhabens umfassend berücksichtigen. Unsere Arbeit orientiert sich an den SIA-Normen, um höchste Qualität und Sicherheit zu gewährleisten.",
+          ),
+        },
+      ],
+      _orbi: { component: "SectionTextColumns" },
+    },
+    {
+      id: "planungProcess",
+      body: de(
+        "Durch diese strukturierte Vorgehensweise stellen wir sicher, dass Ihr Projekt nicht nur Ihren Vorstellungen entspricht, sondern auch effizient und kostenbewusst realisiert wird. Entdecken Sie, wie Bhend Architektur Ihre Bauprojekte mit Präzision und Innovation zum Erfolg führt.",
+      ),
+      lead: de(
+        "Wir legen grossen Wert auf eine transparente und umfassende Beratung in allen Planungsphasen:",
+      ),
+      image: "/images/planung/process.jpg",
+      imageAlt: de("Detailplanung mit Plänen und Massstab"),
+      items: [
+        {
+          title: de("Analyse und Entwurf"),
+          text: de(
+            "Professionelle Analyse und Entwurf Ihrer Immobilie für optimale Ergebnisse.",
+          ),
+        },
+        {
+          title: de("Vorprojekt mit Kostenschätzung"),
+          text: de(
+            "Detaillierte Vorplanung inklusive einer ersten Kostenschätzung für Ihr Projekt.",
+          ),
+        },
+        {
+          title: de("Bauprojekt mit detailliertem Kostenvoranschlag"),
+          text: de(
+            "Umfassende Ausarbeitung Ihres Bauprojekts mit einem detaillierten Kostenvoranschlag.",
+          ),
+        },
+        {
+          title: de("Ausführungsplanung"),
+          text: de(
+            "Präzise Ausführungsplanung zur reibungslosen Umsetzung Ihres Bauprojekts.",
+          ),
+        },
+      ],
+      _orbi: { component: "SectionChecklistSplit" },
+    },
+    {
+      id: "planungCta",
+      eyebrow: de("Weitere Informationen zum Thema"),
+      title: de("PLANUNG"),
+      text: de("Rufen Sie uns noch heute an"),
+      ctaLabel: de("+41 62 798 00 00"),
+      reservationMode: "url",
+      reservationTarget: "tel:+41627980000",
+      _orbi: { component: "SectionCta" },
+    },
+  ]
+}
+
 export function buildSeedPages({
   hasSqlKeyConfigured = false,
   apiKeysUrl = API_KEYS_URL,
@@ -554,6 +903,43 @@ export function buildSeedPages({
       updated_at: now(),
       sections: membershipSections(),
     },
+    {
+      id: "seed-presse-extern",
+      slug: "ueber-uns/presse-extern",
+      title: {
+        de: "Presse / Extern",
+        en: "Press / External",
+      },
+      lead: {
+        de: "Presseberichte und externe Beiträge",
+        en: "Press coverage and external features",
+      },
+      img: "/images/presse-extern/baureportage-bornapark-1.jpg",
+      keywords: ["presse", "extern", "über uns", "medien"],
+      head: {},
+      created_at: now(),
+      updated_at: now(),
+      sections: pressSections(),
+    },
+    {
+      id: "seed-planung",
+      slug: "planung",
+      title: {
+        de: "Planung",
+        en: "Planning",
+      },
+      lead: {
+        de: "Massgeschneiderte und präzise Planung",
+        en: "Tailored and precise planning",
+      },
+      img: "/images/planung/hero.jpg",
+      keywords: ["planung", "leistungen", "architektur", "sia"],
+      head: {},
+      created_at: now(),
+      updated_at: now(),
+      sections: planungSections(),
+    },
+    ...buildLeistungenSeedPages(now),
     {
       id: "seed-setup",
       slug: "setup",
