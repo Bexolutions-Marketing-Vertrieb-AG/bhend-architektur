@@ -1,6 +1,17 @@
 {
   "requiredPages": {
     "home": {
+      "components": [
+        "SectionHero",
+        "SectionIconGrid",
+        "SectionSplit",
+        "SectionMediaStory",
+        "SectionProjectCarousel",
+        "SectionCta",
+        "SectionMap"
+      ]
+    },
+    "setup": {
       "components": ["SectionWelcome"]
     }
   }

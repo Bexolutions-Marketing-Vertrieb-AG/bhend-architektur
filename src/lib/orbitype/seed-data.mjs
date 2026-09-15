@@ -4,6 +4,276 @@ const now = () => new Date().toISOString()
 
 const API_KEYS_URL = "https://app.orbitype.com/settings/api-keys"
 
+const CONTACT_MAIL = "info@bhend-architektur.ch"
+const CAREERS_PATH = "/bei-uns-arbeiten"
+
+const de = (value) => ({ de: value, en: value })
+
+function homeSections() {
+  return [
+    {
+      title: de("BHEND ARCHITEKTUR"),
+      lead: de("Bauen für Menschen, gestalten für Generationen"),
+      image: "/images/home/hero.jpg",
+      imageAlt: de("Modernes Wohnhaus von Bhend Architektur"),
+      _orbi: { component: "SectionHero" },
+    },
+    {
+      id: "audience",
+      items: [
+        {
+          title: de("Privatpersonen"),
+          text: de(
+            "Verwirklichung Ihres Traumhauses – massgeschneidert, Ihre Wünsche widerspiegelnd.",
+          ),
+          icon: "/images/home/icons/private.png",
+        },
+        {
+          title: de("Firmen und Institutionen"),
+          text: de(
+            "Realisierung funktionaler und zukunftsorientierter Geschäftsräume, die Effizienz und Innovation vereinen.",
+          ),
+          icon: "/images/home/icons/business.png",
+        },
+        {
+          title: de("Öffentliche Bauten"),
+          text: de(
+            "Erschaffung öffentlicher Bauten, die Gemeinschaften ermöglichen und Generationen inspirieren.",
+          ),
+          icon: "/images/home/icons/public.png",
+        },
+      ],
+      _orbi: { component: "SectionIconGrid" },
+    },
+    {
+      id: "challenges",
+      heading: de(
+        "Private und Öffentliche Bauprojekte =\nGleiche Herausforderungen",
+      ),
+      body: de(
+        "Häufig begegnen unsere Kunden und Partner Herausforderungen bei der Planung und Umsetzung ihrer Bauvorhaben, unabhängig davon, ob es sich um private, geschäftliche oder öffentliche Projekte handelt.",
+      ),
+      image: "/images/home/challenges.jpg",
+      imageAlt: de("Moderne Holztreppe im Innenraum"),
+      imagePosition: "left",
+      _orbi: { component: "SectionSplit" },
+    },
+    {
+      id: "challengeDetails",
+      items: [
+        {
+          title: de("Privatpersonen"),
+          text: de(
+            "Privatkunden stehen oft vor der Schwierigkeit, ein Zuhause zu entwerfen, das sowohl ihren persönlichen Stil als auch ihre praktischen Bedürfnisse perfekt widerspiegelt.",
+          ),
+          icon: "/images/home/icons/private.png",
+        },
+        {
+          title: de("Firmen und Institutionen"),
+          text: de(
+            "Firmen und Institutionen suchen nach Wegen, ihre Räumlichkeiten effizient und zukunftssicher zu gestalten, während sie gleichzeitig ein inspirierendes Arbeitsumfeld schaffen möchten.",
+          ),
+          icon: "/images/home/icons/business.png",
+        },
+        {
+          title: de("Öffentliche Bauten"),
+          text: de(
+            "Öffentliche Einrichtungen suchen nach Lösungen, um Gebäude zu konzipieren, die sowohl funktional sind als auch langfristig zum Wohl der Gemeinschaft beitragen.",
+          ),
+          icon: "/images/home/icons/public.png",
+        },
+      ],
+      _orbi: { component: "SectionIconGrid" },
+    },
+    {
+      id: "aesthetics",
+      heading: de("Ästhetik und Innovation Hand in Hand"),
+      body: de(
+        "Alle unsere Kunden sind mit der Herausforderung konfrontiert, Nachhaltigkeit und Energieeffizienz zu einem fairen Preis in Einklang mit Ästhetik und Innovation zu bringen.",
+      ),
+      image: "/images/home/aesthetics.jpg",
+      imageAlt: de("Dachlandschaft moderner Gebäude"),
+      imagePosition: "right",
+      _orbi: { component: "SectionSplit" },
+    },
+    {
+      id: "partner",
+      heading: de("Ihr Baupartner für die Zukunft"),
+      body: de(
+        "Bei Bhend Architektur verstehen wir die vielfältigen Herausforderungen, mit denen unsere Kunden bei ihren Bauvorhaben konfrontiert sind.\nOb es nun um den Traum eines perfekt abgestimmten Zuhauses geht, um die Anforderungen von Firmen und Institutionen an funktionale und zukunftssichere Räumlichkeiten oder um die spezifischen Bedürfnisse der öffentlichen Hand bei der Gestaltung von Gemeinschaftseinrichtungen – wir stehen bereit, um Sie in all diesen Belangen zu unterstützen.",
+      ),
+      image: "/images/home/partner.jpg",
+      imageAlt: de("Innenraum Café und Meeting-Bereich"),
+      imagePosition: "left",
+      caption: de("Fotograf: Patrick Lüthy"),
+      _orbi: { component: "SectionSplit" },
+    },
+    {
+      id: "mehrAls",
+      heading: de("Mehr als nur Bauen"),
+      body: de(
+        "Unser Fokus liegt nicht allein auf dem Bau von Gebäuden; es ist unser Bestreben, Räume zu erschaffen, die Lebensqualität, Effizienz und Wohlbefinden in den Vordergrund stellen.",
+      ),
+      bodySecondary: de(
+        "Wir sind stets darauf bedacht, massgeschneiderte Lösungen zu entwickeln, die den einzigartigen Anforderungen und Wünschen unserer Kunden gerecht werden und dabei einen Mehrwert für die Zukunft schaffen.",
+      ),
+      image: "/images/home/mehr-als.jpg",
+      imageAlt: de("Modernes Foyer mit Rundbeleuchtung"),
+      caption: de("Fotograf: Patrick Lüthy"),
+      _orbi: { component: "SectionMediaStory" },
+    },
+    {
+      id: "team",
+      heading: de("Unser Team aus Experten"),
+      body: de(
+        "Unser Team besteht aus erfahrenen Architekten und Fachspezialisten, die sich durch fortlaufende Weiterbildung stets auf dem neuesten Stand der Bautechnologien und Trends halten.",
+      ),
+      bodySecondary: de(
+        "Wir bieten nicht nur innovative Gestaltungslösungen an, sondern setzen auch auf nachhaltige und energieeffiziente Baupraktiken, die sowohl die Umwelt schonen als auch langfristige Kosteneinsparungen ermöglichen.",
+      ),
+      image: "/images/home/team.jpg",
+      imageAlt: de("Team von Fachleuten auf der Baustelle"),
+      ctaLabel: de("Freie Stellen"),
+      reservationMode: "path",
+      reservationTarget: CAREERS_PATH,
+      _orbi: { component: "SectionMediaStory" },
+    },
+    {
+      id: "benefits",
+      heading: de("Als Kunde profitieren Sie von:"),
+      image: "/images/home/benefits.jpg",
+      imageAlt: de("Arbeit am Computer"),
+      imagePosition: "left",
+      items: [
+        {
+          text: de(
+            "Energieeffizienten Gebäude dank akkreditierten Energieberatern mit Expertise in Minergie- und Minergie-P-Bauten;",
+          ),
+        },
+        {
+          text: de(
+            "Finanziellen Vorteilen und Fördergelder durch energieeffiziente Massnahmen dank unseren GEAK-Beratern;",
+          ),
+        },
+        {
+          text: de(
+            "Einer hohen Sicherheit im Brandschutz dank regelmässiger und jahrelanger Erfahrung und Ausbildung;",
+          ),
+        },
+        {
+          text: de(
+            "Aktuellsten Stand der Technik dank unseren Kenntnissen in den SIA Normen;",
+          ),
+        },
+        {
+          text: de(
+            "Jedes Projekt ist individuell auf Ihre Wünsche zusammengestellt.",
+          ),
+        },
+      ],
+      _orbi: { component: "SectionSplit" },
+    },
+    {
+      id: "projects",
+      items: [
+        {
+          title: de("Gewerbliche Bauprojekte"),
+          text: de("Moderne Bürogebäude und gewerbliche Einrichtungen."),
+          image: "/images/home/carousel.jpg",
+          imageAlt: de("Gewerbliches Gebäude"),
+        },
+      ],
+      _orbi: { component: "SectionProjectCarousel" },
+    },
+    {
+      id: "standsFor",
+      heading: de("Bhend Architektur steht für"),
+      body: de(
+        "Bhend Architektur steht für massgeschneiderte, nachhaltige und zukunftsorientierte Baukonzepte, die nicht nur Ihre individuellen Wünsche erfüllen, sondern auch einen bleibenden Wert für Sie und die Gemeinschaft schaffen.",
+      ),
+      image: "/images/home/stands-for.jpg",
+      imageAlt: de("Gebäudeecke"),
+      imagePosition: "left",
+      ctaLabel: de("Starten Sie Ihr Projekt mit uns"),
+      reservationMode: "mailto",
+      reservationTarget: CONTACT_MAIL,
+      _orbi: { component: "SectionSplit" },
+    },
+    {
+      id: "process",
+      title: de(
+        "Realisieren Sie Ihr Bauprojekt mit Bhend Architektur\nIn drei einfachen Schritten",
+      ),
+      items: [
+        {
+          title: de("Kontaktaufnahme und Beratung"),
+          text: de(
+            "Beginnen Sie Ihr Projekt, indem Sie Kontakt mit uns aufnehmen. Wir sind hier, um Ihre spezifischen Anforderungen zu verstehen, sei es für ein privates Eigenheim, ein gewerbliches Bauvorhaben oder ein öffentliches Bauwerk.",
+          ),
+          icon: "/images/home/icons/step1.png",
+        },
+        {
+          title: de("Planung und Konzeptentwicklung"),
+          text: de(
+            "Unser Team arbeitet eng mit Ihnen zusammen, um ein massgeschneidertes Konzept zu entwickeln. Wir berücksichtigen Ihre Anforderungen, um sicherzustellen, dass Ihre Bedürfnisse vollständig erfüllt werden.",
+          ),
+          icon: "/images/home/icons/step2.png",
+        },
+        {
+          title: de("Umsetzung und Fertigstellung"),
+          text: de(
+            "Wir kümmern uns um die reibungslose Realisierung Ihres Projekts. Von der Beschaffung der Baubewilligung bis zur Fertigstellung des Bauwerks gewährleisten wir eine professionelle Ausführung.",
+          ),
+          icon: "/images/home/icons/step3.png",
+        },
+      ],
+      _orbi: { component: "SectionIconGrid" },
+    },
+    {
+      id: "ctaBand",
+      title: de(
+        "Machen Sie den ersten Schritt zu Ihrem erfolgreichen Bauprojekt!",
+      ),
+      ctaLabel: de("Jetzt Kontakt aufnehmen"),
+      reservationMode: "mailto",
+      reservationTarget: CONTACT_MAIL,
+      _orbi: { component: "SectionCta" },
+    },
+    {
+      id: "risks",
+      heading: de(
+        "Mit Bhend Architektur Risiken minimieren und Sicherheit gewinnen",
+      ),
+      body: de(
+        "Bei jedem Bauprojekt, egal ob privat, geschäftlich oder öffentlich, gibt es potenzielle Herausforderungen und Risiken.\nBhend Architektur hat sich darauf spezialisiert, diese Risiken zu minimieren und Misserfolge zu vermeiden. Unsere klaren Strukturen und bewährten Prozesse helfen uns, häufige Fallen wie Budgetüberschreitungen, Qualitätsmängel, Planungsfehler und Bauverzögerungen zu verhindern.",
+      ),
+      bodySecondary: de(
+        "Wir setzen auf transparente Kommunikation, gründliche Planung und sorgfältige Ausführung, um sicherzustellen, dass Ihr Projekt erfolgreich und gemäss Ihren Vorstellungen realisiert wird. Mit Bhend Architektur an Ihrer Seite können Sie darauf vertrauen, dass Ihr Bauvorhaben in sicheren Händen ist und Ihre Investition langfristigen Wert schafft.",
+      ),
+      image: "/images/home/risks.jpg",
+      imageAlt: de("Team in einer Besprechung"),
+      _orbi: { component: "SectionMediaStory" },
+    },
+    {
+      id: "engagement",
+      heading: de("Unser Engagement für Ihren Erfolg bei jedem Bauprojekt"),
+      body: de(
+        "Bei Bhend Architektur ist es unser Hauptanliegen, Ihre Visionen in die Realität umzusetzen. Wir konzentrieren uns darauf, die spezifischen Wünsche und Bedürfnisse jedes Projekts zu verstehen und mit grösster Sorgfalt und Präzision zu erfüllen.\nUnser Ziel ist es, Räume zu schaffen, die nicht nur heute begeistern, sondern auch zukünftigen Anforderungen standhalten.\nOb es sich um ein gemütliches Zuhause, ein funktionales Geschäftsgebäude oder eine öffentliche Einrichtung handelt – wir sind bestrebt, langfristigen Wert und dauerhafte Zufriedenheit zu schaffen. Verwirklichen Sie Ihr Projekt mit uns.",
+      ),
+      image: "/images/home/engagement.jpg",
+      imageAlt: de("Pläne und Arbeit am Entwurf"),
+      imagePosition: "left",
+      _orbi: { component: "SectionSplit" },
+    },
+    {
+      id: "map",
+      image: "/images/home/map.jpg",
+      imageAlt: de("Standort Bhend Architektur in Oftringen"),
+      _orbi: { component: "SectionMap" },
+    },
+  ]
+}
+
 export function buildSeedPages({
   hasSqlKeyConfigured = false,
   apiKeysUrl = API_KEYS_URL,
@@ -13,15 +283,33 @@ export function buildSeedPages({
       id: "seed-home",
       slug: "home",
       title: {
-        en: "Welcome",
-        de: "Willkommen",
+        de: "Home",
+        en: "Home",
       },
       lead: {
-        en: "Get your Orbitype-powered Astro site running in a few steps.",
-        de: "Bringen Sie Ihre Orbitype-Astro-Site in wenigen Schritten zum Laufen.",
+        de: "Bauen für Menschen, gestalten für Generationen",
+        en: "Bauen für Menschen, gestalten für Generationen",
+      },
+      img: "/images/home/hero.jpg",
+      keywords: ["architektur", "bauen", "oftringen", "bhend"],
+      head: {},
+      created_at: now(),
+      updated_at: now(),
+      sections: homeSections(),
+    },
+    {
+      id: "seed-setup",
+      slug: "setup",
+      title: {
+        de: "Setup",
+        en: "Setup",
+      },
+      lead: {
+        de: "Operator onboarding",
+        en: "Operator onboarding",
       },
       img: "",
-      keywords: ["welcome", "setup", "orbitype"],
+      keywords: ["welcome", "setup"],
       head: {},
       created_at: now(),
       updated_at: now(),
@@ -32,120 +320,19 @@ export function buildSeedPages({
             de: "Willkommen bei Ihrer Astro + Orbitype Site",
           },
           lead: {
-            en: "This screen appears when the CMS is empty, unconfigured, or running in mock mode. Follow the steps below to connect Orbitype and publish real content.",
-            de: "Dieser Bildschirm erscheint, wenn das CMS leer, nicht konfiguriert oder im Mock-Modus ist. Folgen Sie den Schritten unten.",
+            en: "This screen appears when the CMS is empty, unconfigured, or running in mock mode.",
+            de: "Dieser Bildschirm erscheint, wenn das CMS leer, nicht konfiguriert oder im Mock-Modus ist.",
           },
-          capabilities: [
-            {
-              title: { en: "Zero client JS by default", de: "Kein Client-JS" },
-              text: {
-                en: "Content pages ship HTML and CSS only — no framework runtime.",
-                de: "Inhaltsseiten liefern nur HTML und CSS — kein Framework-Runtime.",
-              },
-              badge: "perf",
-            },
-            {
-              title: { en: "Section-driven pages", de: "Abschnittsbasiert" },
-              text: {
-                en: "Compose pages from CMS JSON. Each section maps to one .astro file by name.",
-                de: "Seiten aus CMS-JSON zusammensetzen. Jeder Abschnitt entspricht einer .astro-Datei.",
-              },
-            },
-            {
-              title: { en: "MCP authoring", de: "MCP-Authoring" },
-              text: {
-                en: "Read and write content from Cursor via Orbitype MCP — never leave the editor.",
-                de: "Inhalte über Orbitype MCP in Cursor lesen und schreiben.",
-              },
-            },
-          ],
+          capabilities: [],
           steps: [
             {
-              title: {
-                en: "Create a SQL connector",
-                de: "SQL-Connector erstellen",
-              },
+              title: { en: "Install schema", de: "Schema installieren" },
               text: {
-                en: "In Orbitype, create a SQL connector and point it at your Postgres database.",
-                de: "Erstellen Sie in Orbitype einen SQL-Connector und verbinden Sie Ihre Postgres-Datenbank.",
-              },
-            },
-            {
-              title: {
-                en: "Create a connector-scoped API key",
-                de: "API-Schlüssel erstellen",
-              },
-              text: {
-                en: `Create a key scoped to that connector at ${apiKeysUrl}.`,
-                de: `Erstellen Sie einen Schlüssel für diesen Connector unter ${apiKeysUrl}.`,
-              },
-            },
-            {
-              title: {
-                en: "Add credentials to .env",
-                de: "Zugangsdaten in .env",
-              },
-              text: {
-                en: "Set ORBITYPE_API_SQL_URL, ORBITYPE_API_SQL_KEY, and ORBITYPE_MOCK=false.",
-                de: "Setzen Sie ORBITYPE_API_SQL_URL, ORBITYPE_API_SQL_KEY und ORBITYPE_MOCK=false.",
-              },
-              code: `ORBITYPE_MOCK=false
-ORBITYPE_API_SQL_URL=https://core.orbitype.com/api/sql/v1
-ORBITYPE_API_SQL_KEY=your-connector-key`,
-            },
-            {
-              title: {
-                en: "Install the CMS schema",
-                de: "CMS-Schema installieren",
-              },
-              text: {
-                en: "From an authorized machine run: pnpm run cms:install. Creates uid() and the CMS tables. Safe to re-run.",
-                de: "Auf einem autorisierten Rechner: pnpm run cms:install. Erstellt uid() und die CMS-Tabellen.",
+                en: "Run pnpm run cms:install on an authorized machine.",
+                de: "Führen Sie pnpm run cms:install auf einem autorisierten Rechner aus.",
               },
               kind: "cli",
               code: "pnpm run cms:install",
-            },
-            {
-              title: {
-                en: "Seed starter content",
-                de: "Starter-Inhalte laden",
-              },
-              text: {
-                en: "Run: pnpm run cms:seed. Inserts the homepage and a sample post. Skips rows that already exist.",
-                de: "Ausführen: pnpm run cms:seed. Fügt Startseite und Beispielbeitrag ein.",
-              },
-              kind: "cli",
-              code: "pnpm run cms:seed",
-            },
-            {
-              title: {
-                en: "Wire Orbitype MCP",
-                de: "Orbitype MCP einrichten",
-              },
-              text: {
-                en: "Export ORBITYPE_SQL_API_KEY (run pnpm run mcp:env), reload MCP in Cursor, then call orbitype_get_context.",
-                de: "ORBITYPE_SQL_API_KEY exportieren (pnpm run mcp:env), MCP neu laden, dann orbitype_get_context aufrufen.",
-              },
-              code: `{
-  "mcpServers": {
-    "orbitype-sql": {
-      "url": "https://core.orbitype.com/api/mcp/v1",
-      "headers": {
-        "X-API-KEY": "\${env:ORBITYPE_SQL_API_KEY}"
-      }
-    }
-  }
-}`,
-            },
-            {
-              title: {
-                en: "Build your first section",
-                de: "Ersten Abschnitt bauen",
-              },
-              text: {
-                en: "Add src/components/sections/SectionName.astro, then append matching JSON to pages.sections via SQL.",
-                de: "SectionName.astro anlegen, dann passendes JSON per SQL anhängen.",
-              },
             },
           ],
           hasSqlKeyConfigured,
@@ -162,12 +349,12 @@ export function buildSeedPosts() {
     {
       id: "seed-post-1",
       title: {
-        en: "Getting started with sections",
         de: "Erste Schritte mit Abschnitten",
+        en: "Getting started with sections",
       },
       lead: {
-        en: "<p>How CMS JSON becomes rendered HTML.</p>",
         de: "<p>Wie CMS-JSON zu gerendertem HTML wird.</p>",
+        en: "<p>How CMS JSON becomes rendered HTML.</p>",
       },
       img: "",
       status: {
@@ -180,12 +367,12 @@ export function buildSeedPosts() {
       sections: [
         {
           title: {
-            en: "One file per section",
             de: "Eine Datei pro Abschnitt",
+            en: "One file per section",
           },
           content: {
-            en: "<p>Create <code>SectionName.astro</code> in <code>src/components/sections/</code>. The filename must match <code>_orbi.component</code> exactly.</p>",
             de: "<p>Erstellen Sie <code>SectionName.astro</code>. Der Dateiname muss genau <code>_orbi.component</code> entsprechen.</p>",
+            en: "<p>Create <code>SectionName.astro</code> in <code>src/components/sections/</code>. The filename must match <code>_orbi.component</code> exactly.</p>",
           },
           _orbi: { component: "SectionProse" },
         },

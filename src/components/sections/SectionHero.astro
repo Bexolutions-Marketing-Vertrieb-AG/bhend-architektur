@@ -1,5 +1,5 @@
 ---
-// SectionHero.astro
+// SectionHero.astro — brand split hero (Home)
 import { translate } from "~/lib/i18n"
 import { bf } from "~/lib/bf"
 import { resolveReservationHref } from "~/lib/reservation"
@@ -14,7 +14,9 @@ interface Props {
   ctaHref?: string
   reservationMode?: ReservationMode
   reservationTarget?: string
+  image?: string
   img?: string
+  imageAlt?: I18nString
   locale: Locale
 }
 
@@ -25,11 +27,16 @@ const {
   ctaHref,
   reservationMode,
   reservationTarget,
+  image,
   img,
+  imageAlt,
   locale,
 } = Astro.props
 const heading = translate(title, locale)
+const body = translate(lead, locale)
 const cta = translate(ctaLabel, locale)
+const media = image || img || ""
+const alt = translate(imageAlt, locale)
 const href = resolveReservationHref({
   reservationMode,
   reservationTarget,
@@ -37,33 +44,36 @@ const href = resolveReservationHref({
 })
 ---
 
-<section
-  class="container-wide py-section"
-  {...bf("home.hero.shell", "container", "hero")}
->
-  <div class="grid items-center gap-10 lg:grid-cols-2">
-    <div>
+<section class="bg-surface" {...bf("home.hero.shell", "container", "hero")}>
+  <div
+    class="container-wide py-section grid items-stretch gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-12"
+  >
+    <div class="flex flex-col justify-center">
       {
         heading && (
           <h1
-            class="mb-4 text-4xl font-semibold tracking-tight text-balance md:text-5xl"
+            class="font-display mb-6 text-5xl leading-[1.1] font-bold tracking-tight uppercase md:text-6xl"
             {...bf("home.hero.heading", "style_target", "hero")}
           >
             {heading}
           </h1>
         )
       }
-      <p
-        class="mb-8 text-lg text-neutral-600"
-        {...bf("home.hero.body", "style_target", "hero")}
-      >
-        {translate(lead, locale)}
-      </p>
       {
-        cta && href && (
+        body && (
+          <p
+            class="font-display text-3xl leading-snug font-bold text-balance md:text-4xl"
+            {...bf("home.hero.body", "style_target", "hero")}
+          >
+            {body}
+          </p>
+        )
+      }
+      {
+        cta && href && href !== "#" && (
           <a
             href={href}
-            class="bg-brand-900 inline-flex rounded-lg px-5 py-2.5 text-sm font-medium text-white"
+            class="btn-primary mt-8 w-fit"
             {...bf("home.hero.cta", "chrome_denied", "hero")}
           >
             {cta}
@@ -72,11 +82,13 @@ const href = resolveReservationHref({
       }
     </div>
     {
-      img && (
+      media && (
         <img
-          src={img}
-          alt=""
-          class="w-full rounded-2xl object-cover shadow-sm"
+          src={media}
+          alt={alt}
+          class="h-full min-h-[320px] w-full object-cover lg:min-h-[650px]"
+          width="685"
+          height="650"
           loading="eager"
           {...bf("home.hero.image", "image", "hero")}
         />

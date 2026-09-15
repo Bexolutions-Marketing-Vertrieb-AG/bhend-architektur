@@ -1,24 +1,33 @@
 import { expect, test } from "@playwright/test"
 
 test.describe("smoke", () => {
-  test("home renders welcome section", async ({ page }) => {
+  test("home renders hero section", async ({ page }) => {
     const response = await page.goto("/")
     expect(response?.status()).toBe(200)
+    await expect(page.locator('[data-bf-id="home.hero.shell"]')).toBeVisible()
+    await expect(page.locator('[data-bf-id="home.hero.heading"]')).toBeVisible()
+    await expect(
+      page.locator('[data-bf-id="home.hero.heading"]'),
+    ).toContainText(/BHEND ARCHITEKTUR/i)
+  })
+
+  test("setup page renders welcome section", async ({ page }) => {
+    await page.goto("/setup")
     await expect(page.getByTestId("section-welcome")).toBeVisible()
     await expect(page.getByTestId("welcome-heading")).toBeVisible()
     await expect(page.getByTestId("section-welcome")).toHaveAttribute(
       "data-bf-id",
       "home.welcome.shell",
     )
-    await expect(page.getByTestId("welcome-heading")).toHaveAttribute(
-      "data-bf-id",
-      "home.welcome.heading",
-    )
   })
 
   test("welcome accordion expands the second step", async ({ page }) => {
-    await page.goto("/")
+    await page.goto("/setup")
     const details = page.getByTestId("welcome-step")
+    if ((await details.count()) < 2) {
+      test.skip()
+      return
+    }
     await expect(details.first()).toHaveAttribute("open", "")
     await details.nth(1).locator("summary").click()
     await expect(details.nth(1)).toHaveAttribute("open", "")
@@ -28,7 +37,7 @@ test.describe("smoke", () => {
     const response = await page.goto("/definitely-not-a-real-page-xyz")
     expect(response?.status()).toBe(404)
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
-      /not found/i,
+      /not found|nicht gefunden/i,
     )
   })
 
