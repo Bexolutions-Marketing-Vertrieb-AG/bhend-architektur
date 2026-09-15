@@ -74,11 +74,15 @@ assert(
   "no cookie banner in upstream — e2e banner deferred (helper shipped)",
 )
 
-// --- SVG width/height ---
-const favicon = fs.readFileSync("public/favicon.svg", "utf8")
+// --- Favicon present ---
 assert(
-  /<svg[^>]*\bwidth=/.test(favicon) && /<svg[^>]*\bheight=/.test(favicon),
-  "favicon.svg has width and height",
+  fs.existsSync("public/favicon.png") &&
+    fs.statSync("public/favicon.png").size > 0,
+  "favicon.png is present",
+)
+assert(
+  fs.existsSync("public/favicon-32x32.png"),
+  "favicon-32x32.png is present",
 )
 
 const nav = fs.readFileSync("src/components/layout/Navigation.astro", "utf8")

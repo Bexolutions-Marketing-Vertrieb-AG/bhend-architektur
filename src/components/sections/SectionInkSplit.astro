@@ -1,0 +1,91 @@
+---
+// SectionInkSplit.astro — dark band: title + body left, photo + caption right
+import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
+import type { I18nString } from "~/types/i18n"
+import type { Locale } from "~/config/locales"
+
+interface Props {
+  id?: string
+  title?: I18nString
+  heading?: I18nString
+  body?: I18nString
+  image?: string
+  imageAlt?: I18nString
+  imageCaption?: I18nString
+  locale: Locale
+}
+
+const {
+  id = "inkSplit",
+  title,
+  heading,
+  body,
+  image,
+  imageAlt,
+  imageCaption,
+  locale,
+} = Astro.props
+const section = id
+const headline = translate(heading ?? title, locale)
+const copy = translate(body, locale)
+const alt = translate(imageAlt, locale)
+const caption = translate(imageCaption, locale)
+---
+
+<section
+  class="bg-brand-900 text-white"
+  {...bf(`${section}.shell`, "container", section)}
+>
+  <div class="container-wide py-section-sm md:py-section">
+    <div
+      class="grid items-start gap-10 lg:grid-cols-[minmax(0,481px)_minmax(0,1fr)] lg:gap-16"
+    >
+      <div class="flex flex-col gap-6">
+        {
+          headline && (
+            <h2
+              class="font-display text-brand-100 text-3xl font-bold tracking-tight md:text-4xl"
+              {...bf(`${section}.heading`, "style_target", section)}
+            >
+              {headline}
+            </h2>
+          )
+        }
+        {
+          copy && (
+            <p
+              class="section-lead text-brand-200 whitespace-pre-line"
+              {...bf(`${section}.body`, "style_target", section)}
+            >
+              {copy}
+            </p>
+          )
+        }
+      </div>
+      {
+        image && (
+          <figure>
+            <img
+              src={image}
+              alt={alt}
+              class="aspect-[580/650] w-full object-cover"
+              width="580"
+              height="650"
+              loading="lazy"
+              {...bf(`${section}.image`, "image", section)}
+            />
+            {caption && (
+              <figcaption
+                class="text-brand-200 mt-3 text-sm"
+                {...bf(`${section}.imageCaption`, "style_target", section)}
+              >
+                {caption}
+              </figcaption>
+            )}
+          </figure>
+        )
+      }
+    </div>
+  </div>
+</section>

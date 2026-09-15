@@ -22,10 +22,20 @@ const links: NavItem[] = [
     children: [
       { href: "/ueber-uns/team", label: "Team" },
       { href: "/ueber-uns/mitgliedschaften", label: "Mitgliedschaften" },
-      { href: "/ueber-uns/presse", label: "Presse / Extern" },
+      { href: "/ueber-uns/presse-extern", label: "Presse / Extern" },
     ],
   },
-  { href: "/leistungen", label: "Leistungen" },
+  {
+    label: "Leistungen",
+    children: [
+      { href: "/planung", label: "Planung" },
+      { href: "/beratung", label: "Beratung" },
+      { href: "/brandschutz", label: "Brandschutz" },
+      { href: "/realisierung", label: "Realisierung" },
+      { href: "/energieberatung", label: "Energieberatung" },
+      { href: "/bauherrenberatung", label: "Bauherrenberatung" },
+    ],
+  },
   { href: "/aktuell", label: "Aktuell" },
   { href: "/referenzen", label: "Referenzen" },
   { href: "/bei-uns-arbeiten", label: "Bei uns arbeiten" },

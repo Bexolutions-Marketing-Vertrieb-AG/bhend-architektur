@@ -1,0 +1,117 @@
+---
+// SectionServiceIntro.astro — Leistungen page hero (title + lead + body + photo)
+import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
+import { resolveReservationHref } from "~/lib/reservation"
+import type { ReservationMode } from "~/lib/reservation"
+import type { I18nString } from "~/types/i18n"
+import type { Locale } from "~/config/locales"
+
+interface Props {
+  id?: string
+  title?: I18nString
+  heading?: I18nString
+  lead?: I18nString
+  body?: I18nString
+  image?: string
+  imageAlt?: I18nString
+  ctaLabel?: I18nString
+  ctaHref?: string
+  reservationMode?: ReservationMode
+  reservationTarget?: string
+  locale: Locale
+}
+
+const {
+  id = "serviceIntro",
+  title,
+  heading,
+  lead,
+  body,
+  image,
+  imageAlt,
+  ctaLabel,
+  ctaHref,
+  reservationMode,
+  reservationTarget,
+  locale,
+} = Astro.props
+const section = id
+const headline = translate(heading ?? title, locale)
+const kicker = translate(lead, locale)
+const copy = translate(body, locale)
+const alt = translate(imageAlt, locale) || headline
+const cta = translate(ctaLabel, locale)
+const href = resolveReservationHref({
+  reservationMode,
+  reservationTarget,
+  ctaHref,
+})
+---
+
+<section class="bg-white" {...bf(`${section}.shell`, "container", section)}>
+  <div class="container-wide py-section-sm md:pb-section md:pt-section">
+    <div
+      class="grid items-start gap-10 lg:grid-cols-[minmax(0,480px)_minmax(0,1fr)] lg:gap-16"
+    >
+      <div class="flex flex-col gap-6">
+        {
+          headline && (
+            <h1
+              class="font-display text-4xl font-bold tracking-tight uppercase md:text-5xl"
+              {...bf(`${section}.heading`, "style_target", section)}
+            >
+              {headline}
+            </h1>
+          )
+        }
+        {
+          kicker && (
+            <p
+              class="font-display text-xl font-bold tracking-tight uppercase md:text-2xl"
+              {...bf(`${section}.lead`, "style_target", section)}
+            >
+              {kicker}
+            </p>
+          )
+        }
+        {
+          copy && (
+            <p
+              class="section-lead max-w-md whitespace-pre-line"
+              {...bf(`${section}.body`, "style_target", section)}
+            >
+              {copy}
+            </p>
+          )
+        }
+        {
+          cta && href && href !== "#" && (
+            <a
+              href={href}
+              class="btn-primary mt-2 w-fit"
+              target={href.startsWith("http") ? "_blank" : undefined}
+              rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+              {...bf(`${section}.cta`, "chrome_denied", section)}
+            >
+              {cta}
+            </a>
+          )
+        }
+      </div>
+      {
+        image && (
+          <img
+            src={image}
+            alt={alt}
+            class="aspect-[685/650] w-full object-cover"
+            width="685"
+            height="650"
+            loading="eager"
+            {...bf(`${section}.image`, "image", section)}
+          />
+        )
+      }
+    </div>
+  </div>
+</section>

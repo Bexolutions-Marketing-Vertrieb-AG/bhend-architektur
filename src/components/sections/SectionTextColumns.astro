@@ -1,0 +1,68 @@
+---
+// SectionTextColumns.astro — multi-column title + body (no cards)
+import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
+import type { I18nString } from "~/types/i18n"
+import type { Locale } from "~/config/locales"
+
+interface Item {
+  title?: I18nString
+  text?: I18nString
+  body?: I18nString
+}
+
+interface Props {
+  id?: string
+  title?: I18nString
+  items?: Item[]
+  locale: Locale
+}
+
+const { id = "textColumns", title, items = [], locale } = Astro.props
+const section = id
+const headline = translate(title, locale)
+---
+
+<section class="bg-white" {...bf(`${section}.shell`, "container", section)}>
+  <div class="container-wide py-section-sm md:pb-section">
+    {
+      headline && (
+        <h2
+          class="section-heading mb-12"
+          {...bf(`${section}.heading`, "style_target", section)}
+        >
+          {headline}
+        </h2>
+      )
+    }
+    <ul class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+      {
+        items.map((item, index) => {
+          const n = index + 1
+          const itemTitle = translate(item.title, locale)
+          const itemBody = translate(item.text ?? item.body, locale)
+          return (
+            <li class="flex flex-col gap-4">
+              {itemTitle && (
+                <h3
+                  class="font-display text-2xl font-bold tracking-tight"
+                  {...bf(`${section}.item${n}Title`, "style_target", section)}
+                >
+                  {itemTitle}
+                </h3>
+              )}
+              {itemBody && (
+                <p
+                  class="section-lead"
+                  {...bf(`${section}.item${n}Body`, "style_target", section)}
+                >
+                  {itemBody}
+                </p>
+              )}
+            </li>
+          )
+        })
+      }
+    </ul>
+  </div>
+</section>
