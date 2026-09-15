@@ -9,6 +9,166 @@ const CAREERS_PATH = "/bei-uns-arbeiten"
 
 const de = (value) => ({ de: value, en: value })
 
+function teamMember({ name, roles, image, phone }) {
+  return {
+    name: de(name),
+    roles: roles.map(de),
+    image,
+    imageAlt: de(name),
+    phone,
+    mailLabel: de("Mail"),
+  }
+}
+
+function teamSections() {
+  return [
+    {
+      id: "teamHero",
+      title: de("BHEND ARCHITEKTUR TEAM"),
+      image: "/images/team/team-hero.jpg",
+      imageAlt: de("Das Team von Bhend Architektur"),
+      _orbi: { component: "SectionPageHero" },
+    },
+    {
+      id: "teamGrid",
+      members: [
+        teamMember({
+          name: "Ueli Bhend",
+          image: "/images/team/ueli-bhend.jpg",
+          phone: "+41 62 798 0707",
+          roles: [
+            "Geschäftsinhaber",
+            "Architekt HF",
+            "Energieberater Kanton Aargau",
+            "GEAK Experte",
+            "Energieberater für Schutzobjekte und kirchliche Gebäude",
+            "Fortbildung Minergie -P Bauweise",
+            "Solarprofi Kurs Swisssola",
+          ],
+        }),
+        teamMember({
+          name: "Micha Bhend",
+          image: "/images/team/micha-bhend.jpg",
+          phone: "+41 62 798 0909",
+          roles: [
+            "Mitglied Geschäftsleitung / Partner",
+            "Architekt HF",
+            "Hochbaupolier",
+          ],
+        }),
+        teamMember({
+          name: "Thomas Schweizer",
+          image: "/images/team/thomas-schweizer.jpg",
+          phone: "+41 62 798 0404",
+          roles: [
+            "Mitglied Geschäftsleitung / Partner",
+            "Techniker HF Holztechnik",
+            "Brandschutzfachmann mit eidg. FA/VKF",
+            "CAS Brandschutz für Architekten",
+            "Brandschutztechnische Beurteilung von Bestandesbauten",
+            "Berufsbildner",
+          ],
+        }),
+        teamMember({
+          name: "Patrick Zingg",
+          image: "/images/team/patrick-zingg.jpg",
+          phone: "+41 62 798 1070",
+          roles: [
+            "Mitglied Geschäftsleitung / Partner",
+            "Architekt HF",
+            "GEAK Experte",
+            "Energieberater",
+            "CAS Nachhaltiges Bauen",
+            "CAS Strategische Bauerneuerung",
+            "CAS Energieberatung",
+            "Berufsbildner",
+          ],
+        }),
+        teamMember({
+          name: "Christoph Ruesch",
+          image: "/images/team/christoph-ruesch.jpg",
+          phone: "+41 62 798 1072",
+          roles: [
+            "Architekt FH",
+            "Energiexperte Bau",
+            "GEAK Experte",
+            "DAS Energieexperte Bau",
+            "CAS Energie am Bau",
+            "CAS Energie in der Gebäudeerneuerung",
+            "CAS Management Skills",
+            "CAS Nachhaltiges Bauen",
+            "CAS Photovoltaik",
+          ],
+        }),
+        teamMember({
+          name: "Markus Moser",
+          image: "/images/team/markus-moser.jpg",
+          phone: "+41 62 798 1076",
+          roles: [
+            "Bauleiter",
+            "Technischer Kaufmann mit eidgenösischem Fachausweis",
+            "Dipl. Bodenberater Boden Schweiz/ISP/TVS",
+            "Berufsbildner",
+          ],
+        }),
+        teamMember({
+          name: "Joel Gerber",
+          image: "/images/team/joel-gerber.jpg",
+          phone: "+41 62 798 1076",
+          roles: ["Architekt HF", "Berufsbildner"],
+        }),
+        teamMember({
+          name: "Brigitte Flükiger",
+          image: "/images/team/brigitte-fluekiger.jpg",
+          phone: "+41 62 798 1077",
+          roles: [
+            "Zeichnerin EFZ Architektur",
+            "Hochbauzeichnerin",
+            "Berufsbildnerin",
+          ],
+        }),
+        teamMember({
+          name: "Stefanie Burren",
+          image: "/images/team/stefanie-burren.jpg",
+          phone: "+41 62 798 1071",
+          roles: ["Zeichnerin EFZ Architektur"],
+        }),
+        teamMember({
+          name: "Simon Höchenberger",
+          image: "/images/team/simon-hoechenberger.jpg",
+          phone: "+41 62 798 0000",
+          roles: ["Zeichner EFZ Architektur", "Maurer EFZ"],
+        }),
+        teamMember({
+          name: "Jannik Wyss",
+          image: "/images/team/jannik-wyss.jpg",
+          phone: "+41 62 798 0000",
+          roles: ["Zeichner EFZ Architektur i.A"],
+        }),
+        teamMember({
+          name: "Mathilde de Almeida Rocha",
+          image: "/images/team/mathilde-de-almeida-rocha.jpg",
+          phone: "+41 62 798 0000",
+          roles: ["Zeichnerin EFZ Architektur i.A."],
+        }),
+        teamMember({
+          name: "Esther Wälchli",
+          image: "/images/team/esther-waelchli.jpg",
+          phone: "+41 62 798 0000",
+          roles: ["Administration"],
+        }),
+        teamMember({
+          name: "Selina Vonäsch",
+          image: "/images/team/selina-vonaesch.jpg",
+          phone: "+41 62 798 0000",
+          roles: ["Praktikantin"],
+        }),
+      ],
+      _orbi: { component: "SectionTeamGrid" },
+    },
+  ]
+}
+
 function homeSections() {
   return [
     {
@@ -296,6 +456,24 @@ export function buildSeedPages({
       created_at: now(),
       updated_at: now(),
       sections: homeSections(),
+    },
+    {
+      id: "seed-team",
+      slug: "ueber-uns/team",
+      title: {
+        de: "Team",
+        en: "Team",
+      },
+      lead: {
+        de: "Bhend Architektur Team",
+        en: "Bhend Architektur Team",
+      },
+      img: "/images/team/team-hero.jpg",
+      keywords: ["team", "über uns", "architektur"],
+      head: {},
+      created_at: now(),
+      updated_at: now(),
+      sections: teamSections(),
     },
     {
       id: "seed-setup",

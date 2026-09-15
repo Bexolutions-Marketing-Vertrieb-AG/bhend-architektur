@@ -217,3 +217,66 @@ surfaces:
     locales: [de]
     publication_target: orbitype_pages
     sample: ""
+
+  - bf_id: teamHero.shell
+    kind: container
+    area: team
+    section: teamHero
+    path: src/components/sections/SectionPageHero.astro
+    locator: orbitype:pages/ueber-uns/team/sections/teamHero
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: teamHero.heading
+    kind: style_target
+    area: team
+    section: teamHero
+    path: src/components/sections/SectionPageHero.astro
+    locator: orbitype:pages/ueber-uns/team/sections/teamHero/title@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "BHEND ARCHITEKTUR TEAM"
+
+  - bf_id: teamHero.image
+    kind: image
+    area: team
+    section: teamHero
+    path: src/components/sections/SectionPageHero.astro
+    locator: orbitype:pages/ueber-uns/team/sections/teamHero/image@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: /images/team/team-hero.jpg
+    alt_locator: orbitype:pages/ueber-uns/team/sections/teamHero/imageAlt@de
+
+  - bf_id: teamGrid.shell
+    kind: container
+    area: team
+    section: teamGrid
+    path: src/components/sections/SectionTeamGrid.astro
+    locator: orbitype:pages/ueber-uns/team/sections/teamGrid
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: teamGrid.member1Name
+    kind: style_target
+    area: team
+    section: teamGrid
+    path: src/components/sections/SectionTeamGrid.astro
+    locator: orbitype:pages/ueber-uns/team/sections/teamGrid/members@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Ueli Bhend"
+    notes: "Member names/roles live in members[] items; locator uses section id teamGrid"
+
+  - bf_id: teamGrid.member1Phone
+    kind: chrome_denied
+    area: team
+    section: teamGrid
+    path: src/components/sections/SectionTeamGrid.astro
+    locator: orbitype:pages/ueber-uns/team/sections/teamGrid/members@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "+41 62 798 0707"
+    notes: "tel: chrome; Mail link only when email field is set (no invented mailto)"
