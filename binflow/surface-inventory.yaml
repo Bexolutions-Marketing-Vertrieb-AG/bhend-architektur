@@ -1,39 +1,38 @@
-# Binflow surface inventory (v1). Clones: set project_key; keep bf_ids stable.
-# Locators use componentId (Section*), never sections[] index.
+# Binflow surface inventory (v1). Locators use componentId / section id, never sections[] index.
 # @see docs/template/BSI.md
 version: 1
-project_key: orbitype-astro-template
+project_key: bhend-architektur
 surfaces:
   - bf_id: home.welcome.shell
     kind: container
     area: home
     section: welcome
     path: src/components/sections/SectionWelcome.astro
-    locator: orbitype:pages/home/sections/SectionWelcome
-    locales: [en]
+    locator: orbitype:pages/setup/sections/SectionWelcome
+    locales: [de]
     publication_target: orbitype_pages
     sample: ""
-    notes: "Default mock/seed Home shell — declare-only"
+    notes: "Operator setup page shell — declare-only"
 
   - bf_id: home.welcome.heading
     kind: style_target
     area: home
     section: welcome
     path: src/components/sections/SectionWelcome.astro
-    locator: orbitype:pages/home/sections/SectionWelcome/title@en
-    locales: [en]
+    locator: orbitype:pages/setup/sections/SectionWelcome/title@de
+    locales: [de]
     publication_target: orbitype_pages
-    sample: "Welcome to your Astro + Orbitype site"
+    sample: "Willkommen bei Ihrer Astro + Orbitype Site"
 
   - bf_id: home.welcome.body
     kind: style_target
     area: home
     section: welcome
     path: src/components/sections/SectionWelcome.astro
-    locator: orbitype:pages/home/sections/SectionWelcome/lead@en
-    locales: [en]
+    locator: orbitype:pages/setup/sections/SectionWelcome/lead@de
+    locales: [de]
     publication_target: orbitype_pages
-    sample: "This screen appears when the CMS is empty, unconfigured, or running in mock mode."
+    sample: "Dieser Bildschirm erscheint, wenn das CMS leer, nicht konfiguriert oder im Mock-Modus ist."
 
   - bf_id: home.hero.shell
     kind: container
@@ -41,48 +40,180 @@ surfaces:
     section: hero
     path: src/components/sections/SectionHero.astro
     locator: orbitype:pages/home/sections/SectionHero
-    locales: [en]
+    locales: [de]
     publication_target: orbitype_pages
     sample: ""
-    notes: "Optional marketing Home hero when seed replaces welcome"
 
   - bf_id: home.hero.heading
     kind: style_target
     area: home
     section: hero
     path: src/components/sections/SectionHero.astro
-    locator: orbitype:pages/home/sections/SectionHero/title@en
-    locales: [en]
+    locator: orbitype:pages/home/sections/SectionHero/title@de
+    locales: [de]
     publication_target: orbitype_pages
-    sample: "Headline"
+    sample: "BHEND ARCHITEKTUR"
 
   - bf_id: home.hero.body
     kind: style_target
     area: home
     section: hero
     path: src/components/sections/SectionHero.astro
-    locator: orbitype:pages/home/sections/SectionHero/lead@en
-    locales: [en]
+    locator: orbitype:pages/home/sections/SectionHero/lead@de
+    locales: [de]
     publication_target: orbitype_pages
-    sample: "Lead text"
+    sample: "Bauen für Menschen, gestalten für Generationen"
 
   - bf_id: home.hero.image
     kind: image
     area: home
     section: hero
     path: src/components/sections/SectionHero.astro
-    locator: orbitype:pages/home/sections/SectionHero/img@en
-    locales: [en]
+    locator: orbitype:pages/home/sections/SectionHero/image@de
+    locales: [de]
     publication_target: orbitype_pages
-    sample: ""
+    sample: /images/home/hero.jpg
+    alt_locator: orbitype:pages/home/sections/SectionHero/imageAlt@de
 
   - bf_id: home.hero.cta
     kind: chrome_denied
     area: home
     section: hero
     path: src/components/sections/SectionHero.astro
-    locator: orbitype:pages/home/sections/SectionHero/ctaLabel@en
-    locales: [en]
+    locator: orbitype:pages/home/sections/SectionHero/ctaLabel@de
+    locales: [de]
     publication_target: orbitype_pages
-    sample: "Get started"
-    notes: "CTA label; href via ctaHref sibling field"
+    sample: ""
+    notes: "Optional CTA; href via reservationMode/reservationTarget or ctaHref"
+
+  - bf_id: home.audience.shell
+    kind: container
+    area: home
+    section: audience
+    path: src/components/sections/SectionIconGrid.astro
+    locator: orbitype:pages/home/sections/audience
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: home.challenges.shell
+    kind: container
+    area: home
+    section: challenges
+    path: src/components/sections/SectionSplit.astro
+    locator: orbitype:pages/home/sections/challenges
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: home.challenges.heading
+    kind: style_target
+    area: home
+    section: challenges
+    path: src/components/sections/SectionSplit.astro
+    locator: orbitype:pages/home/sections/challenges/heading@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Private und Öffentliche Bauprojekte ="
+
+  - bf_id: home.challenges.body
+    kind: style_target
+    area: home
+    section: challenges
+    path: src/components/sections/SectionSplit.astro
+    locator: orbitype:pages/home/sections/challenges/body@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Häufig begegnen unsere Kunden und Partner Herausforderungen"
+
+  - bf_id: home.challenges.image
+    kind: image
+    area: home
+    section: challenges
+    path: src/components/sections/SectionSplit.astro
+    locator: orbitype:pages/home/sections/challenges/image@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: /images/home/challenges.jpg
+
+  - bf_id: home.ctaBand.shell
+    kind: container
+    area: home
+    section: ctaBand
+    path: src/components/sections/SectionCta.astro
+    locator: orbitype:pages/home/sections/ctaBand
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: home.ctaBand.heading
+    kind: style_target
+    area: home
+    section: ctaBand
+    path: src/components/sections/SectionCta.astro
+    locator: orbitype:pages/home/sections/ctaBand/title@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Machen Sie den ersten Schritt zu Ihrem erfolgreichen Bauprojekt!"
+
+  - bf_id: home.ctaBand.cta
+    kind: chrome_denied
+    area: home
+    section: ctaBand
+    path: src/components/sections/SectionCta.astro
+    locator: orbitype:pages/home/sections/ctaBand/ctaLabel@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Jetzt Kontakt aufnehmen"
+    notes: "mailto via reservationMode=mailto + reservationTarget"
+
+  - bf_id: home.standsFor.cta
+    kind: chrome_denied
+    area: home
+    section: standsFor
+    path: src/components/sections/SectionSplit.astro
+    locator: orbitype:pages/home/sections/standsFor/ctaLabel@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Starten Sie Ihr Projekt mit uns"
+
+  - bf_id: home.map.image
+    kind: image
+    area: home
+    section: map
+    path: src/components/sections/SectionMap.astro
+    locator: orbitype:pages/home/sections/map/image@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: /images/home/map.jpg
+
+  - bf_id: chrome.nav.shell
+    kind: container
+    area: chrome
+    section: nav
+    path: src/components/layout/Navigation.astro
+    locator: orbitype:pages/home/sections/Navigation
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+    notes: "Layout chrome — declare-only"
+
+  - bf_id: chrome.nav.cta
+    kind: chrome_denied
+    area: chrome
+    section: nav
+    path: src/components/layout/Navigation.astro
+    locator: orbitype:pages/home/sections/Navigation/ctaLabel@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Kontakt"
+
+  - bf_id: chrome.footer.shell
+    kind: container
+    area: chrome
+    section: footer
+    path: src/components/layout/Footer.astro
+    locator: orbitype:pages/home/sections/Footer
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""

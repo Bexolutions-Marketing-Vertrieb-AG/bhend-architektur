@@ -1,0 +1,39 @@
+---
+// SectionMap.astro — map thumbnail / embed image
+import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
+import type { I18nString } from "~/types/i18n"
+import type { Locale } from "~/config/locales"
+
+interface Props {
+  id?: string
+  image?: string
+  imageAlt?: I18nString
+  locale: Locale
+}
+
+const { id = "map", image, imageAlt, locale } = Astro.props
+const section = id
+const alt = translate(imageAlt, locale)
+---
+
+<section
+  class="bg-surface"
+  {...bf(`home.${section}.shell`, "container", section)}
+>
+  <div class="container-wide py-section-sm md:py-section">
+    {
+      image && (
+        <img
+          src={image}
+          alt={alt || "Map"}
+          class="aspect-[1200/675] w-full object-cover"
+          width="1200"
+          height="675"
+          loading="lazy"
+          {...bf(`home.${section}.image`, "image", section)}
+        />
+      )
+    }
+  </div>
+</section>

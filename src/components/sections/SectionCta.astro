@@ -1,16 +1,18 @@
 ---
-// SectionCta.astro
-//
-// Prefer reservationMode + reservationTarget over label heuristics.
+// SectionCta.astro — conversion band
 import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
 import { resolveReservationHref } from "~/lib/reservation"
 import type { ReservationMode } from "~/lib/reservation"
 import type { I18nString } from "~/types/i18n"
 import type { Locale } from "~/config/locales"
 
 interface Props {
+  id?: string
   title?: I18nString
+  heading?: I18nString
   text?: I18nString
+  lead?: I18nString
   ctaLabel?: I18nString
   ctaHref?: string
   reservationMode?: ReservationMode
@@ -19,15 +21,20 @@ interface Props {
 }
 
 const {
+  id = "cta",
   title,
+  heading,
   text,
+  lead,
   ctaLabel,
   ctaHref = "#",
   reservationMode,
   reservationTarget,
   locale,
 } = Astro.props
-const heading = translate(title, locale)
+const section = id
+const headline = translate(heading ?? title, locale)
+const body = translate(text ?? lead, locale)
 const cta = translate(ctaLabel, locale)
 const href = resolveReservationHref({
   reservationMode,
@@ -36,19 +43,28 @@ const href = resolveReservationHref({
 })
 ---
 
-<section class="py-section">
-  <div
-    class="container-wide bg-brand-900 rounded-3xl px-8 py-12 text-center text-white"
-  >
+<section
+  class="bg-surface"
+  {...bf(`home.${section}.shell`, "container", section)}
+>
+  <div class="container-wide py-section flex flex-col items-center text-center">
     {
-      heading && (
-        <h2 class="mb-3 text-3xl font-semibold tracking-tight">{heading}</h2>
+      headline && (
+        <h2
+          class="section-heading mb-8 max-w-4xl"
+          {...bf(`home.${section}.heading`, "style_target", section)}
+        >
+          {headline}
+        </h2>
       )
     }
     {
-      text && (
-        <p class="text-brand-100 mx-auto mb-8 max-w-2xl">
-          {translate(text, locale)}
+      body && (
+        <p
+          class="section-lead mb-8 max-w-2xl"
+          {...bf(`home.${section}.body`, "style_target", section)}
+        >
+          {body}
         </p>
       )
     }
@@ -56,7 +72,8 @@ const href = resolveReservationHref({
       cta && (
         <a
           href={href}
-          class="text-brand-900 inline-flex rounded-lg bg-white px-5 py-2.5 text-sm font-medium"
+          class="btn-primary"
+          {...bf(`home.${section}.cta`, "chrome_denied", section)}
         >
           {cta}
         </a>

@@ -1,0 +1,94 @@
+---
+// SectionIconGrid.astro — three-column icon cards (audience / challenges / steps)
+import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
+import type { I18nString } from "~/types/i18n"
+import type { Locale } from "~/config/locales"
+
+interface Item {
+  title?: I18nString
+  text?: I18nString
+  body?: I18nString
+  icon?: string
+}
+
+interface Props {
+  id?: string
+  title?: I18nString
+  items?: Item[]
+  locale: Locale
+}
+
+const { id = "iconGrid", title, items = [], locale } = Astro.props
+const heading = translate(title, locale)
+const section = id
+---
+
+<section
+  class="bg-surface"
+  {...bf(`home.${section}.shell`, "container", section)}
+>
+  <div class="container-wide py-section-sm md:py-section">
+    {
+      heading && (
+        <h2
+          class="section-heading mb-12 max-w-4xl"
+          {...bf(`home.${section}.heading`, "style_target", section)}
+        >
+          {heading}
+        </h2>
+      )
+    }
+    <ul class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+      {
+        items.map((item, index) => {
+          const itemTitle = translate(item.title, locale)
+          const itemBody = translate(item.text ?? item.body, locale)
+          return (
+            <li class="flex flex-col items-start gap-4">
+              {item.icon && (
+                <img
+                  src={item.icon}
+                  alt=""
+                  class="h-[120px] w-[120px]"
+                  width="120"
+                  height="120"
+                  loading="lazy"
+                  {...bf(
+                    `home.${section}.item${index + 1}Icon`,
+                    "image",
+                    section,
+                  )}
+                />
+              )}
+              {itemTitle && (
+                <h3
+                  class="font-display text-2xl font-bold"
+                  {...bf(
+                    `home.${section}.item${index + 1}Title`,
+                    "style_target",
+                    section,
+                  )}
+                >
+                  {itemTitle}
+                </h3>
+              )}
+              {itemBody && (
+                <p
+                  class="section-lead"
+                  {...bf(
+                    `home.${section}.item${index + 1}Body`,
+                    "style_target",
+                    section,
+                  )}
+                >
+                  {itemBody}
+                </p>
+              )}
+            </li>
+          )
+        })
+      }
+    </ul>
+  </div>
+</section>

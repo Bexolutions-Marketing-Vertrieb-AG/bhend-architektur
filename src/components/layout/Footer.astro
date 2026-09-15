@@ -1,26 +1,90 @@
 ---
-import { phrases } from "~/lib/phrases"
-import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
 import type { Locale } from "~/config/locales"
-import { siteName } from "~/lib/site"
 
 interface Props {
   locale: Locale
 }
 
-const { locale } = Astro.props
-const year = new Date().getFullYear()
+const { locale: _locale } = Astro.props
+
+const menu = [
+  { href: "/ueber-uns", label: "Über Uns" },
+  { href: "/leistungen", label: "Leistungen" },
+  { href: "/aktuell", label: "Aktuell" },
+  { href: "/referenzen", label: "Referenzen" },
+  { href: "/bei-uns-arbeiten", label: "Bei uns arbeiten" },
+  { href: "mailto:info@bhend-architektur.ch", label: "Kontakt" },
+] as const
 ---
 
-<footer class="mt-auto border-t border-neutral-200">
+<footer
+  class="bg-brand-900 mt-auto text-white"
+  {...bf("chrome.footer.shell", "container", "footer")}
+>
   <div
-    class="container-wide flex flex-col gap-2 py-8 text-sm text-neutral-500 sm:flex-row sm:items-center sm:justify-between"
+    class="container-wide grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[226px_164px_284px_156px] lg:gap-16"
   >
-    <p>
-      © {year}
-      {" "}
-      {siteName()}
-    </p>
-    <p>{translate(phrases.all_rights_reserved, locale)}</p>
+    <a href="/" class="block" {...bf("chrome.footer.logo", "image", "footer")}>
+      <img
+        src="/images/logo.png"
+        alt="Bhend Architektur"
+        width="226"
+        height="64"
+        class="h-16 w-auto brightness-0 invert"
+      />
+    </a>
+
+    <div>
+      <h2 class="font-display mb-6 text-2xl font-bold">Menu</h2>
+      <ul class="space-y-3 text-sm">
+        {
+          menu.map((item) => (
+            <li>
+              <a
+                class="enter:text-brand-200 transition-colors"
+                href={item.href}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div {...bf("chrome.footer.contact", "style_target", "footer")}>
+      <h2 class="font-display mb-6 text-2xl font-bold">Kontakt</h2>
+      <address class="space-y-4 text-sm leading-relaxed not-italic">
+        <p>
+          Bhend Architektur AG<br />
+          Zofingerstrasse 43<br />
+          4665 Oftringen
+        </p>
+        <p>
+          <a class="enter:text-brand-200" href="tel:+41627980000"
+            >+41 62 798 00 00</a
+          >
+        </p>
+        <p>
+          <a
+            class="enter:text-brand-200"
+            href="mailto:info@bhend-architektur.ch">info@bhend-architektur.ch</a
+          >
+        </p>
+      </address>
+    </div>
+
+    <div>
+      <h2 class="font-display mb-6 text-2xl font-bold">Social Media</h2>
+      <p class="text-brand-200 mb-8 text-sm">LinkedIn · Instagram · Facebook</p>
+      <a
+        href="/impressum"
+        class="enter:text-brand-200 text-sm"
+        {...bf("chrome.footer.impressum", "chrome_denied", "footer")}
+      >
+        Impressum
+      </a>
+    </div>
   </div>
 </footer>

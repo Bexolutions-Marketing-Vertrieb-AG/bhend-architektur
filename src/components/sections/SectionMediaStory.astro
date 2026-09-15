@@ -1,0 +1,130 @@
+---
+// SectionMediaStory.astro — wide image + caption + title + dual body (+ optional CTA)
+import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
+import { resolveReservationHref } from "~/lib/reservation"
+import type { ReservationMode } from "~/lib/reservation"
+import type { I18nString } from "~/types/i18n"
+import type { Locale } from "~/config/locales"
+
+interface Props {
+  id?: string
+  heading?: I18nString
+  title?: I18nString
+  body?: I18nString
+  bodySecondary?: I18nString
+  image?: string
+  imageAlt?: I18nString
+  caption?: I18nString
+  ctaLabel?: I18nString
+  ctaHref?: string
+  reservationMode?: ReservationMode
+  reservationTarget?: string
+  locale: Locale
+}
+
+const {
+  id = "mediaStory",
+  heading,
+  title,
+  body,
+  bodySecondary,
+  image,
+  imageAlt,
+  caption,
+  ctaLabel,
+  ctaHref,
+  reservationMode,
+  reservationTarget,
+  locale,
+} = Astro.props
+
+const section = id
+const headline = translate(heading ?? title, locale)
+const primary = translate(body, locale)
+const secondary = translate(bodySecondary, locale)
+const alt = translate(imageAlt, locale)
+const credit = translate(caption, locale)
+const cta = translate(ctaLabel, locale)
+const href = resolveReservationHref({
+  reservationMode,
+  reservationTarget,
+  ctaHref,
+})
+---
+
+<section
+  class="bg-surface"
+  {...bf(`home.${section}.shell`, "container", section)}
+>
+  <div class="container-wide py-section-sm md:py-section">
+    {
+      image && (
+        <img
+          src={image}
+          alt={alt}
+          class="mb-3 aspect-[1200/675] w-full object-cover"
+          width="1200"
+          height="675"
+          loading="lazy"
+          {...bf(`home.${section}.image`, "image", section)}
+        />
+      )
+    }
+    {
+      credit && (
+        <p
+          class="text-muted mb-8 text-sm"
+          {...bf(`home.${section}.caption`, "style_target", section)}
+        >
+          {credit}
+        </p>
+      )
+    }
+    <div class="grid gap-8 lg:grid-cols-[minmax(0,273px)_1fr_1fr] lg:gap-10">
+      {
+        headline && (
+          <h2
+            class="font-display text-2xl font-bold md:text-3xl"
+            {...bf(`home.${section}.heading`, "style_target", section)}
+          >
+            {headline}
+          </h2>
+        )
+      }
+      {
+        primary && (
+          <p
+            class="section-lead whitespace-pre-line"
+            {...bf(`home.${section}.body`, "style_target", section)}
+          >
+            {primary}
+          </p>
+        )
+      }
+      <div>
+        {
+          secondary && (
+            <p
+              class="section-lead whitespace-pre-line"
+              {...bf(`home.${section}.bodySecondary`, "style_target", section)}
+            >
+              {secondary}
+            </p>
+          )
+        }
+        {
+          cta && href && href !== "#" && (
+            <a
+              href={href}
+              class="btn-primary mt-6 w-fit"
+              {...bf(`home.${section}.cta`, "chrome_denied", section)}
+            >
+              {cta}
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>

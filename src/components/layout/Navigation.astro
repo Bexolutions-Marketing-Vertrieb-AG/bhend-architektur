@@ -1,56 +1,82 @@
 ---
-import { phrases } from "~/lib/phrases"
 import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
+import { phrases } from "~/lib/phrases"
 import type { Locale } from "~/config/locales"
-import { siteName } from "~/lib/site"
 
 interface Props {
   locale: Locale
 }
 
 const { locale } = Astro.props
+
+const links = [
+  { href: "/ueber-uns", label: "Über uns" },
+  { href: "/leistungen", label: "Leistungen" },
+  { href: "/aktuell", label: "Aktuell" },
+  { href: "/referenzen", label: "Referenzen" },
+  { href: "/bei-uns-arbeiten", label: "Bei uns arbeiten" },
+  { href: "/posts", label: "Blog" },
+] as const
+
+const contactHref = "mailto:info@bhend-architektur.ch"
 ---
 
-<header class="border-b border-neutral-200">
+<header class="bg-white" {...bf("chrome.nav.shell", "container", "nav")}>
   <nav
-    class="container-wide flex items-center justify-between gap-6 py-4"
+    class="container-wide flex flex-wrap items-center justify-between gap-4 py-8 lg:gap-6 lg:py-10"
     aria-label={translate(phrases.menu, locale)}
   >
-    <a
-      href="/"
-      class="flex items-center gap-2 text-lg font-semibold tracking-tight text-neutral-900"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 32 32"
-        aria-hidden="true"
-        class="text-brand-900 shrink-0"
-      >
-        <rect width="32" height="32" rx="7" fill="currentColor"></rect>
-        <circle
-          cx="16"
-          cy="16"
-          r="6.5"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          opacity="0.45"></circle>
-      </svg>
-      {siteName()}
+    <a href="/" class="shrink-0" {...bf("chrome.nav.logo", "image", "nav")}>
+      <img
+        src="/images/logo.png"
+        alt="Bhend Architektur"
+        width="198"
+        height="56"
+        class="h-14 w-auto"
+      />
     </a>
-    <ul class="flex items-center gap-6 text-sm text-neutral-600">
-      <li>
-        <a class="enter:text-brand-700 transition-colors" href="/">
-          {translate(phrases.homepage, locale)}
-        </a>
-      </li>
-      <li>
-        <a class="enter:text-brand-700 transition-colors" href="/posts">
-          {translate(phrases.posts, locale)}
-        </a>
-      </li>
+
+    <ul
+      class="text-ink hidden items-center gap-6 text-sm font-semibold tracking-wide uppercase lg:flex"
+    >
+      {
+        links.map((link) => (
+          <li>
+            <a class="enter:text-brand-500 transition-colors" href={link.href}>
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
     </ul>
+
+    <div class="flex items-center gap-3">
+      <details class="relative lg:hidden">
+        <summary
+          class="cursor-pointer list-none px-3 py-2 text-sm font-semibold uppercase"
+        >
+          {translate(phrases.menu, locale)}
+        </summary>
+        <ul
+          class="border-brand-200 absolute right-0 z-20 mt-2 min-w-[220px] border bg-white p-4 text-sm font-semibold uppercase shadow-sm"
+        >
+          {
+            links.map((link) => (
+              <li class="py-2">
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </details>
+      <a
+        href={contactHref}
+        class="btn-primary"
+        {...bf("chrome.nav.cta", "chrome_denied", "nav")}
+      >
+        Kontakt
+      </a>
+    </div>
   </nav>
 </header>

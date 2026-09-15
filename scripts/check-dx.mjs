@@ -83,8 +83,13 @@ assert(
 
 const nav = fs.readFileSync("src/components/layout/Navigation.astro", "utf8")
 assert(
-  nav.includes("<svg") && /width="\d+"/.test(nav) && /height="\d+"/.test(nav),
-  "Navigation critical SVG has width and height",
+  (nav.includes("<svg") &&
+    /width="\d+"/.test(nav) &&
+    /height="\d+"/.test(nav)) ||
+    (/<img[^>]+src="\/images\/logo\.png"/.test(nav) &&
+      /width="\d+"/.test(nav) &&
+      /height="\d+"/.test(nav)),
+  "Navigation critical logo (SVG or img) has width and height",
 )
 
 const cta = fs.readFileSync("src/components/sections/SectionCta.astro", "utf8")
