@@ -11,6 +11,9 @@
         "SectionMap"
       ]
     },
+    "ueber-uns/team": {
+      "components": ["SectionPageHero", "SectionTeamGrid"]
+    },
     "setup": {
       "components": ["SectionWelcome"]
     }
