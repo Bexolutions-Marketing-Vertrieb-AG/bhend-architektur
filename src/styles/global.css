@@ -66,4 +66,36 @@
   .section-lead {
     @apply text-ink text-base leading-relaxed md:text-lg;
   }
+
+  .nav-dropdown-trigger {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    color: inherit;
+    cursor: pointer;
+    border: 0;
+  }
+
+  .nav-dropdown-panel {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(0.25rem);
+    transition:
+      opacity 120ms ease,
+      transform 120ms ease,
+      visibility 120ms ease;
+  }
+
+  .nav-dropdown:hover .nav-dropdown-panel,
+  .nav-dropdown:focus-within .nav-dropdown-panel {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .nav-dropdown.is-active .nav-dropdown-trigger {
+    @apply text-brand-500;
+  }
 }

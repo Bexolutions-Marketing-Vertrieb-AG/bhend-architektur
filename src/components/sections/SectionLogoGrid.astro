@@ -1,0 +1,97 @@
+---
+// SectionLogoGrid.astro — linked logo cards (memberships / partners)
+import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
+import type { I18nString } from "~/types/i18n"
+import type { Locale } from "~/config/locales"
+
+interface Item {
+  title?: I18nString
+  image?: string
+  imageAlt?: I18nString
+  href?: string
+}
+
+interface Props {
+  id?: string
+  title?: I18nString
+  heading?: I18nString
+  items?: Item[]
+  locale: Locale
+}
+
+const { id = "logoGrid", title, heading, items = [], locale } = Astro.props
+const section = id
+const headline = translate(heading ?? title, locale)
+---
+
+<section class="bg-white" {...bf(`${section}.shell`, "container", section)}>
+  <div class="container-wide py-section-sm md:pb-section">
+    {
+      headline && (
+        <h1
+          class="font-display mb-12 text-4xl font-bold tracking-tight uppercase md:text-5xl"
+          {...bf(`${section}.heading`, "style_target", section)}
+        >
+          {headline}
+        </h1>
+      )
+    }
+    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+      {
+        items.map((item, index) => {
+          const label = translate(item.title, locale)
+          const alt = translate(item.imageAlt, locale) || label
+          const href = (item.href ?? "").trim()
+          const n = index + 1
+          const cardClass =
+            "flex h-[178px] items-center justify-center bg-brand-50 px-6 py-4 transition-opacity enter:opacity-80"
+          const linkBf = bf(`${section}.item${n}Link`, "chrome_denied", section)
+          const paintedBf = bf(`${section}.item${n}Card`, "image", section, {
+            presentation: "background",
+          })
+          const img = item.image ? (
+            <img
+              src={item.image}
+              alt={alt}
+              class="max-h-[120px] w-full max-w-full object-contain"
+              loading="lazy"
+              {...bf(`${section}.item${n}Image`, "image", section)}
+            />
+          ) : null
+          const inner = (
+            <div class={cardClass} {...paintedBf}>
+              {label && (
+                <span
+                  class="sr-only"
+                  {...bf(`${section}.item${n}Title`, "style_target", section)}
+                >
+                  {label}
+                </span>
+              )}
+              {img}
+            </div>
+          )
+          return (
+            <li>
+              {href ? (
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label || undefined}
+                  class="block"
+                  {...linkBf}
+                >
+                  {inner}
+                </a>
+              ) : (
+                inner
+              )}
+            </li>
+          )
+        })
+      }
+    </ul>
+  </div>
+</section>

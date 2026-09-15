@@ -9,17 +9,38 @@ interface Props {
 }
 
 const { locale } = Astro.props
+const pathname = Astro.url.pathname.replace(/\/$/, "") || "/"
 
-const links = [
-  { href: "/ueber-uns/team", label: "Über uns" },
+type NavChild = { href: string; label: string }
+type NavItem =
+  | { label: string; href: string; children?: undefined }
+  | { label: string; href?: undefined; children: NavChild[] }
+
+const links: NavItem[] = [
+  {
+    label: "Über uns",
+    children: [
+      { href: "/ueber-uns/team", label: "Team" },
+      { href: "/ueber-uns/mitgliedschaften", label: "Mitgliedschaften" },
+      { href: "/ueber-uns/presse", label: "Presse / Extern" },
+    ],
+  },
   { href: "/leistungen", label: "Leistungen" },
   { href: "/aktuell", label: "Aktuell" },
   { href: "/referenzen", label: "Referenzen" },
   { href: "/bei-uns-arbeiten", label: "Bei uns arbeiten" },
   { href: "/posts", label: "Blog" },
-] as const
+]
 
 const contactHref = "mailto:info@bhend-architektur.ch"
+
+function isActive(href: string): boolean {
+  return pathname === href || pathname.startsWith(`${href}/`)
+}
+
+function isGroupActive(children: NavChild[]): boolean {
+  return children.some((child) => isActive(child.href))
+}
 ---
 
 <header class="bg-white" {...bf("chrome.nav.shell", "container", "nav")}>
@@ -41,13 +62,70 @@ const contactHref = "mailto:info@bhend-architektur.ch"
       class="text-ink hidden items-center gap-6 text-sm font-semibold tracking-wide uppercase lg:flex"
     >
       {
-        links.map((link) => (
-          <li>
-            <a class="enter:text-brand-500 transition-colors" href={link.href}>
-              {link.label}
-            </a>
-          </li>
-        ))
+        links.map((link) =>
+          link.children ? (
+            <li
+              class:list={[
+                "nav-dropdown group relative",
+                isGroupActive(link.children) && "is-active",
+              ]}
+            >
+              <button
+                type="button"
+                class="nav-dropdown-trigger enter:text-brand-500 text-ink group-hover:text-brand-500 group-focus-within:text-brand-500 inline-flex items-center gap-1 bg-transparent p-0 font-sans text-sm font-semibold tracking-wide uppercase transition-colors"
+                aria-haspopup="menu"
+              >
+                {link.label}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  class="transition-transform group-focus-within:rotate-180 group-hover:rotate-180"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+              <ul
+                class="nav-dropdown-panel text-ink absolute top-full left-0 z-30 min-w-[220px] bg-white py-4 shadow-sm"
+                role="menu"
+              >
+                {link.children.map((child) => (
+                  <li role="none">
+                    <a
+                      role="menuitem"
+                      href={child.href}
+                      class:list={[
+                        "enter:text-brand-500 block px-5 py-2.5 transition-colors",
+                        isActive(child.href) && "text-brand-500",
+                      ]}
+                    >
+                      {child.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ) : (
+            <li>
+              <a
+                class:list={[
+                  "enter:text-brand-500 transition-colors",
+                  isActive(link.href) && "text-brand-500",
+                ]}
+                href={link.href}
+              >
+                {link.label}
+              </a>
+            </li>
+          ),
+        )
       }
     </ul>
 
@@ -59,14 +137,29 @@ const contactHref = "mailto:info@bhend-architektur.ch"
           {translate(phrases.menu, locale)}
         </summary>
         <ul
-          class="border-brand-200 absolute right-0 z-20 mt-2 min-w-[220px] border bg-white p-4 text-sm font-semibold uppercase shadow-sm"
+          class="border-brand-200 absolute right-0 z-20 mt-2 min-w-[240px] border bg-white p-4 text-sm font-semibold uppercase shadow-sm"
         >
           {
-            links.map((link) => (
-              <li class="py-2">
-                <a href={link.href}>{link.label}</a>
-              </li>
-            ))
+            links.map((link) =>
+              link.children ? (
+                <li class="py-2">
+                  <p class="text-brand-500 mb-1">{link.label}</p>
+                  <ul class="border-brand-100 ml-2 space-y-2 border-l pl-3 font-medium tracking-normal normal-case">
+                    {link.children.map((child) => (
+                      <li>
+                        <a class="tracking-wide uppercase" href={child.href}>
+                          {child.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ) : (
+                <li class="py-2">
+                  <a href={link.href}>{link.label}</a>
+                </li>
+              ),
+            )
           }
         </ul>
       </details>

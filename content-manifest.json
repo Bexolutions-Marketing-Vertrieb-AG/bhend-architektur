@@ -14,6 +14,9 @@
     "ueber-uns/team": {
       "components": ["SectionPageHero", "SectionTeamGrid"]
     },
+    "ueber-uns/mitgliedschaften": {
+      "components": ["SectionLogoGrid"]
+    },
     "setup": {
       "components": ["SectionWelcome"]
     }
