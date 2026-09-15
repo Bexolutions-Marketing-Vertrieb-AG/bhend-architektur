@@ -434,6 +434,67 @@ function homeSections() {
   ]
 }
 
+function membershipLogo({ title, image, href }) {
+  return {
+    title: de(title),
+    image,
+    imageAlt: de(title),
+    href,
+  }
+}
+
+function membershipSections() {
+  return [
+    {
+      id: "memberships",
+      title: de("MITGLIEDSCHAFTEN"),
+      items: [
+        membershipLogo({
+          title: "Energieberatung Aargau",
+          image: "/images/mitgliedschaften/energieberatung-aargau.png",
+          href: "https://www.ag.ch/de/verwaltung/bvu/energie/energieberatungaargau",
+        }),
+        membershipLogo({
+          title: "GEAK",
+          image: "/images/mitgliedschaften/geak.png",
+          href: "https://www.geak.ch/",
+        }),
+        membershipLogo({
+          title: "LVBP",
+          image: "/images/mitgliedschaften/lvbp.svg",
+          href: "https://www.lvbp.ch/",
+        }),
+        membershipLogo({
+          title: "CRB",
+          image: "/images/mitgliedschaften/crb.svg",
+          href: "https://www.crb.ch/",
+        }),
+        membershipLogo({
+          title: "VBSF",
+          image: "/images/mitgliedschaften/vbsf.png",
+          href: "https://www.vbsf.ch/",
+        }),
+        membershipLogo({
+          title: "WR Zofingen",
+          image: "/images/mitgliedschaften/wr-zofingen.png",
+          href: "https://wr-zofingen.ch/",
+        }),
+        membershipLogo({
+          title: "Gewerbe Roggwil",
+          image: "/images/mitgliedschaften/gewerbe-roggwil.png",
+          href: "https://www.gewerbe-roggwil.ch/",
+        }),
+        membershipLogo({
+          title: "Gewerbe Oftringen",
+          image: "/images/mitgliedschaften/gewerbe-oftringen.png",
+          href: "https://www.gewerbe-oftringen.ch/",
+        }),
+      ],
+      _orbi: { component: "SectionLogoGrid" },
+    },
+  ]
+}
+
 export function buildSeedPages({
   hasSqlKeyConfigured = false,
   apiKeysUrl = API_KEYS_URL,
@@ -474,6 +535,24 @@ export function buildSeedPages({
       created_at: now(),
       updated_at: now(),
       sections: teamSections(),
+    },
+    {
+      id: "seed-mitgliedschaften",
+      slug: "ueber-uns/mitgliedschaften",
+      title: {
+        de: "Mitgliedschaften",
+        en: "Memberships",
+      },
+      lead: {
+        de: "Mitgliedschaften von Bhend Architektur",
+        en: "Bhend Architektur memberships",
+      },
+      img: "/images/mitgliedschaften/energieberatung-aargau.png",
+      keywords: ["mitgliedschaften", "über uns", "partner"],
+      head: {},
+      created_at: now(),
+      updated_at: now(),
+      sections: membershipSections(),
     },
     {
       id: "seed-setup",

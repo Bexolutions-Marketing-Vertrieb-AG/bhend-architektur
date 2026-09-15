@@ -280,3 +280,44 @@ surfaces:
     publication_target: orbitype_pages
     sample: "+41 62 798 0707"
     notes: "tel: chrome; Mail link only when email field is set (no invented mailto)"
+
+  - bf_id: memberships.shell
+    kind: container
+    area: memberships
+    section: memberships
+    path: src/components/sections/SectionLogoGrid.astro
+    locator: orbitype:pages/ueber-uns/mitgliedschaften/sections/memberships
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: memberships.heading
+    kind: style_target
+    area: memberships
+    section: memberships
+    path: src/components/sections/SectionLogoGrid.astro
+    locator: orbitype:pages/ueber-uns/mitgliedschaften/sections/memberships/title@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "MITGLIEDSCHAFTEN"
+
+  - bf_id: memberships.item1Image
+    kind: image
+    area: memberships
+    section: memberships
+    path: src/components/sections/SectionLogoGrid.astro
+    locator: orbitype:pages/ueber-uns/mitgliedschaften/sections/memberships/items@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: /images/mitgliedschaften/energieberatung-aargau.png
+
+  - bf_id: memberships.item1Link
+    kind: chrome_denied
+    area: memberships
+    section: memberships
+    path: src/components/sections/SectionLogoGrid.astro
+    locator: orbitype:pages/ueber-uns/mitgliedschaften/sections/memberships/items@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Energieberatung Aargau"
+    notes: "Logo href opens in new tab; URLs provided by client"
