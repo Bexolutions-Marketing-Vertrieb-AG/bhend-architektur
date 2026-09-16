@@ -122,6 +122,7 @@ export const POST: APIRoute = async ({ request }) => {
         to,
         from,
         fromName: MAIL_FROM_NAME || PUBLIC_SITE_NAME,
+        replyTo: data.email,
         subject: `Bewerbung: ${data.applicationType} — ${data.first_name} ${data.last_name}`,
         text: [
           `Name: ${data.salutation} ${data.first_name} ${data.last_name}`.trim(),

@@ -103,6 +103,7 @@ export const POST: APIRoute = async ({ request }) => {
         to,
         from,
         fromName: MAIL_FROM_NAME || PUBLIC_SITE_NAME,
+        replyTo: data.email,
         subject: `Kontakt von ${fullName}`,
         text: [
           `Name: ${fullName}`,
