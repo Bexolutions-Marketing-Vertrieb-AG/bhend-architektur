@@ -7,7 +7,7 @@ import {
 } from "./seed-projects.mjs"
 import { buildSeedBlogPosts } from "./seed-blog.mjs"
 import { impressumSections } from "./seed-impressum.mjs"
-import { kontaktSections } from "./seed-kontakt.mjs"
+import { kontaktSections, MAP_EMBED } from "./seed-kontakt.mjs"
 
 const now = () => new Date().toISOString()
 
@@ -207,21 +207,21 @@ function homeSections() {
           text: de(
             "Verwirklichung Ihres Traumhauses – massgeschneidert, Ihre Wünsche widerspiegelnd.",
           ),
-          icon: "/images/home/icons/private.png",
+          icon: "/images/home/icons/private-light.png",
         },
         {
           title: de("Firmen und Institutionen"),
           text: de(
             "Realisierung funktionaler und zukunftsorientierter Geschäftsräume, die Effizienz und Innovation vereinen.",
           ),
-          icon: "/images/home/icons/business.png",
+          icon: "/images/home/icons/business-light.png",
         },
         {
           title: de("Öffentliche Bauten"),
           text: de(
             "Erschaffung öffentlicher Bauten, die Gemeinschaften ermöglichen und Generationen inspirieren.",
           ),
-          icon: "/images/home/icons/public.png",
+          icon: "/images/home/icons/public-light.png",
         },
       ],
       _orbi: { component: "SectionIconGrid" },
@@ -247,21 +247,21 @@ function homeSections() {
           text: de(
             "Privatkunden stehen oft vor der Schwierigkeit, ein Zuhause zu entwerfen, das sowohl ihren persönlichen Stil als auch ihre praktischen Bedürfnisse perfekt widerspiegelt.",
           ),
-          icon: "/images/home/icons/private.png",
+          icon: "/images/home/icons/private-dark.png",
         },
         {
           title: de("Firmen und Institutionen"),
           text: de(
             "Firmen und Institutionen suchen nach Wegen, ihre Räumlichkeiten effizient und zukunftssicher zu gestalten, während sie gleichzeitig ein inspirierendes Arbeitsumfeld schaffen möchten.",
           ),
-          icon: "/images/home/icons/business.png",
+          icon: "/images/home/icons/business-dark.png",
         },
         {
           title: de("Öffentliche Bauten"),
           text: de(
             "Öffentliche Einrichtungen suchen nach Lösungen, um Gebäude zu konzipieren, die sowohl funktional sind als auch langfristig zum Wohl der Gemeinschaft beitragen.",
           ),
-          icon: "/images/home/icons/public.png",
+          icon: "/images/home/icons/public-dark.png",
         },
       ],
       _orbi: { component: "SectionIconGrid" },
@@ -462,7 +462,8 @@ function homeSections() {
     },
     {
       id: "map",
-      image: "/images/home/map.jpg",
+      mapEmbedUrl: MAP_EMBED,
+      mapTitle: de("Zofingerstrasse 43, 4665 Oftringen"),
       imageAlt: de("Standort Bhend Architektur in Oftringen"),
       _orbi: { component: "SectionMap" },
     },

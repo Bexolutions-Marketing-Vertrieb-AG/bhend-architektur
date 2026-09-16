@@ -1,5 +1,5 @@
 ---
-// SectionMap.astro — map thumbnail / embed image
+// SectionMap.astro — Google Maps embed (same contract as Kontakt)
 import { translate } from "~/lib/i18n"
 import { bf } from "~/lib/bf"
 import type { I18nString } from "~/types/i18n"
@@ -9,12 +9,22 @@ interface Props {
   id?: string
   image?: string
   imageAlt?: I18nString
+  mapEmbedUrl?: string
+  mapTitle?: I18nString
   locale: Locale
 }
 
-const { id = "map", image, imageAlt, locale } = Astro.props
+const {
+  id = "map",
+  image,
+  imageAlt,
+  mapEmbedUrl,
+  mapTitle,
+  locale,
+} = Astro.props
 const section = id
 const alt = translate(imageAlt, locale)
+const title = translate(mapTitle, locale) || alt || "Standort"
 ---
 
 <section
@@ -23,16 +33,32 @@ const alt = translate(imageAlt, locale)
 >
   <div class="container-wide py-section-sm md:py-section">
     {
-      image && (
-        <img
-          src={image}
-          alt={alt || "Map"}
-          class="aspect-[1200/675] w-full object-cover"
-          width="1200"
-          height="675"
-          loading="lazy"
-          {...bf(`home.${section}.image`, "image", section)}
-        />
+      mapEmbedUrl ? (
+        <div
+          class="border-brand-200 overflow-hidden rounded-xl border bg-white shadow-sm"
+          {...bf(`home.${section}.map`, "container", section)}
+        >
+          <iframe
+            src={mapEmbedUrl}
+            title={title}
+            class="aspect-[1200/675] min-h-[16rem] w-full border-0"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          />
+        </div>
+      ) : (
+        image && (
+          <img
+            src={image}
+            alt={alt || "Map"}
+            class="aspect-[1200/675] w-full object-cover"
+            width="1200"
+            height="675"
+            loading="lazy"
+            {...bf(`home.${section}.image`, "image", section)}
+          />
+        )
       )
     }
   </div>

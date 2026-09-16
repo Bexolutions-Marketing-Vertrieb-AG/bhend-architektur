@@ -32,7 +32,7 @@ const section = id
     {
       heading && (
         <h2
-          class="section-heading mb-12 max-w-4xl"
+          class="section-heading mx-auto mb-12 max-w-4xl text-center"
           {...bf(`home.${section}.heading`, "style_target", section)}
         >
           {heading}
@@ -45,12 +45,12 @@ const section = id
           const itemTitle = translate(item.title, locale)
           const itemBody = translate(item.text ?? item.body, locale)
           return (
-            <li class="flex flex-col items-start gap-4">
+            <li class="flex flex-col items-center gap-4 text-center">
               {item.icon && (
                 <img
                   src={item.icon}
                   alt=""
-                  class="h-[120px] w-[120px]"
+                  class="mx-auto size-[120px] object-contain"
                   width="120"
                   height="120"
                   loading="lazy"
@@ -63,7 +63,7 @@ const section = id
               )}
               {itemTitle && (
                 <h3
-                  class="font-display text-2xl font-bold"
+                  class="font-display text-2xl font-bold whitespace-pre-line"
                   {...bf(
                     `home.${section}.item${index + 1}Title`,
                     "style_target",
