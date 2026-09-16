@@ -3,11 +3,16 @@ import { i18nStringSchema, orbiSchema } from "~/lib/section-schema-base"
 
 const memberSchema = z.object({
   name: i18nStringSchema,
-  roles: z.array(i18nStringSchema).optional(),
+  role: i18nStringSchema,
+  studies: z.array(i18nStringSchema).optional(),
   image: z.string().optional(),
   imageAlt: i18nStringSchema.optional(),
   phone: z.string().optional(),
-  email: z.string().optional(),
+  // Allow unicode local-parts (e.g. brigitte.flükiger@…).
+  email: z
+    .string()
+    .min(3)
+    .refine((value) => value.includes("@"), "email must contain @"),
   mailLabel: i18nStringSchema.optional(),
 })
 

@@ -1,0 +1,386 @@
+---
+// SectionProjectFeed.astro — category listing; projects injected by [...slug].astro
+import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
+import SectionProjectCard from "./SectionProjectCard.astro"
+import type { I18nString } from "~/types/i18n"
+import type { Locale } from "~/config/locales"
+import type { ProjectCategory } from "~/config/projects"
+import { projectPhase } from "~/config/projects"
+
+interface GalleryItem {
+  src?: string
+  alt?: I18nString
+}
+
+interface ProjectItem {
+  id?: string
+  title?: I18nString
+  subcategory?: I18nString
+  location?: I18nString
+  year?: number | string
+  projektId?: string
+  renderImage?: string
+  renderImageAlt?: I18nString
+  description?: I18nString
+  mainImage?: string
+  mainImageAlt?: I18nString
+  gallery?: GalleryItem[]
+  phase?: "aktuell" | "referenz"
+  category?: ProjectCategory
+}
+
+interface Props {
+  id?: string
+  title?: I18nString
+  heading?: I18nString
+  category: ProjectCategory
+  projects?: ProjectItem[]
+  locale: Locale
+}
+
+const {
+  id = "projectFeed",
+  title,
+  heading,
+  category,
+  projects = [],
+  locale,
+} = Astro.props
+const section = id
+const headline = translate(heading ?? title, locale)
+const phase = projectPhase(category)
+
+const subcategories = [
+  ...new Set(
+    projects
+      .map((project) => translate(project.subcategory, locale).trim())
+      .filter(Boolean),
+  ),
+].sort((a, b) => a.localeCompare(b, "de"))
+
+const years = [
+  ...new Set(
+    projects
+      .map((project) =>
+        project.year === null ||
+        project.year === undefined ||
+        project.year === ""
+          ? ""
+          : String(project.year).trim(),
+      )
+      .filter(Boolean),
+  ),
+].sort((a, b) => Number(b) - Number(a) || b.localeCompare(a))
+
+const subOptions = ["", ...subcategories]
+const yearOptions = ["", ...years]
+---
+
+<section class="bg-white" {...bf(`${section}.shell`, "container", section)}>
+  <div class="container-wide py-section-sm md:pb-section md:pt-section">
+    {
+      headline && (
+        <h1
+          class="font-display mb-6 text-4xl font-bold tracking-tight uppercase md:mb-8 md:text-5xl"
+          {...bf(`${section}.heading`, "style_target", section)}
+        >
+          {headline}
+        </h1>
+      )
+    }
+    {
+      projects.length === 0 ? (
+        <p class="text-muted text-sm">Keine Projekte in dieser Kategorie.</p>
+      ) : (
+        <div data-project-feed>
+          <div
+            class="project-sorter mb-6 flex flex-wrap items-center gap-2.5 md:mb-8"
+            data-project-sorter
+            {...bf(`${section}.sorter`, "container", section)}
+          >
+            <div
+              class="project-sorter-dropdown relative"
+              data-sorter-dropdown
+              data-filter="subcategory"
+            >
+              <button
+                type="button"
+                class="border-brand-200 text-ink enter:border-brand-500 inline-flex max-w-full items-center gap-2 rounded-full border bg-white py-1 pr-1.5 pl-2.5 text-sm"
+                aria-expanded="false"
+                aria-haspopup="listbox"
+                data-sorter-trigger
+              >
+                <span class="text-brand-500 shrink-0" aria-hidden="true">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M3 10.5 12 3l9 7.5" />
+                    <path d="M5 10v10h14V10" />
+                    <path d="M9 20v-6h6v6" />
+                  </svg>
+                </span>
+                <span class="text-muted hidden font-semibold tracking-wide uppercase sm:inline">
+                  Subkategorie
+                </span>
+                <span
+                  class="bg-brand-100 text-brand-900 inline-flex max-w-[10rem] items-center gap-1 truncate rounded-full py-1 pr-2 pl-2.5 text-xs font-bold sm:max-w-[14rem] sm:text-sm"
+                  data-sorter-value-wrap
+                >
+                  <span data-sorter-value>Alle</span>
+                  <span class="text-brand-500 shrink-0" aria-hidden="true">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                  </span>
+                </span>
+              </button>
+              <ul
+                class="border-brand-200 absolute top-[calc(100%+6px)] left-0 z-30 hidden max-h-60 min-w-full overflow-auto rounded-xl border bg-white py-1.5 shadow-sm sm:min-w-[14rem]"
+                role="listbox"
+                data-sorter-menu
+              >
+                {subOptions.map((value) => (
+                  <li role="presentation">
+                    <button
+                      type="button"
+                      role="option"
+                      class="project-sorter-option text-ink enter:bg-brand-50 enter:text-brand-500 mx-1.5 flex w-[calc(100%-0.75rem)] items-center rounded-lg px-3 py-2 text-left text-sm font-semibold"
+                      data-value={value}
+                      aria-selected={value === "" ? "true" : "false"}
+                    >
+                      {value || "Alle"}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div
+              class="project-sorter-dropdown relative"
+              data-sorter-dropdown
+              data-filter="year"
+            >
+              <button
+                type="button"
+                class="border-brand-200 text-ink enter:border-brand-500 inline-flex max-w-full items-center gap-2 rounded-full border bg-white py-1 pr-1.5 pl-2.5 text-sm"
+                aria-expanded="false"
+                aria-haspopup="listbox"
+                data-sorter-trigger
+              >
+                <span class="text-brand-500 shrink-0" aria-hidden="true">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="3" y="5" width="18" height="16" rx="2" />
+                    <path d="M3 10h18" />
+                    <path d="M8 3v4" />
+                    <path d="M16 3v4" />
+                  </svg>
+                </span>
+                <span class="text-muted hidden font-semibold tracking-wide uppercase sm:inline">
+                  Jahr
+                </span>
+                <span
+                  class="bg-brand-100 text-brand-900 inline-flex items-center gap-1 rounded-full py-1 pr-2 pl-2.5 text-xs font-bold sm:text-sm"
+                  data-sorter-value-wrap
+                >
+                  <span data-sorter-value>Alle</span>
+                  <span class="text-brand-500 shrink-0" aria-hidden="true">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                  </span>
+                </span>
+              </button>
+              <ul
+                class="border-brand-200 absolute top-[calc(100%+6px)] left-0 z-30 hidden max-h-60 min-w-full overflow-auto rounded-xl border bg-white py-1.5 shadow-sm sm:min-w-[10rem]"
+                role="listbox"
+                data-sorter-menu
+              >
+                {yearOptions.map((value) => (
+                  <li role="presentation">
+                    <button
+                      type="button"
+                      role="option"
+                      class="project-sorter-option text-ink enter:bg-brand-50 enter:text-brand-500 mx-1.5 flex w-[calc(100%-0.75rem)] items-center rounded-lg px-3 py-2 text-left text-sm font-semibold"
+                      data-value={value}
+                      aria-selected={value === "" ? "true" : "false"}
+                    >
+                      {value || "Alle"}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div data-project-list>
+            {projects.map((project) => (
+              <SectionProjectCard
+                {...project}
+                category={project.category ?? category}
+                phase={project.phase ?? phase}
+                locale={locale}
+              />
+            ))}
+          </div>
+
+          <p class="text-muted mt-6 hidden text-sm" data-project-empty>
+            Keine Projekte für diese Filter.
+          </p>
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .project-sorter-option[aria-selected="true"] {
+    background: var(--color-brand-100);
+    color: var(--color-brand-900);
+  }
+  .project-sorter-dropdown.is-open [data-sorter-menu] {
+    display: block;
+  }
+  .project-sorter-dropdown.is-open [data-sorter-trigger] {
+    border-color: var(--color-brand-500);
+  }
+  .project-sorter-dropdown.is-open [data-sorter-value-wrap] {
+    background: var(--color-brand-200);
+  }
+</style>
+
+<script>
+  function bindSorter(root: Element) {
+    if (!(root instanceof HTMLElement) || root.dataset.bound === "1") return
+    root.dataset.bound = "1"
+
+    const sorter = root.querySelector("[data-project-sorter]")
+    const list = root.querySelector("[data-project-list]")
+    const empty = root.querySelector("[data-project-empty]")
+    if (!sorter || !list || !empty) return
+
+    const filters = {
+      subcategory: "",
+      year: "",
+    }
+
+    const apply = () => {
+      let visible = 0
+      list.querySelectorAll("article").forEach((card) => {
+        if (!(card instanceof HTMLElement)) return
+        const cardSub = card.dataset.subcategory ?? ""
+        const cardYear = card.dataset.year ?? ""
+        const matchSub = !filters.subcategory || cardSub === filters.subcategory
+        const matchYear = !filters.year || cardYear === filters.year
+        const show = matchSub && matchYear
+        card.hidden = !show
+        if (show) visible += 1
+      })
+      empty.classList.toggle("hidden", visible > 0)
+    }
+
+    const closeAll = (except?: Element) => {
+      sorter.querySelectorAll("[data-sorter-dropdown]").forEach((dropdown) => {
+        if (dropdown === except) return
+        dropdown.classList.remove("is-open")
+        const trigger = dropdown.querySelector("[data-sorter-trigger]")
+        trigger?.setAttribute("aria-expanded", "false")
+      })
+    }
+
+    sorter.querySelectorAll("[data-sorter-dropdown]").forEach((dropdown) => {
+      if (!(dropdown instanceof HTMLElement)) return
+      const key = dropdown.dataset.filter
+      const trigger = dropdown.querySelector("[data-sorter-trigger]")
+      const menu = dropdown.querySelector("[data-sorter-menu]")
+      const valueEl = dropdown.querySelector("[data-sorter-value]")
+      if (!key || !trigger || !menu || !valueEl) return
+
+      trigger.addEventListener("click", (event) => {
+        event.preventDefault()
+        event.stopPropagation()
+        const willOpen = !dropdown.classList.contains("is-open")
+        closeAll(dropdown)
+        dropdown.classList.toggle("is-open", willOpen)
+        trigger.setAttribute("aria-expanded", willOpen ? "true" : "false")
+      })
+
+      menu.querySelectorAll("[data-value]").forEach((option) => {
+        option.addEventListener("click", (event) => {
+          event.preventDefault()
+          event.stopPropagation()
+          if (!(option instanceof HTMLElement)) return
+          const value = option.dataset.value ?? ""
+          filters[key as "subcategory" | "year"] = value
+          valueEl.textContent = value || "Alle"
+          menu.querySelectorAll("[data-value]").forEach((item) => {
+            if (!(item instanceof HTMLElement)) return
+            item.setAttribute(
+              "aria-selected",
+              (item.dataset.value ?? "") === value ? "true" : "false",
+            )
+          })
+          closeAll()
+          apply()
+        })
+      })
+    })
+
+    document.addEventListener("click", (event) => {
+      if (!(event.target instanceof Node) || sorter.contains(event.target))
+        return
+      closeAll()
+    })
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeAll()
+    })
+  }
+
+  function bindAll() {
+    document
+      .querySelectorAll("[data-project-feed]")
+      .forEach((root) => bindSorter(root))
+  }
+
+  bindAll()
+  document.addEventListener("astro:page-load", bindAll)
+</script>

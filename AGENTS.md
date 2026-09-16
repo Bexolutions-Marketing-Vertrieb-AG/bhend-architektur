@@ -13,6 +13,7 @@ Operator and agent lessons from client ships live under [`docs/template/`](docs/
 - For CMS reads, use `.agents/skills/orbitype-read`.
 - For CMS writes, use `.agents/skills/orbitype-publish` (never implicit).
 - For Presse / Extern clippings, use `.agents/skills/press-post` (create/delete by stable item `id`).
+- For Aktuell / Referenzen projects, use `.agents/skills/project-post` (CRUD / set-category on `posts`).
 - For Figma-to-site work, use `.agents/skills/astro-cms-build-from-figma`.
 - Never treat a locally hardcoded prototype as a completed CMS implementation.
 

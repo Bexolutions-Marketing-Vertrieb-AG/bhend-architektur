@@ -112,28 +112,47 @@ async function main() {
 
   for (const post of posts) {
     try {
-      const titleEn = post.title.en
-      const existing = await orbitypeSql(
-        `SELECT id FROM posts WHERE title->>'en' = :title LIMIT 1`,
-        { title: titleEn },
-      )
+      const isProject = Boolean(post.category)
+      const existing = isProject
+        ? await orbitypeSql(`SELECT id FROM posts WHERE id = :id LIMIT 1`, {
+            id: post.id,
+          })
+        : await orbitypeSql(
+            `SELECT id FROM posts WHERE title->>'en' = :title LIMIT 1`,
+            { title: post.title.en },
+          )
       if (existing[0]) {
         results.push({ kind: "post", id: existing[0].id, status: "skipped" })
         continue
       }
 
       const inserted = await orbitypeSql(
-        `INSERT INTO posts (title, lead, img, status, sections, keywords)
-         VALUES (
-           :title::json,
-           :lead::json,
-           :img,
-           :status::json,
-           :sections::json,
-           :keywords::json
-         )
-         RETURNING id`,
+        isProject
+          ? `INSERT INTO posts (id, title, lead, img, status, sections, keywords, category, year)
+             VALUES (
+               :id,
+               :title::json,
+               :lead::json,
+               :img,
+               :status::json,
+               :sections::json,
+               :keywords::json,
+               :category,
+               :year
+             )
+             RETURNING id`
+          : `INSERT INTO posts (title, lead, img, status, sections, keywords)
+             VALUES (
+               :title::json,
+               :lead::json,
+               :img,
+               :status::json,
+               :sections::json,
+               :keywords::json
+             )
+             RETURNING id`,
         {
+          id: post.id,
           title: JSON.stringify(post.title),
           lead: JSON.stringify(post.lead ?? { en: "" }),
           img: post.img ?? "",
@@ -145,6 +164,8 @@ async function main() {
           ),
           sections: JSON.stringify(post.sections),
           keywords: JSON.stringify(post.keywords ?? []),
+          category: post.category ?? null,
+          year: post.year ?? null,
         },
       )
       results.push({
