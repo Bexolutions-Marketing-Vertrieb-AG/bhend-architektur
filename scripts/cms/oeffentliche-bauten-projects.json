@@ -1,0 +1,125 @@
+[
+  {
+    "id": "erneuerung-pfarrhaus-oftringen-oftringen",
+    "title": "Erneuerung Pfarrhaus Oftringen",
+    "subcategory": "Erneuerung Pfarrhaus",
+    "location": "4665 Oftringen",
+    "year": 2025,
+    "description": "Bhend Architektur hat das grosszügige reformierte Pfarrhaus von 1924 in Oftringen als kommunales Kulturobjekt sorgfältig energetisch saniert und zugleich seine historische Erscheinung bewahrt. Das Dach wurde mit einer zeitgemässen Dämmung ertuechtigt und statisch verstärkt, sodass die feinen Traufdetails und Lukarnen weiterhin filigran wirken. Die bestehende Fassade blieb unverändert, im Innern wurden Keller und Archiv mit einer neuen Innenwärmedämmung und einer Entfeuchtungsanlage für ein stabiles Raumklima ausgestattet. Für die Heizung sorgt heute eine Luft-Wasser-Wärmepumpe im Gartenhaus, welche das Pfarrhaus über eine unterirdische Leitung mit Wärme versorgt.",
+    "projektId": "23-26 Pfarrhaus Oftringen",
+    "paths": {
+      "main": "/images/oeffentliche-bauten/erneuerung-pfarrhaus-oftringen-oftringen/main.jpg"
+    },
+    "gallery": [
+      "/images/oeffentliche-bauten/erneuerung-pfarrhaus-oftringen-oftringen/gallery-1.jpg",
+      "/images/oeffentliche-bauten/erneuerung-pfarrhaus-oftringen-oftringen/gallery-2.jpg",
+      "/images/oeffentliche-bauten/erneuerung-pfarrhaus-oftringen-oftringen/gallery-3.jpg",
+      "/images/oeffentliche-bauten/erneuerung-pfarrhaus-oftringen-oftringen/gallery-4.jpg",
+      "/images/oeffentliche-bauten/erneuerung-pfarrhaus-oftringen-oftringen/gallery-5.jpg",
+      "/images/oeffentliche-bauten/erneuerung-pfarrhaus-oftringen-oftringen/gallery-6.jpg",
+      "/images/oeffentliche-bauten/erneuerung-pfarrhaus-oftringen-oftringen/gallery-7.jpg",
+      "/images/oeffentliche-bauten/erneuerung-pfarrhaus-oftringen-oftringen/gallery-8.jpg",
+      "/images/oeffentliche-bauten/erneuerung-pfarrhaus-oftringen-oftringen/gallery-9.jpg",
+      "/images/oeffentliche-bauten/erneuerung-pfarrhaus-oftringen-oftringen/gallery-10.jpg",
+      "/images/oeffentliche-bauten/erneuerung-pfarrhaus-oftringen-oftringen/gallery-11.jpg",
+      "/images/oeffentliche-bauten/erneuerung-pfarrhaus-oftringen-oftringen/gallery-12.jpg",
+      "/images/oeffentliche-bauten/erneuerung-pfarrhaus-oftringen-oftringen/gallery-13.jpg",
+      "/images/oeffentliche-bauten/erneuerung-pfarrhaus-oftringen-oftringen/gallery-14.jpg"
+    ],
+    "node": "276:10541",
+    "category": "oeffentliche-bauten"
+  },
+  {
+    "id": "schulhauserneuerungen-2023",
+    "title": "Schulhauserneuerungen",
+    "subcategory": "Erneuerung",
+    "location": "Othmarsingen",
+    "year": "2022-2023",
+    "description": "Dieses altehrwürdige Schulhaus wird etappenweise erneuert. Im Jahr 2022 wurden dank den Lukarnen die Schulräume im Dachgeschoss massiv aufgewertet. 2023 folgte die Modernisierung der grosszügigen Eingangshalle.",
+    "projektId": "22-01 Othmarsingen",
+    "paths": {
+      "main": "/images/oeffentliche-bauten/schulhauserneuerungen-2023/main.jpg"
+    },
+    "gallery": [
+      "/images/oeffentliche-bauten/schulhauserneuerungen-2023/gallery-1.jpg",
+      "/images/oeffentliche-bauten/schulhauserneuerungen-2023/gallery-2.jpg",
+      "/images/oeffentliche-bauten/schulhauserneuerungen-2023/gallery-3.jpg"
+    ],
+    "node": "2025:5432",
+    "category": "oeffentliche-bauten"
+  },
+  {
+    "id": "kirche-schoeftland-schoftland",
+    "title": "Kirche Schöftland",
+    "subcategory": "Sanierung",
+    "location": "Schöftland",
+    "year": 2022,
+    "description": "Die Kath. Kirche in Schöftland ist ein Musterbeispiel für eine nachhaltige Sanierung. Holzelementen für das Dach, eine mineralische Fassade sowie neue Holz-Metallfenster bringen die Gebäudehülle auf den neuesten Stand der Technik.\nEine neue Wärmepumpe sowie eine Indach-Photovoltaikanlage sind ebenfalls Teil des Projekts. Um die Nachhaltigkeit weiter in den Vordergrund zu stellen, wurden viele Bauteile erhalten und die alten Fenster für weitere Projekte wiederverwendet.",
+    "projektId": "21-08 kath. Kirche",
+    "paths": {
+      "main": "/images/oeffentliche-bauten/kirche-schoeftland-schoftland/main.jpg"
+    },
+    "gallery": [],
+    "node": "276:10569",
+    "category": "oeffentliche-bauten"
+  },
+  {
+    "id": "kindergarten-oftringen",
+    "title": "Kindergarten",
+    "subcategory": "Neubau",
+    "location": "Oftringen",
+    "year": 2022,
+    "description": "Der eingeschossige Neubau des Kindergartens bietet dank der Bandfenster sehr helle und einladende Räume. Die Solaranlage produziert ausreichend Strom, um auch den angrenzenden bestehenden Kindergarten mit Energie zu versorgen. Der naturnahe Spielplatz ergänzt das Ensemble und steht auch der Allgemeint zur Verfügung.",
+    "projektId": "22-12 Kiga Ahornweg",
+    "paths": {
+      "main": "/images/oeffentliche-bauten/kindergarten-oftringen/main.jpg"
+    },
+    "gallery": [
+      "/images/oeffentliche-bauten/kindergarten-oftringen/gallery-1.jpg",
+      "/images/oeffentliche-bauten/kindergarten-oftringen/gallery-2.jpg",
+      "/images/oeffentliche-bauten/kindergarten-oftringen/gallery-3.jpg",
+      "/images/oeffentliche-bauten/kindergarten-oftringen/gallery-4.jpg"
+    ],
+    "node": "276:10589",
+    "category": "oeffentliche-bauten"
+  },
+  {
+    "id": "denkmalgeschuetztes-schulhaus-kuengoldingen-oftrinen",
+    "title": "Denkmalgeschütztes Schulhaus Küngoldingen",
+    "subcategory": "Sanierung",
+    "location": "Oftringen",
+    "year": 2020,
+    "description": "An diesem historisch wertvollen Schulhaus wurde das Dach vollständig erneuert, die alten Fassaden wurden risssaniert und die Fassade des hinteren Anbaus wurde komplett ersetzt und gestalterisch und harmonisch an den Bestand angepasst.",
+    "projektId": "19-01 Schulhaus Küngoldingen",
+    "paths": {
+      "main": "/images/oeffentliche-bauten/denkmalgeschuetztes-schulhaus-kuengoldingen-oftrinen/main.jpg"
+    },
+    "gallery": [
+      "/images/oeffentliche-bauten/denkmalgeschuetztes-schulhaus-kuengoldingen-oftrinen/gallery-1.jpg",
+      "/images/oeffentliche-bauten/denkmalgeschuetztes-schulhaus-kuengoldingen-oftrinen/gallery-2.jpg",
+      "/images/oeffentliche-bauten/denkmalgeschuetztes-schulhaus-kuengoldingen-oftrinen/gallery-3.jpg"
+    ],
+    "node": "277:10954",
+    "category": "oeffentliche-bauten"
+  },
+  {
+    "id": "pflegeheim-sennhof-vordemwald",
+    "title": "Pflegeheim Sennhof",
+    "subcategory": "Anbau / Modernisierung / Umbau / Sanierung",
+    "location": "Vordemwald",
+    "year": "2020-2022",
+    "description": "Die Vergrösserung des Restaurants mit einem zusätzlichen Festsaal und die Modernisierung des Innenhofs werten die Erweiterung des Erdgeschosses erheblich auf. In den Obergeschossen wurden die Zimmer saniert und auf den neuesten Stand der Technik gebracht. Anpassungen in den Verwaltungs- und Technikräumen sowie der Einbau eines geschützten Wohnbereichs wurden zeitgleich in Etappen umgesetzt.",
+    "projektId": "18-24 Sennhof",
+    "paths": {
+      "main": "/images/oeffentliche-bauten/pflegeheim-sennhof-vordemwald/main.jpg"
+    },
+    "gallery": [
+      "/images/oeffentliche-bauten/pflegeheim-sennhof-vordemwald/gallery-1.jpg",
+      "/images/oeffentliche-bauten/pflegeheim-sennhof-vordemwald/gallery-2.jpg",
+      "/images/oeffentliche-bauten/pflegeheim-sennhof-vordemwald/gallery-3.jpg",
+      "/images/oeffentliche-bauten/pflegeheim-sennhof-vordemwald/gallery-4.jpg"
+    ],
+    "node": "277:10988",
+    "category": "oeffentliche-bauten"
+  }
+]

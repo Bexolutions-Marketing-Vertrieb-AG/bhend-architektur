@@ -1,0 +1,301 @@
+[
+  {
+    "id": "machbarkeitsstudie-erweiterung-firmengebaeude-roggwil",
+    "title": "Machbarkeitsstudie Erweiterung Firmengebäude",
+    "subcategory": "Industrie",
+    "location": "4914 Roggwil",
+    "year": 2026,
+    "paths": {
+      "render": "/images/aktuell/machbarkeitsstudie-erweiterung-firmengebaeude-roggwil/render.jpg",
+      "main": "/images/aktuell/machbarkeitsstudie-erweiterung-firmengebaeude-roggwil/main.jpg"
+    },
+    "gallery": [
+      "/images/aktuell/machbarkeitsstudie-erweiterung-firmengebaeude-roggwil/gallery-1.jpg",
+      "/images/aktuell/machbarkeitsstudie-erweiterung-firmengebaeude-roggwil/gallery-2.jpg",
+      "/images/aktuell/machbarkeitsstudie-erweiterung-firmengebaeude-roggwil/gallery-3.jpg"
+    ],
+    "node": "2012:4876",
+    "projektId": "25-34 E. Grütter Roggwil"
+  },
+  {
+    "id": "ersatzneubau-einfamilienhaus-uerkheim",
+    "title": "Ersatzneubau Einfamilienhaus",
+    "subcategory": "Wohnen",
+    "location": "4813 Uerkheim",
+    "year": 2026,
+    "paths": {
+      "render": "/images/aktuell/ersatzneubau-einfamilienhaus-uerkheim/render.jpg",
+      "main": "/images/aktuell/ersatzneubau-einfamilienhaus-uerkheim/main.jpg"
+    },
+    "gallery": [
+      "/images/aktuell/ersatzneubau-einfamilienhaus-uerkheim/gallery-1.jpg"
+    ],
+    "node": "267:8468",
+    "projektId": "25-33 Hürzeler"
+  },
+  {
+    "id": "fassadensanierung-breitenpark-rothrist",
+    "title": "Fassadensanierung Breitenpark",
+    "subcategory": "Gewerbe und Wohnen",
+    "location": "4852 Rothrist",
+    "year": 2026,
+    "paths": {
+      "render": "/images/aktuell/fassadensanierung-breitenpark-rothrist/render.jpg",
+      "main": "/images/aktuell/fassadensanierung-breitenpark-rothrist/main.jpg"
+    },
+    "gallery": [
+      "/images/aktuell/fassadensanierung-breitenpark-rothrist/gallery-1.jpg",
+      "/images/aktuell/fassadensanierung-breitenpark-rothrist/gallery-2.jpg",
+      "/images/aktuell/fassadensanierung-breitenpark-rothrist/gallery-3.jpg",
+      "/images/aktuell/fassadensanierung-breitenpark-rothrist/gallery-4.jpg",
+      "/images/aktuell/fassadensanierung-breitenpark-rothrist/gallery-5.jpg"
+    ],
+    "node": "2012:4881",
+    "projektId": "25-23 Breitenpark"
+  },
+  {
+    "id": "umbau-einfamilienhaus-safenwil",
+    "title": "Umbau Einfamilienhaus",
+    "subcategory": "Wohnen",
+    "location": "5745 Safenwil",
+    "year": 2026,
+    "paths": {
+      "render": "/images/aktuell/umbau-einfamilienhaus-safenwil/render.jpg",
+      "main": "/images/aktuell/umbau-einfamilienhaus-safenwil/main.jpg"
+    },
+    "gallery": [],
+    "node": "2012:4883",
+    "projektId": "25-05 Hilfiker Safenwil"
+  },
+  {
+    "id": "neubau-einfamilienhaus-ursenbach",
+    "title": "Neubau Einfamilienhaus",
+    "subcategory": "Wohnen",
+    "location": "4937 Ursenbach",
+    "year": 2025,
+    "paths": {
+      "render": "/images/aktuell/neubau-einfamilienhaus-ursenbach/render.jpg",
+      "main": "/images/aktuell/neubau-einfamilienhaus-ursenbach/main.jpg"
+    },
+    "gallery": [
+      "/images/aktuell/neubau-einfamilienhaus-ursenbach/gallery-1.jpg"
+    ],
+    "node": "2012:4887",
+    "projektId": "25-30 Sierro Ursenbach"
+  },
+  {
+    "id": "ersatzneubau-doppeleinfamilienhaus-oftringen",
+    "title": "Ersatzneubau Doppeleinfamilienhaus",
+    "subcategory": "Wohnen",
+    "location": "4665 Oftringen",
+    "year": 2025,
+    "paths": {
+      "render": "/images/aktuell/ersatzneubau-doppeleinfamilienhaus-oftringen/render.jpg",
+      "main": "/images/aktuell/ersatzneubau-doppeleinfamilienhaus-oftringen/main.jpg"
+    },
+    "gallery": [
+      "/images/aktuell/ersatzneubau-doppeleinfamilienhaus-oftringen/gallery-1.jpg",
+      "/images/aktuell/ersatzneubau-doppeleinfamilienhaus-oftringen/gallery-2.jpg"
+    ],
+    "node": "2012:4889",
+    "projektId": "25-13 Käser Oftringen"
+  },
+  {
+    "id": "lindenpark-kuengoldingen-generation-silber-oftringen",
+    "title": "Lindenpark Küngoldingen GENERATION SILBER",
+    "subcategory": "Ersatzneubau Wohnen",
+    "location": "4665 Oftringen",
+    "year": 2024,
+    "paths": {
+      "render": "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/render.jpg",
+      "main": "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/main.jpg"
+    },
+    "gallery": [
+      "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/gallery-1.jpg",
+      "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/gallery-2.jpg",
+      "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/gallery-3.jpg",
+      "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/gallery-4.jpg",
+      "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/gallery-5.jpg",
+      "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/gallery-6.jpg",
+      "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/gallery-7.jpg",
+      "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/gallery-8.jpg",
+      "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/gallery-9.jpg",
+      "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/gallery-10.jpg",
+      "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/gallery-11.jpg",
+      "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/gallery-12.jpg",
+      "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/gallery-13.jpg",
+      "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/gallery-14.jpg",
+      "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/gallery-15.jpg",
+      "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/gallery-16.jpg",
+      "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/gallery-17.jpg",
+      "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/gallery-18.jpg",
+      "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/gallery-19.jpg",
+      "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/gallery-20.jpg",
+      "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/gallery-21.jpg",
+      "/images/aktuell/lindenpark-kuengoldingen-generation-silber-oftringen/gallery-22.jpg"
+    ],
+    "node": "2012:4891",
+    "projektId": "23-06 Lindenpark"
+  },
+  {
+    "id": "modernisierung-und-erweiterung-autogarage-wynau",
+    "title": "Modernisierung und Erweiterung Autogarage",
+    "subcategory": "Modernisierung",
+    "location": "4923 Wynau",
+    "year": 2024,
+    "paths": {
+      "render": "/images/aktuell/modernisierung-und-erweiterung-autogarage-wynau/render.jpg",
+      "main": "/images/aktuell/modernisierung-und-erweiterung-autogarage-wynau/main.jpg"
+    },
+    "gallery": [
+      "/images/aktuell/modernisierung-und-erweiterung-autogarage-wynau/gallery-1.jpg",
+      "/images/aktuell/modernisierung-und-erweiterung-autogarage-wynau/gallery-2.jpg",
+      "/images/aktuell/modernisierung-und-erweiterung-autogarage-wynau/gallery-3.jpg",
+      "/images/aktuell/modernisierung-und-erweiterung-autogarage-wynau/gallery-4.jpg",
+      "/images/aktuell/modernisierung-und-erweiterung-autogarage-wynau/gallery-5.jpg",
+      "/images/aktuell/modernisierung-und-erweiterung-autogarage-wynau/gallery-6.jpg",
+      "/images/aktuell/modernisierung-und-erweiterung-autogarage-wynau/gallery-7.jpg",
+      "/images/aktuell/modernisierung-und-erweiterung-autogarage-wynau/gallery-8.jpg",
+      "/images/aktuell/modernisierung-und-erweiterung-autogarage-wynau/gallery-9.jpg",
+      "/images/aktuell/modernisierung-und-erweiterung-autogarage-wynau/gallery-10.jpg",
+      "/images/aktuell/modernisierung-und-erweiterung-autogarage-wynau/gallery-11.jpg",
+      "/images/aktuell/modernisierung-und-erweiterung-autogarage-wynau/gallery-12.jpg",
+      "/images/aktuell/modernisierung-und-erweiterung-autogarage-wynau/gallery-13.jpg"
+    ],
+    "node": "2012:4893",
+    "projektId": "22-19 Greub"
+  },
+  {
+    "id": "modernisierung-einfamilienhaus-aarwangen",
+    "title": "Modernisierung Einfamilienhaus",
+    "subcategory": "Wohnen",
+    "location": "4912 Aarwangen",
+    "year": 2026,
+    "paths": {
+      "render": "/images/aktuell/modernisierung-einfamilienhaus-aarwangen/render.jpg",
+      "main": "/images/aktuell/modernisierung-einfamilienhaus-aarwangen/main.jpg"
+    },
+    "gallery": [],
+    "node": "2012:4895",
+    "projektId": "25-37 Gygax Aarwangen"
+  },
+  {
+    "id": "gebaeudeaufnahmen-einfamilienhaus-schwarzhaeusern",
+    "title": "Gebäudeaufnahmen Einfamilienhaus",
+    "subcategory": "Wohnen",
+    "location": "4911 Schwarzhäusern",
+    "year": 2026,
+    "paths": {
+      "render": "/images/aktuell/gebaeudeaufnahmen-einfamilienhaus-schwarzhaeusern/render.jpg",
+      "main": "/images/aktuell/gebaeudeaufnahmen-einfamilienhaus-schwarzhaeusern/main.jpg"
+    },
+    "gallery": [
+      "/images/aktuell/gebaeudeaufnahmen-einfamilienhaus-schwarzhaeusern/gallery-1.jpg",
+      "/images/aktuell/gebaeudeaufnahmen-einfamilienhaus-schwarzhaeusern/gallery-2.jpg"
+    ],
+    "node": "2025:4976",
+    "projektId": "26-02 Stalder Schwarzhäusern"
+  },
+  {
+    "id": "umbau-mehrfamilienhaus-wettingen",
+    "title": "Umbau Mehrfamilienhaus",
+    "subcategory": "Wohnen",
+    "location": "5430 Wettingen",
+    "year": 2025,
+    "paths": {
+      "render": "/images/aktuell/umbau-mehrfamilienhaus-wettingen/render.jpg",
+      "main": "/images/aktuell/umbau-mehrfamilienhaus-wettingen/main.jpg"
+    },
+    "gallery": [
+      "/images/aktuell/umbau-mehrfamilienhaus-wettingen/gallery-1.jpg",
+      "/images/aktuell/umbau-mehrfamilienhaus-wettingen/gallery-2.jpg",
+      "/images/aktuell/umbau-mehrfamilienhaus-wettingen/gallery-3.jpg",
+      "/images/aktuell/umbau-mehrfamilienhaus-wettingen/gallery-4.jpg",
+      "/images/aktuell/umbau-mehrfamilienhaus-wettingen/gallery-5.jpg",
+      "/images/aktuell/umbau-mehrfamilienhaus-wettingen/gallery-6.jpg",
+      "/images/aktuell/umbau-mehrfamilienhaus-wettingen/gallery-7.jpg",
+      "/images/aktuell/umbau-mehrfamilienhaus-wettingen/gallery-8.jpg",
+      "/images/aktuell/umbau-mehrfamilienhaus-wettingen/gallery-9.jpg",
+      "/images/aktuell/umbau-mehrfamilienhaus-wettingen/gallery-10.jpg",
+      "/images/aktuell/umbau-mehrfamilienhaus-wettingen/gallery-11.jpg",
+      "/images/aktuell/umbau-mehrfamilienhaus-wettingen/gallery-12.jpg"
+    ],
+    "node": "2025:5005",
+    "projektId": "24-14 Obrist-Schmid Wettingen"
+  },
+  {
+    "id": "zweifamilienhaus-modernisierung-roggwil",
+    "title": "Zweifamilienhaus Modernisierung",
+    "subcategory": "Umbau",
+    "location": "4914 Roggwil",
+    "year": 2024,
+    "paths": {
+      "render": "/images/aktuell/zweifamilienhaus-modernisierung-roggwil/render.jpg",
+      "main": "/images/aktuell/zweifamilienhaus-modernisierung-roggwil/main.jpg"
+    },
+    "gallery": [
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil/gallery-1.jpg",
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil/gallery-2.jpg",
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil/gallery-3.jpg",
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil/gallery-4.jpg",
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil/gallery-5.jpg",
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil/gallery-6.jpg",
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil/gallery-7.jpg",
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil/gallery-8.jpg",
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil/gallery-9.jpg",
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil/gallery-10.jpg",
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil/gallery-11.jpg",
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil/gallery-12.jpg",
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil/gallery-13.jpg",
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil/gallery-14.jpg",
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil/gallery-15.jpg",
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil/gallery-16.jpg"
+    ],
+    "node": "2025:5043",
+    "projektId": "24-09 Haenni Pfister"
+  },
+  {
+    "id": "zweifamilienhaus-modernisierung-roggwil-2",
+    "title": "Zweifamilienhaus Modernisierung",
+    "subcategory": "Umbau",
+    "location": "4914 Roggwil",
+    "year": 2024,
+    "paths": {
+      "render": "/images/aktuell/zweifamilienhaus-modernisierung-roggwil-2/render.jpg",
+      "main": "/images/aktuell/zweifamilienhaus-modernisierung-roggwil-2/main.jpg"
+    },
+    "gallery": [
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil-2/gallery-1.jpg",
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil-2/gallery-2.jpg",
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil-2/gallery-3.jpg",
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil-2/gallery-4.jpg",
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil-2/gallery-5.jpg",
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil-2/gallery-6.jpg",
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil-2/gallery-7.jpg",
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil-2/gallery-8.jpg",
+      "/images/aktuell/zweifamilienhaus-modernisierung-roggwil-2/gallery-9.jpg"
+    ],
+    "node": "2025:5116",
+    "projektId": "24-07 Haenni"
+  },
+  {
+    "id": "teilersatzneubau-einfamilienhaus-neubau-einfamilienhaus-roggwil",
+    "title": "Teilersatzneubau Einfamilienhaus + Neubau Einfamilienhaus",
+    "subcategory": "Wohnen",
+    "location": "4914 Roggwil",
+    "year": 2025,
+    "paths": {
+      "render": "/images/aktuell/teilersatzneubau-einfamilienhaus-neubau-einfamilienhaus-roggwil/render.jpg",
+      "main": "/images/aktuell/teilersatzneubau-einfamilienhaus-neubau-einfamilienhaus-roggwil/main.jpg"
+    },
+    "gallery": [
+      "/images/aktuell/teilersatzneubau-einfamilienhaus-neubau-einfamilienhaus-roggwil/gallery-1.jpg",
+      "/images/aktuell/teilersatzneubau-einfamilienhaus-neubau-einfamilienhaus-roggwil/gallery-2.jpg",
+      "/images/aktuell/teilersatzneubau-einfamilienhaus-neubau-einfamilienhaus-roggwil/gallery-3.jpg",
+      "/images/aktuell/teilersatzneubau-einfamilienhaus-neubau-einfamilienhaus-roggwil/gallery-4.jpg",
+      "/images/aktuell/teilersatzneubau-einfamilienhaus-neubau-einfamilienhaus-roggwil/gallery-5.jpg"
+    ],
+    "node": "2025:5151",
+    "projektId": "25-15 Zingg Roggwil"
+  }
+]

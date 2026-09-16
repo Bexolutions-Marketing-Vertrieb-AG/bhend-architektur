@@ -35,6 +35,35 @@ No registration file. The registry globs `Section*.astro` by filename.
 | `SectionCta`            | Conversion band                         |
 | `SectionFeatureCallout` | Highlight / default callout (`variant`) |
 | `SectionWelcome`        | First-run setup wizard                  |
+| `SectionTeamGrid`       | Team portrait grid (`members[]`)        |
+
+## Team members (`SectionTeamGrid`)
+
+Each card is one object in `members[]` (not a separate section). Alta/baja via skills `/new-employe` and `/delete-employe`.
+
+```json
+{
+  "id": "teamGrid",
+  "members": [
+    {
+      "name": { "de": "Stefanie Burren", "en": "Stefanie Burren" },
+      "role": {
+        "de": "Zeichnerin EFZ Architektur",
+        "en": "Zeichnerin EFZ Architektur"
+      },
+      "studies": [],
+      "image": "/images/team/stefanie-burren.jpg",
+      "imageAlt": { "de": "Stefanie Burren", "en": "Stefanie Burren" },
+      "phone": "+41 62 798 1071",
+      "email": "stefanie.burren@bhend-architektur.ch",
+      "mailLabel": { "de": "Mail", "en": "Mail" }
+    }
+  ],
+  "_orbi": { "component": "SectionTeamGrid" }
+}
+```
+
+`email` is required and drives `mailto:` on the Mail control. `studies` (optional) open under `<details>` when non-empty.
 
 ## Example: SectionFeatureCallout
 

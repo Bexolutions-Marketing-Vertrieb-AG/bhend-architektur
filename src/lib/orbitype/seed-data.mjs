@@ -1,6 +1,10 @@
 /** Starter CMS rows — single source for mock mode and `pnpm run cms:seed`. */
 
 import { buildLeistungenSeedPages } from "./seed-leistungen.mjs"
+import {
+  buildProjectFeedPages,
+  buildSeedProjectPosts,
+} from "./seed-projects.mjs"
 
 const now = () => new Date().toISOString()
 
@@ -11,13 +15,15 @@ const CAREERS_PATH = "/bei-uns-arbeiten"
 
 const de = (value) => ({ de: value, en: value })
 
-function teamMember({ name, roles, image, phone }) {
+function teamMember({ name, role, studies = [], image, phone, email }) {
   return {
     name: de(name),
-    roles: roles.map(de),
+    role: de(role),
+    studies: studies.map(de),
     image,
     imageAlt: de(name),
     phone,
+    email,
     mailLabel: de("Mail"),
   }
 }
@@ -38,8 +44,9 @@ function teamSections() {
           name: "Ueli Bhend",
           image: "/images/team/ueli-bhend.jpg",
           phone: "+41 62 798 0707",
-          roles: [
-            "Geschäftsinhaber",
+          email: "ueli.bhend@bhend-architektur.ch",
+          role: "Geschäftsinhaber",
+          studies: [
             "Architekt HF",
             "Energieberater Kanton Aargau",
             "GEAK Experte",
@@ -52,18 +59,17 @@ function teamSections() {
           name: "Micha Bhend",
           image: "/images/team/micha-bhend.jpg",
           phone: "+41 62 798 0909",
-          roles: [
-            "Mitglied Geschäftsleitung / Partner",
-            "Architekt HF",
-            "Hochbaupolier",
-          ],
+          email: "micha.bhend@bhend-architektur.ch",
+          role: "Mitglied Geschäftsleitung / Partner",
+          studies: ["Architekt HF", "Hochbaupolier"],
         }),
         teamMember({
           name: "Thomas Schweizer",
           image: "/images/team/thomas-schweizer.jpg",
           phone: "+41 62 798 0404",
-          roles: [
-            "Mitglied Geschäftsleitung / Partner",
+          email: "thomas.schweizer@bhend-architektur.ch",
+          role: "Mitglied Geschäftsleitung / Partner",
+          studies: [
             "Techniker HF Holztechnik",
             "Brandschutzfachmann mit eidg. FA/VKF",
             "CAS Brandschutz für Architekten",
@@ -75,8 +81,9 @@ function teamSections() {
           name: "Patrick Zingg",
           image: "/images/team/patrick-zingg.jpg",
           phone: "+41 62 798 1070",
-          roles: [
-            "Mitglied Geschäftsleitung / Partner",
+          email: "patrick.zingg@bhend-architektur.ch",
+          role: "Mitglied Geschäftsleitung / Partner",
+          studies: [
             "Architekt HF",
             "GEAK Experte",
             "Energieberater",
@@ -90,8 +97,9 @@ function teamSections() {
           name: "Christoph Ruesch",
           image: "/images/team/christoph-ruesch.jpg",
           phone: "+41 62 798 1072",
-          roles: [
-            "Architekt FH",
+          email: "christoph.ruesch@bhend-architektur.ch",
+          role: "Architekt FH",
+          studies: [
             "Energiexperte Bau",
             "GEAK Experte",
             "DAS Energieexperte Bau",
@@ -106,8 +114,9 @@ function teamSections() {
           name: "Markus Moser",
           image: "/images/team/markus-moser.jpg",
           phone: "+41 62 798 1076",
-          roles: [
-            "Bauleiter",
+          email: "markus.moser@bhend-architektur.ch",
+          role: "Bauleiter",
+          studies: [
             "Technischer Kaufmann mit eidgenösischem Fachausweis",
             "Dipl. Bodenberater Boden Schweiz/ISP/TVS",
             "Berufsbildner",
@@ -117,53 +126,60 @@ function teamSections() {
           name: "Joel Gerber",
           image: "/images/team/joel-gerber.jpg",
           phone: "+41 62 798 1076",
-          roles: ["Architekt HF", "Berufsbildner"],
+          email: "joel.gerber@bhend-architektur.ch",
+          role: "Architekt HF",
+          studies: ["Berufsbildner"],
         }),
         teamMember({
           name: "Brigitte Flükiger",
           image: "/images/team/brigitte-fluekiger.jpg",
           phone: "+41 62 798 1077",
-          roles: [
-            "Zeichnerin EFZ Architektur",
-            "Hochbauzeichnerin",
-            "Berufsbildnerin",
-          ],
+          email: "brigitte.flükiger@bhend-architektur.ch",
+          role: "Zeichnerin EFZ Architektur",
+          studies: ["Hochbauzeichnerin", "Berufsbildnerin"],
         }),
         teamMember({
           name: "Stefanie Burren",
           image: "/images/team/stefanie-burren.jpg",
           phone: "+41 62 798 1071",
-          roles: ["Zeichnerin EFZ Architektur"],
+          email: "stefanie.burren@bhend-architektur.ch",
+          role: "Zeichnerin EFZ Architektur",
         }),
         teamMember({
           name: "Simon Höchenberger",
           image: "/images/team/simon-hoechenberger.jpg",
           phone: "+41 62 798 0000",
-          roles: ["Zeichner EFZ Architektur", "Maurer EFZ"],
+          email: "simon.hoechi@bhend-architektur.ch",
+          role: "Zeichner EFZ Architektur",
+          studies: ["Maurer EFZ"],
         }),
         teamMember({
           name: "Jannik Wyss",
           image: "/images/team/jannik-wyss.jpg",
           phone: "+41 62 798 0000",
-          roles: ["Zeichner EFZ Architektur i.A"],
+          email: "jannik.wyss@bhend-architektur.ch",
+          role: "Zeichner EFZ Architektur i.A",
         }),
         teamMember({
           name: "Mathilde de Almeida Rocha",
           image: "/images/team/mathilde-de-almeida-rocha.jpg",
           phone: "+41 62 798 0000",
-          roles: ["Zeichnerin EFZ Architektur i.A."],
+          email: "mathilde.rocha@bhend-architektur.ch",
+          role: "Zeichnerin EFZ Architektur i.A.",
         }),
         teamMember({
           name: "Esther Wälchli",
           image: "/images/team/esther-waelchli.jpg",
           phone: "+41 62 798 0000",
-          roles: ["Administration"],
+          email: "sekretariat@bhend-architektur.ch",
+          role: "Administration",
         }),
         teamMember({
           name: "Selina Vonäsch",
           image: "/images/team/selina-vonaesch.jpg",
           phone: "+41 62 798 0000",
-          roles: ["Praktikantin"],
+          email: "selina.vonaesch@bhend-architektur.ch",
+          role: "Praktikantin",
         }),
       ],
       _orbi: { component: "SectionTeamGrid" },
@@ -940,6 +956,7 @@ export function buildSeedPages({
       sections: planungSections(),
     },
     ...buildLeistungenSeedPages(now),
+    ...buildProjectFeedPages(now),
     {
       id: "seed-setup",
       slug: "setup",
@@ -1021,5 +1038,6 @@ export function buildSeedPosts() {
         },
       ],
     },
+    ...buildSeedProjectPosts(now),
   ]
 }

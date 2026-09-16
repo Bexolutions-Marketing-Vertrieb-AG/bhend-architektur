@@ -1,0 +1,51 @@
+[
+  {
+    "id": "sanierung-gebaeudehuelle-an-stahlbauhalle-oftringen",
+    "title": "Sanierung Gebäudehülle an Stahlbauhalle",
+    "subcategory": "Sanierung",
+    "location": "Oftringen",
+    "year": 2021,
+    "description": "Die Sanierung der Gebäudehülle dieser imposanten Halle hat neben einer erheblichen Energieeinsparung auch die Lichtsituation für die Mitarbeitenden deutlich verbessert.",
+    "projektId": "20-24 Senn",
+    "paths": {
+      "main": "/images/industrie-gewerbe/sanierung-gebaeudehuelle-an-stahlbauhalle-oftringen/main.jpg"
+    },
+    "gallery": [
+      "/images/industrie-gewerbe/sanierung-gebaeudehuelle-an-stahlbauhalle-oftringen/gallery-1.jpg",
+      "/images/industrie-gewerbe/sanierung-gebaeudehuelle-an-stahlbauhalle-oftringen/gallery-2.jpg",
+      "/images/industrie-gewerbe/sanierung-gebaeudehuelle-an-stahlbauhalle-oftringen/gallery-3.jpg"
+    ],
+    "node": "276:9419",
+    "category": "industrie-gewerbe"
+  },
+  {
+    "id": "fassadensanierung-gewerbebetrieb-rothrist",
+    "title": "Fassadensanierung Gewerbebetrieb",
+    "subcategory": "Sanierung",
+    "location": "Rothrist",
+    "year": 2021,
+    "description": "Die Fassaden und Dachsanierung dieser Gewerbeimmobilie reduzierte nicht nur den Energieverbrauch sondern brachte die verschiedenen Bauetappen gestalterisch zusammen.",
+    "projektId": "20-25 Wernli",
+    "paths": {
+      "main": "/images/industrie-gewerbe/fassadensanierung-gewerbebetrieb-rothrist/main.jpg"
+    },
+    "gallery": [],
+    "node": "276:9448",
+    "category": "industrie-gewerbe"
+  },
+  {
+    "id": "dachsanierung-sheddaecher-zofingen",
+    "title": "Dachsanierung Sheddächer",
+    "subcategory": "Sanierung",
+    "location": "Zofingen",
+    "year": 2018,
+    "description": "Durch die Sanierung dieses eindrücklichen Sheddachs wurde das Gebäude stark aufgewertet. Die verschiedenen Gewerbe profitieren dank dem neuen Dach von besseren klimatischen Bedingungen und einer optimierten Lüftung durch die Automatisierung der Fenster.",
+    "projektId": "15-19 Trila",
+    "paths": {
+      "main": "/images/industrie-gewerbe/dachsanierung-sheddaecher-zofingen/main.jpg"
+    },
+    "gallery": [],
+    "node": "276:9467",
+    "category": "industrie-gewerbe"
+  }
+]

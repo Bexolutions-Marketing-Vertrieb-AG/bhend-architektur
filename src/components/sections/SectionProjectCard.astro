@@ -1,0 +1,645 @@
+---
+// SectionProjectCard.astro — single architectural project row (aktuell / referenz)
+import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
+import type { I18nString } from "~/types/i18n"
+import type { Locale } from "~/config/locales"
+import type { ProjectCategory } from "~/config/projects"
+import { projectPhase } from "~/config/projects"
+
+interface GalleryItem {
+  src?: string
+  alt?: I18nString
+}
+
+interface Props {
+  id?: string
+  title?: I18nString
+  subcategory?: I18nString
+  location?: I18nString
+  year?: number | string
+  /** Internal Projekt ID (Binflow / CMS) — not shown in visible UI */
+  projektId?: string
+  renderImage?: string
+  renderImageAlt?: I18nString
+  description?: I18nString
+  mainImage?: string
+  mainImageAlt?: I18nString
+  gallery?: GalleryItem[]
+  phase?: "aktuell" | "referenz"
+  category?: ProjectCategory
+  locale: Locale
+}
+
+const {
+  id = "project",
+  title,
+  subcategory,
+  location,
+  year,
+  projektId,
+  renderImage,
+  renderImageAlt,
+  description,
+  mainImage,
+  mainImageAlt,
+  gallery = [],
+  phase: phaseProp,
+  category,
+  locale,
+} = Astro.props
+
+const projectId = (id ?? "project").trim() || "project"
+const section = `project.${projectId}`
+const phase = phaseProp ?? (category ? projectPhase(category) : "aktuell")
+const headline = translate(title, locale)
+const sub = translate(subcategory, locale)
+const place = translate(location, locale)
+const yearLabel =
+  year === null || year === undefined || year === "" ? "" : String(year)
+const projektIdLabel = (projektId ?? "").trim()
+const body = translate(description, locale)
+const renderAlt = translate(renderImageAlt, locale) || headline
+
+const slides: GalleryItem[] = []
+if (mainImage) slides.push({ src: mainImage, alt: mainImageAlt })
+for (const item of gallery) {
+  if (item.src && !slides.some((s) => s.src === item.src)) slides.push(item)
+}
+const radioName = `pg-${projectId}`
+---
+
+<article
+  class="border-brand-200 grid gap-8 border-b py-10 last:border-b-0 md:grid-cols-[minmax(16rem,24rem)_minmax(0,1fr)] md:gap-12 lg:gap-16"
+  data-subcategory={sub}
+  data-year={yearLabel}
+  {...bf(`${section}.shell`, "container", "projectFeed")}
+>
+  {
+    projektIdLabel && (
+      <span
+        class="sr-only"
+        {...bf(`${section}.projektId`, "style_target", "projectFeed")}
+      >
+        {projektIdLabel}
+      </span>
+    )
+  }
+  <div class="flex flex-col gap-4">
+    {
+      headline && (
+        <h2
+          class="font-display text-[1.75rem] leading-10 font-bold tracking-tight md:text-[2rem]"
+          {...bf(`${section}.title`, "style_target", "projectFeed")}
+        >
+          {headline}
+        </h2>
+      )
+    }
+    <ul
+      class="text-brand-500 flex flex-col gap-3 font-sans text-[20px] leading-normal font-bold"
+    >
+      {
+        sub && (
+          <li
+            class="flex items-center gap-3"
+            {...bf(`${section}.subcategory`, "style_target", "projectFeed")}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.25"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="size-8 shrink-0"
+              aria-hidden="true"
+            >
+              <path d="M3 10.5 12 3l9 7.5" />
+              <path d="M5 10v10h14V10" />
+              <path d="M9 20v-6h6v6" />
+            </svg>
+            <span>{sub}</span>
+          </li>
+        )
+      }
+      {
+        place && (
+          <li
+            class="flex items-center gap-3"
+            {...bf(`${section}.location`, "style_target", "projectFeed")}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.25"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="size-8 shrink-0"
+              aria-hidden="true"
+            >
+              <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11Z" />
+              <circle cx="12" cy="10" r="2.5" />
+            </svg>
+            <span>{place}</span>
+          </li>
+        )
+      }
+      {
+        yearLabel && (
+          <li
+            class="flex items-center gap-3"
+            {...bf(`${section}.year`, "style_target", "projectFeed")}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.25"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="size-8 shrink-0"
+              aria-hidden="true"
+            >
+              <rect x="3" y="5" width="18" height="16" rx="2" />
+              <path d="M3 10h18" />
+              <path d="M8 3v4" />
+              <path d="M16 3v4" />
+            </svg>
+            <span>{yearLabel}</span>
+          </li>
+        )
+      }
+    </ul>
+    {
+      phase === "aktuell" && renderImage && (
+        <img
+          src={renderImage}
+          alt={renderAlt}
+          class="mt-2 w-full object-cover"
+          loading="lazy"
+          {...bf(`${section}.render`, "image", "projectFeed")}
+        />
+      )
+    }
+    {
+      phase === "referenz" && body && (
+        <p
+          class="section-lead mt-2 text-base whitespace-pre-line"
+          {...bf(`${section}.description`, "style_target", "projectFeed")}
+        >
+          {body}
+        </p>
+      )
+    }
+  </div>
+
+  {
+    slides.length > 0 && (
+      <div class="project-gallery flex flex-col gap-3" data-project-gallery>
+        <div
+          class="project-gallery-stage relative w-full cursor-zoom-in overflow-hidden"
+          role="button"
+          tabindex="0"
+          aria-label={
+            headline ? `${headline} — vergrössern` : "Bild vergrössern"
+          }
+          data-project-gallery-open
+        >
+          {slides.map((item, index) => {
+            const n = index + 1
+            const alt = translate(item.alt, locale) || `${headline} ${n}`
+            const inputId = `${radioName}-${n}`
+            return (
+              <div class="project-gallery-slide absolute inset-0">
+                <input
+                  type="radio"
+                  name={radioName}
+                  id={inputId}
+                  class="project-gallery-radio sr-only"
+                  checked={index === 0}
+                  tabindex="-1"
+                />
+                <img
+                  src={item.src}
+                  alt={alt}
+                  class="project-gallery-main"
+                  loading={index === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                  draggable="false"
+                  {...bf(
+                    index === 0
+                      ? `${section}.mainImage`
+                      : `${section}.gallery${index}`,
+                    "image",
+                    "projectFeed",
+                  )}
+                />
+              </div>
+            )
+          })}
+        </div>
+        {slides.length > 1 && (
+          <div class="flex flex-wrap gap-2" data-project-gallery-thumbs>
+            {slides.map((item, index) => {
+              const n = index + 1
+              const alt = translate(item.alt, locale) || `${headline} ${n}`
+              return (
+                <button
+                  type="button"
+                  class="border-brand-200 enter:opacity-80 block h-16 w-16 shrink-0 cursor-pointer overflow-hidden border bg-transparent p-0 sm:h-20 sm:w-20"
+                  data-project-gallery-thumb
+                  data-radio-id={`${radioName}-${n}`}
+                  aria-label={alt}
+                >
+                  <img
+                    src={item.src}
+                    alt=""
+                    class="pointer-events-none h-full w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </button>
+              )
+            })}
+          </div>
+        )}
+        <dialog
+          class="project-lightbox m-auto w-[min(96vw,72rem)] max-w-[min(96vw,72rem)] border-0 bg-transparent p-0 open:flex open:flex-col open:items-stretch open:gap-3"
+          data-project-lightbox
+        >
+          <div class="project-lightbox-toolbar flex justify-end px-1 md:absolute md:top-0 md:right-0 md:z-20">
+            <form method="dialog">
+              <button
+                type="submit"
+                class="bg-brand-900 flex h-10 w-10 items-center justify-center text-lg text-white"
+                aria-label="Schliessen"
+              >
+                ×
+              </button>
+            </form>
+          </div>
+
+          <div
+            class="project-lightbox-stage relative flex min-h-0 flex-1 items-center justify-center"
+            data-project-lightbox-stage
+          >
+            <button
+              type="button"
+              class="bg-brand-900 absolute top-1/2 left-2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center text-white md:left-4 md:flex"
+              aria-label="Vorheriges Bild"
+              data-project-lightbox-prev
+              hidden={slides.length < 2}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+            <img
+              src=""
+              alt=""
+              class="max-h-[78vh] max-w-full touch-pan-y object-contain md:max-h-[90vh]"
+              data-project-lightbox-img
+            />
+            <button
+              type="button"
+              class="bg-brand-900 absolute top-1/2 right-2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center text-white md:right-4 md:flex"
+              aria-label="Nächstes Bild"
+              data-project-lightbox-next
+              hidden={slides.length < 2}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            class="project-lightbox-dots"
+            data-project-lightbox-dots
+            role="tablist"
+            aria-label="Bildnavigation"
+            hidden={slides.length < 2}
+          >
+            {slides.map((_, index) => (
+              <button
+                type="button"
+                class="project-lightbox-dot"
+                data-project-lightbox-dot
+                data-index={String(index)}
+                aria-label={`Bild ${index + 1}`}
+                aria-current={index === 0 ? "true" : "false"}
+              />
+            ))}
+          </div>
+        </dialog>
+      </div>
+    )
+  }
+</article>
+
+<style>
+  .project-gallery-stage {
+    aspect-ratio: 16 / 9;
+    max-height: 28rem;
+  }
+  .project-gallery-main {
+    display: none;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .project-gallery-radio:checked + .project-gallery-main {
+    display: block;
+  }
+  .project-lightbox::backdrop {
+    background: rgb(0 0 0 / 0.85);
+  }
+  /* Mobile-only dots; :global so styles still apply after dialog moves to body */
+  :global(.project-lightbox-dots) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    padding: 0.75rem 0 0.25rem;
+  }
+  :global(.project-lightbox-dot) {
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 9999px;
+    border: 0;
+    padding: 0;
+    background: rgb(255 255 255 / 0.45);
+    cursor: pointer;
+  }
+  :global(.project-lightbox-dot[aria-current="true"]) {
+    background: #fff;
+    transform: scale(1.3);
+  }
+  @media (min-width: 768px) {
+    :global(.project-lightbox-dots) {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  function galleryRadios(root: Element): HTMLInputElement[] {
+    return Array.from(
+      root.querySelectorAll(".project-gallery-radio"),
+    ) as HTMLInputElement[]
+  }
+
+  function activeGalleryIndex(root: Element): number {
+    const radios = galleryRadios(root)
+    const index = radios.findIndex((radio) => radio.checked)
+    return index >= 0 ? index : 0
+  }
+
+  function galleryImageAt(
+    root: Element,
+    index: number,
+  ): HTMLImageElement | null {
+    const radio = galleryRadios(root)[index]
+    const img = radio?.nextElementSibling
+    return img instanceof HTMLImageElement ? img : null
+  }
+
+  function bindGallery(root: Element) {
+    if (!(root instanceof HTMLElement) || root.dataset.bound === "1") return
+    root.dataset.bound = "1"
+
+    const dialog = root.querySelector(
+      "[data-project-lightbox]",
+    ) as HTMLDialogElement | null
+    const openBtn = root.querySelector("[data-project-gallery-open]")
+    if (!dialog || !openBtn) return
+
+    const lightboxImg = dialog.querySelector(
+      "[data-project-lightbox-img]",
+    ) as HTMLImageElement | null
+    const stage = dialog.querySelector(
+      "[data-project-lightbox-stage]",
+    ) as HTMLElement | null
+    const dotsRoot = dialog.querySelector(
+      "[data-project-lightbox-dots]",
+    ) as HTMLElement | null
+    const prevBtn = dialog.querySelector(
+      "[data-project-lightbox-prev]",
+    ) as HTMLButtonElement | null
+    const nextBtn = dialog.querySelector(
+      "[data-project-lightbox-next]",
+    ) as HTMLButtonElement | null
+    if (!lightboxImg) return
+
+    let lockedScrollY = 0
+    let lightboxIndex = 0
+    let touchStartX: number | null = null
+
+    const lockScroll = () => {
+      lockedScrollY = window.scrollY
+      document.body.style.position = "fixed"
+      document.body.style.top = `-${lockedScrollY}px`
+      document.body.style.left = "0"
+      document.body.style.right = "0"
+      document.body.style.width = "100%"
+    }
+
+    const unlockScroll = () => {
+      document.body.style.position = ""
+      document.body.style.top = ""
+      document.body.style.left = ""
+      document.body.style.right = ""
+      document.body.style.width = ""
+      window.scrollTo(0, lockedScrollY)
+    }
+
+    const syncDots = () => {
+      if (!dotsRoot) return
+      dotsRoot
+        .querySelectorAll("[data-project-lightbox-dot]")
+        .forEach((btn) => {
+          if (!(btn instanceof HTMLElement)) return
+          const index = Number(btn.dataset.index ?? -1)
+          btn.setAttribute(
+            "aria-current",
+            index === lightboxIndex ? "true" : "false",
+          )
+        })
+    }
+
+    const showLightboxImage = (index: number) => {
+      const radios = galleryRadios(root)
+      if (!radios.length) return
+      const nextIndex =
+        ((index % radios.length) + radios.length) % radios.length
+      lightboxIndex = nextIndex
+      radios[nextIndex]!.checked = true
+      const img = galleryImageAt(root, nextIndex)
+      if (!img?.src) return
+      lightboxImg.src = img.currentSrc || img.src
+      lightboxImg.alt = img.alt || ""
+      syncDots()
+    }
+
+    const open = () => {
+      lightboxIndex = activeGalleryIndex(root)
+      showLightboxImage(lightboxIndex)
+      if (!lightboxImg.src) return
+      if (dialog.parentElement !== document.body) {
+        document.body.appendChild(dialog)
+      }
+      lockScroll()
+      dialog.showModal()
+    }
+
+    const step = (delta: number) => {
+      if (galleryRadios(root).length < 2) return
+      showLightboxImage(lightboxIndex + delta)
+    }
+
+    openBtn.addEventListener("click", (event) => {
+      event.preventDefault()
+      if (!(event.target instanceof Element)) return
+      if (event.target.closest("[data-project-gallery-thumb]")) return
+      open()
+    })
+    openBtn.addEventListener("keydown", (event) => {
+      if (!(event instanceof KeyboardEvent)) return
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault()
+        open()
+      }
+    })
+
+    root.querySelectorAll("[data-project-gallery-thumb]").forEach((thumb) => {
+      thumb.addEventListener("click", (event) => {
+        event.preventDefault()
+        event.stopPropagation()
+        if (!(thumb instanceof HTMLElement)) return
+        const radioId = thumb.dataset.radioId
+        if (!radioId) return
+        const radio = root.querySelector(
+          `#${CSS.escape(radioId)}`,
+        ) as HTMLInputElement | null
+        if (radio) radio.checked = true
+      })
+    })
+
+    prevBtn?.addEventListener("click", (event) => {
+      event.stopPropagation()
+      step(-1)
+    })
+    nextBtn?.addEventListener("click", (event) => {
+      event.stopPropagation()
+      step(1)
+    })
+
+    dotsRoot?.addEventListener("click", (event) => {
+      const target = event.target
+      if (!(target instanceof Element)) return
+      const btn = target.closest("[data-project-lightbox-dot]")
+      if (!(btn instanceof HTMLElement)) return
+      event.stopPropagation()
+      const index = Number(btn.dataset.index ?? -1)
+      if (index < 0) return
+      showLightboxImage(index)
+    })
+
+    const swipeTarget = stage ?? lightboxImg
+    swipeTarget.addEventListener(
+      "touchstart",
+      (event) => {
+        if (!(event instanceof TouchEvent) || event.changedTouches.length === 0)
+          return
+        const touch = event.changedTouches[0]
+        if (!touch) return
+        touchStartX = touch.screenX
+      },
+      { passive: true },
+    )
+    swipeTarget.addEventListener(
+      "touchend",
+      (event) => {
+        if (
+          touchStartX === null ||
+          touchStartX === undefined ||
+          !(event instanceof TouchEvent) ||
+          event.changedTouches.length === 0
+        )
+          return
+        const touch = event.changedTouches[0]
+        if (!touch || touchStartX === null || touchStartX === undefined) return
+        const dx = touch.screenX - touchStartX
+        touchStartX = null
+        if (Math.abs(dx) < 40) return
+        step(dx < 0 ? 1 : -1)
+      },
+      { passive: true },
+    )
+
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close()
+    })
+
+    dialog.addEventListener("keydown", (event) => {
+      if (!(event instanceof KeyboardEvent) || !dialog.open) return
+      if (event.key === "ArrowLeft") {
+        event.preventDefault()
+        step(-1)
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault()
+        step(1)
+      }
+    })
+
+    dialog.addEventListener("close", () => {
+      unlockScroll()
+      if (dialog.parentElement === document.body) {
+        root.appendChild(dialog)
+      }
+      lightboxImg.removeAttribute("src")
+      lightboxImg.alt = ""
+    })
+  }
+
+  function bindAll() {
+    document
+      .querySelectorAll("[data-project-gallery]")
+      .forEach((root) => bindGallery(root))
+  }
+
+  bindAll()
+  document.addEventListener("astro:page-load", bindAll)
+</script>

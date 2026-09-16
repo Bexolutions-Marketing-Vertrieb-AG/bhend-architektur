@@ -263,23 +263,23 @@ surfaces:
     kind: style_target
     area: team
     section: teamGrid
-    path: src/components/sections/SectionTeamGrid.astro
+    path: src/components/sections/partials/TeamMemberCard.astro
     locator: orbitype:pages/ueber-uns/team/sections/teamGrid/members@de
     locales: [de]
     publication_target: orbitype_pages
     sample: "Ueli Bhend"
-    notes: "Member names/roles live in members[] items; locator uses section id teamGrid"
+    notes: "Member names/role/studies/email live in members[] items; locator uses section id teamGrid"
 
   - bf_id: teamGrid.member1Phone
     kind: chrome_denied
     area: team
     section: teamGrid
-    path: src/components/sections/SectionTeamGrid.astro
+    path: src/components/sections/partials/TeamMemberCard.astro
     locator: orbitype:pages/ueber-uns/team/sections/teamGrid/members@de
     locales: [de]
     publication_target: orbitype_pages
     sample: "+41 62 798 0707"
-    notes: "tel: chrome; Mail link only when email field is set (no invented mailto)"
+    notes: "tel: chrome; Mail is always mailto:email (email required on member contract)"
 
   - bf_id: memberships.shell
     kind: container
@@ -696,3 +696,321 @@ surfaces:
     locales: [de]
     publication_target: orbitype_pages
     sample: "Jetzt beraten lassen"
+
+  - bf_id: projectFeed.shell
+    kind: container
+    area: aktuell
+    section: projectFeed
+    path: src/components/sections/SectionProjectFeed.astro
+    locator: orbitype:pages/aktuell/sections/projectFeed
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: projectFeed.heading
+    kind: style_target
+    area: aktuell
+    section: projectFeed
+    path: src/components/sections/SectionProjectFeed.astro
+    locator: orbitype:pages/aktuell/sections/projectFeed/heading@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "AKTUELL"
+
+  - bf_id: project.machbarkeitsstudie-erweiterung-firmengebaeude-roggwil.shell
+    kind: container
+    area: aktuell
+    section: projectFeed
+    path: src/components/sections/SectionProjectCard.astro
+    locator: orbitype:posts/machbarkeitsstudie-erweiterung-firmengebaeude-roggwil/sections@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: ""
+    notes: "bf_id pattern project.{id}.*; manage via .agents/skills/project-post"
+
+  - bf_id: project.machbarkeitsstudie-erweiterung-firmengebaeude-roggwil.title
+    kind: style_target
+    area: aktuell
+    section: projectFeed
+    path: src/components/sections/SectionProjectCard.astro
+    locator: orbitype:posts/machbarkeitsstudie-erweiterung-firmengebaeude-roggwil/sections@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "Machbarkeitsstudie Erweiterung Firmengebäude"
+
+  - bf_id: project.machbarkeitsstudie-erweiterung-firmengebaeude-roggwil.subcategory
+    kind: style_target
+    area: aktuell
+    section: projectFeed
+    path: src/components/sections/SectionProjectCard.astro
+    locator: orbitype:posts/machbarkeitsstudie-erweiterung-firmengebaeude-roggwil/sections@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "Industrie"
+
+  - bf_id: project.machbarkeitsstudie-erweiterung-firmengebaeude-roggwil.location
+    kind: style_target
+    area: aktuell
+    section: projectFeed
+    path: src/components/sections/SectionProjectCard.astro
+    locator: orbitype:posts/machbarkeitsstudie-erweiterung-firmengebaeude-roggwil/sections@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "4914 Roggwil"
+
+  - bf_id: project.machbarkeitsstudie-erweiterung-firmengebaeude-roggwil.year
+    kind: style_target
+    area: aktuell
+    section: projectFeed
+    path: src/components/sections/SectionProjectCard.astro
+    locator: orbitype:posts/machbarkeitsstudie-erweiterung-firmengebaeude-roggwil/sections@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "2026"
+
+  - bf_id: project.machbarkeitsstudie-erweiterung-firmengebaeude-roggwil.projektId
+    kind: style_target
+    area: aktuell
+    section: projectFeed
+    path: src/components/sections/SectionProjectCard.astro
+    locator: orbitype:posts/machbarkeitsstudie-erweiterung-firmengebaeude-roggwil/sections@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "25-34 E. Grütter Roggwil"
+    notes: "sr-only; searchable Projekt ID for Binflow / operators"
+
+  - bf_id: project.machbarkeitsstudie-erweiterung-firmengebaeude-roggwil.render
+    kind: image
+    area: aktuell
+    section: projectFeed
+    path: src/components/sections/SectionProjectCard.astro
+    locator: orbitype:posts/machbarkeitsstudie-erweiterung-firmengebaeude-roggwil/sections@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "/images/aktuell/machbarkeitsstudie-erweiterung-firmengebaeude-roggwil/render.jpg"
+
+  - bf_id: project.machbarkeitsstudie-erweiterung-firmengebaeude-roggwil.mainImage
+    kind: image
+    area: aktuell
+    section: projectFeed
+    path: src/components/sections/SectionProjectCard.astro
+    locator: orbitype:posts/machbarkeitsstudie-erweiterung-firmengebaeude-roggwil/sections@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "/images/aktuell/machbarkeitsstudie-erweiterung-firmengebaeude-roggwil/main.jpg"
+
+  - bf_id: project.lindenpark-kuengoldingen-generation-silber-oftringen.shell
+    kind: container
+    area: aktuell
+    section: projectFeed
+    path: src/components/sections/SectionProjectCard.astro
+    locator: orbitype:posts/lindenpark-kuengoldingen-generation-silber-oftringen/sections@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: ""
+    notes: "Mid-list card with thumbnail strip; gallery via project.{id}.gallery{n}"
+
+  - bf_id: projectFeed.shell
+    kind: container
+    area: wohnen
+    section: projectFeed
+    path: src/components/sections/SectionProjectFeed.astro
+    locator: orbitype:pages/wohnen/sections/projectFeed
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+    notes: "Referenzen Wohnen listing; same SectionProjectFeed as aktuell"
+
+  - bf_id: projectFeed.heading
+    kind: style_target
+    area: wohnen
+    section: projectFeed
+    path: src/components/sections/SectionProjectFeed.astro
+    locator: orbitype:pages/wohnen/sections/projectFeed/heading@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "WOHNEN"
+
+  - bf_id: project.erneuerung-einfamilienhaus-und-umgebung-zofingen.shell
+    kind: container
+    area: wohnen
+    section: projectFeed
+    path: src/components/sections/SectionProjectCard.astro
+    locator: orbitype:posts/erneuerung-einfamilienhaus-und-umgebung-zofingen/sections@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: ""
+    notes: "Referenz card: description below meta (no renderImage)"
+
+  - bf_id: project.erneuerung-einfamilienhaus-und-umgebung-zofingen.title
+    kind: style_target
+    area: wohnen
+    section: projectFeed
+    path: src/components/sections/SectionProjectCard.astro
+    locator: orbitype:posts/erneuerung-einfamilienhaus-und-umgebung-zofingen/sections@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "Erneuerung Einfamilienhaus und Umgebung"
+
+  - bf_id: project.erneuerung-einfamilienhaus-und-umgebung-zofingen.subcategory
+    kind: style_target
+    area: wohnen
+    section: projectFeed
+    path: src/components/sections/SectionProjectCard.astro
+    locator: orbitype:posts/erneuerung-einfamilienhaus-und-umgebung-zofingen/sections@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "Diverse Erneuerungen"
+
+  - bf_id: project.erneuerung-einfamilienhaus-und-umgebung-zofingen.location
+    kind: style_target
+    area: wohnen
+    section: projectFeed
+    path: src/components/sections/SectionProjectCard.astro
+    locator: orbitype:posts/erneuerung-einfamilienhaus-und-umgebung-zofingen/sections@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "4800 Zofingen"
+
+  - bf_id: project.erneuerung-einfamilienhaus-und-umgebung-zofingen.year
+    kind: style_target
+    area: wohnen
+    section: projectFeed
+    path: src/components/sections/SectionProjectCard.astro
+    locator: orbitype:posts/erneuerung-einfamilienhaus-und-umgebung-zofingen/sections@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "2024"
+
+  - bf_id: project.erneuerung-einfamilienhaus-und-umgebung-zofingen.projektId
+    kind: style_target
+    area: wohnen
+    section: projectFeed
+    path: src/components/sections/SectionProjectCard.astro
+    locator: orbitype:posts/erneuerung-einfamilienhaus-und-umgebung-zofingen/sections@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "21-11 Anderegg"
+    notes: "sr-only; searchable Projekt ID"
+
+  - bf_id: project.erneuerung-einfamilienhaus-und-umgebung-zofingen.description
+    kind: style_target
+    area: wohnen
+    section: projectFeed
+    path: src/components/sections/SectionProjectCard.astro
+    locator: orbitype:posts/erneuerung-einfamilienhaus-und-umgebung-zofingen/sections@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "Nebst einer kompletten Modernisierung der Gebäudehülle und einzelner Innenräume durften wir rund ums Haus eine traumhafte Oase gestalten."
+
+  - bf_id: project.erneuerung-einfamilienhaus-und-umgebung-zofingen.mainImage
+    kind: image
+    area: wohnen
+    section: projectFeed
+    path: src/components/sections/SectionProjectCard.astro
+    locator: orbitype:posts/erneuerung-einfamilienhaus-und-umgebung-zofingen/sections@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "/images/wohnen/erneuerung-einfamilienhaus-und-umgebung-zofingen/main.jpg"
+
+  - bf_id: projectFeed.shell
+    kind: container
+    area: industrie-gewerbe
+    section: projectFeed
+    path: src/components/sections/SectionProjectFeed.astro
+    locator: orbitype:pages/industrie-gewerbe/sections/projectFeed
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: projectFeed.heading
+    kind: style_target
+    area: industrie-gewerbe
+    section: projectFeed
+    path: src/components/sections/SectionProjectFeed.astro
+    locator: orbitype:pages/industrie-gewerbe/sections/projectFeed/heading@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "INDUSTRIE GEWERBE"
+
+  - bf_id: project.sanierung-gebaeudehuelle-an-stahlbauhalle-oftringen.shell
+    kind: container
+    area: industrie-gewerbe
+    section: projectFeed
+    path: src/components/sections/SectionProjectCard.astro
+    locator: orbitype:posts/sanierung-gebaeudehuelle-an-stahlbauhalle-oftringen/sections@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: ""
+    notes: "Referenz Industrie sample; description phase"
+
+  - bf_id: project.sanierung-gebaeudehuelle-an-stahlbauhalle-oftringen.title
+    kind: style_target
+    area: industrie-gewerbe
+    section: projectFeed
+    path: src/components/sections/SectionProjectCard.astro
+    locator: orbitype:posts/sanierung-gebaeudehuelle-an-stahlbauhalle-oftringen/sections@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "Sanierung Gebäudehülle an Stahlbauhalle"
+
+  - bf_id: project.sanierung-gebaeudehuelle-an-stahlbauhalle-oftringen.description
+    kind: style_target
+    area: industrie-gewerbe
+    section: projectFeed
+    path: src/components/sections/SectionProjectCard.astro
+    locator: orbitype:posts/sanierung-gebaeudehuelle-an-stahlbauhalle-oftringen/sections@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "Die Sanierung der Gebäudehülle dieser imposanten Halle hat neben einer erheblichen Energieeinsparung auch die Lichtsituation für die Mitarbeitenden deutlich verbessert."
+
+  - bf_id: projectFeed.shell
+    kind: container
+    area: oeffentliche-bauten
+    section: projectFeed
+    path: src/components/sections/SectionProjectFeed.astro
+    locator: orbitype:pages/oeffentliche-bauten/sections/projectFeed
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: projectFeed.heading
+    kind: style_target
+    area: oeffentliche-bauten
+    section: projectFeed
+    path: src/components/sections/SectionProjectFeed.astro
+    locator: orbitype:pages/oeffentliche-bauten/sections/projectFeed/heading@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "ÖFFENTLICHE BAUTEN"
+
+  - bf_id: project.erneuerung-pfarrhaus-oftringen-oftringen.shell
+    kind: container
+    area: oeffentliche-bauten
+    section: projectFeed
+    path: src/components/sections/SectionProjectCard.astro
+    locator: orbitype:posts/erneuerung-pfarrhaus-oftringen-oftringen/sections@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: ""
+    notes: "Referenz Öffentliche Bauten sample; description phase"
+
+  - bf_id: project.erneuerung-pfarrhaus-oftringen-oftringen.title
+    kind: style_target
+    area: oeffentliche-bauten
+    section: projectFeed
+    path: src/components/sections/SectionProjectCard.astro
+    locator: orbitype:posts/erneuerung-pfarrhaus-oftringen-oftringen/sections@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "Erneuerung Pfarrhaus Oftringen"
+
+  - bf_id: project.erneuerung-pfarrhaus-oftringen-oftringen.description
+    kind: style_target
+    area: oeffentliche-bauten
+    section: projectFeed
+    path: src/components/sections/SectionProjectCard.astro
+    locator: orbitype:posts/erneuerung-pfarrhaus-oftringen-oftringen/sections@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "Bhend Architektur hat das grosszügige reformierte Pfarrhaus von 1924 in Oftringen als kommunales Kulturobjekt sorgfältig energetisch saniert."

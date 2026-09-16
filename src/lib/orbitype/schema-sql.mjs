@@ -55,6 +55,8 @@ CREATE TABLE posts (
     }
   ]'::json,
   keywords json DEFAULT '[ "..." ]'::json,
+  category text DEFAULT NULL,
+  year integer DEFAULT NULL,
   created_at timestamp DEFAULT CURRENT_TIMESTAMP,
   updated_at timestamp DEFAULT CURRENT_TIMESTAMP
 );
@@ -120,6 +122,12 @@ export const CMS_MIGRATIONS_SQL = {
     "ALTER TABLE contacts ADD COLUMN IF NOT EXISTS topic text DEFAULT ''::text",
   "contacts.phone":
     "ALTER TABLE contacts ADD COLUMN IF NOT EXISTS phone text DEFAULT ''::text",
+  "posts.category":
+    "ALTER TABLE posts ADD COLUMN IF NOT EXISTS category text DEFAULT NULL",
+  "posts.year":
+    "ALTER TABLE posts ADD COLUMN IF NOT EXISTS year integer DEFAULT NULL",
+  posts_category_index:
+    "CREATE INDEX IF NOT EXISTS posts_category_idx ON posts (category)",
   pages_slug_unique:
     "CREATE UNIQUE INDEX IF NOT EXISTS pages_slug_unique ON pages (slug)",
   templates_name_unique:

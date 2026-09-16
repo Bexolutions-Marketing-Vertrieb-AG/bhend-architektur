@@ -34,7 +34,14 @@ const menu: MenuItem[] = [
     ],
   },
   { href: "/aktuell", label: "Aktuell" },
-  { href: "/referenzen", label: "Referenzen" },
+  {
+    label: "Referenzen",
+    children: [
+      { href: "/wohnen", label: "Wohnen" },
+      { href: "/industrie-gewerbe", label: "Industrie Gewerbe" },
+      { href: "/oeffentliche-bauten", label: "Öffentliche Bauten" },
+    ],
+  },
   { href: "/bei-uns-arbeiten", label: "Bei uns arbeiten" },
   { href: "mailto:info@bhend-architektur.ch", label: "Kontakt" },
 ]
