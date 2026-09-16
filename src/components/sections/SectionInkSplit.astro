@@ -2,6 +2,7 @@
 // SectionInkSplit.astro — title + body left, photo + caption right (light|dark)
 import { translate } from "~/lib/i18n"
 import { bf } from "~/lib/bf"
+import { fotografCreditParts } from "~/lib/photo-credit"
 import type { I18nString } from "~/types/i18n"
 import type { Locale } from "~/config/locales"
 
@@ -34,6 +35,7 @@ const headline = translate(heading ?? title, locale)
 const copy = translate(body, locale)
 const alt = translate(imageAlt, locale)
 const caption = translate(imageCaption, locale)
+const captionParts = caption ? fotografCreditParts(caption) : null
 ---
 
 <section
@@ -92,7 +94,14 @@ const caption = translate(imageCaption, locale)
                 ]}
                 {...bf(`${section}.imageCaption`, "style_target", section)}
               >
-                {caption}
+                {captionParts ? (
+                  <>
+                    <strong class="font-bold">{captionParts.label}</strong>
+                    {captionParts.rest}
+                  </>
+                ) : (
+                  caption
+                )}
               </figcaption>
             )}
           </figure>

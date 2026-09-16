@@ -229,7 +229,7 @@ function homeSections() {
     {
       id: "challenges",
       heading: de(
-        "Private und Öffentliche Bauprojekte =\nGleiche Herausforderungen",
+        "Private und Öffentliche\nBauprojekte Gleiche Herausforderungen",
       ),
       body: de(
         "Häufig begegnen unsere Kunden und Partner Herausforderungen bei der Planung und Umsetzung ihrer Bauvorhaben, unabhängig davon, ob es sich um private, geschäftliche oder öffentliche Projekte handelt.",
@@ -390,8 +390,8 @@ function homeSections() {
       imageAlt: de("Gebäudeecke"),
       imagePosition: "left",
       ctaLabel: de("Starten Sie Ihr Projekt mit uns"),
-      reservationMode: "mailto",
-      reservationTarget: CONTACT_MAIL,
+      reservationMode: "path",
+      reservationTarget: "/kontakt",
       _orbi: { component: "SectionSplit" },
     },
     {
@@ -401,21 +401,21 @@ function homeSections() {
       ),
       items: [
         {
-          title: de("Kontaktaufnahme und Beratung"),
+          title: de("Kontaktaufnahme und\nBeratung"),
           text: de(
             "Beginnen Sie Ihr Projekt, indem Sie Kontakt mit uns aufnehmen. Wir sind hier, um Ihre spezifischen Anforderungen zu verstehen, sei es für ein privates Eigenheim, ein gewerbliches Bauvorhaben oder ein öffentliches Bauwerk.",
           ),
           icon: "/images/home/icons/step1.png",
         },
         {
-          title: de("Planung und Konzeptentwicklung"),
+          title: de("Planung und\nKonzeptentwicklung"),
           text: de(
             "Unser Team arbeitet eng mit Ihnen zusammen, um ein massgeschneidertes Konzept zu entwickeln. Wir berücksichtigen Ihre Anforderungen, um sicherzustellen, dass Ihre Bedürfnisse vollständig erfüllt werden.",
           ),
           icon: "/images/home/icons/step2.png",
         },
         {
-          title: de("Umsetzung und Fertigstellung"),
+          title: de("Umsetzung und\nFertigstellung"),
           text: de(
             "Wir kümmern uns um die reibungslose Realisierung Ihres Projekts. Von der Beschaffung der Baubewilligung bis zur Fertigstellung des Bauwerks gewährleisten wir eine professionelle Ausführung.",
           ),

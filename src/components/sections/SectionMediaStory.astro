@@ -2,6 +2,7 @@
 // SectionMediaStory.astro — wide image + caption + title + dual body (+ optional CTA)
 import { translate } from "~/lib/i18n"
 import { bf } from "~/lib/bf"
+import { fotografCreditParts } from "~/lib/photo-credit"
 import { resolveReservationHref } from "~/lib/reservation"
 import type { ReservationMode } from "~/lib/reservation"
 import type { I18nString } from "~/types/i18n"
@@ -45,6 +46,7 @@ const primary = translate(body, locale)
 const secondary = translate(bodySecondary, locale)
 const alt = translate(imageAlt, locale)
 const credit = translate(caption, locale)
+const creditParts = credit ? fotografCreditParts(credit) : null
 const cta = translate(ctaLabel, locale)
 const href = resolveReservationHref({
   reservationMode,
@@ -77,7 +79,14 @@ const href = resolveReservationHref({
           class="text-muted mb-8 text-sm"
           {...bf(`home.${section}.caption`, "style_target", section)}
         >
-          {credit}
+          {creditParts ? (
+            <>
+              <strong class="font-bold">{creditParts.label}</strong>
+              {creditParts.rest}
+            </>
+          ) : (
+            credit
+          )}
         </p>
       )
     }

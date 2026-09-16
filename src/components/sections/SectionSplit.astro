@@ -2,6 +2,7 @@
 // SectionSplit.astro — image + text (optional list / CTA / caption)
 import { translate } from "~/lib/i18n"
 import { bf } from "~/lib/bf"
+import { fotografCreditParts } from "~/lib/photo-credit"
 import { resolveReservationHref } from "~/lib/reservation"
 import type { ReservationMode } from "~/lib/reservation"
 import type { I18nString } from "~/types/i18n"
@@ -50,9 +51,14 @@ const {
 
 const section = id
 const headline = translate(heading ?? title, locale)
+const headlineLines = headline
+  .split(/\n+/)
+  .map((line) => line.trim())
+  .filter(Boolean)
 const copy = translate(body ?? lead, locale)
 const alt = translate(imageAlt, locale)
 const credit = translate(caption, locale)
+const creditParts = credit ? fotografCreditParts(credit) : null
 const cta = translate(ctaLabel, locale)
 const href = resolveReservationHref({
   reservationMode,
@@ -90,13 +96,31 @@ const imageFirst = imagePosition === "left"
       }
       <div class="flex flex-col justify-center">
         {
-          headline && (
-            <h2
-              class="section-heading mb-6"
-              {...bf(`home.${section}.heading`, "style_target", section)}
-            >
-              {headline}
-            </h2>
+          headlineLines.length > 0 && (
+            <div class="mb-6 flex flex-col gap-0">
+              {headlineLines.map((line, index) => {
+                const isChallengesSecond =
+                  section === "challenges" && index === 1
+                return (
+                  <h2
+                    class:list={[
+                      isChallengesSecond
+                        ? "font-display text-ink text-[64px] leading-[72px] font-bold"
+                        : "section-heading",
+                    ]}
+                    {...bf(
+                      index === 0
+                        ? `home.${section}.heading`
+                        : `home.${section}.heading${index + 1}`,
+                      "style_target",
+                      section,
+                    )}
+                  >
+                    {line}
+                  </h2>
+                )
+              })}
+            </div>
           )
         }
         {
@@ -169,7 +193,14 @@ const imageFirst = imagePosition === "left"
           class="text-muted mt-4 text-sm"
           {...bf(`home.${section}.caption`, "style_target", section)}
         >
-          {credit}
+          {creditParts ? (
+            <>
+              <strong class="font-bold">{creditParts.label}</strong>
+              {creditParts.rest}
+            </>
+          ) : (
+            credit
+          )}
         </p>
       )
     }
