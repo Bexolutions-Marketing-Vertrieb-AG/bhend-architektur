@@ -1,111 +1,157 @@
 ---
-import type { Locale } from "~/config/locales"
+// SectionContactForm.astro — Kontakt page: modern form + map
 import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
 import type { I18nString } from "~/types/i18n"
-import { isEmailConfigured } from "~/lib/email"
+import type { Locale } from "~/config/locales"
 
 interface Props {
+  id?: string
   title?: I18nString
+  heading?: I18nString
   lead?: I18nString
   submitLabel?: I18nString
-  privacyLabel?: I18nString
-  privacyHref?: string
-  /** Override; defaults to whether an EmailProvider is wired. */
-  enabled?: boolean
+  namePlaceholder?: I18nString
+  emailPlaceholder?: I18nString
+  phonePlaceholder?: I18nString
+  companyPlaceholder?: I18nString
+  messagePlaceholder?: I18nString
+  mapEmbedUrl?: string
+  mapTitle?: I18nString
+  successMessage?: I18nString
+  errorMessage?: I18nString
   locale: Locale
 }
 
 const {
+  id = "kontakt",
   title,
+  heading,
   lead,
   submitLabel,
-  privacyLabel,
-  privacyHref = "/privacy",
-  enabled,
+  namePlaceholder,
+  emailPlaceholder,
+  phonePlaceholder,
+  companyPlaceholder,
+  messagePlaceholder,
+  mapEmbedUrl,
+  mapTitle,
+  successMessage,
+  errorMessage,
   locale,
 } = Astro.props
 
-const heading = translate(title, locale)
-const mailReady = enabled ?? isEmailConfigured()
+const section = id
+const headline = translate(heading ?? title, locale) || "KONTAKT"
+const intro = translate(lead, locale)
+const cta = translate(submitLabel, locale) || "JETZT KONTAKT AUFNEHMEN"
+const namePh = translate(namePlaceholder, locale) || "Name"
+const emailPh = translate(emailPlaceholder, locale) || "Email"
+const phonePh = translate(phonePlaceholder, locale) || "Telefon"
+const companyPh = translate(companyPlaceholder, locale) || "Firma"
+const messagePh = translate(messagePlaceholder, locale) || "Nachricht"
+const mapLabel = translate(mapTitle, locale) || "Standort Bhend Architektur"
+const okMsg =
+  translate(successMessage, locale) ||
+  "Vielen Dank — Ihre Nachricht wurde übermittelt."
+const errMsg =
+  translate(errorMessage, locale) ||
+  "Senden fehlgeschlagen. Bitte später erneut versuchen oder per E-Mail melden."
+
+const fieldClass =
+  "kontakt-field text-ink placeholder:text-muted border-brand-200 enter:border-brand-500 focus:border-brand-500 w-full rounded-xl border bg-white px-4 py-3.5 text-sm font-semibold shadow-sm transition-colors outline-none"
 ---
 
-<section class="container-prose py-section" data-testid="section-contact-form">
-  {
-    heading && (
-      <h2 class="mb-3 text-3xl font-semibold tracking-tight">{heading}</h2>
-    )
-  }
-  {lead && <p class="mb-8 text-neutral-600">{translate(lead, locale)}</p>}
+<section
+  class="bg-white"
+  data-testid="section-contact-form"
+  {...bf(`${section}.shell`, "container", section)}
+>
+  <div class="container-wide py-section-sm md:py-section">
+    {
+      headline && (
+        <h1
+          class="font-display mb-10 text-4xl font-bold tracking-tight uppercase md:mb-12 md:text-5xl"
+          {...bf(`${section}.heading`, "style_target", section)}
+        >
+          {headline}
+        </h1>
+      )
+    }
+    {
+      intro && (
+        <p
+          class="section-lead mb-10 max-w-2xl"
+          {...bf(`${section}.lead`, "style_target", section)}
+        >
+          {intro}
+        </p>
+      )
+    }
 
-  {
-    !mailReady ? (
-      <p class="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
-        The contact form is unavailable until an email provider is configured.
-      </p>
-    ) : (
+    <div
+      class="grid items-start gap-10 lg:grid-cols-[minmax(0,28rem)_minmax(0,1fr)] lg:gap-16"
+    >
       <form
         method="post"
         action="/api/forms/contact"
-        class="space-y-4"
+        class="flex flex-col gap-3.5"
         data-testid="contact-form"
+        data-kontakt-form
+        data-success-message={okMsg}
+        data-error-message={errMsg}
+        {...bf(`${section}.form`, "container", section)}
       >
-        <div class="grid gap-4 sm:grid-cols-2">
-          <label class="block text-sm">
-            <span class="mb-1 block font-medium">First name</span>
-            <input
-              required
-              name="first_name"
-              autocomplete="given-name"
-              class="w-full rounded-lg border border-neutral-300 px-3 py-2"
-            />
-          </label>
-          <label class="block text-sm">
-            <span class="mb-1 block font-medium">Last name</span>
-            <input
-              required
-              name="last_name"
-              autocomplete="family-name"
-              class="w-full rounded-lg border border-neutral-300 px-3 py-2"
-            />
-          </label>
-        </div>
-        <label class="block text-sm">
-          <span class="mb-1 block font-medium">Email</span>
+        <label class="block">
+          <span class="sr-only">{namePh}</span>
+          <input
+            required
+            name="name"
+            autocomplete="name"
+            placeholder={namePh}
+            class={fieldClass}
+          />
+        </label>
+        <label class="block">
+          <span class="sr-only">{emailPh}</span>
           <input
             required
             type="email"
             name="email"
             autocomplete="email"
-            class="w-full rounded-lg border border-neutral-300 px-3 py-2"
+            placeholder={emailPh}
+            class={fieldClass}
           />
         </label>
-        <label class="block text-sm">
-          <span class="mb-1 block font-medium">Phone</span>
+        <label class="block">
+          <span class="sr-only">{phonePh}</span>
           <input
             type="tel"
             name="phone"
             autocomplete="tel"
-            class="w-full rounded-lg border border-neutral-300 px-3 py-2"
+            placeholder={phonePh}
+            class={fieldClass}
           />
         </label>
-        <label class="block text-sm">
-          <span class="mb-1 block font-medium">Topic</span>
+        <label class="block">
+          <span class="sr-only">{companyPh}</span>
           <input
             name="topic"
-            class="w-full rounded-lg border border-neutral-300 px-3 py-2"
+            autocomplete="organization"
+            placeholder={companyPh}
+            class={fieldClass}
           />
         </label>
-        <label class="block text-sm">
-          <span class="mb-1 block font-medium">Message</span>
+        <label class="block">
+          <span class="sr-only">{messagePh}</span>
           <textarea
             required
             name="message"
-            rows="5"
-            class="w-full rounded-lg border border-neutral-300 px-3 py-2"
-          />
+            rows="6"
+            placeholder={messagePh}
+            class:list={[fieldClass, "min-h-[9.5rem] resize-y"]}></textarea>
         </label>
 
-        {/* Honeypot — visually hidden, left empty by humans */}
         <div class="absolute -left-[9999px]" aria-hidden="true">
           <label>
             Website
@@ -118,30 +164,86 @@ const mailReady = enabled ?? isEmailConfigured()
           </label>
         </div>
 
-        <label class="flex items-start gap-2 text-sm">
-          <input
-            required
-            type="checkbox"
-            name="privacy"
-            value="on"
-            class="mt-1"
-          />
-          <span>
-            {translate(privacyLabel, locale) ||
-              "I agree to the privacy notice."}{" "}
-            <a class="text-brand-700 underline" href={privacyHref}>
-              Privacy
-            </a>
-          </span>
-        </label>
+        <p class="text-muted hidden text-sm" data-kontakt-status role="status">
+        </p>
 
         <button
           type="submit"
-          class="bg-brand-900 rounded-lg px-5 py-2.5 text-sm font-medium text-white"
+          class="btn-primary mt-2 w-fit"
+          {...bf(`${section}.submit`, "chrome_denied", section)}
         >
-          {translate(submitLabel, locale) || "Send"}
+          {cta}
         </button>
       </form>
-    )
-  }
+
+      {
+        mapEmbedUrl && (
+          <div
+            class="border-brand-200 overflow-hidden rounded-xl border bg-white shadow-sm"
+            {...bf(`${section}.map`, "container", section)}
+          >
+            <iframe
+              src={mapEmbedUrl}
+              title={mapLabel}
+              class="aspect-square min-h-[20rem] w-full border-0 lg:min-h-[28rem]"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            />
+          </div>
+        )
+      }
+    </div>
+  </div>
 </section>
+
+<script>
+  const forms = document.querySelectorAll("[data-kontakt-form]")
+  for (const form of forms) {
+    if (!(form instanceof HTMLFormElement)) continue
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault()
+      const status = form.querySelector("[data-kontakt-status]")
+      const submit = form.querySelector('button[type="submit"]')
+      const success =
+        form.dataset.successMessage ||
+        "Vielen Dank — Ihre Nachricht wurde übermittelt."
+      const failure =
+        form.dataset.errorMessage ||
+        "Senden fehlgeschlagen. Bitte später erneut versuchen."
+
+      if (status instanceof HTMLElement) {
+        status.classList.add("hidden")
+        status.textContent = ""
+      }
+      if (submit instanceof HTMLButtonElement) submit.disabled = true
+
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        })
+        const data = await res.json().catch(() => ({}))
+        if (!res.ok || !data.ok) {
+          throw new Error(data.message || failure)
+        }
+        form.reset()
+        if (status instanceof HTMLElement) {
+          status.textContent = data.message || success
+          status.classList.remove("hidden", "text-red-700")
+          status.classList.add("text-brand-500")
+        }
+      } catch (error) {
+        if (status instanceof HTMLElement) {
+          status.textContent =
+            error instanceof Error && error.message ? error.message : failure
+          status.classList.remove("hidden", "text-brand-500")
+          status.classList.add("text-red-700")
+        }
+      } finally {
+        if (submit instanceof HTMLButtonElement) submit.disabled = false
+      }
+    })
+  }
+</script>

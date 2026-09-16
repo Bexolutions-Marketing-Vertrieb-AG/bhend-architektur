@@ -229,6 +229,66 @@ surfaces:
     sample: "Impressum"
     notes: "Links to /impressum CMS page"
 
+  - bf_id: chrome.footer.social.linkedin
+    kind: chrome_denied
+    area: chrome
+    section: footer
+    path: src/components/layout/Footer.astro
+    locator: code:src/components/layout/Footer.astro#social.linkedin
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "https://www.linkedin.com/company/bhend-architektur/"
+
+  - bf_id: chrome.footer.social.instagram
+    kind: chrome_denied
+    area: chrome
+    section: footer
+    path: src/components/layout/Footer.astro
+    locator: code:src/components/layout/Footer.astro#social.instagram
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "https://www.instagram.com/bhend.architektur/"
+
+  - bf_id: kontakt.shell
+    kind: container
+    area: kontakt
+    section: kontakt
+    path: src/components/sections/SectionContactForm.astro
+    locator: orbitype:pages/kontakt/sections/kontakt
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: kontakt.heading
+    kind: style_target
+    area: kontakt
+    section: kontakt
+    path: src/components/sections/SectionContactForm.astro
+    locator: orbitype:pages/kontakt/sections/kontakt/heading@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "KONTAKT"
+
+  - bf_id: kontakt.submit
+    kind: chrome_denied
+    area: kontakt
+    section: kontakt
+    path: src/components/sections/SectionContactForm.astro
+    locator: orbitype:pages/kontakt/sections/kontakt/submitLabel@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "JETZT KONTAKT AUFNEHMEN"
+
+  - bf_id: kontakt.map
+    kind: container
+    area: kontakt
+    section: kontakt
+    path: src/components/sections/SectionContactForm.astro
+    locator: orbitype:pages/kontakt/sections/kontakt/mapEmbedUrl
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
   - bf_id: teamHero.shell
     kind: container
     area: team
