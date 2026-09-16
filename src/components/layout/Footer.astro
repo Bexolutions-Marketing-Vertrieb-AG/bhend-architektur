@@ -43,8 +43,36 @@ const menu: MenuItem[] = [
     ],
   },
   { href: "/bei-uns-arbeiten", label: "Bei uns arbeiten" },
-  { href: "mailto:info@bhend-architektur.ch", label: "Kontakt" },
+  { href: "/kontakt", label: "Kontakt" },
 ]
+
+/** Official social profiles — chrome links, not CMS copy */
+const socialLinks = [
+  {
+    id: "linkedin",
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/bhend-architektur/",
+    icon: "/images/social/linkedin.png",
+  },
+  {
+    id: "facebook",
+    label: "Facebook",
+    href: "https://www.facebook.com/Bhend.Architektur",
+    icon: "/images/social/facebook.png",
+  },
+  {
+    id: "instagram",
+    label: "Instagram",
+    href: "https://www.instagram.com/bhend.architektur/",
+    icon: "/images/social/instagram.png",
+  },
+  {
+    id: "whatsapp",
+    label: "WhatsApp",
+    href: "https://api.whatsapp.com/send/?phone=41627980000&text&type=phone_number&app_absent=0",
+    icon: "/images/social/whatsapp.png",
+  },
+] as const
 ---
 
 <footer
@@ -146,7 +174,36 @@ const menu: MenuItem[] = [
       <h2 class="font-display mb-6 text-xl font-bold sm:text-2xl">
         Social Media
       </h2>
-      <p class="text-brand-200 mb-8 text-sm">LinkedIn · Instagram · Facebook</p>
+      <ul class="mb-8 flex flex-nowrap items-center gap-2.5">
+        {
+          socialLinks.map((item) => (
+            <li class="shrink-0">
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="enter:opacity-80 inline-flex size-6 items-center justify-center transition-opacity"
+                aria-label={item.label}
+                {...bf(
+                  `chrome.footer.social.${item.id}`,
+                  "chrome_denied",
+                  "footer",
+                )}
+              >
+                <img
+                  src={item.icon}
+                  alt=""
+                  width="24"
+                  height="24"
+                  class="size-6 object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
       <a
         href="/impressum"
         class="enter:text-brand-200 text-sm"

@@ -7,6 +7,7 @@ import {
 } from "./seed-projects.mjs"
 import { buildSeedBlogPosts } from "./seed-blog.mjs"
 import { impressumSections } from "./seed-impressum.mjs"
+import { kontaktSections } from "./seed-kontakt.mjs"
 
 const now = () => new Date().toISOString()
 
@@ -357,10 +358,24 @@ function homeSections() {
       id: "projects",
       items: [
         {
+          title: de("Private Bauprojekte"),
+          text: de(
+            "Individuell gestaltete Einfamilienhäuser und Wohnkomplexe.",
+          ),
+          image: "/images/home/carousel-1.jpg",
+          imageAlt: de("Privates Wohnprojekt"),
+        },
+        {
           title: de("Gewerbliche Bauprojekte"),
           text: de("Moderne Bürogebäude und gewerbliche Einrichtungen."),
           image: "/images/home/carousel.jpg",
           imageAlt: de("Gewerbliches Gebäude"),
+        },
+        {
+          title: de("Institutionelle Bauprojekte"),
+          text: de("Schulen, Kindergärten und öffentliche Einrichtungen."),
+          image: "/images/home/carousel-2.jpg",
+          imageAlt: de("Institutionelles Bauprojekt"),
         },
       ],
       _orbi: { component: "SectionProjectCarousel" },
@@ -1132,6 +1147,24 @@ export function buildSeedPages({
       created_at: now(),
       updated_at: now(),
       sections: impressumSections(),
+    },
+    {
+      id: "seed-kontakt",
+      slug: "kontakt",
+      title: {
+        de: "Kontakt",
+        en: "Contact",
+      },
+      lead: {
+        de: "Schreiben Sie uns — wir melden uns gerne",
+        en: "Write to us — we will get back to you",
+      },
+      img: "",
+      keywords: ["kontakt", "anfrage", "formular"],
+      head: {},
+      created_at: now(),
+      updated_at: now(),
+      sections: kontaktSections(),
     },
     {
       id: "seed-setup",

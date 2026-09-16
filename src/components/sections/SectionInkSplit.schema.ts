@@ -9,6 +9,7 @@ export const sectionInkSplitSchema = z.object({
   image: z.string().optional(),
   imageAlt: i18nStringSchema.optional(),
   imageCaption: i18nStringSchema.optional(),
+  tone: z.enum(["light", "dark"]).optional(),
   _orbi: orbiSchema,
 })
 

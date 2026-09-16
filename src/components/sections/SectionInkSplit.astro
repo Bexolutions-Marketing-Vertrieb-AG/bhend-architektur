@@ -1,5 +1,5 @@
 ---
-// SectionInkSplit.astro — dark band: title + body left, photo + caption right
+// SectionInkSplit.astro — title + body left, photo + caption right (light|dark)
 import { translate } from "~/lib/i18n"
 import { bf } from "~/lib/bf"
 import type { I18nString } from "~/types/i18n"
@@ -13,6 +13,7 @@ interface Props {
   image?: string
   imageAlt?: I18nString
   imageCaption?: I18nString
+  tone?: "light" | "dark"
   locale: Locale
 }
 
@@ -24,9 +25,11 @@ const {
   image,
   imageAlt,
   imageCaption,
+  tone = "dark",
   locale,
 } = Astro.props
 const section = id
+const dark = tone === "dark"
 const headline = translate(heading ?? title, locale)
 const copy = translate(body, locale)
 const alt = translate(imageAlt, locale)
@@ -34,7 +37,7 @@ const caption = translate(imageCaption, locale)
 ---
 
 <section
-  class="bg-brand-900 text-white"
+  class:list={[dark ? "bg-brand-900 text-white" : "text-ink bg-white"]}
   {...bf(`${section}.shell`, "container", section)}
 >
   <div class="container-wide py-section-sm md:py-section">
@@ -45,7 +48,10 @@ const caption = translate(imageCaption, locale)
         {
           headline && (
             <h2
-              class="font-display text-brand-100 text-3xl font-bold tracking-tight md:text-4xl"
+              class:list={[
+                "font-display text-3xl font-bold tracking-tight md:text-4xl",
+                dark ? "text-brand-100" : "text-ink",
+              ]}
               {...bf(`${section}.heading`, "style_target", section)}
             >
               {headline}
@@ -55,7 +61,10 @@ const caption = translate(imageCaption, locale)
         {
           copy && (
             <p
-              class="section-lead text-brand-200 whitespace-pre-line"
+              class:list={[
+                "section-lead whitespace-pre-line",
+                dark ? "text-brand-200" : "text-ink",
+              ]}
               {...bf(`${section}.body`, "style_target", section)}
             >
               {copy}
@@ -77,7 +86,10 @@ const caption = translate(imageCaption, locale)
             />
             {caption && (
               <figcaption
-                class="text-brand-200 mt-3 text-sm"
+                class:list={[
+                  "mt-3 text-sm",
+                  dark ? "text-brand-200" : "text-muted",
+                ]}
                 {...bf(`${section}.imageCaption`, "style_target", section)}
               >
                 {caption}

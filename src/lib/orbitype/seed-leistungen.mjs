@@ -353,7 +353,6 @@ export function bauherrenberatungSections() {
       image: "/images/bauherrenberatung/process.jpg",
       imageAlt: de("Innenraum mit Wendeltreppe"),
       imageCaption: de("Fotograf: Karina Castro | Architektur: Malte Kloes"),
-      tone: "dark",
       items: [
         { title: de("Unabhängige Zweitmeinung zu Projektideen und Angeboten") },
         {
@@ -393,6 +392,7 @@ export function bauherrenberatungSections() {
       image: "/images/bauherrenberatung/cta.jpg",
       imageAlt: de("Innenraum mit Betonboden und Holzrahmen"),
       imageCaption: de("Fotograf: Karina Castro | Architektur: Malte Kloes"),
+      tone: "light",
       _orbi: { component: "SectionInkSplit" },
     },
     phoneCta("bauherrenberatungCta", "BAUHERRENBERATUNG"),

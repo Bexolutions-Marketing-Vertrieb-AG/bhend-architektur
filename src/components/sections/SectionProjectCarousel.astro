@@ -1,5 +1,5 @@
 ---
-// SectionProjectCarousel.astro — CSS scroll-snap project band (no client framework)
+// SectionProjectCarousel.astro — project category band with prev/next controls
 import { translate } from "~/lib/i18n"
 import { bf } from "~/lib/bf"
 import type { I18nString } from "~/types/i18n"
@@ -26,65 +26,20 @@ const slideCount = items.length
 
 <section
   class="bg-surface overflow-hidden"
+  data-project-carousel={section}
   {...bf(`home.${section}.shell`, "container", section)}
 >
   <div class="py-section-sm md:py-section relative">
     <div
-      id={`${section}-track`}
-      class="flex snap-x snap-mandatory [scrollbar-width:none] overflow-x-auto scroll-smooth [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+      class="mx-auto flex max-w-[1400px] items-center gap-3 px-4 sm:gap-4 md:gap-6 md:px-8"
     >
       {
-        items.map((item, index) => {
-          const itemTitle = translate(item.title, locale)
-          const itemBody = translate(item.text ?? item.body, locale)
-          const alt = translate(item.imageAlt, locale)
-          return (
-            <article
-              id={`${section}-slide-${index}`}
-              class="w-full shrink-0 snap-center px-6"
-            >
-              <div class="mx-auto max-w-[1138px]">
-                {item.image && (
-                  <img
-                    src={item.image}
-                    alt={alt}
-                    class="mb-6 aspect-[1138/640] w-full object-cover"
-                    width="1138"
-                    height="640"
-                    loading="lazy"
-                    {...bf(`home.${section}.image`, "image", section)}
-                  />
-                )}
-                {itemTitle && (
-                  <h2
-                    class="font-display mb-2 text-2xl font-bold md:text-3xl"
-                    {...bf(`home.${section}.heading`, "style_target", section)}
-                  >
-                    {itemTitle}
-                  </h2>
-                )}
-                {itemBody && (
-                  <p
-                    class="section-lead"
-                    {...bf(`home.${section}.body`, "style_target", section)}
-                  >
-                    {itemBody}
-                  </p>
-                )}
-              </div>
-            </article>
-          )
-        })
-      }
-    </div>
-
-    {
-      slideCount > 1 && (
-        <div class="pointer-events-none absolute inset-y-0 right-0 left-0 flex items-center justify-between px-4 md:px-8">
-          <a
-            href={`#${section}-slide-0`}
-            class="bg-brand-500 pointer-events-auto flex h-[72px] w-[72px] items-center justify-center rounded-full text-white"
-            aria-label="Previous"
+        slideCount > 1 && (
+          <button
+            type="button"
+            class="bg-brand-500 enter:opacity-90 hidden h-[56px] w-[56px] shrink-0 items-center justify-center rounded-full text-white transition-opacity md:flex md:h-[72px] md:w-[72px]"
+            aria-label="Vorheriges Projekt"
+            data-carousel-prev
             {...bf(`home.${section}.prev`, "chrome_denied", section)}
           >
             <svg
@@ -99,11 +54,83 @@ const slideCount = items.length
             >
               <polyline points="15 18 9 12 15 6" />
             </svg>
-          </a>
-          <a
-            href={`#${section}-slide-${Math.min(1, slideCount - 1)}`}
-            class="bg-brand-500 pointer-events-auto flex h-[72px] w-[72px] items-center justify-center rounded-full text-white"
-            aria-label="Next"
+          </button>
+        )
+      }
+
+      <div class="min-w-0 flex-1 overflow-hidden" data-carousel-viewport>
+        <div
+          class="flex transition-transform duration-500 ease-out"
+          data-carousel-track
+          style="transform: translateX(0%)"
+        >
+          {
+            items.map((item, index) => {
+              const itemTitle = translate(item.title, locale)
+              const itemBody = translate(item.text ?? item.body, locale)
+              const alt = translate(item.imageAlt, locale) || itemTitle
+              const n = index + 1
+              return (
+                <article
+                  class="w-full shrink-0"
+                  data-carousel-slide={index}
+                  aria-hidden={index === 0 ? "false" : "true"}
+                >
+                  <div class="mx-auto max-w-[1138px]">
+                    {item.image && (
+                      <img
+                        src={item.image}
+                        alt={alt}
+                        class="mb-6 aspect-[1138/640] w-full object-cover"
+                        width="1138"
+                        height="640"
+                        loading={index === 0 ? "eager" : "lazy"}
+                        {...bf(
+                          `home.${section}.item${n}.image`,
+                          "image",
+                          section,
+                        )}
+                      />
+                    )}
+                    {itemTitle && (
+                      <h2
+                        class="font-display mb-2 text-2xl font-bold md:text-3xl"
+                        {...bf(
+                          `home.${section}.item${n}.heading`,
+                          "style_target",
+                          section,
+                        )}
+                      >
+                        {itemTitle}
+                      </h2>
+                    )}
+                    {itemBody && (
+                      <p
+                        class="section-lead"
+                        {...bf(
+                          `home.${section}.item${n}.body`,
+                          "style_target",
+                          section,
+                        )}
+                      >
+                        {itemBody}
+                      </p>
+                    )}
+                  </div>
+                </article>
+              )
+            })
+          }
+        </div>
+      </div>
+
+      {
+        slideCount > 1 && (
+          <button
+            type="button"
+            class="bg-brand-500 enter:opacity-90 hidden h-[56px] w-[56px] shrink-0 items-center justify-center rounded-full text-white transition-opacity md:flex md:h-[72px] md:w-[72px]"
+            aria-label="Nächstes Projekt"
+            data-carousel-next
             {...bf(`home.${section}.next`, "chrome_denied", section)}
           >
             <svg
@@ -118,9 +145,80 @@ const slideCount = items.length
             >
               <polyline points="9 18 15 12 9 6" />
             </svg>
-          </a>
+          </button>
+        )
+      }
+    </div>
+
+    {
+      slideCount > 1 && (
+        <div class="mt-6 flex justify-center gap-3 md:hidden">
+          <button
+            type="button"
+            class="bg-brand-500 enter:opacity-90 flex h-12 w-12 items-center justify-center rounded-full text-white"
+            aria-label="Vorheriges Projekt"
+            data-carousel-prev
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="bg-brand-500 enter:opacity-90 flex h-12 w-12 items-center justify-center rounded-full text-white"
+            aria-label="Nächstes Projekt"
+            data-carousel-next
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
         </div>
       )
     }
   </div>
 </section>
+
+<script>
+  const roots = document.querySelectorAll("[data-project-carousel]")
+  for (const root of roots) {
+    if (!(root instanceof HTMLElement)) continue
+    const track = root.querySelector("[data-carousel-track]")
+    const slides = [...root.querySelectorAll("[data-carousel-slide]")]
+    if (!(track instanceof HTMLElement) || slides.length < 2) continue
+
+    let index = 0
+    const go = (next: number) => {
+      index = (next + slides.length) % slides.length
+      track.style.transform = `translateX(-${index * 100}%)`
+      slides.forEach((slide, i) => {
+        slide.setAttribute("aria-hidden", i === index ? "false" : "true")
+      })
+    }
+
+    root.querySelectorAll("[data-carousel-prev]").forEach((btn) => {
+      btn.addEventListener("click", () => go(index - 1))
+    })
+    root.querySelectorAll("[data-carousel-next]").forEach((btn) => {
+      btn.addEventListener("click", () => go(index + 1))
+    })
+  }
+</script>
