@@ -114,7 +114,7 @@ surfaces:
     locator: orbitype:pages/home/sections/challenges/heading@de
     locales: [de]
     publication_target: orbitype_pages
-    sample: "Private und Öffentliche Bauprojekte ="
+    sample: "Private und Öffentliche Bauprojekte"
 
   - bf_id: home.challenges.body
     kind: style_target

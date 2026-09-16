@@ -54,6 +54,7 @@
   .font-display {
     font-family: var(--font-display);
     font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
   }
 
   .btn-primary {
@@ -65,7 +66,7 @@
   }
 
   .section-lead {
-    @apply text-ink text-base leading-relaxed md:text-lg;
+    @apply text-ink font-sans text-xl leading-normal font-medium;
   }
 
   .nav-dropdown-trigger {
