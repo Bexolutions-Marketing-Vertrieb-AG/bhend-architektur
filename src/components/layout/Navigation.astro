@@ -10,6 +10,7 @@ interface Props {
 
 const { locale } = Astro.props
 const pathname = Astro.url.pathname.replace(/\/$/, "") || "/"
+const menuLabel = translate(phrases.menu, locale)
 
 type NavChild = { href: string; label: string }
 type NavItem =
@@ -46,7 +47,7 @@ const links: NavItem[] = [
     ],
   },
   { href: "/bei-uns-arbeiten", label: "Bei uns arbeiten" },
-  { href: "/posts", label: "Blog" },
+  { href: "/blog", label: "Blog" },
 ]
 
 const contactHref = "mailto:info@bhend-architektur.ch"
@@ -60,10 +61,13 @@ function isGroupActive(children: NavChild[]): boolean {
 }
 ---
 
-<header class="bg-white" {...bf("chrome.nav.shell", "container", "nav")}>
+<header
+  class="relative z-50 bg-white"
+  {...bf("chrome.nav.shell", "container", "nav")}
+>
   <nav
-    class="container-wide flex flex-wrap items-center justify-between gap-4 py-8 lg:gap-6 lg:py-10"
-    aria-label={translate(phrases.menu, locale)}
+    class="container-wide flex items-center justify-between gap-3 py-4 lg:gap-6 lg:py-10"
+    aria-label={menuLabel}
   >
     <a href="/" class="shrink-0" {...bf("chrome.nav.logo", "image", "nav")}>
       <img
@@ -71,7 +75,7 @@ function isGroupActive(children: NavChild[]): boolean {
         alt="Bhend Architektur"
         width="198"
         height="56"
-        class="h-14 w-auto"
+        class="h-10 w-auto lg:h-14"
       />
     </a>
 
@@ -146,47 +150,120 @@ function isGroupActive(children: NavChild[]): boolean {
       }
     </ul>
 
-    <div class="flex items-center gap-3">
-      <details class="relative lg:hidden">
-        <summary
-          class="cursor-pointer list-none px-3 py-2 text-sm font-semibold uppercase"
-        >
-          {translate(phrases.menu, locale)}
-        </summary>
-        <ul
-          class="border-brand-200 absolute right-0 z-20 mt-2 min-w-[240px] border bg-white p-4 text-sm font-semibold uppercase shadow-sm"
-        >
-          {
-            links.map((link) =>
-              link.children ? (
-                <li class="py-2">
-                  <p class="text-brand-500 mb-1">{link.label}</p>
-                  <ul class="border-brand-100 ml-2 space-y-2 border-l pl-3 font-medium tracking-normal normal-case">
-                    {link.children.map((child) => (
-                      <li>
-                        <a class="tracking-wide uppercase" href={child.href}>
-                          {child.label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ) : (
-                <li class="py-2">
-                  <a href={link.href}>{link.label}</a>
-                </li>
-              ),
-            )
-          }
-        </ul>
-      </details>
+    <div class="flex shrink-0 items-center gap-2 sm:gap-3">
       <a
         href={contactHref}
-        class="btn-primary"
+        class="btn-primary max-lg:px-4 max-lg:py-2.5 max-lg:text-xs"
         {...bf("chrome.nav.cta", "chrome_denied", "nav")}
       >
         Kontakt
       </a>
+
+      <details class="group/mobile-nav relative lg:hidden">
+        <summary
+          class="text-ink enter:text-brand-500 flex size-11 cursor-pointer list-none items-center justify-center [&::-webkit-details-marker]:hidden"
+          aria-label={menuLabel}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            aria-hidden="true"
+            class="group-open/mobile-nav:hidden"
+          >
+            <path d="M4 7h16M4 12h16M4 17h16"></path>
+          </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            aria-hidden="true"
+            class="hidden group-open/mobile-nav:block"
+          >
+            <path d="M6 6l12 12M18 6L6 18"></path>
+          </svg>
+        </summary>
+
+        <div
+          class="border-brand-200 absolute top-[calc(100%+0.75rem)] right-0 z-50 max-h-[min(75dvh,36rem)] w-[min(calc(100vw-1.5rem),22rem)] overflow-y-auto border bg-white shadow-lg"
+        >
+          <ul
+            class="text-ink divide-brand-100 divide-y p-2 text-sm font-semibold tracking-wide uppercase"
+          >
+            {
+              links.map((link) =>
+                link.children ? (
+                  <li>
+                    <details class="group/mobile-sub">
+                      <summary class="enter:text-brand-500 flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3.5 [&::-webkit-details-marker]:hidden">
+                        <span
+                          class:list={[
+                            isGroupActive(link.children) && "text-brand-500",
+                          ]}
+                        >
+                          {link.label}
+                        </span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          aria-hidden="true"
+                          class="text-muted transition-transform group-open/mobile-sub:rotate-180"
+                        >
+                          <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                      </summary>
+                      <ul class="border-brand-100 mb-2 ml-4 space-y-1 border-l pb-2 pl-3 font-medium tracking-normal normal-case">
+                        {link.children.map((child) => (
+                          <li>
+                            <a
+                              href={child.href}
+                              class:list={[
+                                "enter:text-brand-500 block py-2 tracking-wide uppercase",
+                                isActive(child.href) && "text-brand-500",
+                              ]}
+                            >
+                              {child.label}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                  </li>
+                ) : (
+                  <li>
+                    <a
+                      href={link.href}
+                      class:list={[
+                        "enter:text-brand-500 block px-4 py-3.5",
+                        isActive(link.href) && "text-brand-500",
+                      ]}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ),
+              )
+            }
+          </ul>
+        </div>
+      </details>
     </div>
   </nav>
 </header>

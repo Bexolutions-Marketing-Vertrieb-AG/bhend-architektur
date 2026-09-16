@@ -6,7 +6,6 @@ import AnySection from "~/components/sections/AnySection.astro"
 import { DEFAULT_LOCALE } from "~/config/locales"
 import { getPost, listPublishedPostIds } from "~/lib/orbitype/posts"
 import { OrbitypeError } from "~/lib/orbitype/client"
-import { translate } from "~/lib/i18n"
 import { buildPostSeo } from "~/lib/seo"
 import { postPath, postTitleSlug } from "~/lib/post-slug"
 
@@ -77,6 +76,10 @@ const seo = buildPostSeo({
   locale,
   path: canonicalPath,
 })
+
+const hasArticleSection = post.sections.some(
+  (section) => section._orbi?.component === "SectionBlogArticle",
+)
 ---
 
 <Base locale={locale}>
@@ -85,15 +88,17 @@ const seo = buildPostSeo({
     <JsonLd data={seo.jsonLd} />
   </Fragment>
   <main>
-    <header class="container-prose pt-section pb-6">
-      <h1 class="text-4xl font-semibold tracking-tight text-balance">
-        {translate(post.title, locale)}
-      </h1>
-    </header>
     {
       post.sections.map((section) => (
         <AnySection data={section} locale={locale} />
       ))
+    }
+    {
+      !hasArticleSection && (
+        <p class="container-prose text-muted py-section text-sm">
+          Dieser Beitrag hat noch keinen Artikelinhalt.
+        </p>
+      )
     }
   </main>
 </Base>

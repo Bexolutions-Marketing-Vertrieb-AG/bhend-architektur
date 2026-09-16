@@ -1,0 +1,106 @@
+{
+  "slug": "impressum",
+  "title": {
+    "de": "Impressum",
+    "en": "Legal notice"
+  },
+  "lead": {
+    "de": "Kontaktadresse und rechtliche Angaben",
+    "en": "Contact address and legal information"
+  },
+  "img": "/images/impressum/photo.jpg",
+  "keywords": ["impressum", "kontakt", "rechtliches"],
+  "head": {},
+  "sections": [
+    {
+      "id": "impressum",
+      "image": "/images/impressum/photo.jpg",
+      "imageAlt": {
+        "de": "Gebäudeecke mit blauem Himmel — Bhend Architektur",
+        "en": "Gebäudeecke mit blauem Himmel — Bhend Architektur"
+      },
+      "contactHeading": {
+        "de": "Kontaktadresse",
+        "en": "Kontaktadresse"
+      },
+      "address": {
+        "de": "Bhend Architektur AG\nZofingerstrasse 43\n4665 Oftringen\nSchweiz",
+        "en": "Bhend Architektur AG\nZofingerstrasse 43\n4665 Oftringen\nSchweiz"
+      },
+      "email": "info@bhend-architektur.ch",
+      "phone": "+41 62 798 00 00",
+      "phoneTel": "tel:+41627980000",
+      "blocks": [
+        {
+          "id": "vertretung",
+          "heading": {
+            "de": "Vertretungsberechtigte Personen",
+            "en": "Vertretungsberechtigte Personen"
+          },
+          "body": {
+            "de": "Ulrich Bhend, Geschäftsführer\nMicha Bhend, Gesellschafter\nThomas Schweizer, Gesellschafter\nPatrick Zingg, Gesellschafter",
+            "en": "Ulrich Bhend, Geschäftsführer\nMicha Bhend, Gesellschafter\nThomas Schweizer, Gesellschafter\nPatrick Zingg, Gesellschafter"
+          }
+        },
+        {
+          "id": "handelsregister",
+          "heading": {
+            "de": "Handelsregistereintrag",
+            "en": "Handelsregistereintrag"
+          },
+          "body": {
+            "de": "Eingetragener Firmenname: Bhend Architektur AG\nNummer: CHE-443.394.873",
+            "en": "Eingetragener Firmenname: Bhend Architektur AG\nNummer: CHE-443.394.873"
+          }
+        },
+        {
+          "id": "mwst",
+          "heading": {
+            "de": "Mehrwertsteuernummer",
+            "en": "Mehrwertsteuernummer"
+          },
+          "body": {
+            "de": "CHE-443.394.873",
+            "en": "CHE-443.394.873"
+          }
+        },
+        {
+          "id": "haftung",
+          "heading": {
+            "de": "Haftungsausschluss",
+            "en": "Haftungsausschluss"
+          },
+          "body": {
+            "de": "Der Autor übernimmt keinerlei Gewähr hinsichtlich der inhaltlichen Richtigkeit, Genauigkeit, Aktualität, Zuverlässigkeit und Vollständigkeit der Informationen. Haftungsansprüche gegen den Autor wegen Schäden materieller oder immaterieller Art, welche aus dem Zugriff oder der Nutzung bzw. Nichtnutzung der veröffentlichten Informationen, durch Missbrauch der Verbindung oder durch technische Störungen entstanden sind, werden ausgeschlossen. Alle Angebote sind unverbindlich. Der Autor behält es sich ausdrücklich vor, Teile der Seiten oder das gesamte Angebot ohne gesonderte Ankündigung zu verändern, zu ergänzen, zu löschen oder die Veröffentlichung zeitweise oder endgültig einzustellen.",
+            "en": "Der Autor übernimmt keinerlei Gewähr hinsichtlich der inhaltlichen Richtigkeit, Genauigkeit, Aktualität, Zuverlässigkeit und Vollständigkeit der Informationen. Haftungsansprüche gegen den Autor wegen Schäden materieller oder immaterieller Art, welche aus dem Zugriff oder der Nutzung bzw. Nichtnutzung der veröffentlichten Informationen, durch Missbrauch der Verbindung oder durch technische Störungen entstanden sind, werden ausgeschlossen. Alle Angebote sind unverbindlich. Der Autor behält es sich ausdrücklich vor, Teile der Seiten oder das gesamte Angebot ohne gesonderte Ankündigung zu verändern, zu ergänzen, zu löschen oder die Veröffentlichung zeitweise oder endgültig einzustellen."
+          }
+        },
+        {
+          "id": "links",
+          "heading": {
+            "de": "Haftung für Links",
+            "en": "Haftung für Links"
+          },
+          "body": {
+            "de": "Verweise und Links auf Webseiten Dritter liegen ausserhalb unseres Verantwortungsbereichs Es wird jegliche Verantwortung für solche Webseiten abgelehnt. Der Zugriff und die Nutzung solcher Webseiten erfolgen auf eigene Gefahr des Nutzers oder der Nutzerin.",
+            "en": "Verweise und Links auf Webseiten Dritter liegen ausserhalb unseres Verantwortungsbereichs Es wird jegliche Verantwortung für solche Webseiten abgelehnt. Der Zugriff und die Nutzung solcher Webseiten erfolgen auf eigene Gefahr des Nutzers oder der Nutzerin."
+          }
+        },
+        {
+          "id": "urheberrechte",
+          "heading": {
+            "de": "Urheberrechte",
+            "en": "Urheberrechte"
+          },
+          "body": {
+            "de": "Die Urheber- und alle anderen Rechte an Inhalten, Bildern, Fotos oder anderen Dateien auf der Website gehören ausschliesslich der Firma Bhend Architektur AG oder den speziell genannten Rechtsinhabern. Für die Reproduktion jeglicher Elemente ist die schriftliche Zustimmung der Urheberrechtsträger im Voraus einzuholen.",
+            "en": "Die Urheber- und alle anderen Rechte an Inhalten, Bildern, Fotos oder anderen Dateien auf der Website gehören ausschliesslich der Firma Bhend Architektur AG oder den speziell genannten Rechtsinhabern. Für die Reproduktion jeglicher Elemente ist die schriftliche Zustimmung der Urheberrechtsträger im Voraus einzuholen."
+          }
+        }
+      ],
+      "_orbi": {
+        "component": "SectionImpressum"
+      }
+    }
+  ]
+}

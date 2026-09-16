@@ -1,0 +1,180 @@
+---
+// SectionImpressum.astro — legal notice: sticky photo + contact + text blocks
+import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
+import { resolveReservationHref } from "~/lib/reservation"
+import type { I18nString } from "~/types/i18n"
+import type { Locale } from "~/config/locales"
+
+interface Block {
+  id?: string
+  heading?: I18nString
+  body?: I18nString
+}
+
+interface Props {
+  id?: string
+  image?: string
+  imageAlt?: I18nString
+  contactHeading?: I18nString
+  address?: I18nString
+  email?: string
+  phone?: string
+  phoneTel?: string
+  blocks?: Block[]
+  locale: Locale
+}
+
+const {
+  id = "impressum",
+  image,
+  imageAlt,
+  contactHeading,
+  address,
+  email,
+  phone,
+  phoneTel,
+  blocks = [],
+  locale,
+} = Astro.props
+
+const section = id
+const contactTitle = translate(contactHeading, locale)
+const addressCopy = translate(address, locale)
+const alt = translate(imageAlt, locale) || contactTitle || "Impressum"
+
+const mailHref = email
+  ? resolveReservationHref({
+      reservationMode: "mailto",
+      reservationTarget: email,
+    })
+  : ""
+
+const telTarget =
+  (phoneTel ?? "").trim() ||
+  (phone ? `tel:${phone.replace(/[^\d+]/g, "")}` : "")
+const phoneHref = telTarget
+  ? resolveReservationHref({
+      reservationMode: "url",
+      reservationTarget: telTarget.startsWith("tel:")
+        ? telTarget
+        : `tel:${telTarget}`,
+    })
+  : ""
+---
+
+<section class="bg-white" {...bf(`${section}.shell`, "container", section)}>
+  <div class="container-wide py-section-sm md:py-section">
+    <div
+      class="grid items-start gap-10 lg:grid-cols-[minmax(0,479fr)_minmax(0,582fr)] lg:gap-16"
+    >
+      {
+        image && (
+          <div class="lg:sticky lg:top-28">
+            <img
+              src={image}
+              alt={alt}
+              class="aspect-[479/727] w-full object-cover"
+              width="479"
+              height="727"
+              loading="eager"
+              {...bf(`${section}.image`, "image", section, {
+                presentation: "background",
+              })}
+            />
+          </div>
+        )
+      }
+
+      <div class="flex flex-col gap-10 md:gap-12">
+        {
+          (contactTitle || addressCopy || email || phone) && (
+            <div {...bf(`${section}.contact.shell`, "container", section)}>
+              {contactTitle && (
+                <h1
+                  class="font-display text-ink mb-4 text-3xl font-bold tracking-tight md:text-4xl md:leading-tight"
+                  {...bf(`${section}.contactHeading`, "style_target", section)}
+                >
+                  {contactTitle}
+                </h1>
+              )}
+              {addressCopy && (
+                <p
+                  class="section-lead whitespace-pre-line"
+                  {...bf(`${section}.address`, "style_target", section)}
+                >
+                  {addressCopy}
+                </p>
+              )}
+              {email && (
+                <p class="section-lead mt-1">
+                  <a
+                    href={mailHref}
+                    class="enter:text-brand-500 text-ink"
+                    {...bf(`${section}.email`, "chrome_denied", section)}
+                  >
+                    {email}
+                  </a>
+                </p>
+              )}
+              {phone && (
+                <p class="section-lead mt-1">
+                  <a
+                    href={phoneHref || "#"}
+                    class="enter:text-brand-500 text-ink"
+                    {...bf(`${section}.phone`, "chrome_denied", section)}
+                  >
+                    {phone}
+                  </a>
+                </p>
+              )}
+            </div>
+          )
+        }
+
+        {
+          blocks.map((block) => {
+            const blockId = (block.id ?? "").trim()
+            const heading = translate(block.heading, locale)
+            const body = translate(block.body, locale)
+            if (!blockId) return null
+            return (
+              <article
+                {...bf(
+                  `${section}.block.${blockId}.shell`,
+                  "container",
+                  section,
+                )}
+              >
+                {heading && (
+                  <h2
+                    class="font-display text-ink mb-3 text-xl font-bold tracking-tight md:text-2xl"
+                    {...bf(
+                      `${section}.block.${blockId}.heading`,
+                      "style_target",
+                      section,
+                    )}
+                  >
+                    {heading}
+                  </h2>
+                )}
+                {body && (
+                  <p
+                    class="section-lead whitespace-pre-line"
+                    {...bf(
+                      `${section}.block.${blockId}.body`,
+                      "style_target",
+                      section,
+                    )}
+                  >
+                    {body}
+                  </p>
+                )}
+              </article>
+            )
+          })
+        }
+      </div>
+    </div>
+  </div>
+</section>

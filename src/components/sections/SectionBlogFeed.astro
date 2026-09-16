@@ -1,0 +1,154 @@
+---
+// SectionBlogFeed.astro — BLOGS grid; posts injected by [...slug].astro
+import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
+import type { I18nString } from "~/types/i18n"
+import type { Locale } from "~/config/locales"
+
+interface BlogCard {
+  id?: string
+  title?: I18nString
+  lead?: I18nString
+  image?: string
+  imageAlt?: I18nString
+  href?: string
+  publishedAt?: string
+  ctaLabel?: I18nString
+}
+
+interface Props {
+  id?: string
+  title?: I18nString
+  heading?: I18nString
+  posts?: BlogCard[]
+  emptyMessage?: I18nString
+  locale: Locale
+}
+
+const {
+  id = "blogFeed",
+  title,
+  heading,
+  posts = [],
+  emptyMessage,
+  locale,
+} = Astro.props
+
+const section = id
+const headline = translate(heading ?? title, locale)
+const empty = translate(emptyMessage, locale)
+---
+
+<section class="bg-white" {...bf(`${section}.shell`, "container", section)}>
+  <div class="container-wide py-section-sm md:pt-section md:pb-section">
+    {
+      headline && (
+        <h1
+          class="font-display mb-10 text-4xl font-bold tracking-tight uppercase md:mb-12 md:text-5xl"
+          {...bf(`${section}.heading`, "style_target", section)}
+        >
+          {headline}
+        </h1>
+      )
+    }
+
+    {
+      posts.length === 0 ? (
+        <p
+          class="text-muted text-sm"
+          {...bf(`${section}.empty`, "style_target", section)}
+        >
+          {empty || "Noch keine Blogbeiträge veröffentlicht."}
+        </p>
+      ) : (
+        <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-10">
+          {posts.map((post) => {
+            const postId = (post.id ?? "post").trim() || "post"
+            const postTitle = translate(post.title, locale)
+            const lead = translate(post.lead, locale)
+            const alt = translate(post.imageAlt, locale) || postTitle
+            const cta = translate(post.ctaLabel, locale) || "MEHR LESEN"
+            const href = (post.href ?? "").trim() || "#"
+            const dateLabel = (post.publishedAt ?? "").trim()
+            return (
+              <li
+                class="bg-white shadow-[0_1px_8px_rgba(0,0,0,0.08)]"
+                {...bf(`${section}.${postId}.shell`, "container", section)}
+              >
+                <article class="flex h-full flex-col p-4">
+                  {post.image && (
+                    <a href={href} class="mb-4 block overflow-hidden">
+                      <img
+                        src={post.image}
+                        alt={alt}
+                        class="aspect-[344/194] w-full object-cover"
+                        loading="lazy"
+                        width="344"
+                        height="194"
+                        {...bf(`${section}.${postId}.image`, "image", section)}
+                      />
+                    </a>
+                  )}
+                  {postTitle && (
+                    <h2
+                      class="font-display text-brand-500 mb-3 text-lg leading-snug font-bold tracking-tight"
+                      {...bf(
+                        `${section}.${postId}.title`,
+                        "style_target",
+                        section,
+                      )}
+                    >
+                      <a href={href} class="enter:opacity-80">
+                        {postTitle}
+                      </a>
+                    </h2>
+                  )}
+                  {lead && (
+                    <p
+                      class="text-muted mb-4 line-clamp-4 flex-1 text-sm leading-relaxed"
+                      {...bf(
+                        `${section}.${postId}.lead`,
+                        "style_target",
+                        section,
+                      )}
+                    >
+                      {lead}
+                    </p>
+                  )}
+                  <a
+                    href={href}
+                    class="text-brand-500 mb-4 inline-flex items-center gap-1 text-sm font-semibold tracking-wide uppercase"
+                    {...bf(
+                      `${section}.${postId}.cta`,
+                      "chrome_denied",
+                      section,
+                    )}
+                  >
+                    {cta}
+                    <span aria-hidden="true">›</span>
+                  </a>
+                  {dateLabel && (
+                    <>
+                      <hr class="border-brand-200 mb-3" />
+                      <time
+                        class="text-muted text-sm"
+                        datetime={dateLabel}
+                        {...bf(
+                          `${section}.${postId}.publishedAt`,
+                          "style_target",
+                          section,
+                        )}
+                      >
+                        {dateLabel}
+                      </time>
+                    </>
+                  )}
+                </article>
+              </li>
+            )
+          })}
+        </ul>
+      )
+    }
+  </div>
+</section>

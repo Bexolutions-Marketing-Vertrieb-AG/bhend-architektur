@@ -52,9 +52,13 @@ const menu: MenuItem[] = [
   {...bf("chrome.footer.shell", "container", "footer")}
 >
   <div
-    class="container-wide grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[226px_164px_284px_156px] lg:gap-16"
+    class="container-wide grid grid-cols-2 gap-x-6 gap-y-12 py-16 lg:grid-cols-[226px_164px_284px_156px] lg:gap-16"
   >
-    <a href="/" class="block" {...bf("chrome.footer.logo", "image", "footer")}>
+    <a
+      href="/"
+      class="col-span-2 block lg:col-span-1"
+      {...bf("chrome.footer.logo", "image", "footer")}
+    >
       <img
         src="/images/logo.png"
         alt="Bhend Architektur"
@@ -65,7 +69,7 @@ const menu: MenuItem[] = [
     </a>
 
     <div>
-      <h2 class="font-display mb-6 text-2xl font-bold">Menu</h2>
+      <h2 class="font-display mb-6 text-xl font-bold sm:text-2xl">Menu</h2>
       <ul class="space-y-3 text-sm">
         {
           menu.map((item) =>
@@ -117,7 +121,7 @@ const menu: MenuItem[] = [
     </div>
 
     <div {...bf("chrome.footer.contact", "style_target", "footer")}>
-      <h2 class="font-display mb-6 text-2xl font-bold">Kontakt</h2>
+      <h2 class="font-display mb-6 text-xl font-bold sm:text-2xl">Kontakt</h2>
       <address class="space-y-4 text-sm leading-relaxed not-italic">
         <p>
           Bhend Architektur AG<br />
@@ -138,8 +142,10 @@ const menu: MenuItem[] = [
       </address>
     </div>
 
-    <div>
-      <h2 class="font-display mb-6 text-2xl font-bold">Social Media</h2>
+    <div class="col-span-2 lg:col-span-1">
+      <h2 class="font-display mb-6 text-xl font-bold sm:text-2xl">
+        Social Media
+      </h2>
       <p class="text-brand-200 mb-8 text-sm">LinkedIn · Instagram · Facebook</p>
       <a
         href="/impressum"

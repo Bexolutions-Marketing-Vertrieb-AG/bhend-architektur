@@ -1,0 +1,260 @@
+---
+/**
+ * ApplicationForm — Figma two-column dialog (brand panel + white form).
+ * Nodes: 2012:6329 (base), 2012:6336 (with Schnuppertag date).
+ */
+import type { Locale } from "~/config/locales"
+
+interface Props {
+  dialogId: string
+  formTitle?: string
+  eyebrow?: string
+  defaultType: string
+  brandImage?: string
+  brandImageAlt?: string
+  dateOptions?: string[]
+  locale: Locale
+}
+
+const {
+  dialogId,
+  formTitle = "Deine Bewerbung",
+  eyebrow = "BHEND ARCHITEKTUR - SCHNUPPERTAGE",
+  defaultType,
+  brandImage = "/images/bei-uns-arbeiten/application-brand.jpg",
+  brandImageAlt = "Bhend Architektur Team",
+  dateOptions = [
+    "Donnerstag, 13. November 2025",
+    "Donnerstag, 27. November 2025",
+    "Donnerstag, 11. Dezember 2025",
+  ],
+  locale: _locale,
+} = Astro.props
+
+const types = [
+  "Schnuppertag",
+  "Bewerbung Lehrstelle",
+  "Bewerbung freie Stelle",
+  "Spontanbewerbung",
+]
+---
+
+<dialog
+  id={dialogId}
+  class="application-dialog text-ink m-auto max-h-[min(96vh,64rem)] w-[min(100%,72rem)] overflow-hidden border-0 bg-white p-0 shadow-2xl open:flex"
+  data-application-dialog={dialogId}
+>
+  <div
+    class="grid max-h-[min(96vh,64rem)] w-full grid-cols-1 overflow-hidden md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]"
+  >
+    <aside class="relative hidden min-h-full md:block">
+      <img
+        src={brandImage}
+        alt={brandImageAlt}
+        class="absolute inset-0 size-full object-cover object-center"
+        width="587"
+        height="1031"
+        loading="lazy"
+      />
+      <div
+        class="pointer-events-none absolute inset-0 flex items-center justify-center p-8"
+        aria-hidden="true"
+      >
+        <img
+          src="/images/bei-uns-arbeiten/application-brand-mark.svg"
+          alt=""
+          width="245"
+          height="89"
+          class="h-auto w-[min(70%,15.5rem)]"
+        />
+      </div>
+    </aside>
+
+    <div
+      class="relative flex max-h-[min(96vh,64rem)] flex-col overflow-y-auto bg-white"
+    >
+      <form method="dialog" class="absolute top-3 right-3 z-20">
+        <button
+          type="submit"
+          class="text-muted enter:text-ink flex size-9 items-center justify-center text-lg leading-none"
+          aria-label="Schliessen">✕</button
+        >
+      </form>
+
+      <form
+        class="application-form flex flex-col gap-6 px-6 pt-10 pb-8 sm:px-10 sm:pt-12 sm:pb-10"
+        method="post"
+        action="/api/forms/application"
+        enctype="multipart/form-data"
+        data-application-form
+        data-default-type={defaultType}
+      >
+        <div class="flex items-center justify-end gap-4 pr-8">
+          <span class="bg-brand-500 h-px w-24 sm:w-44" aria-hidden="true"
+          ></span>
+          <p class="text-brand-500 text-sm font-normal tracking-wide uppercase">
+            {eyebrow}
+          </p>
+        </div>
+
+        <h2 class="font-display text-ink text-[1.75rem] leading-10 font-bold">
+          {formTitle}
+        </h2>
+
+        <fieldset class="space-y-2 border border-neutral-300 px-4 py-3">
+          <legend class="sr-only">Bewerbungstyp</legend>
+          <p class="text-ink mb-1 text-base font-medium">
+            Bitte wähle aus, wofür du dich bewirbst:
+          </p>
+          <div class="flex flex-col gap-1.5">
+            {
+              types.map((type) => (
+                <label class="text-muted flex cursor-pointer items-center gap-3.5 text-sm font-medium">
+                  <input
+                    type="radio"
+                    name="applicationType"
+                    value={type}
+                    class="application-type-radio border-muted checked:border-muted checked:bg-brand-500 size-3 shrink-0 appearance-none border"
+                    required
+                    checked={type === defaultType}
+                    data-application-type-option
+                  />
+                  <span>{type}</span>
+                </label>
+              ))
+            }
+          </div>
+        </fieldset>
+
+        <label class="block" data-date-field hidden>
+          <span class="sr-only">Datum Schnuppertag</span>
+          <select
+            name="date"
+            class="text-muted w-full border border-neutral-300 bg-white px-4 py-2 text-sm font-medium"
+            data-date-select
+          >
+            {dateOptions.map((opt) => <option value={opt}>{opt}</option>)}
+          </select>
+        </label>
+
+        <label class="block">
+          <span class="sr-only">Anrede</span>
+          <select
+            name="salutation"
+            class="text-muted w-full border border-neutral-300 bg-white px-4 py-2 text-sm font-medium"
+          >
+            <option value="Frau">Frau</option>
+            <option value="Herr">Herr</option>
+            <option value="Divers">Divers</option>
+          </select>
+        </label>
+
+        <label class="block">
+          <span class="sr-only">Name</span>
+          <input
+            required
+            name="last_name"
+            autocomplete="family-name"
+            placeholder="Name*"
+            class="text-ink placeholder:text-muted w-full border border-neutral-300 bg-white px-4 py-2 text-sm font-medium"
+          />
+        </label>
+        <label class="block">
+          <span class="sr-only">Vorname</span>
+          <input
+            required
+            name="first_name"
+            autocomplete="given-name"
+            placeholder="Vorname*"
+            class="text-ink placeholder:text-muted w-full border border-neutral-300 bg-white px-4 py-2 text-sm font-medium"
+          />
+        </label>
+        <label class="block">
+          <span class="sr-only">E-Mail</span>
+          <input
+            required
+            type="email"
+            name="email"
+            autocomplete="email"
+            placeholder="E-Mail*"
+            class="text-ink placeholder:text-muted w-full border border-neutral-300 bg-white px-4 py-2 text-sm font-medium"
+          />
+        </label>
+        <label class="block">
+          <span class="sr-only">Telefon</span>
+          <input
+            type="tel"
+            name="phone"
+            autocomplete="tel"
+            placeholder="Telefon"
+            class="text-ink placeholder:text-muted w-full border border-neutral-300 bg-white px-4 py-2 text-sm font-medium"
+          />
+        </label>
+
+        <div class="space-y-2">
+          <p class="text-ink text-base font-medium">Lebenslauf</p>
+          <label
+            class="text-muted enter:border-brand-500 flex cursor-pointer items-center justify-between gap-3 border border-neutral-300 px-4 py-3.5 text-sm font-medium"
+          >
+            <span data-cv-label>Hier Lebenslauf als PDF hochladen.</span>
+            <input
+              type="file"
+              name="cv"
+              accept="application/pdf,.pdf"
+              class="sr-only"
+              data-cv-input
+            />
+            <img
+              src="/images/bei-uns-arbeiten/upload-icon.svg"
+              alt=""
+              width="12"
+              height="12"
+              class="size-3 shrink-0"
+              aria-hidden="true"
+            />
+          </label>
+        </div>
+
+        <div class="space-y-2">
+          <p class="text-ink text-base font-medium">Bewerbung</p>
+          <textarea
+            required
+            name="message"
+            rows="4"
+            placeholder="Bitte schreibe in 2–4 Sätzen, warum du dich bewirbst und was dich auszeichnet."
+            class="text-ink placeholder:text-muted w-full border border-neutral-300 bg-white px-4 py-2.5 text-sm font-medium"
+          ></textarea>
+        </div>
+
+        <div class="absolute -left-[9999px]" aria-hidden="true">
+          <label>
+            Website
+            <input
+              type="text"
+              name="website"
+              tabindex={-1}
+              autocomplete="off"
+            />
+          </label>
+        </div>
+
+        <p
+          class="text-muted hidden text-sm"
+          data-application-status
+          role="status"
+        >
+        </p>
+
+        <button type="submit" class="btn-primary w-full max-w-[20.5rem]"
+          >ABSCHICKEN</button
+        >
+      </form>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  .application-dialog::backdrop {
+    background: rgb(0 0 0 / 0.55);
+  }
+</style>

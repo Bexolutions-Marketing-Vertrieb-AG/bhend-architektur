@@ -1,0 +1,74 @@
+---
+// SectionApplicationInvite.astro — Initiativbewerbung CTA → opens dialog
+import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
+import type { I18nString } from "~/types/i18n"
+import type { Locale } from "~/config/locales"
+
+interface Props {
+  id?: string
+  title?: I18nString
+  heading?: I18nString
+  body?: I18nString
+  ctaLabel?: I18nString
+  dialogId?: string
+  defaultApplicationType?: string
+  locale: Locale
+}
+
+const {
+  id = "applicationInvite",
+  title,
+  heading,
+  body,
+  ctaLabel,
+  dialogId = "application-lehrstelle",
+  defaultApplicationType = "Spontanbewerbung",
+  locale,
+} = Astro.props
+
+const section = id
+const headline = translate(heading ?? title, locale)
+const copy = translate(body, locale)
+const cta = translate(ctaLabel, locale)
+---
+
+<section class="bg-white" {...bf(`${section}.shell`, "container", section)}>
+  <div
+    class="container-wide py-section-sm md:py-section flex flex-col items-start gap-8 md:items-center md:text-center"
+  >
+    {
+      headline && (
+        <h2
+          class="font-display text-brand-500 text-3xl font-bold tracking-tight md:text-4xl"
+          {...bf(`${section}.heading`, "style_target", section)}
+        >
+          {headline}
+        </h2>
+      )
+    }
+    {
+      copy && (
+        <p
+          class="section-lead max-w-4xl whitespace-pre-line"
+          {...bf(`${section}.body`, "style_target", section)}
+        >
+          {copy}
+        </p>
+      )
+    }
+    {
+      cta && (
+        <button
+          type="button"
+          class="btn-primary"
+          data-open-application={dialogId}
+          data-application-type={defaultApplicationType}
+          {...bf(`${section}.cta`, "chrome_denied", section)}
+        >
+          {cta}
+        </button>
+      )
+    }
+  </div>
+</section>
