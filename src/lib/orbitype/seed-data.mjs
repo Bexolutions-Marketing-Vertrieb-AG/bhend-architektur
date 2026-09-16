@@ -5,6 +5,8 @@ import {
   buildProjectFeedPages,
   buildSeedProjectPosts,
 } from "./seed-projects.mjs"
+import { buildSeedBlogPosts } from "./seed-blog.mjs"
+import { impressumSections } from "./seed-impressum.mjs"
 
 const now = () => new Date().toISOString()
 
@@ -860,6 +862,126 @@ function planungSections() {
   ]
 }
 
+function careersSections() {
+  return [
+    {
+      id: "careersIntro",
+      heading: de("WIR SUCHEN DICH!"),
+      image: "/images/bei-uns-arbeiten/hero.jpg",
+      imageAlt: de("Das Team von Bhend Architektur auf der Baustelle"),
+      body: de(
+        "Du suchst nach einem Arbeitsumfeld das Innovation, Teamgeist und Fachkompetenz vereint?",
+      ),
+      bodySecondary: de(
+        "Bei Bhend Architektur legen wir grossen Wert auf die Entwicklung und das Wohl unserer Mitarbeiter. Wir glauben daran, dass eine starke Unternehmenskultur und vielfältige Weiterbildungsmöglichkeiten den Schlüssel zu einem erfüllenden Berufsleben bilden. Werden Sie Teil eines Teams, das nicht nur Innovation lebt, sondern auch auf individuelle Stärken und Karrieren setzt.",
+      ),
+      _orbi: { component: "SectionCareersIntro" },
+    },
+    {
+      id: "jobOpenings",
+      heading: de("Offene Stellen"),
+      items: [
+        {
+          id: "schnuppertage",
+          title: de("ZEICHNER EFZ ARCHITEKTUR (M/W) SCHNUPPERTAGE"),
+          body: de(
+            "Nutze die Gelegenheit, einen Einblick in die Arbeiten und den Alltag von einem Zeichner zu erhalten und erfahre, wie vielseitig und kreativ der Beruf sein kann.",
+          ),
+          image: "/images/bei-uns-arbeiten/job-schnuppertage.jpg",
+          imageAlt: de("Schnuppertage im Büro"),
+          ctaLabel: de("MEHR ÜBER SCHNUPPERTAGE"),
+          dialogId: "application-schnuppertage",
+        },
+        {
+          id: "lehrstelle",
+          title: de("ZEICHNER EFZ ARCHITEKTUR (M/W) LEHRSTELLE"),
+          body: de(
+            "Du willst mitgestalten statt nur abzeichnen? Bei Bhend Architektur kombinieren wir Praxis, Herz und Verstand – fair, kompetent, visionär. Wenn dich Sinn, Teamgeist und sauberes Handwerk antreiben, bist du hier richtig.",
+          ),
+          image: "/images/bei-uns-arbeiten/job-lehrstelle.jpg",
+          imageAlt: de("Lehrstelle Architektur"),
+          ctaLabel: de("Bewerbung für Lehrstelle"),
+          dialogId: "application-lehrstelle",
+        },
+      ],
+      _orbi: { component: "SectionJobOpenings" },
+    },
+    {
+      id: "applicationInvite",
+      heading: de("Deine Initiativbewerbung"),
+      body: de(
+        "Keine passende Stelle? Trotzdem melden.\nSchnuppertag, Lehrstelle, freie Stelle oder Spontanbewerbung – wir schauen uns jede Bewerbung aufmerksam an und geben dir rasch Feedback.",
+      ),
+      ctaLabel: de("Jetzt bewerben"),
+      dialogId: "application-lehrstelle",
+      defaultApplicationType: "Spontanbewerbung",
+      _orbi: { component: "SectionApplicationInvite" },
+    },
+    {
+      id: "careersAbout",
+      heading: de("WER SIND WIR EIGENTLICH?"),
+      body: de(
+        "Bhend Architektur steht für visionäre Architektur und innovative Bauprojekte!\nMit über 200 erfolgreich abgeschlossenen Projekten und einem erfahrenen Team von zusammen über 120 Jahren Bauerfahrung, kombinieren wir Fachkompetenz, soziale Verantwortung und zukunftsorientiertes Denken.",
+      ),
+      image: "/images/bei-uns-arbeiten/about.jpg",
+      imageAlt: de("Teammeeting bei Bhend Architektur"),
+      lead: de("Unsere Kunden sind:"),
+      items: [
+        {
+          body: de(
+            "Familien, welche ein modernisiertes oder neues Eigenheim suchen",
+          ),
+        },
+        { body: de("Pflegeheime mit Visionen") },
+        {
+          body: de(
+            "Gemeinden welche neue Schulräume, Turnhallen oder Mehrzweckräume benötigen",
+          ),
+        },
+        {
+          body: de("Kirchen mit vielfältigen Wünschen zu ihren Gebäuden"),
+        },
+        {
+          body: de("Investoren mit Bedarf an Wohn- und Gewerberäume"),
+        },
+        {
+          body: de(
+            "Zusätzlich sind wir stark in der Energieberatung und im Brandschutz.",
+          ),
+        },
+      ],
+      _orbi: { component: "SectionChecklistSplit" },
+    },
+    {
+      id: "cultureBand",
+      heading: de("MITARBEITERKULTUR UND ARBEITSUMFELD"),
+      subheading: de("UNSERE MITARBEITERKULTUR – MEHR ALS NUR ARBEIT"),
+      body: de(
+        "Wir legen grossen Wert auf eine respektvolle und unterstützende Arbeitsatmosphäre. Teamanlässe, flexible Arbeitszeiten und eine moderne Büroinfrastruktur gehören zu den Grundlagen, die unseren Mitarbeitern helfen, sich zu entfalten.",
+      ),
+      _orbi: { component: "SectionCultureBand" },
+    },
+    {
+      id: "instagramFeed",
+      username: "bhend.architektur",
+      biography: de("Bauen für Menschen, gestalten für Generationen."),
+      limit: 12,
+      _orbi: { component: "SectionInstagramFeed" },
+    },
+  ]
+}
+
+function blogSections() {
+  return [
+    {
+      id: "blogFeed",
+      heading: de("BLOGS"),
+      emptyMessage: de("Noch keine Blogbeiträge veröffentlicht."),
+      _orbi: { component: "SectionBlogFeed" },
+    },
+  ]
+}
+
 export function buildSeedPages({
   hasSqlKeyConfigured = false,
   apiKeysUrl = API_KEYS_URL,
@@ -958,6 +1080,60 @@ export function buildSeedPages({
     ...buildLeistungenSeedPages(now),
     ...buildProjectFeedPages(now),
     {
+      id: "seed-bei-uns-arbeiten",
+      slug: "bei-uns-arbeiten",
+      title: {
+        de: "Bei uns arbeiten",
+        en: "Work with us",
+      },
+      lead: {
+        de: "Wir suchen dich — offene Stellen und Initiativbewerbung",
+        en: "We're hiring — open positions and speculative applications",
+      },
+      img: "/images/bei-uns-arbeiten/hero.jpg",
+      keywords: ["karriere", "stellen", "lehrstelle", "schnuppertage", "team"],
+      head: {},
+      created_at: now(),
+      updated_at: now(),
+      sections: careersSections(),
+    },
+    {
+      id: "seed-blog",
+      slug: "blog",
+      title: {
+        de: "Blog",
+        en: "Blog",
+      },
+      lead: {
+        de: "Beiträge von Bhend Architektur",
+        en: "Articles from Bhend Architektur",
+      },
+      img: "",
+      keywords: ["blog", "wissen", "architektur"],
+      head: {},
+      created_at: now(),
+      updated_at: now(),
+      sections: blogSections(),
+    },
+    {
+      id: "seed-impressum",
+      slug: "impressum",
+      title: {
+        de: "Impressum",
+        en: "Legal notice",
+      },
+      lead: {
+        de: "Kontaktadresse und rechtliche Angaben",
+        en: "Contact address and legal information",
+      },
+      img: "/images/impressum/photo.jpg",
+      keywords: ["impressum", "kontakt", "rechtliches"],
+      head: {},
+      created_at: now(),
+      updated_at: now(),
+      sections: impressumSections(),
+    },
+    {
       id: "seed-setup",
       slug: "setup",
       title: {
@@ -1005,39 +1181,5 @@ export function buildSeedPages({
 }
 
 export function buildSeedPosts() {
-  return [
-    {
-      id: "seed-post-1",
-      title: {
-        de: "Erste Schritte mit Abschnitten",
-        en: "Getting started with sections",
-      },
-      lead: {
-        de: "<p>Wie CMS-JSON zu gerendertem HTML wird.</p>",
-        en: "<p>How CMS JSON becomes rendered HTML.</p>",
-      },
-      img: "",
-      status: {
-        options: ["draft", "review", "published"],
-        value: "published",
-      },
-      keywords: ["sections", "orbitype"],
-      created_at: now(),
-      updated_at: now(),
-      sections: [
-        {
-          title: {
-            de: "Eine Datei pro Abschnitt",
-            en: "One file per section",
-          },
-          content: {
-            de: "<p>Erstellen Sie <code>SectionName.astro</code>. Der Dateiname muss genau <code>_orbi.component</code> entsprechen.</p>",
-            en: "<p>Create <code>SectionName.astro</code> in <code>src/components/sections/</code>. The filename must match <code>_orbi.component</code> exactly.</p>",
-          },
-          _orbi: { component: "SectionProse" },
-        },
-      ],
-    },
-    ...buildSeedProjectPosts(now),
-  ]
+  return [...buildSeedProjectPosts(now), ...buildSeedBlogPosts(now)]
 }

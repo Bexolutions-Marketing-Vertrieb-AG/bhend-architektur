@@ -98,6 +98,28 @@ export default defineConfig({
         optional: true,
       }),
 
+      INSTAGRAM_ACCESS_TOKEN: envField.string({
+        context: "server",
+        access: "secret",
+        optional: true,
+      }),
+      INSTAGRAM_USER_ID: envField.string({
+        context: "server",
+        access: "secret",
+        optional: true,
+      }),
+      INSTAGRAM_FEED_JSON_URL: envField.string({
+        context: "server",
+        access: "secret",
+        optional: true,
+      }),
+      PUBLIC_INSTAGRAM_USERNAME: envField.string({
+        context: "client",
+        access: "public",
+        optional: true,
+        default: "bhend.architektur",
+      }),
+
       PUBLIC_SITE_URL: envField.string({ context: "client", access: "public" }),
       PUBLIC_SITE_NAME: envField.string({
         context: "client",

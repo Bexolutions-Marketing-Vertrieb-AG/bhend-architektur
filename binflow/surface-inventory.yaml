@@ -218,6 +218,17 @@ surfaces:
     publication_target: orbitype_pages
     sample: ""
 
+  - bf_id: chrome.footer.impressum
+    kind: chrome_denied
+    area: chrome
+    section: footer
+    path: src/components/layout/Footer.astro
+    locator: code:src/components/layout/Footer.astro#impressum
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Impressum"
+    notes: "Links to /impressum CMS page"
+
   - bf_id: teamHero.shell
     kind: container
     area: team
@@ -1014,3 +1025,392 @@ surfaces:
     locales: [de]
     publication_target: orbitype_posts
     sample: "Bhend Architektur hat das grosszügige reformierte Pfarrhaus von 1924 in Oftringen als kommunales Kulturobjekt sorgfältig energetisch saniert."
+
+  - bf_id: careersIntro.shell
+    kind: container
+    area: bei-uns-arbeiten
+    section: careersIntro
+    path: src/components/sections/SectionCareersIntro.astro
+    locator: orbitype:pages/bei-uns-arbeiten/sections/careersIntro
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: careersIntro.heading
+    kind: style_target
+    area: bei-uns-arbeiten
+    section: careersIntro
+    path: src/components/sections/SectionCareersIntro.astro
+    locator: orbitype:pages/bei-uns-arbeiten/sections/careersIntro/heading@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "WIR SUCHEN DICH!"
+
+  - bf_id: careersIntro.image
+    kind: image
+    area: bei-uns-arbeiten
+    section: careersIntro
+    path: src/components/sections/SectionCareersIntro.astro
+    locator: orbitype:pages/bei-uns-arbeiten/sections/careersIntro/image
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "/images/bei-uns-arbeiten/hero.jpg"
+
+  - bf_id: careersIntro.body
+    kind: style_target
+    area: bei-uns-arbeiten
+    section: careersIntro
+    path: src/components/sections/SectionCareersIntro.astro
+    locator: orbitype:pages/bei-uns-arbeiten/sections/careersIntro/body@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Du suchst nach einem Arbeitsumfeld das Innovation, Teamgeist und Fachkompetenz vereint?"
+
+  - bf_id: careersIntro.bodySecondary
+    kind: style_target
+    area: bei-uns-arbeiten
+    section: careersIntro
+    path: src/components/sections/SectionCareersIntro.astro
+    locator: orbitype:pages/bei-uns-arbeiten/sections/careersIntro/bodySecondary@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Bei Bhend Architektur legen wir grossen Wert auf die Entwicklung und das Wohl unserer Mitarbeiter."
+
+  - bf_id: jobOpenings.shell
+    kind: container
+    area: bei-uns-arbeiten
+    section: jobOpenings
+    path: src/components/sections/SectionJobOpenings.astro
+    locator: orbitype:pages/bei-uns-arbeiten/sections/jobOpenings
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: jobOpenings.heading
+    kind: style_target
+    area: bei-uns-arbeiten
+    section: jobOpenings
+    path: src/components/sections/SectionJobOpenings.astro
+    locator: orbitype:pages/bei-uns-arbeiten/sections/jobOpenings/heading@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Offene Stellen"
+
+  - bf_id: jobOpenings.schnuppertage.cta
+    kind: chrome_denied
+    area: bei-uns-arbeiten
+    section: jobOpenings
+    path: src/components/sections/SectionJobOpenings.astro
+    locator: orbitype:pages/bei-uns-arbeiten/sections/jobOpenings
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "MEHR ÜBER SCHNUPPERTAGE"
+    notes: "Opens dialog application-schnuppertage (Figma 475:3691 / form 2012:6329)"
+
+  - bf_id: jobOpenings.lehrstelle.cta
+    kind: chrome_denied
+    area: bei-uns-arbeiten
+    section: jobOpenings
+    path: src/components/sections/SectionJobOpenings.astro
+    locator: orbitype:pages/bei-uns-arbeiten/sections/jobOpenings
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Bewerbung für Lehrstelle"
+    notes: "Opens dialog application-lehrstelle (Figma 475:3851 / form 2012:6336)"
+
+  - bf_id: applicationInvite.shell
+    kind: container
+    area: bei-uns-arbeiten
+    section: applicationInvite
+    path: src/components/sections/SectionApplicationInvite.astro
+    locator: orbitype:pages/bei-uns-arbeiten/sections/applicationInvite
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: applicationInvite.heading
+    kind: style_target
+    area: bei-uns-arbeiten
+    section: applicationInvite
+    path: src/components/sections/SectionApplicationInvite.astro
+    locator: orbitype:pages/bei-uns-arbeiten/sections/applicationInvite/heading@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Deine Initiativbewerbung"
+
+  - bf_id: applicationInvite.cta
+    kind: chrome_denied
+    area: bei-uns-arbeiten
+    section: applicationInvite
+    path: src/components/sections/SectionApplicationInvite.astro
+    locator: orbitype:pages/bei-uns-arbeiten/sections/applicationInvite
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Jetzt bewerben"
+
+  - bf_id: careersAbout.shell
+    kind: container
+    area: bei-uns-arbeiten
+    section: careersAbout
+    path: src/components/sections/SectionChecklistSplit.astro
+    locator: orbitype:pages/bei-uns-arbeiten/sections/careersAbout
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: careersAbout.heading
+    kind: style_target
+    area: bei-uns-arbeiten
+    section: careersAbout
+    path: src/components/sections/SectionChecklistSplit.astro
+    locator: orbitype:pages/bei-uns-arbeiten/sections/careersAbout/heading@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "WER SIND WIR EIGENTLICH?"
+
+  - bf_id: cultureBand.shell
+    kind: container
+    area: bei-uns-arbeiten
+    section: cultureBand
+    path: src/components/sections/SectionCultureBand.astro
+    locator: orbitype:pages/bei-uns-arbeiten/sections/cultureBand
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: cultureBand.heading
+    kind: style_target
+    area: bei-uns-arbeiten
+    section: cultureBand
+    path: src/components/sections/SectionCultureBand.astro
+    locator: orbitype:pages/bei-uns-arbeiten/sections/cultureBand/heading@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "MITARBEITERKULTUR UND ARBEITSUMFELD"
+
+  - bf_id: instagramFeed.shell
+    kind: container
+    area: bei-uns-arbeiten
+    section: instagramFeed
+    path: src/components/sections/SectionInstagramFeed.astro
+    locator: orbitype:pages/bei-uns-arbeiten/sections/instagramFeed
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+    notes: "Posts injected at render via Graph API / INSTAGRAM_FEED_JSON_URL; username bhend.architektur"
+
+  - bf_id: instagramFeed.biography
+    kind: style_target
+    area: bei-uns-arbeiten
+    section: instagramFeed
+    path: src/components/sections/SectionInstagramFeed.astro
+    locator: orbitype:pages/bei-uns-arbeiten/sections/instagramFeed/biography@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Bauen für Menschen, gestalten für Generationen."
+
+  - bf_id: blogFeed.shell
+    kind: container
+    area: blog
+    section: blogFeed
+    path: src/components/sections/SectionBlogFeed.astro
+    locator: orbitype:pages/blog/sections/blogFeed
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: blogFeed.heading
+    kind: style_target
+    area: blog
+    section: blogFeed
+    path: src/components/sections/SectionBlogFeed.astro
+    locator: orbitype:pages/blog/sections/blogFeed/heading@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "BLOGS"
+    notes: "Cards render from published posts without category"
+
+  - bf_id: blogFeed.wie-viel-planung-steckt-hinter-einer-erfolgreichen-sanierung.shell
+    kind: container
+    area: blog
+    section: blogFeed
+    path: src/components/sections/SectionBlogFeed.astro
+    locator: orbitype:posts/wie-viel-planung-steckt-hinter-einer-erfolgreichen-sanierung@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: ""
+
+  - bf_id: blogArticle.shell
+    kind: container
+    area: blog
+    section: blogArticle
+    path: src/components/sections/SectionBlogArticle.astro
+    locator: orbitype:posts/wie-viel-planung-steckt-hinter-einer-erfolgreichen-sanierung/sections/blogArticle
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: ""
+
+  - bf_id: blogArticle.image
+    kind: image
+    area: blog
+    section: blogArticle
+    path: src/components/sections/SectionBlogArticle.astro
+    locator: orbitype:posts/wie-viel-planung-steckt-hinter-einer-erfolgreichen-sanierung/sections/blogArticle/image
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "/images/blog/wie-viel-planung-steckt-hinter-einer-erfolgreichen-sanierung/hero.jpg"
+
+  - bf_id: blogArticle.heading
+    kind: style_target
+    area: blog
+    section: blogArticle
+    path: src/components/sections/SectionBlogArticle.astro
+    locator: orbitype:posts/wie-viel-planung-steckt-hinter-einer-erfolgreichen-sanierung/sections/blogArticle/heading@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "WIE VIEL PLANUNG STECKT HINTER EINER ERFOLGREICHEN SANIERUNG?"
+
+  - bf_id: blogArticle.subheading
+    kind: style_target
+    area: blog
+    section: blogArticle
+    path: src/components/sections/SectionBlogArticle.astro
+    locator: orbitype:posts/wie-viel-planung-steckt-hinter-einer-erfolgreichen-sanierung/sections/blogArticle/subheading@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "Warum der Architekt beim Umbau und einer Sanierung eine zentrale Rolle spielt"
+
+  - bf_id: blogArticle.toc
+    kind: container
+    area: blog
+    section: blogArticle
+    path: src/components/sections/SectionBlogArticle.astro
+    locator: orbitype:posts/wie-viel-planung-steckt-hinter-einer-erfolgreichen-sanierung/sections/blogArticle/toc
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: ""
+
+  - bf_id: blogArticle.tocLabel
+    kind: style_target
+    area: blog
+    section: blogArticle
+    path: src/components/sections/SectionBlogArticle.astro
+    locator: orbitype:posts/wie-viel-planung-steckt-hinter-einer-erfolgreichen-sanierung/sections/blogArticle/tocLabel@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "Inhaltsverzeichnis"
+
+  - bf_id: blogArticle.block.einleitung.heading
+    kind: style_target
+    area: blog
+    section: blogArticle
+    path: src/components/sections/SectionBlogArticle.astro
+    locator: orbitype:posts/wie-viel-planung-steckt-hinter-einer-erfolgreichen-sanierung/sections/blogArticle/blocks/einleitung/heading@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "Einleitung"
+
+  - bf_id: blogArticle.faqHeading
+    kind: style_target
+    area: blog
+    section: blogArticle
+    path: src/components/sections/SectionBlogArticle.astro
+    locator: orbitype:posts/wie-viel-planung-steckt-hinter-einer-erfolgreichen-sanierung/sections/blogArticle/faqHeading@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "Häufige Fragen zur Sanierungsplanung"
+
+  - bf_id: blogArticle.midCta
+    kind: chrome_denied
+    area: blog
+    section: blogArticle
+    path: src/components/sections/SectionBlogArticle.astro
+    locator: orbitype:posts/wie-viel-planung-steckt-hinter-einer-erfolgreichen-sanierung/sections/blogArticle/midCtaLabel@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "JETZT ERSTGESPRÄCH"
+    notes: "mailto via reservationMode/reservationTarget"
+
+  - bf_id: blogArticle.closingCta
+    kind: chrome_denied
+    area: blog
+    section: blogArticle
+    path: src/components/sections/SectionBlogArticle.astro
+    locator: orbitype:posts/wie-viel-planung-steckt-hinter-einer-erfolgreichen-sanierung/sections/blogArticle/closingCtaLabel@de
+    locales: [de]
+    publication_target: orbitype_posts
+    sample: "GESPRÄCH VEREINBAREN"
+    notes: "mailto via reservationMode/reservationTarget"
+
+  - bf_id: impressum.shell
+    kind: container
+    area: impressum
+    section: impressum
+    path: src/components/sections/SectionImpressum.astro
+    locator: orbitype:pages/impressum/sections/impressum
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: impressum.image
+    kind: image
+    area: impressum
+    section: impressum
+    path: src/components/sections/SectionImpressum.astro
+    locator: orbitype:pages/impressum/sections/impressum/image
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "/images/impressum/photo.jpg"
+    presentation: background
+
+  - bf_id: impressum.contactHeading
+    kind: style_target
+    area: impressum
+    section: impressum
+    path: src/components/sections/SectionImpressum.astro
+    locator: orbitype:pages/impressum/sections/impressum/contactHeading@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Kontaktadresse"
+
+  - bf_id: impressum.address
+    kind: style_target
+    area: impressum
+    section: impressum
+    path: src/components/sections/SectionImpressum.astro
+    locator: orbitype:pages/impressum/sections/impressum/address@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Bhend Architektur AG\nZofingerstrasse 43\n4665 Oftringen\nSchweiz"
+
+  - bf_id: impressum.email
+    kind: chrome_denied
+    area: impressum
+    section: impressum
+    path: src/components/sections/SectionImpressum.astro
+    locator: orbitype:pages/impressum/sections/impressum/email
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "info@bhend-architektur.ch"
+    notes: "mailto via reservationMode"
+
+  - bf_id: impressum.phone
+    kind: chrome_denied
+    area: impressum
+    section: impressum
+    path: src/components/sections/SectionImpressum.astro
+    locator: orbitype:pages/impressum/sections/impressum/phone
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "+41 62 798 00 00"
+    notes: "tel via reservationMode url"
+
+  - bf_id: impressum.block.haftung.heading
+    kind: style_target
+    area: impressum
+    section: impressum
+    path: src/components/sections/SectionImpressum.astro
+    locator: orbitype:pages/impressum/sections/impressum/blocks/haftung/heading@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Haftungsausschluss"

@@ -1,0 +1,159 @@
+---
+// SectionInstagramFeed.astro — Instagram grid (posts injected by [...slug].astro)
+import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
+import { instagramProfile } from "~/lib/instagram"
+import type { InstagramPost, InstagramProfile } from "~/lib/instagram"
+import type { I18nString } from "~/types/i18n"
+import type { Locale } from "~/config/locales"
+
+interface Props {
+  id?: string
+  title?: I18nString
+  heading?: I18nString
+  username?: string
+  biography?: I18nString
+  limit?: number
+  profile?: InstagramProfile
+  posts?: InstagramPost[]
+  feedSource?: string
+  locale: Locale
+}
+
+const {
+  id = "instagramFeed",
+  title,
+  heading,
+  username,
+  biography,
+  profile: profileProp,
+  posts = [],
+  locale,
+} = Astro.props
+
+const section = id
+const headline = translate(heading ?? title, locale)
+const profile = profileProp ?? instagramProfile(username)
+const bio = translate(biography, locale) || profile.biography || ""
+const handle = profile.username
+const profileUrl = profile.profileUrl
+---
+
+<section class="bg-white" {...bf(`${section}.shell`, "container", section)}>
+  <div class="container-wide pb-section">
+    {
+      headline && (
+        <h2
+          class="font-display mb-8 text-center text-2xl font-bold tracking-tight uppercase md:mb-10"
+          {...bf(`${section}.heading`, "style_target", section)}
+        >
+          {headline}
+        </h2>
+      )
+    }
+
+    <div
+      class="mb-6 flex flex-wrap items-center gap-4"
+      {...bf(`${section}.profile`, "container", section)}
+    >
+      <a
+        href={profileUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-3"
+        {...bf(`${section}.profileLink`, "chrome_denied", section)}
+      >
+        <span
+          class="bg-brand-900 text-brand-100 flex size-12 items-center justify-center rounded-full text-lg font-bold"
+          aria-hidden="true">B</span
+        >
+        <span class="flex flex-col">
+          <span class="text-social-instagram text-sm font-bold uppercase">
+            @{handle}
+          </span>
+          {
+            bio && (
+              <span
+                class="text-social-instagram text-sm"
+                {...bf(`${section}.biography`, "style_target", section)}
+              >
+                {bio}
+              </span>
+            )
+          }
+        </span>
+      </a>
+      <a
+        href={profileUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-social-instagram enter:underline text-sm font-semibold underline-offset-2"
+      >
+        Folge für Neuigkeiten direkt ins Geschehen
+      </a>
+    </div>
+
+    {
+      posts.length > 0 ? (
+        <ul
+          class="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 md:gap-2.5"
+          {...bf(`${section}.grid`, "container", section)}
+        >
+          {posts.map((post) => {
+            const src = post.thumbnailUrl || post.mediaUrl
+            const isVideo = post.mediaType === "VIDEO"
+            return (
+              <li>
+                <a
+                  href={post.permalink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group bg-brand-50 relative block aspect-square overflow-hidden"
+                >
+                  <img
+                    src={src}
+                    alt={post.caption?.slice(0, 120) || `Instagram @${handle}`}
+                    class="size-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                    loading="lazy"
+                    width="400"
+                    height="400"
+                  />
+                  {isVideo && (
+                    <span
+                      class="absolute inset-0 flex items-center justify-center bg-black/20"
+                      aria-hidden="true"
+                    >
+                      <span class="flex size-10 items-center justify-center rounded-full bg-black/50 text-white">
+                        ▶
+                      </span>
+                    </span>
+                  )}
+                </a>
+              </li>
+            )
+          })}
+        </ul>
+      ) : (
+        <div
+          class="border-brand-200 border px-6 py-10 text-center"
+          {...bf(`${section}.empty`, "container", section)}
+        >
+          <p class="section-lead mb-4">
+            Der Live-Feed erscheint nach Konfiguration von{" "}
+            <code class="text-sm">INSTAGRAM_ACCESS_TOKEN</code> +{" "}
+            <code class="text-sm">INSTAGRAM_USER_ID</code> (Instagram Graph API)
+            oder <code class="text-sm">INSTAGRAM_FEED_JSON_URL</code>.
+          </p>
+          <a
+            href={profileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary"
+          >
+            @{handle} auf Instagram öffnen
+          </a>
+        </div>
+      )
+    }
+  </div>
+</section>

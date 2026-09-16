@@ -1,0 +1,270 @@
+---
+// SectionJobOpenings.astro — open positions + application dialogs
+import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
+import ApplicationForm from "./partials/ApplicationForm.astro"
+import type { I18nString } from "~/types/i18n"
+import type { Locale } from "~/config/locales"
+
+interface JobItem {
+  id?: string
+  title?: I18nString
+  body?: I18nString
+  image?: string
+  imageAlt?: I18nString
+  ctaLabel?: I18nString
+  dialogId?: string
+}
+
+interface Props {
+  id?: string
+  title?: I18nString
+  heading?: I18nString
+  items?: JobItem[]
+  locale: Locale
+}
+
+const { id = "jobOpenings", title, heading, items = [], locale } = Astro.props
+
+const section = id
+const headline = translate(heading ?? title, locale)
+---
+
+<section class="bg-white" {...bf(`${section}.shell`, "container", section)}>
+  <div class="container-wide py-section-sm md:py-section">
+    {
+      headline && (
+        <h2
+          class="font-display text-brand-500 mb-10 text-3xl font-bold tracking-tight md:mb-12 md:text-4xl"
+          {...bf(`${section}.heading`, "style_target", section)}
+        >
+          {headline}
+        </h2>
+      )
+    }
+
+    <div class="flex flex-col gap-8">
+      {
+        items.map((item) => {
+          const itemId = (item.id ?? "job").trim() || "job"
+          const itemTitle = translate(item.title, locale)
+          const itemBody = translate(item.body, locale)
+          const cta = translate(item.ctaLabel, locale)
+          const alt = translate(item.imageAlt, locale) || itemTitle
+          const dialogId = (item.dialogId ?? "").trim()
+          return (
+            <article
+              class="bg-brand-50 grid gap-6 p-6 md:grid-cols-[minmax(0,537px)_minmax(0,1fr)] md:items-start md:gap-10 md:p-8"
+              {...bf(`${section}.${itemId}.shell`, "container", section)}
+            >
+              <div class="border-brand-200 border-b pb-4 md:col-span-2">
+                {itemTitle && (
+                  <h3
+                    class="font-display text-lg font-bold tracking-tight uppercase md:text-xl"
+                    {...bf(
+                      `${section}.${itemId}.title`,
+                      "style_target",
+                      section,
+                    )}
+                  >
+                    {itemTitle}
+                  </h3>
+                )}
+              </div>
+              {item.image && (
+                <img
+                  src={item.image}
+                  alt={alt}
+                  class="aspect-[537/283] w-full object-cover"
+                  loading="lazy"
+                  {...bf(`${section}.${itemId}.image`, "image", section)}
+                />
+              )}
+              <div class="flex flex-col gap-6">
+                {itemBody && (
+                  <p
+                    class="section-lead"
+                    {...bf(
+                      `${section}.${itemId}.body`,
+                      "style_target",
+                      section,
+                    )}
+                  >
+                    {itemBody}
+                  </p>
+                )}
+                {cta && dialogId && (
+                  <button
+                    type="button"
+                    class="btn-primary self-start"
+                    data-open-application={dialogId}
+                    data-application-type={
+                      dialogId.includes("lehrstelle")
+                        ? "Bewerbung Lehrstelle"
+                        : "Schnuppertag"
+                    }
+                    {...bf(
+                      `${section}.${itemId}.cta`,
+                      "chrome_denied",
+                      section,
+                    )}
+                  >
+                    {cta}
+                  </button>
+                )}
+              </div>
+            </article>
+          )
+        })
+      }
+    </div>
+  </div>
+
+  <ApplicationForm
+    dialogId="application-schnuppertage"
+    eyebrow="BHEND ARCHITEKTUR - SCHNUPPERTAGE"
+    defaultType="Schnuppertag"
+    locale={locale}
+  />
+  <ApplicationForm
+    dialogId="application-lehrstelle"
+    eyebrow="BHEND ARCHITEKTUR - LEHRSTELLE"
+    defaultType="Bewerbung Lehrstelle"
+    locale={locale}
+  />
+</section>
+
+<script>
+  function syncDateField(form: HTMLFormElement) {
+    const dateField = form.querySelector<HTMLElement>("[data-date-field]")
+    const dateSelect =
+      form.querySelector<HTMLSelectElement>("[data-date-select]")
+    const schnupper = form.querySelector<HTMLInputElement>(
+      'input[name="applicationType"][value="Schnuppertag"]',
+    )
+    const show = Boolean(schnupper?.checked)
+    if (dateField) dateField.hidden = !show
+    if (dateSelect) dateSelect.disabled = !show
+  }
+
+  function bindApplicationUi() {
+    const openers = document.querySelectorAll<HTMLElement>(
+      "[data-open-application]",
+    )
+    openers.forEach((btn) => {
+      if (btn.dataset.bound === "1") return
+      btn.dataset.bound = "1"
+      btn.addEventListener("click", () => {
+        const id = btn.dataset.openApplication
+        if (!id) return
+        const dialog = document.getElementById(id)
+        if (!(dialog instanceof HTMLDialogElement)) return
+        const preferred = btn.dataset.applicationType
+        const form = dialog.querySelector<HTMLFormElement>(
+          "[data-application-form]",
+        )
+        if (preferred && form) {
+          const radio = form.querySelector<HTMLInputElement>(
+            `input[name="applicationType"][value="${CSS.escape(preferred)}"]`,
+          )
+          if (radio) radio.checked = true
+          syncDateField(form)
+        }
+        if (dialog.parentElement !== document.body) {
+          document.body.appendChild(dialog)
+        }
+        dialog.showModal()
+      })
+    })
+
+    document
+      .querySelectorAll<HTMLDialogElement>("[data-application-dialog]")
+      .forEach((dialog) => {
+        if (dialog.dataset.bound === "1") return
+        dialog.dataset.bound = "1"
+        dialog.addEventListener("click", (event) => {
+          if (event.target === dialog) dialog.close()
+        })
+      })
+
+    document
+      .querySelectorAll<HTMLFormElement>("[data-application-form]")
+      .forEach((form) => {
+        if (form.dataset.bound === "1") return
+        form.dataset.bound = "1"
+
+        syncDateField(form)
+        form
+          .querySelectorAll<HTMLInputElement>("[data-application-type-option]")
+          .forEach((radio) => {
+            radio.addEventListener("change", () => syncDateField(form))
+          })
+
+        const cvInput = form.querySelector<HTMLInputElement>("[data-cv-input]")
+        const cvLabel = form.querySelector<HTMLElement>("[data-cv-label]")
+        cvInput?.addEventListener("change", () => {
+          if (!cvLabel) return
+          const file = cvInput.files?.[0]
+          cvLabel.textContent = file
+            ? file.name
+            : "Hier Lebenslauf als PDF hochladen."
+        })
+
+        form.addEventListener("submit", async (event) => {
+          event.preventDefault()
+          const status = form.querySelector<HTMLElement>(
+            "[data-application-status]",
+          )
+          const submit = form.querySelector<HTMLButtonElement>(
+            'button[type="submit"]',
+          )
+          if (status) {
+            status.classList.remove("hidden")
+            status.textContent = "Wird gesendet…"
+          }
+          if (submit) submit.disabled = true
+
+          try {
+            const res = await fetch(form.action, {
+              method: "POST",
+              body: new FormData(form),
+              headers: { Accept: "application/json" },
+            })
+            const data = (await res.json().catch(() => ({}))) as {
+              ok?: boolean
+              message?: string
+            }
+            if (!res.ok || !data.ok) {
+              throw new Error(data.message || "Senden fehlgeschlagen")
+            }
+            if (status) {
+              status.textContent =
+                data.message || "Danke — wir haben deine Bewerbung erhalten."
+            }
+            form.reset()
+            const defaultType = form.dataset.defaultType
+            if (defaultType) {
+              const radio = form.querySelector<HTMLInputElement>(
+                `input[name="applicationType"][value="${CSS.escape(defaultType)}"]`,
+              )
+              if (radio) radio.checked = true
+            }
+            syncDateField(form)
+            if (cvLabel) {
+              cvLabel.textContent = "Hier Lebenslauf als PDF hochladen."
+            }
+          } catch (error) {
+            if (status) {
+              status.textContent =
+                error instanceof Error ? error.message : "Senden fehlgeschlagen"
+            }
+          } finally {
+            if (submit) submit.disabled = false
+          }
+        })
+      })
+  }
+
+  bindApplicationUi()
+  document.addEventListener("astro:page-load", bindApplicationUi)
+</script>

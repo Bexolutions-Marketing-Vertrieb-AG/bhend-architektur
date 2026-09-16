@@ -4,12 +4,14 @@ import Seo from "~/components/seo/Seo.astro"
 import JsonLd from "~/components/seo/JsonLd.astro"
 import AnySection from "~/components/sections/AnySection.astro"
 import { getPage, listPageSlugs } from "~/lib/orbitype/pages"
-import { listProjects } from "~/lib/orbitype/posts"
+import { listProjects, listPosts } from "~/lib/orbitype/posts"
 import { getTemplate } from "~/lib/orbitype/templates"
 import { OrbitypeError } from "~/lib/orbitype/client"
 import { parseRoute, translate, localePath } from "~/lib/i18n"
 import { buildPageSeo } from "~/lib/seo"
 import { enrichProjectFeedSections } from "~/lib/projects"
+import { enrichInstagramFeedSections } from "~/lib/instagram-enrich"
+import { enrichBlogFeedSections } from "~/lib/blog"
 import { LOCALES } from "~/config/locales"
 import type { Locale } from "~/config/locales"
 
@@ -64,7 +66,7 @@ if (!page) {
 }
 
 const template = await getTemplate(page.template ?? null)
-const sections = await enrichProjectFeedSections(
+const withProjects = await enrichProjectFeedSections(
   [
     ...(template?.sections_before ?? []),
     ...page.sections,
@@ -72,10 +74,18 @@ const sections = await enrichProjectFeedSections(
   ],
   listProjects,
 )
+const withBlog = await enrichBlogFeedSections(withProjects, listPosts)
+const sections = await enrichInstagramFeedSections(withBlog)
 
 if (Astro.cache.enabled) {
   Astro.cache.set({
-    tags: [`page:${page.id}`, `page-slug:${page.slug}`, "projects"],
+    tags: [
+      `page:${page.id}`,
+      `page-slug:${page.slug}`,
+      "projects",
+      "posts",
+      "instagram",
+    ],
     lastModified: page.updated_at ? new Date(page.updated_at) : undefined,
   })
 }
