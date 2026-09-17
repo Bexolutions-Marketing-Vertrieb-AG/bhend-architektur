@@ -1,5 +1,5 @@
 ---
-// SectionPressList.astro — Presse / Extern clippings (title + source + image stack)
+// SectionPressList.astro — Presse / Extern clippings (title + source + image stack + lightbox)
 import { translate } from "~/lib/i18n"
 import { bf } from "~/lib/bf"
 import type { I18nString } from "~/types/i18n"
@@ -31,7 +31,11 @@ const section = id
 const headline = translate(heading ?? title, locale)
 ---
 
-<section class="bg-white" {...bf(`${section}.shell`, "container", section)}>
+<section
+  class="bg-white"
+  data-press-gallery
+  {...bf(`${section}.shell`, "container", section)}
+>
   <div class="container-wide py-section-sm md:pb-section">
     {
       headline && (
@@ -59,16 +63,16 @@ const headline = translate(heading ?? title, locale)
             >
               <div class="flex flex-col gap-3">
                 {label && (
-                  <h2
-                    class="font-display text-2xl font-bold tracking-tight"
+                  <h3
+                    class="font-display text-ink text-[32px] leading-10 font-bold"
                     {...bf(`${itemSection}.title`, "style_target", section)}
                   >
                     {label}
-                  </h2>
+                  </h3>
                 )}
                 {source && (
                   <p
-                    class="text-muted text-sm"
+                    class="section-lead"
                     {...bf(`${itemSection}.source`, "style_target", section)}
                   >
                     {source}
@@ -84,20 +88,31 @@ const headline = translate(heading ?? title, locale)
                 )}
               </div>
               {images.length > 0 && (
-                <div class="flex flex-col gap-4">
+                <div class="flex flex-col gap-4" data-press-item-gallery>
                   {images.map((img, index) => {
                     const n = index + 1
                     const alt =
                       translate(img.alt, locale) ||
                       (label ? `${label} ${n}` : "")
                     return (
-                      <img
-                        src={img.src}
-                        alt={alt}
-                        class="w-full object-cover"
-                        loading="lazy"
-                        {...bf(`${itemSection}.image${n}`, "image", section)}
-                      />
+                      <button
+                        type="button"
+                        class="focus-visible:outline-brand-500 block w-full cursor-zoom-in border-0 bg-transparent p-0 text-left focus-visible:outline-2 focus-visible:outline-offset-2"
+                        data-press-open
+                        data-press-index={String(index)}
+                        aria-label={
+                          alt ? `${alt} vergrössern` : "Bild vergrössern"
+                        }
+                      >
+                        <img
+                          src={img.src}
+                          alt={alt}
+                          class="w-full object-cover"
+                          loading="lazy"
+                          decoding="async"
+                          {...bf(`${itemSection}.image${n}`, "image", section)}
+                        />
+                      </button>
                     )
                   })}
                 </div>
@@ -108,4 +123,250 @@ const headline = translate(heading ?? title, locale)
       }
     </ul>
   </div>
+
+  <dialog
+    class="press-lightbox m-auto w-[min(96vw,72rem)] max-w-[min(96vw,72rem)] border-0 bg-transparent p-0 open:flex open:flex-col open:items-stretch open:gap-3"
+    data-press-lightbox
+  >
+    <div class="flex justify-end px-1 md:absolute md:top-0 md:right-0 md:z-20">
+      <form method="dialog">
+        <button
+          type="submit"
+          class="bg-brand-900 flex h-10 w-10 items-center justify-center text-lg text-white"
+          aria-label="Schliessen"
+        >
+          ×
+        </button>
+      </form>
+    </div>
+    <div
+      class="relative flex min-h-0 flex-1 items-center justify-center"
+      data-press-lightbox-stage
+    >
+      <button
+        type="button"
+        class="bg-brand-900 absolute top-1/2 left-2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center text-white md:left-4 md:flex"
+        aria-label="Vorheriges Bild"
+        data-press-lightbox-prev
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <img
+        src=""
+        alt=""
+        class="max-h-[78vh] max-w-full touch-pan-y object-contain md:max-h-[90vh]"
+        data-press-lightbox-img
+      />
+      <button
+        type="button"
+        class="bg-brand-900 absolute top-1/2 right-2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center text-white md:right-4 md:flex"
+        aria-label="Nächstes Bild"
+        data-press-lightbox-next
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+  </dialog>
 </section>
+
+<style>
+  .press-lightbox::backdrop {
+    background: rgb(0 0 0 / 0.85);
+  }
+</style>
+
+<script>
+  function bindPressGallery(root: Element) {
+    if (!(root instanceof HTMLElement) || root.dataset.bound === "1") return
+    root.dataset.bound = "1"
+
+    const dialog = root.querySelector(
+      "[data-press-lightbox]",
+    ) as HTMLDialogElement | null
+    const lightboxImg = dialog?.querySelector(
+      "[data-press-lightbox-img]",
+    ) as HTMLImageElement | null
+    const stage = dialog?.querySelector(
+      "[data-press-lightbox-stage]",
+    ) as HTMLElement | null
+    const prevBtn = dialog?.querySelector(
+      "[data-press-lightbox-prev]",
+    ) as HTMLButtonElement | null
+    const nextBtn = dialog?.querySelector(
+      "[data-press-lightbox-next]",
+    ) as HTMLButtonElement | null
+    if (!dialog || !lightboxImg) return
+
+    let lockedScrollY = 0
+    let activeGallery: Element | null = null
+    let lightboxIndex = 0
+    let touchStartX: number | null = null
+
+    const galleryImages = (gallery: Element) =>
+      Array.from(gallery.querySelectorAll("img")).filter(
+        (img): img is HTMLImageElement => img instanceof HTMLImageElement,
+      )
+
+    const lockScroll = () => {
+      lockedScrollY = window.scrollY
+      document.body.style.position = "fixed"
+      document.body.style.top = `-${lockedScrollY}px`
+      document.body.style.left = "0"
+      document.body.style.right = "0"
+      document.body.style.width = "100%"
+    }
+
+    const unlockScroll = () => {
+      document.body.style.position = ""
+      document.body.style.top = ""
+      document.body.style.left = ""
+      document.body.style.right = ""
+      document.body.style.width = ""
+      window.scrollTo(0, lockedScrollY)
+    }
+
+    const syncNav = (count: number) => {
+      const show = count > 1
+      if (prevBtn) prevBtn.hidden = !show
+      if (nextBtn) nextBtn.hidden = !show
+      if (prevBtn) prevBtn.classList.toggle("md:flex", show)
+      if (nextBtn) nextBtn.classList.toggle("md:flex", show)
+    }
+
+    const showImage = (index: number) => {
+      if (!activeGallery) return
+      const images = galleryImages(activeGallery)
+      if (!images.length) return
+      const nextIndex =
+        ((index % images.length) + images.length) % images.length
+      lightboxIndex = nextIndex
+      const img = images[nextIndex]
+      if (!img) return
+      lightboxImg.src = img.currentSrc || img.src
+      lightboxImg.alt = img.alt || ""
+      syncNav(images.length)
+    }
+
+    const open = (gallery: Element, index: number) => {
+      activeGallery = gallery
+      showImage(index)
+      if (!lightboxImg.src) return
+      if (dialog.parentElement !== document.body) {
+        document.body.appendChild(dialog)
+      }
+      lockScroll()
+      dialog.showModal()
+    }
+
+    const step = (delta: number) => {
+      if (!activeGallery || galleryImages(activeGallery).length < 2) return
+      showImage(lightboxIndex + delta)
+    }
+
+    root.querySelectorAll("[data-press-open]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (!(btn instanceof HTMLElement)) return
+        const gallery = btn.closest("[data-press-item-gallery]")
+        if (!gallery) return
+        const index = Number(btn.dataset.pressIndex ?? 0)
+        open(gallery, Number.isFinite(index) ? index : 0)
+      })
+    })
+
+    prevBtn?.addEventListener("click", (event) => {
+      event.stopPropagation()
+      step(-1)
+    })
+    nextBtn?.addEventListener("click", (event) => {
+      event.stopPropagation()
+      step(1)
+    })
+
+    const swipeTarget = stage ?? lightboxImg
+    swipeTarget.addEventListener(
+      "touchstart",
+      (event) => {
+        if (!(event instanceof TouchEvent) || event.changedTouches.length === 0)
+          return
+        const touch = event.changedTouches[0]
+        if (!touch) return
+        touchStartX = touch.screenX
+      },
+      { passive: true },
+    )
+    swipeTarget.addEventListener(
+      "touchend",
+      (event) => {
+        if (
+          touchStartX === null ||
+          !(event instanceof TouchEvent) ||
+          event.changedTouches.length === 0
+        )
+          return
+        const touch = event.changedTouches[0]
+        if (!touch) return
+        const dx = touch.screenX - touchStartX
+        touchStartX = null
+        if (Math.abs(dx) < 40) return
+        step(dx < 0 ? 1 : -1)
+      },
+      { passive: true },
+    )
+
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close()
+    })
+
+    dialog.addEventListener("keydown", (event) => {
+      if (!(event instanceof KeyboardEvent) || !dialog.open) return
+      if (event.key === "ArrowLeft") {
+        event.preventDefault()
+        step(-1)
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault()
+        step(1)
+      }
+    })
+
+    dialog.addEventListener("close", () => {
+      unlockScroll()
+      if (dialog.parentElement === document.body) {
+        root.appendChild(dialog)
+      }
+      lightboxImg.removeAttribute("src")
+      lightboxImg.alt = ""
+      activeGallery = null
+    })
+  }
+
+  function bindAll() {
+    document
+      .querySelectorAll("[data-press-gallery]")
+      .forEach((root) => bindPressGallery(root))
+  }
+
+  bindAll()
+  document.addEventListener("astro:page-load", bindAll)
+</script>

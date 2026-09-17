@@ -17,7 +17,11 @@ interface Props {
   title?: I18nString
   heading?: I18nString
   body?: I18nString
+  /** H4 above the checklist lead (right column) */
+  listHeading?: I18nString
   lead?: I18nString
+  /** Plain sentence after the checklist (no checkmark) */
+  note?: I18nString
   image?: string
   imageAlt?: I18nString
   imageCaption?: I18nString
@@ -31,7 +35,9 @@ const {
   title,
   heading,
   body,
+  listHeading,
   lead,
+  note,
   image,
   imageAlt,
   imageCaption,
@@ -43,7 +49,9 @@ const section = id
 const dark = tone === "dark"
 const headline = translate(heading ?? title, locale)
 const copy = translate(body, locale)
+const listTitle = translate(listHeading, locale)
 const listLead = translate(lead, locale)
+const listNote = translate(note, locale)
 const alt = translate(imageAlt, locale)
 const caption = translate(imageCaption, locale)
 const captionParts = caption ? fotografCreditParts(caption) : null
@@ -116,6 +124,19 @@ const captionParts = caption ? fotografCreditParts(caption) : null
       </div>
       <div class="flex flex-col gap-8">
         {
+          listTitle && (
+            <h3
+              class:list={[
+                "font-display text-[28px] leading-10 font-bold",
+                dark ? "text-brand-100" : "text-ink",
+              ]}
+              {...bf(`${section}.listHeading`, "style_target", section)}
+            >
+              {listTitle}
+            </h3>
+          )
+        }
+        {
           listLead && (
             <p
               class:list={[
@@ -137,22 +158,16 @@ const captionParts = caption ? fotografCreditParts(caption) : null
               return (
                 <li class="flex gap-4">
                   <span
-                    class="border-brand-500 text-brand-500 mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2"
+                    class="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center"
                     aria-hidden="true"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
+                    <img
+                      src="/images/icons/check-badge.png"
+                      alt=""
+                      width="40"
+                      height="40"
+                      class="h-10 w-10"
+                    />
                   </span>
                   <div class="flex flex-col gap-1">
                     {itemTitle && (
@@ -191,6 +206,19 @@ const captionParts = caption ? fotografCreditParts(caption) : null
             })
           }
         </ul>
+        {
+          listNote && (
+            <p
+              class:list={[
+                "section-lead",
+                dark ? "text-brand-200" : "text-ink",
+              ]}
+              {...bf(`${section}.note`, "style_target", section)}
+            >
+              {listNote}
+            </p>
+          )
+        }
       </div>
     </div>
   </div>

@@ -58,7 +58,7 @@ const roleBf = bf(`${bfPrefix}Role`, "style_target", section)
 const studiesBf = bf(`${bfPrefix}Studies`, "style_target", section)
 ---
 
-<li class="flex flex-col gap-4">
+<li class="flex flex-col items-center gap-4 text-center">
   {
     member.image && (
       <img
@@ -74,9 +74,12 @@ const studiesBf = bf(`${bfPrefix}Studies`, "style_target", section)
   }
   {
     expandable ? (
-      <details class="group">
-        <summary class="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-          <h2 class="font-display text-xl font-bold" {...nameBf}>
+      <details class="group w-full">
+        <summary class="cursor-pointer list-none text-center [&::-webkit-details-marker]:hidden">
+          <h2
+            class="font-display text-ink text-[28px] leading-10 font-bold"
+            {...nameBf}
+          >
             {name}
             <span class="group-open:hidden" aria-hidden="true">
               {" "}
@@ -88,13 +91,16 @@ const studiesBf = bf(`${bfPrefix}Studies`, "style_target", section)
             </span>
           </h2>
           {role && (
-            <p class="text-ink mt-1 text-sm leading-snug" {...roleBf}>
+            <p
+              class="text-ink mt-1 font-sans text-base leading-normal font-medium"
+              {...roleBf}
+            >
               {role}
             </p>
           )}
         </summary>
         <ul
-          class="text-ink mt-0.5 space-y-0.5 text-sm leading-snug"
+          class="text-ink mt-0.5 space-y-0.5 font-sans text-base leading-normal font-medium"
           {...studiesBf}
         >
           {studies.map((item) => (
@@ -103,27 +109,33 @@ const studiesBf = bf(`${bfPrefix}Studies`, "style_target", section)
         </ul>
       </details>
     ) : (
-      <div>
+      <div class="w-full text-center">
         {name && (
-          <h2 class="font-display text-xl font-bold" {...nameBf}>
+          <h2
+            class="font-display text-ink text-[28px] leading-10 font-bold"
+            {...nameBf}
+          >
             {name}
             <span aria-hidden="true"> –</span>
           </h2>
         )}
         {role && (
-          <p class="text-ink mt-1 text-sm leading-snug" {...roleBf}>
+          <p
+            class="text-ink mt-1 font-sans text-base leading-normal font-medium"
+            {...roleBf}
+          >
             {role}
           </p>
         )}
       </div>
     )
   }
-  <div class="mt-auto flex flex-col gap-2 pt-2 text-sm">
+  <div class="mt-auto flex w-full flex-col items-center gap-2 pt-2 text-sm">
     {
       phone && (
         <a
           href={telHref(phone)}
-          class="enter:text-brand-500 text-brand-500 inline-flex items-center gap-2"
+          class="enter:text-brand-500 text-brand-500 inline-flex items-center justify-center gap-2"
           {...bf(`${bfPrefix}Phone`, "chrome_denied", section)}
         >
           <svg
@@ -144,7 +156,7 @@ const studiesBf = bf(`${bfPrefix}Studies`, "style_target", section)
       email && (
         <a
           href={`mailto:${email}`}
-          class="enter:text-brand-500 text-brand-500 inline-flex items-center gap-2"
+          class="enter:text-brand-500 text-brand-500 inline-flex items-center justify-center gap-2"
           {...bf(`${bfPrefix}Mail`, "chrome_denied", section)}
         >
           <svg

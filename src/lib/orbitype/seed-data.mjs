@@ -906,7 +906,8 @@ function careersSections() {
           image: "/images/bei-uns-arbeiten/job-schnuppertage.jpg",
           imageAlt: de("Schnuppertage im Büro"),
           ctaLabel: de("MEHR ÜBER SCHNUPPERTAGE"),
-          dialogId: "application-schnuppertage",
+          reservationMode: "path",
+          reservationTarget: "/architektur-erleben",
         },
         {
           id: "lehrstelle",
@@ -941,6 +942,9 @@ function careersSections() {
       ),
       image: "/images/bei-uns-arbeiten/about.jpg",
       imageAlt: de("Teammeeting bei Bhend Architektur"),
+      listHeading: de(
+        "Unser Fokus liegt darauf, individuelle Lebensräume zu schaffen, die hohe Qualitätsstandards erfüllen.",
+      ),
       lead: de("Unsere Kunden sind:"),
       items: [
         {
@@ -960,12 +964,10 @@ function careersSections() {
         {
           body: de("Investoren mit Bedarf an Wohn- und Gewerberäume"),
         },
-        {
-          body: de(
-            "Zusätzlich sind wir stark in der Energieberatung und im Brandschutz.",
-          ),
-        },
       ],
+      note: de(
+        "Zusätzlich sind wir stark in der Energieberatung und im Brandschutz.",
+      ),
       _orbi: { component: "SectionChecklistSplit" },
     },
     {
@@ -983,6 +985,46 @@ function careersSections() {
       biography: de("Bauen für Menschen, gestalten für Generationen."),
       limit: 12,
       _orbi: { component: "SectionInstagramFeed" },
+    },
+  ]
+}
+
+function schnupperSections() {
+  const schnupperCta = de(
+    "Jetzt den Beruf Schnuppern als Zeichner/in EFZ Architektur kennenlernen",
+  )
+  return [
+    {
+      id: "schnupperHero",
+      heading: de("Architektur erleben"),
+      lead: de(
+        "Werde Zeichner für einen Tag! Entdecke den Beruf des Zeichners!",
+      ),
+      body: de(
+        "Nutze die Gelegenheit, einen Einblick in die Arbeiten und den Alltag von einem Zeichner zu erhalten und erfahre, wie vielseitig und kreativ der Beruf sein kann.",
+      ),
+      image: "/images/bei-uns-arbeiten/schnupper-hero.jpg",
+      imageAlt: de("Das Team von Bhend Architektur auf der Baustelle"),
+      ctaLabel: schnupperCta,
+      dialogId: "application-schnuppertage",
+      defaultApplicationType: "Schnuppertag",
+      _orbi: { component: "SectionSchnupperHero" },
+    },
+    {
+      id: "lehrstelleWarum",
+      heading: de("Warum eine Lehrstelle bei Bhend Architektur"),
+      subheading: de(
+        "Die Bhend Architektur steht für visionäre Architektur und innovative Bauprojekte!",
+      ),
+      body: de(
+        "Seit über 10 Jahre bilden wir erfolgreich Zeichner/-innen EFZ aus. Unser Ziel ist es, Schüler/-innen auf ihrem Weg ins Berufsleben zu begleiten und sie auch neben der Ausbildung zu fördern, um einen sanften Einstieg in die Berufswelt zu ermöglichen. Die Lehrlingsausbildner Patrick und Joel haben zusammen über 20 Lehrlinge erfolgreich durch die Berufslehre begleitet.\nNebst der Förderung im Bereich der Berufskenntnisse, Sozial- und Selbstkompetenz fördern wir unsere Lehrlinge in allgemeinen Bereichen und ermöglichen während der Lehre einen Einblick in den Entwurf, die Bauleitung und viele weitere Bereiche.",
+      ),
+      image: "/images/bei-uns-arbeiten/lehrstelle-why.jpg",
+      imageAlt: de("Lehrlinge und Ausbildner auf der Baustelle"),
+      ctaLabel: schnupperCta,
+      dialogId: "application-schnuppertage",
+      defaultApplicationType: "Schnuppertag",
+      _orbi: { component: "SectionLehrstelleSplit" },
     },
   ]
 }
@@ -1112,6 +1154,29 @@ export function buildSeedPages({
       created_at: now(),
       updated_at: now(),
       sections: careersSections(),
+    },
+    {
+      id: "seed-architektur-erleben",
+      slug: "architektur-erleben",
+      title: {
+        de: "Architektur erleben",
+        en: "Experience architecture",
+      },
+      lead: {
+        de: "Schnuppertage und Lehrstelle Zeichner/in EFZ Architektur",
+        en: "Taster days and drafting apprenticeship",
+      },
+      img: "/images/bei-uns-arbeiten/schnupper-hero.jpg",
+      keywords: [
+        "schnuppertage",
+        "lehrstelle",
+        "zeichner",
+        "architektur erleben",
+      ],
+      head: {},
+      created_at: now(),
+      updated_at: now(),
+      sections: schnupperSections(),
     },
     {
       id: "seed-blog",

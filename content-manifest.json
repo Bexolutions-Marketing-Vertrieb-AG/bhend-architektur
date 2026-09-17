@@ -69,8 +69,21 @@
         "SectionCta"
       ]
     },
+    "bei-uns-arbeiten": {
+      "components": [
+        "SectionCareersIntro",
+        "SectionJobOpenings",
+        "SectionApplicationInvite",
+        "SectionChecklistSplit",
+        "SectionCultureBand",
+        "SectionInstagramFeed"
+      ]
+    },
     "setup": {
       "components": ["SectionWelcome"]
+    },
+    "architektur-erleben": {
+      "components": ["SectionSchnupperHero", "SectionLehrstelleSplit"]
     }
   }
 }

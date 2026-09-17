@@ -34,13 +34,11 @@ const cta = translate(ctaLabel, locale)
 ---
 
 <section class="bg-white" {...bf(`${section}.shell`, "container", section)}>
-  <div
-    class="container-wide py-section-sm md:py-section flex flex-col items-start gap-8 md:items-center md:text-center"
-  >
+  <div class="container-wide flex flex-col items-start gap-8 py-8 md:py-12">
     {
       headline && (
         <h2
-          class="font-display text-brand-500 text-3xl font-bold tracking-tight md:text-4xl"
+          class="font-display text-brand-500 text-[48px] leading-[56px] font-bold"
           {...bf(`${section}.heading`, "style_target", section)}
         >
           {headline}
@@ -50,7 +48,7 @@ const cta = translate(ctaLabel, locale)
     {
       copy && (
         <p
-          class="section-lead max-w-4xl whitespace-pre-line"
+          class="font-display text-ink w-full text-[32px] leading-10 font-bold whitespace-pre-line"
           {...bf(`${section}.body`, "style_target", section)}
         >
           {copy}
