@@ -1,135 +1,108 @@
 ---
-// SectionJobOpenings.astro — open positions + application dialogs
+// SectionSchnupperHero.astro — Architektur erleben + CTA + wide photo (+ app dialogs)
 import { translate } from "~/lib/i18n"
 import { bf } from "~/lib/bf"
-import { resolveReservationHref } from "~/lib/reservation"
-import type { ReservationMode } from "~/lib/reservation"
 import ApplicationForm from "./partials/ApplicationForm.astro"
 import type { I18nString } from "~/types/i18n"
 import type { Locale } from "~/config/locales"
-
-interface JobItem {
-  id?: string
-  title?: I18nString
-  body?: I18nString
-  image?: string
-  imageAlt?: I18nString
-  ctaLabel?: I18nString
-  dialogId?: string
-  reservationMode?: ReservationMode
-  reservationTarget?: string
-  ctaHref?: string
-}
 
 interface Props {
   id?: string
   title?: I18nString
   heading?: I18nString
-  items?: JobItem[]
+  lead?: I18nString
+  body?: I18nString
+  image?: string
+  imageAlt?: I18nString
+  ctaLabel?: I18nString
+  dialogId?: string
+  defaultApplicationType?: string
   locale: Locale
 }
 
-const { id = "jobOpenings", title, heading, items = [], locale } = Astro.props
+const {
+  id = "schnupperHero",
+  title,
+  heading,
+  lead,
+  body,
+  image,
+  imageAlt,
+  ctaLabel,
+  dialogId = "application-schnuppertage",
+  defaultApplicationType = "Schnuppertag",
+  locale,
+} = Astro.props
 
 const section = id
 const headline = translate(heading ?? title, locale)
+const leadText = translate(lead, locale)
+const copy = translate(body, locale)
+const cta = translate(ctaLabel, locale)
+const alt = translate(imageAlt, locale) || headline
 ---
 
 <section class="bg-white" {...bf(`${section}.shell`, "container", section)}>
-  <div class="container-wide py-section-sm md:py-section">
-    {
-      headline && (
-        <h2
-          class="font-display text-brand-500 mb-10 text-[48px] leading-[56px] font-bold md:mb-12"
-          {...bf(`${section}.heading`, "style_target", section)}
-        >
-          {headline}
-        </h2>
-      )
-    }
-
-    <div class="flex flex-col gap-8">
+  <div class="container-wide py-section-sm md:pt-section md:pb-section">
+    <div class="mx-auto flex max-w-[984px] flex-col gap-6 md:gap-8">
       {
-        items.map((item) => {
-          const itemId = (item.id ?? "job").trim() || "job"
-          const itemTitle = translate(item.title, locale)
-          const itemBody = translate(item.body, locale)
-          const cta = translate(item.ctaLabel, locale)
-          const alt = translate(item.imageAlt, locale) || itemTitle
-          const dialogId = (item.dialogId ?? "").trim()
-          const href = resolveReservationHref({
-            reservationMode: item.reservationMode,
-            reservationTarget: item.reservationTarget,
-            ctaHref: item.ctaHref,
-          })
-          const linkHref = href && href !== "#" ? href : ""
-          const ctaBf = bf(`${section}.${itemId}.cta`, "chrome_denied", section)
-          return (
-            <article
-              class="bg-brand-100 grid gap-6 p-6 md:grid-cols-[minmax(0,537px)_minmax(0,1fr)] md:items-start md:gap-10 md:p-8"
-              {...bf(`${section}.${itemId}.shell`, "container", section)}
-            >
-              <div class="border-brand-200 border-b pb-4 md:col-span-2">
-                {itemTitle && (
-                  <h3
-                    class="font-display text-lg font-bold tracking-tight uppercase md:text-xl"
-                    {...bf(
-                      `${section}.${itemId}.title`,
-                      "style_target",
-                      section,
-                    )}
-                  >
-                    {itemTitle}
-                  </h3>
-                )}
-              </div>
-              {item.image && (
-                <img
-                  src={item.image}
-                  alt={alt}
-                  class="aspect-[537/283] w-full object-cover"
-                  loading="lazy"
-                  {...bf(`${section}.${itemId}.image`, "image", section)}
-                />
-              )}
-              <div class="flex flex-col gap-6">
-                {itemBody && (
-                  <p
-                    class="section-lead"
-                    {...bf(
-                      `${section}.${itemId}.body`,
-                      "style_target",
-                      section,
-                    )}
-                  >
-                    {itemBody}
-                  </p>
-                )}
-                {cta && linkHref ? (
-                  <a href={linkHref} class="btn-primary self-start" {...ctaBf}>
-                    {cta}
-                  </a>
-                ) : cta && dialogId ? (
-                  <button
-                    type="button"
-                    class="btn-primary self-start"
-                    data-open-application={dialogId}
-                    data-application-type={
-                      dialogId.includes("lehrstelle")
-                        ? "Bewerbung Lehrstelle"
-                        : "Schnuppertag"
-                    }
-                    {...ctaBf}
-                  >
-                    {cta}
-                  </button>
-                ) : null}
-              </div>
-            </article>
-          )
-        })
+        headline && (
+          <h1
+            class="font-display text-ink text-[64px] leading-[72px] font-bold"
+            {...bf(`${section}.heading`, "style_target", section)}
+          >
+            {headline}
+          </h1>
+        )
+      }
+      {
+        leadText && (
+          <p
+            class="font-display text-ink text-[32px] leading-10 font-bold"
+            {...bf(`${section}.lead`, "style_target", section)}
+          >
+            {leadText}
+          </p>
+        )
+      }
+      {
+        copy && (
+          <p
+            class="section-lead whitespace-pre-line"
+            {...bf(`${section}.body`, "style_target", section)}
+          >
+            {copy}
+          </p>
+        )
+      }
+      {
+        cta && (
+          <button
+            type="button"
+            class="btn-primary mt-2 w-fit max-w-full text-left normal-case"
+            data-open-application={dialogId}
+            data-application-type={defaultApplicationType}
+            {...bf(`${section}.cta`, "chrome_denied", section)}
+          >
+            {cta}
+          </button>
+        )
       }
     </div>
+    {
+      image && (
+        <img
+          src={image}
+          alt={alt}
+          class="mt-10 aspect-[1200/585] w-full object-cover md:mt-14"
+          width="1200"
+          height="585"
+          loading="eager"
+          decoding="async"
+          {...bf(`${section}.image`, "image", section)}
+        />
+      )
+    }
   </div>
 
   <ApplicationForm

@@ -1,0 +1,110 @@
+---
+// SectionLehrstelleSplit.astro — why apprenticeship + CTA | portrait photo
+import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
+import type { I18nString } from "~/types/i18n"
+import type { Locale } from "~/config/locales"
+
+interface Props {
+  id?: string
+  title?: I18nString
+  heading?: I18nString
+  subheading?: I18nString
+  body?: I18nString
+  image?: string
+  imageAlt?: I18nString
+  ctaLabel?: I18nString
+  dialogId?: string
+  defaultApplicationType?: string
+  locale: Locale
+}
+
+const {
+  id = "lehrstelleSplit",
+  title,
+  heading,
+  subheading,
+  body,
+  image,
+  imageAlt,
+  ctaLabel,
+  dialogId = "application-schnuppertage",
+  defaultApplicationType = "Schnuppertag",
+  locale,
+} = Astro.props
+
+const section = id
+const headline = translate(heading ?? title, locale)
+const sub = translate(subheading, locale)
+const copy = translate(body, locale)
+const cta = translate(ctaLabel, locale)
+const alt = translate(imageAlt, locale) || headline
+---
+
+<section class="bg-white" {...bf(`${section}.shell`, "container", section)}>
+  <div class="container-wide py-section-sm md:pb-section">
+    <div
+      class="grid items-start gap-10 lg:grid-cols-[minmax(0,685px)_minmax(0,465px)] lg:gap-12"
+    >
+      <div class="flex flex-col gap-6">
+        {
+          headline && (
+            <h2
+              class="font-display text-ink text-[32px] leading-10 font-bold"
+              {...bf(`${section}.heading`, "style_target", section)}
+            >
+              {headline}
+            </h2>
+          )
+        }
+        {
+          sub && (
+            <p
+              class="font-display text-ink text-[28px] leading-10 font-bold"
+              {...bf(`${section}.subheading`, "style_target", section)}
+            >
+              {sub}
+            </p>
+          )
+        }
+        {
+          copy && (
+            <p
+              class="section-lead whitespace-pre-line"
+              {...bf(`${section}.body`, "style_target", section)}
+            >
+              {copy}
+            </p>
+          )
+        }
+        {
+          cta && (
+            <button
+              type="button"
+              class="btn-primary mt-2 w-fit max-w-full text-left normal-case"
+              data-open-application={dialogId}
+              data-application-type={defaultApplicationType}
+              {...bf(`${section}.cta`, "chrome_denied", section)}
+            >
+              {cta}
+            </button>
+          )
+        }
+      </div>
+      {
+        image && (
+          <img
+            src={image}
+            alt={alt}
+            class="aspect-[465/550] w-full object-cover"
+            width="465"
+            height="550"
+            loading="lazy"
+            decoding="async"
+            {...bf(`${section}.image`, "image", section)}
+          />
+        )
+      }
+    </div>
+  </div>
+</section>

@@ -8,8 +8,11 @@ const jobItemSchema = z.object({
   image: z.string().optional(),
   imageAlt: i18nStringSchema.optional(),
   ctaLabel: i18nStringSchema,
-  /** Matches dialog data-application-dialog value */
-  dialogId: z.string().min(1),
+  /** Opens application dialog when set (and no path CTA) */
+  dialogId: z.string().min(1).optional(),
+  reservationMode: z.enum(["path", "url", "mailto", "anchor"]).optional(),
+  reservationTarget: z.string().optional(),
+  ctaHref: z.string().optional(),
 })
 
 export const sectionJobOpeningsSchema = z.object({

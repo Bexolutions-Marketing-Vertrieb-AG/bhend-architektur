@@ -1165,7 +1165,7 @@ surfaces:
     locales: [de]
     publication_target: orbitype_pages
     sample: "MEHR ÜBER SCHNUPPERTAGE"
-    notes: "Opens dialog application-schnuppertage (Figma 475:3691 / form 2012:6329)"
+    notes: "Links to /architektur-erleben (Schnuppern page)"
 
   - bf_id: jobOpenings.lehrstelle.cta
     kind: chrome_denied
@@ -1268,6 +1268,128 @@ surfaces:
     locales: [de]
     publication_target: orbitype_pages
     sample: "Bauen für Menschen, gestalten für Generationen."
+
+  - bf_id: schnupperHero.shell
+    kind: container
+    area: architektur-erleben
+    section: schnupperHero
+    path: src/components/sections/SectionSchnupperHero.astro
+    locator: orbitype:pages/architektur-erleben/sections/schnupperHero
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: schnupperHero.heading
+    kind: style_target
+    area: architektur-erleben
+    section: schnupperHero
+    path: src/components/sections/SectionSchnupperHero.astro
+    locator: orbitype:pages/architektur-erleben/sections/schnupperHero/heading@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Architektur erleben"
+
+  - bf_id: schnupperHero.lead
+    kind: style_target
+    area: architektur-erleben
+    section: schnupperHero
+    path: src/components/sections/SectionSchnupperHero.astro
+    locator: orbitype:pages/architektur-erleben/sections/schnupperHero/lead@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Werde Zeichner für einen Tag!"
+
+  - bf_id: schnupperHero.body
+    kind: style_target
+    area: architektur-erleben
+    section: schnupperHero
+    path: src/components/sections/SectionSchnupperHero.astro
+    locator: orbitype:pages/architektur-erleben/sections/schnupperHero/body@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Nutze die Gelegenheit, einen Einblick"
+
+  - bf_id: schnupperHero.image
+    kind: image
+    area: architektur-erleben
+    section: schnupperHero
+    path: src/components/sections/SectionSchnupperHero.astro
+    locator: orbitype:pages/architektur-erleben/sections/schnupperHero/image
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "/images/bei-uns-arbeiten/schnupper-hero.jpg"
+
+  - bf_id: schnupperHero.cta
+    kind: chrome_denied
+    area: architektur-erleben
+    section: schnupperHero
+    path: src/components/sections/SectionSchnupperHero.astro
+    locator: orbitype:pages/architektur-erleben/sections/schnupperHero
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Jetzt den Beruf Schnuppern"
+    notes: "Opens dialog application-schnuppertage; page not in main nav"
+
+  - bf_id: lehrstelleWarum.shell
+    kind: container
+    area: architektur-erleben
+    section: lehrstelleWarum
+    path: src/components/sections/SectionLehrstelleSplit.astro
+    locator: orbitype:pages/architektur-erleben/sections/lehrstelleWarum
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: ""
+
+  - bf_id: lehrstelleWarum.heading
+    kind: style_target
+    area: architektur-erleben
+    section: lehrstelleWarum
+    path: src/components/sections/SectionLehrstelleSplit.astro
+    locator: orbitype:pages/architektur-erleben/sections/lehrstelleWarum/heading@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Warum eine Lehrstelle bei Bhend Architektur"
+
+  - bf_id: lehrstelleWarum.subheading
+    kind: style_target
+    area: architektur-erleben
+    section: lehrstelleWarum
+    path: src/components/sections/SectionLehrstelleSplit.astro
+    locator: orbitype:pages/architektur-erleben/sections/lehrstelleWarum/subheading@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Die Bhend Architektur steht für visionäre Architektur"
+
+  - bf_id: lehrstelleWarum.body
+    kind: style_target
+    area: architektur-erleben
+    section: lehrstelleWarum
+    path: src/components/sections/SectionLehrstelleSplit.astro
+    locator: orbitype:pages/architektur-erleben/sections/lehrstelleWarum/body@de
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Seit über 10 Jahre bilden wir erfolgreich Zeichner/-innen EFZ aus."
+
+  - bf_id: lehrstelleWarum.image
+    kind: image
+    area: architektur-erleben
+    section: lehrstelleWarum
+    path: src/components/sections/SectionLehrstelleSplit.astro
+    locator: orbitype:pages/architektur-erleben/sections/lehrstelleWarum/image
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "/images/bei-uns-arbeiten/lehrstelle-why.jpg"
+
+  - bf_id: lehrstelleWarum.cta
+    kind: chrome_denied
+    area: architektur-erleben
+    section: lehrstelleWarum
+    path: src/components/sections/SectionLehrstelleSplit.astro
+    locator: orbitype:pages/architektur-erleben/sections/lehrstelleWarum
+    locales: [de]
+    publication_target: orbitype_pages
+    sample: "Jetzt den Beruf Schnuppern"
+    notes: "Opens dialog application-schnuppertage"
 
   - bf_id: blogFeed.shell
     kind: container
