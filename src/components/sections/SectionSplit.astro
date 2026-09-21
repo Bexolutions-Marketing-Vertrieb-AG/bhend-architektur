@@ -62,6 +62,10 @@ const headlineLines = (() => {
   return [first, ...rest.join(" ").split(/\s+/).filter(Boolean)]
 })()
 const copy = translate(body ?? lead, locale)
+const copyParas = copy
+  .split(/\n+/)
+  .map((para) => para.trim())
+  .filter(Boolean)
 const alt = translate(imageAlt, locale)
 const credit = translate(caption, locale)
 const creditParts = credit ? fotografCreditParts(credit) : null
@@ -133,13 +137,15 @@ const imageFirst = imagePosition === "left"
           )
         }
         {
-          copy && (
-            <p
-              class="section-lead whitespace-pre-line"
+          copyParas.length > 0 && (
+            <div
+              class="space-y-5"
               {...bf(`home.${section}.body`, "style_target", section)}
             >
-              {copy}
-            </p>
+              {copyParas.map((para) => (
+                <p class="section-lead">{para}</p>
+              ))}
+            </div>
           )
         }
         {

@@ -179,15 +179,15 @@ const fieldClass =
       {
         mapEmbedUrl && (
           <div
-            class="border-brand-200 overflow-hidden rounded-xl border bg-white shadow-sm"
+            class="border-brand-200 relative aspect-square min-h-[20rem] w-full overflow-hidden rounded-xl border bg-white shadow-sm lg:min-h-[28rem]"
             {...bf(`${section}.map`, "container", section)}
           >
             <iframe
               src={mapEmbedUrl}
               title={mapLabel}
-              class="aspect-square min-h-[20rem] w-full border-0 lg:min-h-[28rem]"
+              class="absolute inset-0 h-full w-full border-0"
               loading="lazy"
-              referrerpolicy="strict-origin-when-cross-origin"
+              referrerpolicy="no-referrer-when-downgrade"
               allowfullscreen
             />
           </div>

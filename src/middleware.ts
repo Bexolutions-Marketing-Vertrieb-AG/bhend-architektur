@@ -59,6 +59,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
         "style-src 'self' 'unsafe-inline'",
         "script-src 'self' 'unsafe-inline'",
         "connect-src 'self' https:",
+        "frame-src 'self' https://www.google.com https://maps.google.com https://www.google.ch",
         "frame-ancestors 'none'",
         "base-uri 'self'",
         "form-action 'self'",
