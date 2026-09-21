@@ -10,6 +10,8 @@ export const sectionServiceIntroSchema = z.object({
   body: i18nStringSchema.optional(),
   image: z.string().optional(),
   imageAlt: i18nStringSchema.optional(),
+  caption: i18nStringSchema.optional(),
+  imageCaption: i18nStringSchema.optional(),
   ctaLabel: i18nStringSchema.optional(),
   ctaHref: z.string().optional(),
   reservationMode: z.enum(RESERVATION_MODES).optional(),

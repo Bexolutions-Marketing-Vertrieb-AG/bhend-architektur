@@ -85,6 +85,71 @@
     font-variation-settings: "wdth" 100;
   }
 
+  /*
+   * Leistungen CTA band: angled TOP edge (Figma).
+   * Left high → right low; bottom edge stays flat.
+   */
+  .leistungen-cta-slant {
+    --leistungen-cta-slant: 6.25vw;
+    clip-path: polygon(
+      0 0,
+      100% var(--leistungen-cta-slant),
+      100% 100%,
+      0 100%
+    );
+    padding-top: calc(var(--spacing-section) + var(--leistungen-cta-slant));
+    padding-bottom: var(--spacing-section);
+  }
+
+  .leistungen-cta-eyebrow {
+    @apply text-ink font-display text-[32px] leading-[40px];
+    font-weight: 700;
+  }
+
+  .leistungen-cta-heading {
+    @apply text-ink font-display text-[48px] leading-[56px];
+    font-weight: 700;
+  }
+
+  .leistungen-cta-body {
+    @apply text-ink font-sans text-[20px] leading-normal;
+    font-weight: 500;
+    font-stretch: normal;
+    font-variation-settings: "wdth" 100;
+  }
+
+  .leistungen-cta-button {
+    @apply bg-brand-500 enter:opacity-90 inline-flex w-[328px] items-center justify-center gap-2.5 px-6 py-4 text-center text-white transition-opacity;
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 40px;
+    font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
+  }
+
+  /* Short process intro line on Brandschutz (ChecklistSplit). */
+  .leistungen-process-intro {
+    @apply text-ink font-display text-[32px] leading-[40px];
+    font-weight: 700;
+  }
+
+  /* Checklist lead on Energieberatung only. */
+  .leistungen-process-lead {
+    @apply text-ink font-sans text-[20px] leading-normal;
+    font-weight: 700;
+    font-stretch: normal;
+    font-variation-settings: "wdth" 100;
+  }
+
+  /* Plain checklist titles (Bauherrenberatung process). */
+  .leistungen-checklist-plain {
+    @apply text-ink font-sans text-[20px] leading-normal whitespace-pre-line;
+    font-weight: 500;
+    font-stretch: normal;
+    font-variation-settings: "wdth" 100;
+  }
+
   .nav-dropdown-trigger {
     font: inherit;
     letter-spacing: inherit;

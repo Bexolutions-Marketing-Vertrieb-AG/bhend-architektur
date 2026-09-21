@@ -44,50 +44,78 @@ const href = resolveReservationHref({
   reservationTarget,
   ctaHref,
 })
+const isLeistungenCta =
+  /^(planung|beratung|brandschutz|realisierung|energieberatung|bauherrenberatung)/.test(
+    section,
+  )
 ---
 
-<section class="bg-brand-50" {...bf(`${section}.shell`, "container", section)}>
-  <div class="container-wide py-section flex flex-col items-start text-left">
-    {
-      kicker && (
-        <p
-          class="text-muted mb-3 text-sm"
-          {...bf(`${section}.eyebrow`, "style_target", section)}
-        >
-          {kicker}
-        </p>
-      )
-    }
-    {
-      headline && (
-        <h2
-          class="section-heading mb-6 max-w-4xl"
-          {...bf(`${section}.heading`, "style_target", section)}
-        >
-          {headline}
-        </h2>
-      )
-    }
-    {
-      body && (
-        <p
-          class="section-lead mb-8 max-w-2xl"
-          {...bf(`${section}.body`, "style_target", section)}
-        >
-          {body}
-        </p>
-      )
-    }
-    {
-      cta && (
-        <a
-          href={href}
-          class="btn-primary"
-          {...bf(`${section}.cta`, "chrome_denied", section)}
-        >
-          {cta}
-        </a>
-      )
-    }
+<section
+  class:list={[isLeistungenCta ? "bg-white" : "bg-brand-50"]}
+  {...bf(`${section}.shell`, "container", section)}
+>
+  <div class:list={[isLeistungenCta && "bg-brand-50 leistungen-cta-slant"]}>
+    <div
+      class:list={[
+        "container-wide flex flex-col items-start text-left",
+        !isLeistungenCta && "py-section",
+      ]}
+    >
+      {
+        kicker && (
+          <p
+            class:list={[
+              isLeistungenCta
+                ? "leistungen-cta-eyebrow mb-3"
+                : "text-muted mb-3 text-sm",
+            ]}
+            {...bf(`${section}.eyebrow`, "style_target", section)}
+          >
+            {kicker}
+          </p>
+        )
+      }
+      {
+        headline && (
+          <h2
+            class:list={[
+              isLeistungenCta
+                ? "leistungen-cta-heading mb-6 max-w-4xl"
+                : "section-heading mb-6 max-w-4xl",
+            ]}
+            {...bf(`${section}.heading`, "style_target", section)}
+          >
+            {headline}
+          </h2>
+        )
+      }
+      {
+        body && (
+          <p
+            class:list={[
+              isLeistungenCta
+                ? "leistungen-cta-body mb-8 max-w-2xl"
+                : "section-lead mb-8 max-w-2xl",
+            ]}
+            {...bf(`${section}.body`, "style_target", section)}
+          >
+            {body}
+          </p>
+        )
+      }
+      {
+        cta && (
+          <a
+            href={href}
+            class:list={[
+              isLeistungenCta ? "leistungen-cta-button" : "btn-primary",
+            ]}
+            {...bf(`${section}.cta`, "chrome_denied", section)}
+          >
+            {cta}
+          </a>
+        )
+      }
+    </div>
   </div>
 </section>

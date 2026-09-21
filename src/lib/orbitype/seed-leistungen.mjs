@@ -96,6 +96,12 @@ export function beratungSections() {
         splitTitleBody(
           "Energieberatung\nOptimieren Sie die Energieeffizienz Ihres Projekts mit unserer Expertenberatung.",
         ),
+        splitTitleBody(
+          "Immobilienberatung\nUnterstützung beim Kauf von Landparzellen oder Bestandsgebäuden.",
+        ),
+        splitTitleBody(
+          "Generalunternehmer-Angebot\nAuf Wunsch bieten wir eine Pauschalkalkulation Ihres Projekts an.",
+        ),
       ],
       _orbi: { component: "SectionChecklistSplit" },
     },
@@ -142,8 +148,11 @@ export function brandschutzSections() {
     },
     {
       id: "brandschutzProcess",
-      body: de(
+      heading: de(
         "Als erfahrenes Architekturbüro übernehmen wir Gesamtplanungen von ganzen Bauvorhaben.",
+      ),
+      body: de(
+        "In der Brandschutzplanung fliessen nun alle Informationen zusammen, die genauen Wünsche der Bauherrschaft, die Architekturplanung, die Materialwahl, der Personen- oder der Sachwertschutz, die Arbeitsabläufe des Betriebes. Durch die Zusammenarbeit aller Beteiligten kann der Brandschutz effizient in die Gesamtplanung eingearbeitet werden. Der Abschluss der Planung wird mit einer amtlichen Brandschutzbewilligung erreicht.",
       ),
       lead: de(
         "Erfahrungen haben wir im Neubau vor allem aber im Umbau und im Sanierungsbereich bei:",
@@ -181,13 +190,13 @@ export function realisierungSections() {
       id: "realisierungPillars",
       items: [
         {
-          title: de("Effiziente Projektsteuerung"),
+          title: de("Effiziente\nProjektsteuerung"),
           text: de(
             "Unser Team übernimmt die effiziente Steuerung und Koordination aller Bauprozesse. Ziel ist es, Ihr Projekt termingerecht und im Rahmen des veranschlagten Budgets erfolgreich abzuschliessen. Durch die präzise Planung und Überwachung aller Schritte sichern wir den reibungslosen Ablauf Ihres Vorhabens.",
           ),
         },
         {
-          title: de("Stetige Qualitätssicherung"),
+          title: de("Stetige\nQualitätssicherung"),
           text: de(
             "Die Qualität Ihrer Bauprojekte ist unser grosses Anliegen. Durch die enge Zusammenarbeit mit ausgewählten Handwerkern und Zulieferern garantieren wir, dass jede Phase der Realisierung den höchsten Qualitätsstandards entspricht. Unsere Qualitätskontrollen auf der Baustelle gewährleisten die präzise Ausführung aller Arbeiten.",
           ),
@@ -230,6 +239,12 @@ export function realisierungSections() {
         ),
         splitTitleBody(
           "Überwachung der Garantiezeiten\nKontinuierliche Überwachung der Garantiezeiten für langfristige Sicherheit.",
+        ),
+        splitTitleBody(
+          "Sicherstellung eines kontinuierlichen Informationsflusses zur Bauherrschaft\nEffektive Sicherstellung eines kontinuierlichen Informationsflusses zur Bauherrschaft.",
+        ),
+        splitTitleBody(
+          "Periodische Endkostenprognosen\nRegelmäßige Endkostenprognosen für eine transparente Budgetplanung.",
         ),
       ],
       _orbi: { component: "SectionChecklistSplit" },
@@ -317,6 +332,7 @@ export function bauherrenberatungSections() {
       ),
       image: "/images/bauherrenberatung/hero.jpg",
       imageAlt: de("Bauherrenberatung"),
+      caption: de("Fotograf: Karina Castro\nArchitektur: Malte Kloes"),
       _orbi: { component: "SectionServiceIntro" },
     },
     {

@@ -2,7 +2,7 @@
 // SectionChecklistSplit.astro — body + image | checklist with check icons
 import { translate } from "~/lib/i18n"
 import { bf } from "~/lib/bf"
-import { fotografCreditParts } from "~/lib/photo-credit"
+import { creditLines } from "~/lib/photo-credit"
 import type { I18nString } from "~/types/i18n"
 import type { Locale } from "~/config/locales"
 
@@ -54,15 +54,26 @@ const listLead = translate(lead, locale)
 const listNote = translate(note, locale)
 const alt = translate(imageAlt, locale)
 const caption = translate(imageCaption, locale)
-const captionParts = caption ? fotografCreditParts(caption) : null
+const lines = caption ? creditLines(caption) : []
 const isLeistungen =
   /^(planung|beratung|brandschutz|realisierung|energieberatung|bauherrenberatung)/.test(
     section,
   )
 const bodyClass = isLeistungen ? "leistungen-body" : "section-lead"
-const itemTitleClass = isLeistungen
-  ? "leistungen-item-title"
-  : "font-display text-lg font-bold whitespace-pre-line"
+const leadClass =
+  section === "energieberatungProcess" || section === "bauherrenberatungProcess"
+    ? "leistungen-process-lead"
+    : bodyClass
+const itemTitleClass =
+  section === "bauherrenberatungProcess"
+    ? "leistungen-checklist-plain"
+    : isLeistungen
+      ? "leistungen-item-title"
+      : "font-display text-lg font-bold whitespace-pre-line"
+const headingClass =
+  section === "brandschutzProcess"
+    ? "leistungen-process-intro"
+    : "font-display text-3xl font-bold tracking-tight md:text-4xl"
 ---
 
 <section
@@ -75,10 +86,7 @@ const itemTitleClass = isLeistungen
         {
           headline && (
             <h2
-              class:list={[
-                "font-display text-3xl font-bold tracking-tight md:text-4xl",
-                dark && "text-brand-100",
-              ]}
+              class:list={[headingClass, dark && "text-brand-100"]}
               {...bf(`${section}.heading`, "style_target", section)}
             >
               {headline}
@@ -113,14 +121,21 @@ const itemTitleClass = isLeistungen
                   ]}
                   {...bf(`${section}.imageCaption`, "style_target", section)}
                 >
-                  {captionParts ? (
-                    <>
-                      <strong class="font-bold">{captionParts.label}</strong>
-                      {captionParts.rest}
-                    </>
-                  ) : (
-                    caption
-                  )}
+                  {lines.length > 0
+                    ? lines.map((line, index) => (
+                        <>
+                          {index > 0 && " | "}
+                          {line.label ? (
+                            <>
+                              <strong class="font-bold">{line.label}</strong>
+                              {line.rest}
+                            </>
+                          ) : (
+                            line.rest
+                          )}
+                        </>
+                      ))
+                    : caption}
                 </figcaption>
               )}
             </figure>
@@ -144,7 +159,7 @@ const itemTitleClass = isLeistungen
         {
           listLead && (
             <p
-              class:list={[bodyClass, dark ? "text-brand-100" : "text-ink"]}
+              class:list={[leadClass, dark ? "text-brand-100" : "text-ink"]}
               {...bf(`${section}.lead`, "style_target", section)}
             >
               {listLead}
