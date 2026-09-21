@@ -35,15 +35,15 @@ const title = translate(mapTitle, locale) || alt || "Standort"
     {
       mapEmbedUrl ? (
         <div
-          class="border-brand-200 overflow-hidden rounded-xl border bg-white shadow-sm"
+          class="border-brand-200 relative aspect-[16/9] min-h-[16rem] w-full overflow-hidden rounded-xl border bg-white shadow-sm"
           {...bf(`home.${section}.map`, "container", section)}
         >
           <iframe
             src={mapEmbedUrl}
             title={title}
-            class="aspect-[1200/675] min-h-[16rem] w-full border-0"
+            class="absolute inset-0 h-full w-full border-0"
             loading="lazy"
-            referrerpolicy="strict-origin-when-cross-origin"
+            referrerpolicy="no-referrer-when-downgrade"
             allowfullscreen
           />
         </div>
@@ -52,7 +52,7 @@ const title = translate(mapTitle, locale) || alt || "Standort"
           <img
             src={image}
             alt={alt || "Map"}
-            class="aspect-[1200/675] w-full object-cover"
+            class="aspect-[16/9] w-full object-cover"
             width="1200"
             height="675"
             loading="lazy"

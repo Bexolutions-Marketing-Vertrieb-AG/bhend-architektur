@@ -43,7 +43,15 @@ const {
 const section = id
 const headline = translate(heading ?? title, locale)
 const primary = translate(body, locale)
+const primaryParas = primary
+  .split(/\n+/)
+  .map((para) => para.trim())
+  .filter(Boolean)
 const secondary = translate(bodySecondary, locale)
+const secondaryParas = secondary
+  .split(/\n+/)
+  .map((para) => para.trim())
+  .filter(Boolean)
 const alt = translate(imageAlt, locale)
 const credit = translate(caption, locale)
 const creditParts = credit ? fotografCreditParts(credit) : null
@@ -102,24 +110,28 @@ const href = resolveReservationHref({
         )
       }
       {
-        primary && (
-          <p
-            class="section-lead whitespace-pre-line"
+        primaryParas.length > 0 && (
+          <div
+            class="space-y-5"
             {...bf(`home.${section}.body`, "style_target", section)}
           >
-            {primary}
-          </p>
+            {primaryParas.map((para) => (
+              <p class="section-lead">{para}</p>
+            ))}
+          </div>
         )
       }
       <div>
         {
-          secondary && (
-            <p
-              class="section-lead whitespace-pre-line"
+          secondaryParas.length > 0 && (
+            <div
+              class="space-y-5"
               {...bf(`home.${section}.bodySecondary`, "style_target", section)}
             >
-              {secondary}
-            </p>
+              {secondaryParas.map((para) => (
+                <p class="section-lead">{para}</p>
+              ))}
+            </div>
           )
         }
         {
