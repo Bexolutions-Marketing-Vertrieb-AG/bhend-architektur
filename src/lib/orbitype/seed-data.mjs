@@ -229,7 +229,7 @@ function homeSections() {
     {
       id: "challenges",
       heading: de(
-        "Private und Öffentliche\nBauprojekte Gleiche Herausforderungen",
+        "Private und Öffentliche\nBauprojekte\nGleiche\nHerausforderungen",
       ),
       body: de(
         "Häufig begegnen unsere Kunden und Partner Herausforderungen bei der Planung und Umsetzung ihrer Bauvorhaben, unabhängig davon, ob es sich um private, geschäftliche oder öffentliche Projekte handelt.",

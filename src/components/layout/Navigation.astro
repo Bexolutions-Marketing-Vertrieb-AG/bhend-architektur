@@ -80,7 +80,7 @@ function isGroupActive(children: NavChild[]): boolean {
     </a>
 
     <ul
-      class="text-ink hidden items-center gap-6 text-sm font-semibold tracking-wide uppercase lg:flex"
+      class="text-ink hidden items-center gap-6 text-center font-sans text-base leading-normal font-normal uppercase lg:flex"
     >
       {
         links.map((link) =>
@@ -93,24 +93,23 @@ function isGroupActive(children: NavChild[]): boolean {
             >
               <button
                 type="button"
-                class="nav-dropdown-trigger enter:text-brand-500 text-ink group-hover:text-brand-500 group-focus-within:text-brand-500 inline-flex items-center gap-1 bg-transparent p-0 font-sans text-sm font-semibold tracking-wide uppercase transition-colors"
+                class="nav-dropdown-trigger enter:text-brand-500 text-ink group-hover:text-brand-500 group-focus-within:text-brand-500 inline-flex items-center gap-1 bg-transparent p-0 font-sans text-base leading-normal font-normal uppercase transition-colors"
                 aria-haspopup="menu"
               >
                 {link.label}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
                   fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
                   aria-hidden="true"
-                  class="transition-transform group-focus-within:rotate-180 group-hover:rotate-180"
+                  class="text-brand-500 transition-transform group-focus-within:rotate-180 group-hover:rotate-180"
                 >
-                  <polyline points="6 9 12 15 18 9" />
+                  <path
+                    d="M1.5 6.15817L3.0975 4.5L10.5 12.1837L17.9025 4.5L19.5 6.15817L10.5 15.5L1.5 6.15817Z"
+                    fill="currentColor"
+                  />
                 </svg>
               </button>
               <ul
@@ -198,7 +197,7 @@ function isGroupActive(children: NavChild[]): boolean {
           class="border-brand-200 absolute top-[calc(100%+0.75rem)] right-0 z-50 max-h-[min(75dvh,36rem)] w-[min(calc(100vw-1.5rem),22rem)] overflow-y-auto border bg-white shadow-lg"
         >
           <ul
-            class="text-ink divide-brand-100 divide-y p-2 text-sm font-semibold tracking-wide uppercase"
+            class="text-ink divide-brand-100 divide-y p-2 text-center font-sans text-base leading-normal font-normal uppercase"
           >
             {
               links.map((link) =>
@@ -215,27 +214,26 @@ function isGroupActive(children: NavChild[]): boolean {
                         </span>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
                           fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
                           aria-hidden="true"
-                          class="text-muted transition-transform group-open/mobile-sub:rotate-180"
+                          class="text-brand-500 transition-transform group-open/mobile-sub:rotate-180"
                         >
-                          <polyline points="6 9 12 15 18 9" />
+                          <path
+                            d="M1.5 6.15817L3.0975 4.5L10.5 12.1837L17.9025 4.5L19.5 6.15817L10.5 15.5L1.5 6.15817Z"
+                            fill="currentColor"
+                          />
                         </svg>
                       </summary>
-                      <ul class="border-brand-100 mb-2 ml-4 space-y-1 border-l pb-2 pl-3 font-medium tracking-normal normal-case">
+                      <ul class="border-brand-100 mb-2 ml-4 space-y-1 border-l pb-2 pl-3 font-normal">
                         {link.children.map((child) => (
                           <li>
                             <a
                               href={child.href}
                               class:list={[
-                                "enter:text-brand-500 block py-2 tracking-wide uppercase",
+                                "enter:text-brand-500 block py-2 uppercase",
                                 isActive(child.href) && "text-brand-500",
                               ]}
                             >

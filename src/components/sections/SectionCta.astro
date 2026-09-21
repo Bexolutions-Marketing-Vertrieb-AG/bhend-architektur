@@ -47,7 +47,7 @@ const href = resolveReservationHref({
 ---
 
 <section class="bg-brand-50" {...bf(`${section}.shell`, "container", section)}>
-  <div class="container-wide py-section flex flex-col items-center text-center">
+  <div class="container-wide py-section flex flex-col items-start text-left">
     {
       kicker && (
         <p
@@ -61,7 +61,7 @@ const href = resolveReservationHref({
     {
       headline && (
         <h2
-          class="section-heading mb-6 max-w-4xl uppercase"
+          class="section-heading mb-6 max-w-4xl"
           {...bf(`${section}.heading`, "style_target", section)}
         >
           {headline}
