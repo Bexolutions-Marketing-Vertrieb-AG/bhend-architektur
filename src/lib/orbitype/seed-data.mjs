@@ -151,7 +151,7 @@ function teamSections() {
         teamMember({
           name: "Simon Höchenberger",
           image: "/images/team/simon-hoechenberger.jpg",
-          phone: "+41 62 798 0000",
+          phone: "+41 62 798 1073",
           email: "simon.hoechi@bhend-architektur.ch",
           role: "Zeichner EFZ Architektur",
           studies: ["Maurer EFZ"],

@@ -38,7 +38,10 @@ interface Props {
 const { member, locale, bfPrefix, section } = Astro.props
 
 const name = translate(member.name, locale)
-const alt = translate(member.imageAlt, locale) || name
+const nameParts = name.replace(/\n+/g, " ").trim().split(/\s+/).filter(Boolean)
+const nameLead = nameParts.slice(0, -1).join(" ")
+const nameTail = nameParts.at(-1) ?? ""
+const alt = translate(member.imageAlt, locale) || name.replace(/\n+/g, " ")
 const mailLabel = translate(member.mailLabel, locale) || "Mail"
 const role = translate(member.role, locale)
 const studies = (member.studies ?? [])
@@ -80,14 +83,15 @@ const studiesBf = bf(`${bfPrefix}Studies`, "style_target", section)
             class="font-display text-ink text-[28px] leading-10 font-bold"
             {...nameBf}
           >
-            {name}
-            <span class="group-open:hidden" aria-hidden="true">
-              {" "}
-              +
-            </span>
-            <span class="hidden group-open:inline" aria-hidden="true">
-              {" "}
-              –
+            {nameLead && <>{nameLead} </>}
+            <span class="whitespace-nowrap">
+              {nameTail}
+              <span class="group-open:hidden" aria-hidden="true">
+                {"\u00A0"}+
+              </span>
+              <span class="hidden group-open:inline" aria-hidden="true">
+                {"\u00A0"}–
+              </span>
             </span>
           </h2>
           {role && (
@@ -100,7 +104,7 @@ const studiesBf = bf(`${bfPrefix}Studies`, "style_target", section)
           )}
         </summary>
         <ul
-          class="text-ink mt-0.5 space-y-0.5 font-sans text-base leading-normal font-medium"
+          class="text-ink mt-2 space-y-4 font-sans text-base leading-snug font-normal"
           {...studiesBf}
         >
           {studies.map((item) => (
@@ -115,8 +119,11 @@ const studiesBf = bf(`${bfPrefix}Studies`, "style_target", section)
             class="font-display text-ink text-[28px] leading-10 font-bold"
             {...nameBf}
           >
-            {name}
-            <span aria-hidden="true"> –</span>
+            {nameLead && <>{nameLead} </>}
+            <span class="whitespace-nowrap">
+              {nameTail}
+              <span aria-hidden="true">{"\u00A0"}–</span>
+            </span>
           </h2>
         )}
         {role && (
@@ -130,12 +137,14 @@ const studiesBf = bf(`${bfPrefix}Studies`, "style_target", section)
       </div>
     )
   }
-  <div class="mt-auto flex w-full flex-col items-center gap-2 pt-2 text-sm">
+  <div
+    class="mt-auto flex w-full flex-col items-center gap-2 pt-2 text-sm font-bold"
+  >
     {
       phone && (
         <a
           href={telHref(phone)}
-          class="enter:text-brand-500 text-brand-500 inline-flex items-center justify-center gap-2"
+          class="enter:text-brand-500 text-brand-500 inline-flex items-center justify-center gap-2 font-bold"
           {...bf(`${bfPrefix}Phone`, "chrome_denied", section)}
         >
           <svg
@@ -156,7 +165,7 @@ const studiesBf = bf(`${bfPrefix}Studies`, "style_target", section)
       email && (
         <a
           href={`mailto:${email}`}
-          class="enter:text-brand-500 text-brand-500 inline-flex items-center justify-center gap-2"
+          class="enter:text-brand-500 text-brand-500 inline-flex items-center justify-center gap-2 font-bold"
           {...bf(`${bfPrefix}Mail`, "chrome_denied", section)}
         >
           <svg

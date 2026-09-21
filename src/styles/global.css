@@ -69,6 +69,22 @@
     @apply text-ink font-sans text-xl leading-normal font-medium;
   }
 
+  /* Body copy on Leistungen service pages only (not global .section-lead). */
+  .leistungen-body {
+    @apply text-ink font-sans text-[20px] leading-normal;
+    font-weight: 400;
+    font-stretch: normal;
+    font-variation-settings: "wdth" 100;
+  }
+
+  /* Checklist item titles on Leistungen service pages. */
+  .leistungen-item-title {
+    @apply text-ink font-sans text-[20px] leading-normal whitespace-pre-line;
+    font-weight: 700;
+    font-stretch: normal;
+    font-variation-settings: "wdth" 100;
+  }
+
   .nav-dropdown-trigger {
     font: inherit;
     letter-spacing: inherit;

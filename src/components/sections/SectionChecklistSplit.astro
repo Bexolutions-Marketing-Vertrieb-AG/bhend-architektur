@@ -55,6 +55,14 @@ const listNote = translate(note, locale)
 const alt = translate(imageAlt, locale)
 const caption = translate(imageCaption, locale)
 const captionParts = caption ? fotografCreditParts(caption) : null
+const isLeistungen =
+  /^(planung|beratung|brandschutz|realisierung|energieberatung|bauherrenberatung)/.test(
+    section,
+  )
+const bodyClass = isLeistungen ? "leistungen-body" : "section-lead"
+const itemTitleClass = isLeistungen
+  ? "leistungen-item-title"
+  : "font-display text-lg font-bold whitespace-pre-line"
 ---
 
 <section
@@ -80,10 +88,7 @@ const captionParts = caption ? fotografCreditParts(caption) : null
         {
           copy && (
             <p
-              class:list={[
-                "section-lead",
-                dark ? "text-brand-200" : "text-ink",
-              ]}
+              class:list={[bodyClass, dark ? "text-brand-200" : "text-ink"]}
               {...bf(`${section}.body`, "style_target", section)}
             >
               {copy}
@@ -139,10 +144,7 @@ const captionParts = caption ? fotografCreditParts(caption) : null
         {
           listLead && (
             <p
-              class:list={[
-                "section-lead font-semibold",
-                dark ? "text-brand-100" : "text-ink",
-              ]}
+              class:list={[bodyClass, dark ? "text-brand-100" : "text-ink"]}
               {...bf(`${section}.lead`, "style_target", section)}
             >
               {listLead}
@@ -173,7 +175,7 @@ const captionParts = caption ? fotografCreditParts(caption) : null
                     {itemTitle && (
                       <h3
                         class:list={[
-                          "font-display text-lg font-bold whitespace-pre-line",
+                          itemTitleClass,
                           dark ? "text-brand-100" : "text-ink",
                         ]}
                         {...bf(
@@ -188,7 +190,7 @@ const captionParts = caption ? fotografCreditParts(caption) : null
                     {itemBody && (
                       <p
                         class:list={[
-                          "section-lead text-base md:text-base",
+                          bodyClass,
                           dark ? "text-brand-200" : "text-ink",
                         ]}
                         {...bf(
@@ -209,10 +211,7 @@ const captionParts = caption ? fotografCreditParts(caption) : null
         {
           listNote && (
             <p
-              class:list={[
-                "section-lead",
-                dark ? "text-brand-200" : "text-ink",
-              ]}
+              class:list={[bodyClass, dark ? "text-brand-200" : "text-ink"]}
               {...bf(`${section}.note`, "style_target", section)}
             >
               {listNote}
