@@ -2,6 +2,7 @@
 // SectionServiceIntro.astro — Leistungen page hero (title + lead + body + photo)
 import { translate } from "~/lib/i18n"
 import { bf } from "~/lib/bf"
+import { creditLines } from "~/lib/photo-credit"
 import { resolveReservationHref } from "~/lib/reservation"
 import type { ReservationMode } from "~/lib/reservation"
 import type { I18nString } from "~/types/i18n"
@@ -15,6 +16,8 @@ interface Props {
   body?: I18nString
   image?: string
   imageAlt?: I18nString
+  caption?: I18nString
+  imageCaption?: I18nString
   ctaLabel?: I18nString
   ctaHref?: string
   reservationMode?: ReservationMode
@@ -30,6 +33,8 @@ const {
   body,
   image,
   imageAlt,
+  caption,
+  imageCaption,
   ctaLabel,
   ctaHref,
   reservationMode,
@@ -41,6 +46,8 @@ const headline = translate(heading ?? title, locale)
 const kicker = translate(lead, locale)
 const copy = translate(body, locale)
 const alt = translate(imageAlt, locale) || headline
+const credit = translate(caption ?? imageCaption, locale)
+const lines = credit ? creditLines(credit) : []
 const cta = translate(ctaLabel, locale)
 const href = resolveReservationHref({
   reservationMode,
@@ -101,15 +108,38 @@ const href = resolveReservationHref({
       </div>
       {
         image && (
-          <img
-            src={image}
-            alt={alt}
-            class="aspect-[685/650] w-full object-cover"
-            width="685"
-            height="650"
-            loading="eager"
-            {...bf(`${section}.image`, "image", section)}
-          />
+          <figure>
+            <img
+              src={image}
+              alt={alt}
+              class="aspect-[685/650] w-full object-cover object-center"
+              width="685"
+              height="650"
+              loading="eager"
+              {...bf(`${section}.image`, "image", section)}
+            />
+            {credit && (
+              <figcaption
+                class="text-muted mt-3 text-sm leading-relaxed"
+                {...bf(`${section}.caption`, "style_target", section)}
+              >
+                {lines.length > 0
+                  ? lines.map((line) => (
+                      <span class="block">
+                        {line.label ? (
+                          <>
+                            <strong class="font-bold">{line.label}</strong>
+                            {line.rest}
+                          </>
+                        ) : (
+                          line.rest
+                        )}
+                      </span>
+                    ))
+                  : credit}
+              </figcaption>
+            )}
+          </figure>
         )
       }
     </div>
