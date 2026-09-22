@@ -33,14 +33,17 @@ const headingLines = (() => {
   const last = lines[lines.length - 1] ?? ""
   const lead = lines.slice(0, -1)
   const joined = lead.join(" ")
-  if (
-    /Bhend Architektur/.test(joined) &&
-    !lead.some((l) => /^Bhend /.test(l))
-  ) {
-    const parts = joined.split(/\s+(?=Bhend Architektur\b)/)
-    return [...parts.map((p) => p.trim()).filter(Boolean), last]
-  }
-  return lines
+  const leadParts =
+    /Bhend Architektur/.test(joined) && !lead.some((l) => /^Bhend /.test(l))
+      ? joined
+          .split(/\s+(?=Bhend Architektur\b)/)
+          .map((p) => p.trim())
+          .filter(Boolean)
+      : lead
+  // Keep "Bauprojekt mit" together so "mit" never wraps alone.
+  return [...leadParts, last].map((line) =>
+    line.replace(/\s+mit$/u, "\u00A0mit"),
+  )
 })()
 ---
 
