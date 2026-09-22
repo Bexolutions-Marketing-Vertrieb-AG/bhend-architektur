@@ -975,7 +975,7 @@ function careersSections() {
       heading: de("MITARBEITERKULTUR UND ARBEITSUMFELD"),
       subheading: de("UNSERE MITARBEITERKULTUR – MEHR ALS NUR ARBEIT"),
       body: de(
-        "Wir legen grossen Wert auf eine respektvolle und unterstützende Arbeitsatmosphäre. Teamanlässe, flexible Arbeitszeiten und eine moderne Büroinfrastruktur gehören zu den Grundlagen, die unseren Mitarbeitern helfen, sich zu entfalten.",
+        "Wir legen grossen Wert auf eine respektvolle und unterstützende Arbeitsatmosphäre.\nTeamanlässe, flexible Arbeitszeiten und eine moderne Büroinfrastruktur gehören zu den Grundlagen, die unseren Mitarbeitern helfen, sich zu entfalten.",
       ),
       _orbi: { component: "SectionCultureBand" },
     },
