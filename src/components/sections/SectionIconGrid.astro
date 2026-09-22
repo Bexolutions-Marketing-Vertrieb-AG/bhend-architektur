@@ -22,6 +22,26 @@ interface Props {
 const { id = "iconGrid", title, items = [], locale } = Astro.props
 const heading = translate(title, locale)
 const section = id
+const isProcess = section === "process"
+const headingLines = (() => {
+  const lines = heading
+    .split(/\n+/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+  if (!isProcess || lines.length === 0) return lines
+  // Design: break before "Bhend Architektur"; last line is the 48/56 subline.
+  const last = lines[lines.length - 1] ?? ""
+  const lead = lines.slice(0, -1)
+  const joined = lead.join(" ")
+  if (
+    /Bhend Architektur/.test(joined) &&
+    !lead.some((l) => /^Bhend /.test(l))
+  ) {
+    const parts = joined.split(/\s+(?=Bhend Architektur\b)/)
+    return [...parts.map((p) => p.trim()).filter(Boolean), last]
+  }
+  return lines
+})()
 ---
 
 <section
@@ -30,14 +50,40 @@ const section = id
 >
   <div class="container-wide py-section-sm md:py-section">
     {
-      heading && (
-        <h2
-          class="section-heading mx-auto mb-12 max-w-4xl text-center"
-          {...bf(`home.${section}.heading`, "style_target", section)}
-        >
-          {heading}
-        </h2>
-      )
+      headingLines.length > 0 &&
+        (isProcess ? (
+          <div class="mx-auto mb-12 flex max-w-4xl flex-col text-center">
+            {headingLines.map((line, index) => {
+              const isLast = index === headingLines.length - 1
+              // Lead lines (64/72); last line "In drei…" (48/56) with 15px gap
+              return (
+                <h2
+                  class:list={[
+                    isLast
+                      ? "font-display text-ink mt-[15px] text-[32px] leading-10 font-bold md:text-[48px] md:leading-[56px]"
+                      : "font-display text-ink text-[40px] leading-[48px] font-bold md:text-[64px] md:leading-[72px]",
+                  ]}
+                  {...bf(
+                    index === 0
+                      ? `home.${section}.heading`
+                      : `home.${section}.heading${index + 1}`,
+                    "style_target",
+                    section,
+                  )}
+                >
+                  {line}
+                </h2>
+              )
+            })}
+          </div>
+        ) : (
+          <h2
+            class="section-heading mx-auto mb-12 max-w-4xl text-center"
+            {...bf(`home.${section}.heading`, "style_target", section)}
+          >
+            {heading}
+          </h2>
+        ))
     }
     <ul class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
       {

@@ -397,7 +397,7 @@ function homeSections() {
     {
       id: "process",
       title: de(
-        "Realisieren Sie Ihr Bauprojekt mit Bhend Architektur\nIn drei einfachen Schritten",
+        "Realisieren Sie Ihr Bauprojekt mit\nBhend Architektur\nIn drei einfachen Schritten",
       ),
       items: [
         {

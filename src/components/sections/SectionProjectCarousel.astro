@@ -152,45 +152,25 @@ const slideCount = items.length
 
     {
       slideCount > 1 && (
-        <div class="mt-6 flex justify-center gap-3 md:hidden">
-          <button
-            type="button"
-            class="bg-brand-500 enter:opacity-90 flex h-12 w-12 items-center justify-center rounded-full text-white"
-            aria-label="Vorheriges Projekt"
-            data-carousel-prev
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              aria-hidden="true"
-            >
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
-          </button>
-          <button
-            type="button"
-            class="bg-brand-500 enter:opacity-90 flex h-12 w-12 items-center justify-center rounded-full text-white"
-            aria-label="Nächstes Projekt"
-            data-carousel-next
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              aria-hidden="true"
-            >
-              <polyline points="9 18 15 12 9 6" />
-            </svg>
-          </button>
+        <div
+          class="mt-6 flex justify-center gap-2 md:hidden"
+          data-carousel-dots
+          role="tablist"
+          aria-label="Projekte"
+        >
+          {items.map((_, index) => (
+            <button
+              type="button"
+              role="tab"
+              aria-label={`Projekt ${index + 1}`}
+              aria-selected={index === 0 ? "true" : "false"}
+              data-carousel-dot={index}
+              class:list={[
+                "h-2.5 w-2.5 rounded-full transition-colors",
+                index === 0 ? "bg-brand-500" : "bg-brand-200",
+              ]}
+            />
+          ))}
         </div>
       )
     }
@@ -202,16 +182,28 @@ const slideCount = items.length
   for (const root of roots) {
     if (!(root instanceof HTMLElement)) continue
     const track = root.querySelector("[data-carousel-track]")
+    const viewport = root.querySelector("[data-carousel-viewport]")
     const slides = [...root.querySelectorAll("[data-carousel-slide]")]
+    const dots = [...root.querySelectorAll("[data-carousel-dot]")]
     if (!(track instanceof HTMLElement) || slides.length < 2) continue
 
     let index = 0
+    const syncDots = () => {
+      dots.forEach((dot, i) => {
+        const active = i === index
+        dot.setAttribute("aria-selected", active ? "true" : "false")
+        dot.classList.toggle("bg-brand-500", active)
+        dot.classList.toggle("bg-brand-200", !active)
+      })
+    }
+
     const go = (next: number) => {
       index = (next + slides.length) % slides.length
       track.style.transform = `translateX(-${index * 100}%)`
       slides.forEach((slide, i) => {
         slide.setAttribute("aria-hidden", i === index ? "false" : "true")
       })
+      syncDots()
     }
 
     root.querySelectorAll("[data-carousel-prev]").forEach((btn) => {
@@ -220,5 +212,45 @@ const slideCount = items.length
     root.querySelectorAll("[data-carousel-next]").forEach((btn) => {
       btn.addEventListener("click", () => go(index + 1))
     })
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        const raw = dot.getAttribute("data-carousel-dot")
+        const next = Number(raw)
+        if (Number.isFinite(next)) go(next)
+      })
+    })
+
+    // Mobile swipe hint: drag sideways to change slides
+    if (viewport instanceof HTMLElement) {
+      let startX = 0
+      let deltaX = 0
+      viewport.addEventListener(
+        "touchstart",
+        (event) => {
+          const touch = event.changedTouches[0]
+          if (!touch) return
+          startX = touch.clientX
+          deltaX = 0
+        },
+        { passive: true },
+      )
+      viewport.addEventListener(
+        "touchmove",
+        (event) => {
+          const touch = event.changedTouches[0]
+          if (!touch) return
+          deltaX = touch.clientX - startX
+        },
+        { passive: true },
+      )
+      viewport.addEventListener(
+        "touchend",
+        () => {
+          if (Math.abs(deltaX) < 40) return
+          go(deltaX < 0 ? index + 1 : index - 1)
+        },
+        { passive: true },
+      )
+    }
   }
 </script>
