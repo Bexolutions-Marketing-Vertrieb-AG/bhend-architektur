@@ -71,7 +71,7 @@
 
   /* Body copy on Leistungen service pages only (not global .section-lead). */
   .leistungen-body {
-    @apply text-ink font-sans text-[20px] leading-normal;
+    @apply text-ink font-sans text-base leading-normal md:text-[20px];
     font-weight: 400;
     font-stretch: normal;
     font-variation-settings: "wdth" 100;
@@ -79,7 +79,7 @@
 
   /* Checklist item titles on Leistungen service pages. */
   .leistungen-item-title {
-    @apply text-ink font-sans text-[20px] leading-normal whitespace-pre-line;
+    @apply text-ink font-sans text-base leading-normal whitespace-pre-line md:text-[20px];
     font-weight: 700;
     font-stretch: normal;
     font-variation-settings: "wdth" 100;
@@ -90,53 +90,68 @@
    * Left high → right low; bottom edge stays flat.
    */
   .leistungen-cta-slant {
-    --leistungen-cta-slant: 6.25vw;
+    --leistungen-cta-slant: 10vw;
     clip-path: polygon(
       0 0,
       100% var(--leistungen-cta-slant),
       100% 100%,
       0 100%
     );
-    padding-top: calc(var(--spacing-section) + var(--leistungen-cta-slant));
-    padding-bottom: var(--spacing-section);
+    padding-top: calc(var(--spacing-section-sm) + var(--leistungen-cta-slant));
+    padding-bottom: var(--spacing-section-sm);
+  }
+
+  @media (min-width: 768px) {
+    .leistungen-cta-slant {
+      --leistungen-cta-slant: 6.25vw;
+      padding-top: calc(var(--spacing-section) + var(--leistungen-cta-slant));
+      padding-bottom: var(--spacing-section);
+    }
   }
 
   .leistungen-cta-eyebrow {
-    @apply text-ink font-display text-[32px] leading-[40px];
+    @apply text-ink font-display text-[24px] leading-8 md:text-[32px] md:leading-[40px];
     font-weight: 700;
   }
 
   .leistungen-cta-heading {
-    @apply text-ink font-display text-[48px] leading-[56px];
+    @apply text-ink font-display text-[28px] leading-9 break-words md:text-[48px] md:leading-[56px];
     font-weight: 700;
   }
 
   .leistungen-cta-body {
-    @apply text-ink font-sans text-[20px] leading-normal;
+    @apply text-ink font-sans text-base leading-normal md:text-[20px];
     font-weight: 500;
     font-stretch: normal;
     font-variation-settings: "wdth" 100;
   }
 
   .leistungen-cta-button {
-    @apply bg-brand-500 enter:opacity-90 inline-flex w-[328px] items-center justify-center gap-2.5 px-6 py-4 text-center text-white transition-opacity;
+    @apply bg-brand-500 enter:opacity-90 inline-flex w-full max-w-[328px] items-center justify-center gap-2.5 px-5 py-3.5 text-center text-white transition-opacity md:w-[328px] md:gap-2.5 md:px-6 md:py-4;
     font-family: var(--font-display);
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 700;
-    line-height: 40px;
+    line-height: 32px;
     font-stretch: 75%;
     font-variation-settings: "wdth" 75;
   }
 
+  @media (min-width: 768px) {
+    .leistungen-cta-button {
+      font-size: 28px;
+      line-height: 40px;
+    }
+  }
+
   /* Short process intro line on Brandschutz (ChecklistSplit). */
   .leistungen-process-intro {
-    @apply text-ink font-display text-[32px] leading-[40px];
+    @apply text-ink font-display text-[24px] leading-8 md:text-[32px] md:leading-[40px];
     font-weight: 700;
   }
 
-  /* Checklist lead on Energieberatung only. */
+  /* Checklist lead on Energieberatung / Bauherrenberatung. */
   .leistungen-process-lead {
-    @apply text-ink font-sans text-[20px] leading-normal;
+    @apply text-ink font-sans text-base leading-normal md:text-[20px];
     font-weight: 700;
     font-stretch: normal;
     font-variation-settings: "wdth" 100;
@@ -144,7 +159,7 @@
 
   /* Plain checklist titles (Bauherrenberatung process). */
   .leistungen-checklist-plain {
-    @apply text-ink font-sans text-[20px] leading-normal whitespace-pre-line;
+    @apply text-ink font-sans text-base leading-normal whitespace-pre-line md:text-[20px];
     font-weight: 500;
     font-stretch: normal;
     font-variation-settings: "wdth" 100;
