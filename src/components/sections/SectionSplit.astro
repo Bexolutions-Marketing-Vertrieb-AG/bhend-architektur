@@ -112,6 +112,8 @@ const imageFirst = imagePosition === "left"
                 const isChallengesHeading = section === "challenges"
                 // First group: "Private und Öffentliche" + "Bauprojekte" (48/56)
                 const isChallengesLead = isChallengesHeading && index < 2
+                // 15px gap below "Bauprojekte" before the larger lines
+                const isBauprojekteLine = isChallengesLead && index === 1
                 return (
                   <h2
                     class:list={[
@@ -120,6 +122,7 @@ const imageFirst = imagePosition === "left"
                         : isChallengesHeading
                           ? "font-display text-ink text-[40px] leading-[48px] font-bold md:text-[64px] md:leading-[72px]"
                           : "section-heading",
+                      isBauprojekteLine && "pb-[15px]",
                     ]}
                     {...bf(
                       index === 0
