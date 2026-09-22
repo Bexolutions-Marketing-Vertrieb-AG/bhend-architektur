@@ -113,7 +113,7 @@ function isGroupActive(children: NavChild[]): boolean {
                 </svg>
               </button>
               <ul
-                class="nav-dropdown-panel text-ink absolute top-full left-0 z-30 min-w-[220px] bg-white py-4 shadow-sm"
+                class="nav-dropdown-panel text-ink absolute top-full left-0 z-30 min-w-[220px] bg-white py-4 text-left shadow-sm"
                 role="menu"
               >
                 {link.children.map((child) => (
@@ -122,7 +122,7 @@ function isGroupActive(children: NavChild[]): boolean {
                       role="menuitem"
                       href={child.href}
                       class:list={[
-                        "enter:text-brand-500 block px-5 py-2.5 transition-colors",
+                        "enter:text-brand-500 block px-5 py-2.5 text-left transition-colors",
                         isActive(child.href) && "text-brand-500",
                       ]}
                     >
