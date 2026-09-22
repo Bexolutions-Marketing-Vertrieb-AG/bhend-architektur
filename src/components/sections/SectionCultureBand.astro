@@ -27,6 +27,18 @@ const section = id
 const headline = translate(heading ?? title, locale)
 const sub = translate(subheading, locale)
 const copy = translate(body, locale)
+// Desktop: two lines after the first sentence; mobile wraps naturally.
+const copyLines = copy
+  .split(/\n+/)
+  .map((line) => line.trim())
+  .filter(Boolean)
+const copyParts =
+  copyLines.length >= 2
+    ? copyLines
+    : (() => {
+        const match = /^(.*?[.!?])\s+(.+)$/s.exec(copy.trim())
+        return match ? [match[1], match[2]] : copy ? [copy] : []
+      })()
 ---
 
 <section class="bg-white" {...bf(`${section}.shell`, "container", section)}>
@@ -54,12 +66,22 @@ const copy = translate(body, locale)
       )
     }
     {
-      copy && (
+      copyParts.length > 0 && (
         <p
-          class="section-lead mt-2 max-w-4xl"
+          class="text-ink mt-2 max-w-4xl text-center font-sans text-base leading-normal font-normal md:text-[20px]"
           {...bf(`${section}.body`, "style_target", section)}
         >
-          {copy}
+          {copyParts.map((part, index) => (
+            <>
+              {index > 0 && (
+                <>
+                  <br class="hidden md:inline" />
+                  <span class="md:hidden"> </span>
+                </>
+              )}
+              {part}
+            </>
+          ))}
         </p>
       )
     }

@@ -166,6 +166,7 @@ export function brandschutzSections() {
         { title: de("Wohnbauten") },
         { title: de("Schulen") },
         { title: de("Kindergarten") },
+        { title: de("Kindertagesstätten") },
       ],
       _orbi: { component: "SectionChecklistSplit" },
     },
