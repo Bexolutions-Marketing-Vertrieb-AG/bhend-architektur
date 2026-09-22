@@ -99,14 +99,14 @@ const socialLinks = [
     <div>
       <h2 class="font-display mb-6 text-xl font-bold sm:text-2xl">Menu</h2>
       <ul
-        class="space-y-3 font-sans text-[18px] leading-normal font-medium text-white"
+        class="space-y-3 font-sans text-base leading-normal font-medium text-white md:text-[18px]"
       >
         {
           menu.map((item) =>
             item.children ? (
               <li>
                 <details class="group">
-                  <summary class="enter:text-brand-200 flex cursor-pointer list-none items-center gap-2 font-sans text-[18px] leading-normal font-medium text-white transition-colors [&::-webkit-details-marker]:hidden">
+                  <summary class="enter:text-brand-200 flex cursor-pointer list-none items-center gap-2 font-sans text-base leading-normal font-medium text-white transition-colors md:text-[18px] [&::-webkit-details-marker]:hidden">
                     <span>{item.label}</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -140,7 +140,7 @@ const socialLinks = [
             ) : (
               <li>
                 <a
-                  class="enter:text-brand-200 font-sans text-[18px] leading-normal font-medium text-white transition-colors"
+                  class="enter:text-brand-200 font-sans text-base leading-normal font-medium text-white transition-colors md:text-[18px]"
                   href={item.href}
                 >
                   {item.label}
@@ -170,7 +170,7 @@ const socialLinks = [
               fill="currentColor"></path>
           </svg>
           <p
-            class="font-sans text-[18px] leading-normal font-medium text-white"
+            class="font-sans text-base leading-normal font-medium text-white md:text-[18px]"
           >
             Bhend Architektur AG<br />
             Zofingerstrasse 43<br />
@@ -192,7 +192,7 @@ const socialLinks = [
               fill="currentColor"></path>
           </svg>
           <a
-            class="text-brand-500 enter:opacity-80 font-sans text-[18px] leading-normal font-bold underline transition-opacity"
+            class="text-brand-500 enter:opacity-80 font-sans text-base leading-normal font-bold underline transition-opacity md:text-[18px]"
             href="tel:+41627980000">+41 62 798 00 00</a
           >
         </div>
@@ -213,7 +213,7 @@ const socialLinks = [
             </svg>
           </span>
           <a
-            class="text-brand-500 enter:opacity-80 font-sans text-[18px] leading-normal font-bold underline transition-opacity"
+            class="text-brand-500 enter:opacity-80 font-sans text-base leading-normal font-bold underline transition-opacity md:text-[18px]"
             href="mailto:info@bhend-architektur.ch">info@bhend-architektur.ch</a
           >
         </div>
@@ -256,7 +256,7 @@ const socialLinks = [
       </ul>
       <a
         href="/impressum"
-        class="enter:opacity-80 inline-flex items-center gap-1 font-sans text-[18px] leading-normal font-medium text-white transition-opacity"
+        class="enter:opacity-80 inline-flex items-center gap-1 font-sans text-base leading-normal font-medium text-white transition-opacity md:text-[18px]"
         {...bf("chrome.footer.impressum", "chrome_denied", "footer")}
       >
         <svg

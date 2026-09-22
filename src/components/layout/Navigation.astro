@@ -197,14 +197,14 @@ function isGroupActive(children: NavChild[]): boolean {
           class="border-brand-200 absolute top-[calc(100%+0.75rem)] right-0 z-50 max-h-[min(75dvh,36rem)] w-[min(calc(100vw-1.5rem),22rem)] overflow-y-auto border bg-white shadow-lg"
         >
           <ul
-            class="text-ink divide-brand-100 divide-y p-2 text-center font-sans text-base leading-normal font-normal uppercase"
+            class="text-ink divide-brand-100 divide-y p-2 text-left font-sans text-base leading-normal font-normal uppercase"
           >
             {
               links.map((link) =>
                 link.children ? (
                   <li>
                     <details class="group/mobile-sub">
-                      <summary class="enter:text-brand-500 flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3.5 [&::-webkit-details-marker]:hidden">
+                      <summary class="enter:text-brand-500 flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3.5 text-left [&::-webkit-details-marker]:hidden">
                         <span
                           class:list={[
                             isGroupActive(link.children) && "text-brand-500",
@@ -219,7 +219,7 @@ function isGroupActive(children: NavChild[]): boolean {
                           viewBox="0 0 20 20"
                           fill="none"
                           aria-hidden="true"
-                          class="text-brand-500 transition-transform group-open/mobile-sub:rotate-180"
+                          class="text-brand-500 shrink-0 transition-transform group-open/mobile-sub:rotate-180"
                         >
                           <path
                             d="M1.5 6.15817L3.0975 4.5L10.5 12.1837L17.9025 4.5L19.5 6.15817L10.5 15.5L1.5 6.15817Z"
@@ -227,13 +227,13 @@ function isGroupActive(children: NavChild[]): boolean {
                           />
                         </svg>
                       </summary>
-                      <ul class="border-brand-100 mb-2 ml-4 space-y-1 border-l pb-2 pl-3 font-normal">
+                      <ul class="mb-2 space-y-1 pb-2 pl-8 font-normal">
                         {link.children.map((child) => (
                           <li>
                             <a
                               href={child.href}
                               class:list={[
-                                "enter:text-brand-500 block py-2 uppercase",
+                                "enter:text-brand-500 block py-2 text-left uppercase",
                                 isActive(child.href) && "text-brand-500",
                               ]}
                             >
@@ -249,7 +249,7 @@ function isGroupActive(children: NavChild[]): boolean {
                     <a
                       href={link.href}
                       class:list={[
-                        "enter:text-brand-500 block px-4 py-3.5",
+                        "enter:text-brand-500 block px-4 py-3.5 text-left",
                         isActive(link.href) && "text-brand-500",
                       ]}
                     >
