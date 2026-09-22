@@ -34,7 +34,7 @@
   }
 
   body {
-    @apply bg-surface text-ink font-sans antialiased;
+    @apply text-ink bg-white font-sans antialiased;
   }
 
   :focus-visible {
