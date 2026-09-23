@@ -50,7 +50,7 @@ const alt = translate(imageAlt, locale) || headline
         {
           headline && (
             <h2
-              class="font-display text-ink text-[32px] leading-10 font-bold"
+              class="font-display text-ink text-[32px] leading-10 font-bold break-words"
               {...bf(`${section}.heading`, "style_target", section)}
             >
               {headline}
@@ -60,7 +60,7 @@ const alt = translate(imageAlt, locale) || headline
         {
           sub && (
             <p
-              class="font-display text-ink text-[28px] leading-10 font-bold"
+              class="font-display text-ink text-[28px] leading-10 font-bold break-words"
               {...bf(`${section}.subheading`, "style_target", section)}
             >
               {sub}

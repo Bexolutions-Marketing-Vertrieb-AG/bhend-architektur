@@ -72,7 +72,31 @@
   }
 
   .section-heading {
-    @apply font-display text-4xl leading-tight font-bold tracking-tight text-balance whitespace-pre-line md:text-5xl;
+    @apply font-display text-[28px] leading-9 font-bold tracking-tight text-balance break-words whitespace-pre-line md:text-5xl md:leading-tight;
+  }
+
+  /*
+   * Responsive display titles (Figma desktop sizes → mobile ~45–50%).
+   * Prefer these over raw text-[64px] so mobile never inherits desktop px.
+   */
+  .heading-hero {
+    @apply font-display text-[40px] leading-[1.15] font-bold tracking-tight break-words md:text-[70px] md:leading-[1.1];
+  }
+
+  .heading-page {
+    @apply font-display text-[32px] leading-10 font-bold tracking-tight break-words md:text-[64px] md:leading-[72px];
+  }
+
+  .heading-section {
+    @apply font-display text-[28px] leading-9 font-bold tracking-tight break-words md:text-[48px] md:leading-[56px];
+  }
+
+  .heading-block {
+    @apply font-display text-[24px] leading-8 font-bold tracking-tight break-words md:text-[32px] md:leading-10;
+  }
+
+  .heading-sub {
+    @apply font-display text-[22px] leading-8 font-bold tracking-tight break-words md:text-[28px] md:leading-10;
   }
 
   .section-lead {

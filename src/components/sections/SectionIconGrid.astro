@@ -29,35 +29,33 @@ const headingLines = (() => {
     .map((line) => line.trim())
     .filter(Boolean)
   if (!isProcess || lines.length === 0) return lines
-  // Lead stays one line ("… mit Bhend Architektur"); last line is the 48/56 subline.
+  // Lead + subline ("In drei…"); keep natural wrapping spaces for mobile.
   if (lines.length === 1) return lines
   const last = lines[lines.length - 1] ?? ""
-  const lead = lines
-    .slice(0, -1)
-    .join(" ")
-    .replace(/\s+mit\s+/u, "\u00A0mit\u00A0")
+  const lead = lines.slice(0, -1).join(" ")
   return [lead, last]
 })()
 ---
 
 <section
-  class="bg-surface"
+  class="bg-surface overflow-x-clip"
   {...bf(`home.${section}.shell`, "container", section)}
 >
   <div class="container-wide py-section-sm md:py-section">
     {
       headingLines.length > 0 &&
         (isProcess ? (
-          <div class="mx-auto mb-12 flex max-w-4xl flex-col text-center">
+          <div class="mx-auto mb-10 flex w-full max-w-4xl flex-col items-center px-1 text-center md:mb-12">
             {headingLines.map((line, index) => {
               const isLast = index === headingLines.length - 1
-              // Lead lines (64/72); last line "In drei…" (48/56) with 15px gap
+              // Lead: 58/66 desktop (−6 from 64/72); smaller wrap-friendly mobile sizes.
               return (
                 <h2
                   class:list={[
+                    "w-full max-w-full text-center text-balance break-words",
                     isLast
-                      ? "font-display text-ink mt-[15px] text-[32px] leading-10 font-bold md:text-[48px] md:leading-[56px]"
-                      : "font-display text-ink text-[40px] leading-[48px] font-bold md:text-[64px] md:leading-[72px] md:whitespace-nowrap",
+                      ? "heading-section text-ink mt-3 md:mt-[15px]"
+                      : "heading-page text-ink md:text-[58px] md:leading-[66px]",
                   ]}
                   {...bf(
                     index === 0
@@ -87,7 +85,7 @@ const headingLines = (() => {
           const itemTitle = translate(item.title, locale)
           const itemBody = translate(item.text ?? item.body, locale)
           return (
-            <li class="flex flex-col items-center gap-4 text-center">
+            <li class="flex min-w-0 flex-col items-center gap-4 text-center">
               {item.icon && (
                 <img
                   src={item.icon}
@@ -105,7 +103,7 @@ const headingLines = (() => {
               )}
               {itemTitle && (
                 <h3
-                  class="font-display text-ink text-center text-[32px] leading-10 font-bold whitespace-pre-line"
+                  class="font-display text-ink w-full max-w-full text-center text-[32px] leading-10 font-bold break-words whitespace-pre-line"
                   {...bf(
                     `home.${section}.item${index + 1}Title`,
                     "style_target",
@@ -117,7 +115,7 @@ const headingLines = (() => {
               )}
               {itemBody && (
                 <p
-                  class="text-ink text-center font-sans text-xl leading-normal font-medium"
+                  class="text-ink w-full max-w-full text-center font-sans text-xl leading-normal font-medium break-words"
                   {...bf(
                     `home.${section}.item${index + 1}Body`,
                     "style_target",
