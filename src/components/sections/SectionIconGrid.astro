@@ -29,21 +29,14 @@ const headingLines = (() => {
     .map((line) => line.trim())
     .filter(Boolean)
   if (!isProcess || lines.length === 0) return lines
-  // Design: break before "Bhend Architektur"; last line is the 48/56 subline.
+  // Lead stays one line ("… mit Bhend Architektur"); last line is the 48/56 subline.
+  if (lines.length === 1) return lines
   const last = lines[lines.length - 1] ?? ""
-  const lead = lines.slice(0, -1)
-  const joined = lead.join(" ")
-  const leadParts =
-    /Bhend Architektur/.test(joined) && !lead.some((l) => /^Bhend /.test(l))
-      ? joined
-          .split(/\s+(?=Bhend Architektur\b)/)
-          .map((p) => p.trim())
-          .filter(Boolean)
-      : lead
-  // Keep "Bauprojekt mit" together so "mit" never wraps alone.
-  return [...leadParts, last].map((line) =>
-    line.replace(/\s+mit$/u, "\u00A0mit"),
-  )
+  const lead = lines
+    .slice(0, -1)
+    .join(" ")
+    .replace(/\s+mit\s+/u, "\u00A0mit\u00A0")
+  return [lead, last]
 })()
 ---
 
@@ -64,7 +57,7 @@ const headingLines = (() => {
                   class:list={[
                     isLast
                       ? "font-display text-ink mt-[15px] text-[32px] leading-10 font-bold md:text-[48px] md:leading-[56px]"
-                      : "font-display text-ink text-[40px] leading-[48px] font-bold md:text-[64px] md:leading-[72px]",
+                      : "font-display text-ink text-[40px] leading-[48px] font-bold md:text-[64px] md:leading-[72px] md:whitespace-nowrap",
                   ]}
                   {...bf(
                     index === 0
