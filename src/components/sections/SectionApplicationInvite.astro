@@ -38,7 +38,7 @@ const cta = translate(ctaLabel, locale)
     {
       headline && (
         <h2
-          class="font-display text-brand-500 text-[48px] leading-[56px] font-bold"
+          class="heading-section text-brand-500"
           {...bf(`${section}.heading`, "style_target", section)}
         >
           {headline}
@@ -48,7 +48,7 @@ const cta = translate(ctaLabel, locale)
     {
       copy && (
         <p
-          class="font-display text-ink w-full text-[32px] leading-10 font-bold whitespace-pre-line"
+          class="font-display text-ink w-full text-[24px] leading-8 font-bold break-words whitespace-pre-line md:text-[32px] md:leading-10"
           {...bf(`${section}.body`, "style_target", section)}
         >
           {copy}

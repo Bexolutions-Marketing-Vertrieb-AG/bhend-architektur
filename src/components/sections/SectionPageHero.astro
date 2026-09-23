@@ -26,10 +26,8 @@ const alt = translate(imageAlt, locale)
       headline && (
         <h1
           class:list={[
-            "font-display mb-10 font-bold tracking-tight uppercase",
-            section === "teamHero"
-              ? "text-[64px] leading-[72px]"
-              : "text-4xl md:text-5xl",
+            "mb-10 uppercase",
+            section === "teamHero" ? "heading-page" : "heading-section",
           ]}
           {...bf(`${section}.heading`, "style_target", section)}
         >

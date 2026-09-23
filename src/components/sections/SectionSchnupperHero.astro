@@ -48,7 +48,7 @@ const alt = translate(imageAlt, locale) || headline
       {
         headline && (
           <h1
-            class="font-display text-ink text-[64px] leading-[72px] font-bold"
+            class="heading-page text-ink"
             {...bf(`${section}.heading`, "style_target", section)}
           >
             {headline}
@@ -58,7 +58,7 @@ const alt = translate(imageAlt, locale) || headline
       {
         leadText && (
           <p
-            class="font-display text-ink text-[32px] leading-10 font-bold"
+            class="heading-block text-ink"
             {...bf(`${section}.lead`, "style_target", section)}
           >
             {leadText}
