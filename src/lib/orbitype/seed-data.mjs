@@ -137,7 +137,7 @@ function teamSections() {
           name: "Brigitte Flükiger",
           image: "/images/team/brigitte-fluekiger.jpg",
           phone: "+41 62 798 1077",
-          email: "brigitte.flükiger@bhend-architektur.ch",
+          email: "brigitte.flueckiger@bhend-architektur.ch",
           role: "Zeichnerin EFZ Architektur",
           studies: ["Hochbauzeichnerin", "Berufsbildnerin"],
         }),
@@ -146,14 +146,14 @@ function teamSections() {
           image: "/images/team/stefanie-burren.jpg",
           phone: "+41 62 798 1071",
           email: "stefanie.burren@bhend-architektur.ch",
-          role: "Zeichnerin EFZ Architektur",
+          role: "Techniker HF i.A.",
         }),
         teamMember({
           name: "Simon Höchenberger",
           image: "/images/team/simon-hoechenberger.jpg",
           phone: "+41 62 798 1073",
           email: "simon.hoechi@bhend-architektur.ch",
-          role: "Zeichner EFZ Architektur",
+          role: "Techniker HF i.A.",
           studies: ["Maurer EFZ"],
         }),
         teamMember({
@@ -182,7 +182,7 @@ function teamSections() {
           image: "/images/team/selina-vonaesch.jpg",
           phone: "+41 62 798 0000",
           email: "selina.vonaesch@bhend-architektur.ch",
-          role: "Praktikantin",
+          role: "Zeichnerin EFZ Architektur i. A.",
         }),
       ],
       _orbi: { component: "SectionTeamGrid" },
@@ -307,7 +307,7 @@ function homeSections() {
       id: "team",
       heading: de("Unser Team aus Experten"),
       body: de(
-        "Unser Team besteht aus erfahrenen Architekten und Fachspezialisten, die sich durch fortlaufende Weiterbildung stets auf dem neuesten Stand der Bautechnologien und Trends halten.",
+        "Mit fortlaufenden Weiterbildungen im Bereich Architektur und in weiteren Fachthemen hält sich unser Team stets auf dem neuesten Stand der bautechnologischen Veränderungen und aktuellen Trends.",
       ),
       bodySecondary: de(
         "Wir bieten nicht nur innovative Gestaltungslösungen an, sondern setzen auch auf nachhaltige und energieeffiziente Baupraktiken, die sowohl die Umwelt schonen als auch langfristige Kosteneinsparungen ermöglichen.",
@@ -384,7 +384,7 @@ function homeSections() {
       id: "standsFor",
       heading: de("Bhend Architektur steht für"),
       body: de(
-        "Bhend Architektur steht für massgeschneiderte, nachhaltige und zukunftsorientierte Baukonzepte, die nicht nur Ihre individuellen Wünsche erfüllen, sondern auch einen bleibenden Wert für Sie und die Gemeinschaft schaffen.",
+        "massgeschneiderte, nachhaltige und zukunftsorientierte Baukonzepte, die nicht nur Ihre individuellen Wünsche erfüllen, sondern auch einen bleibenden Wert für Sie und die Gemeinschaft schaffen.",
       ),
       image: "/images/home/stands-for.jpg",
       imageAlt: de("Gebäudeecke"),
@@ -453,7 +453,7 @@ function homeSections() {
       id: "engagement",
       heading: de("Unser Engagement für Ihren Erfolg bei jedem Bauprojekt"),
       body: de(
-        "Bei Bhend Architektur ist es unser Hauptanliegen, Ihre Visionen in die Realität umzusetzen. Wir konzentrieren uns darauf, die spezifischen Wünsche und Bedürfnisse jedes Projekts zu verstehen und mit grösster Sorgfalt und Präzision zu erfüllen.\nUnser Ziel ist es, Räume zu schaffen, die nicht nur heute begeistern, sondern auch zukünftigen Anforderungen standhalten.\nOb es sich um ein gemütliches Zuhause, ein funktionales Geschäftsgebäude oder eine öffentliche Einrichtung handelt – wir sind bestrebt, langfristigen Wert und dauerhafte Zufriedenheit zu schaffen. Verwirklichen Sie Ihr Projekt mit uns.",
+        "Bei Bhend Architektur ist unser Hauptanliegen, Ihre Visionen in die Realität umzusetzen. Wir konzentrieren uns darauf, die spezifischen Wünsche und Bedürfnisse jedes Projekts zu verstehen und mit grösster Sorgfalt und Präzision zu erfüllen.\nUnser Ziel ist es, Räume zu schaffen, die nicht nur heute begeistern, sondern auch zukünftigen Anforderungen standhalten.\nOb es sich um ein gemütliches Zuhause, ein funktionales Geschäftsgebäude oder eine öffentliche Einrichtung handelt – wir sind bestrebt, langfristigen Wert und dauerhafte Zufriedenheit zu schaffen. Verwirklichen Sie Ihr Projekt mit uns.",
       ),
       image: "/images/home/engagement.jpg",
       imageAlt: de("Pläne und Arbeit am Entwurf"),
@@ -815,7 +815,7 @@ function planungSections() {
             "Innovative Lösungen und Frühzeitige Herausforderungserkennung",
           ),
           text: de(
-            "Unser Team aus erfahrenen Architekten und Bauleitern setzt auf innovative Lösungen und kreative Konzepte. Wir planen Ihr Projekt effizient und erkennen potenzielle Herausforderungen frühzeitig, um optimale Lösungswege zu entwickeln.",
+            "Unser erfahrenes Architektur- und Bauleitungsteam setzt auf innovative Lösungen und kreative Konzepte. Wir planen Ihr Projekt effizient und erkennen potenzielle Herausforderungen frühzeitig, um optimale Lösungswege zu entwickeln.",
           ),
         },
         {
@@ -889,7 +889,7 @@ function careersSections() {
         "Du suchst nach einem Arbeitsumfeld das Innovation, Teamgeist und Fachkompetenz vereint?",
       ),
       bodySecondary: de(
-        "Bei Bhend Architektur legen wir grossen Wert auf die Entwicklung und das Wohl unserer Mitarbeiter. Wir glauben daran, dass eine starke Unternehmenskultur und vielfältige Weiterbildungsmöglichkeiten den Schlüssel zu einem erfüllenden Berufsleben bilden. Werden Sie Teil eines Teams, das nicht nur Innovation lebt, sondern auch auf individuelle Stärken und Karrieren setzt.",
+        "Bei Bhend Architektur legen wir grossen Wert auf die Entwicklung und das Wohl unserer Mitarbeitenden. Wir glauben daran, dass eine starke Unternehmenskultur und vielfältige Weiterbildungsmöglichkeiten den Schlüssel zu einem erfüllenden Berufsleben bilden. Werde Teil eines Teams, das nicht nur Innovation lebt, sondern auch auf individuelle Stärken und Karrieren setzt.",
       ),
       _orbi: { component: "SectionCareersIntro" },
     },
@@ -901,7 +901,7 @@ function careersSections() {
           id: "schnuppertage",
           title: de("ZEICHNER EFZ ARCHITEKTUR (M/W) SCHNUPPERTAGE"),
           body: de(
-            "Nutze die Gelegenheit, einen Einblick in die Arbeiten und den Alltag von einem Zeichner zu erhalten und erfahre, wie vielseitig und kreativ der Beruf sein kann.",
+            "Nutze die Gelegenheit, einen Einblick in die Arbeiten und den Alltag von einem Zeichner / einer Zeichnerin zu erhalten und erfahre, wie vielseitig und kreativ der Beruf sein kann.",
           ),
           image: "/images/bei-uns-arbeiten/job-schnuppertage.jpg",
           imageAlt: de("Schnuppertage im Büro"),
@@ -911,7 +911,7 @@ function careersSections() {
         },
         {
           id: "lehrstelle",
-          title: de("ZEICHNER EFZ ARCHITEKTUR (M/W) LEHRSTELLE"),
+          title: de("Zeichner/in EFZ ARCHITEKTUR (M/W) LEHRSTELLE"),
           body: de(
             "Du willst mitgestalten statt nur abzeichnen? Bei Bhend Architektur kombinieren wir Praxis, Herz und Verstand – fair, kompetent, visionär. Wenn dich Sinn, Teamgeist und sauberes Handwerk antreiben, bist du hier richtig.",
           ),
@@ -938,7 +938,7 @@ function careersSections() {
       id: "careersAbout",
       heading: de("WER SIND WIR EIGENTLICH?"),
       body: de(
-        "Bhend Architektur steht für visionäre Architektur und innovative Bauprojekte!\nMit über 200 erfolgreich abgeschlossenen Projekten und einem erfahrenen Team von zusammen über 120 Jahren Bauerfahrung, kombinieren wir Fachkompetenz, soziale Verantwortung und zukunftsorientiertes Denken.",
+        "Bhend Architektur steht für visionäre Architektur und innovative Bauprojekte.\nMit über 200 erfolgreich abgeschlossenen Projekten und einem erfahrenen Team von zusammen über 120 Jahren Bauerfahrung, kombinieren wir Fachkompetenz, soziale Verantwortung und zukunftsorientiertes Denken.",
       ),
       image: "/images/bei-uns-arbeiten/about.jpg",
       imageAlt: de("Teammeeting bei Bhend Architektur"),
@@ -975,7 +975,7 @@ function careersSections() {
       heading: de("MITARBEITERKULTUR UND ARBEITSUMFELD"),
       subheading: de("UNSERE MITARBEITERKULTUR – MEHR ALS NUR ARBEIT"),
       body: de(
-        "Wir legen grossen Wert auf eine respektvolle und unterstützende Arbeitsatmosphäre.\nTeamanlässe, flexible Arbeitszeiten und eine moderne Büroinfrastruktur gehören zu den Grundlagen, die unseren Mitarbeitern helfen, sich zu entfalten.",
+        "Wir legen grossen Wert auf eine respektvolle und unterstützende Arbeitsatmosphäre.\nTeamanlässe, flexible Arbeitszeiten und eine moderne Büroinfrastruktur gehören zu den Grundlagen, die unseren Mitarbeitenden helfen, sich zu entfalten.",
       ),
       _orbi: { component: "SectionCultureBand" },
     },
@@ -990,22 +990,17 @@ function careersSections() {
 }
 
 function schnupperSections() {
-  const schnupperCta = de(
-    "Jetzt den Beruf Schnuppern als Zeichner/in EFZ Architektur kennenlernen",
-  )
   return [
     {
       id: "schnupperHero",
       heading: de("Architektur erleben"),
-      lead: de(
-        "Werde Zeichner für einen Tag! Entdecke den Beruf des Zeichners!",
-      ),
+      lead: de("Zeichnen als Beruf - probiere es einen Tag lang aus!"),
       body: de(
-        "Nutze die Gelegenheit, einen Einblick in die Arbeiten und den Alltag von einem Zeichner zu erhalten und erfahre, wie vielseitig und kreativ der Beruf sein kann.",
+        "Erhalte Einblick in die Aufgaben und den Arbeitsalltag und entdecke, wie vielseitig und kreativ der Beruf als Zeichner/in sein kann.",
       ),
       image: "/images/bei-uns-arbeiten/schnupper-hero.jpg",
       imageAlt: de("Das Team von Bhend Architektur auf der Baustelle"),
-      ctaLabel: schnupperCta,
+      ctaLabel: de("Jetzt Schnuppern als Zeichner/in EFZ Architektur"),
       dialogId: "application-schnuppertage",
       defaultApplicationType: "Schnuppertag",
       _orbi: { component: "SectionSchnupperHero" },
@@ -1017,11 +1012,11 @@ function schnupperSections() {
         "Die Bhend Architektur steht für visionäre Architektur und innovative Bauprojekte!",
       ),
       body: de(
-        "Seit über 10 Jahre bilden wir erfolgreich Zeichner/-innen EFZ aus. Unser Ziel ist es, Schüler/-innen auf ihrem Weg ins Berufsleben zu begleiten und sie auch neben der Ausbildung zu fördern, um einen sanften Einstieg in die Berufswelt zu ermöglichen. Die Lehrlingsausbildner Patrick und Joel haben zusammen über 20 Lehrlinge erfolgreich durch die Berufslehre begleitet.\nNebst der Förderung im Bereich der Berufskenntnisse, Sozial- und Selbstkompetenz fördern wir unsere Lehrlinge in allgemeinen Bereichen und ermöglichen während der Lehre einen Einblick in den Entwurf, die Bauleitung und viele weitere Bereiche.",
+        "Seit über 10 Jahre bilden wir erfolgreich Zeichner/-innen EFZ aus. Unser Ziel ist es, Schüler/-innen auf ihrem Weg ins Berufsleben zu begleiten und sie auch neben der Ausbildung zu fördern, um einen sanften Einstieg in die Berufswelt zu ermöglichen. Die Lehrlingsausbildner Patrick und Joel haben zusammen über 20 Lernende erfolgreich durch die Berufslehre begleitet.\nUnsere Lernenden vertiefen ihre Berufskenntnisse und stärken ihre sozialen und persönlichen Fähigkeiten. Während der Ausbildung lernen sie auch über den eigenen Beruf hinaus Neues und erhalten Einblicke in den Entwurf, die Bauleitung und vieles mehr.",
       ),
       image: "/images/bei-uns-arbeiten/lehrstelle-why.jpg",
       imageAlt: de("Lehrlinge und Ausbildner auf der Baustelle"),
-      ctaLabel: schnupperCta,
+      ctaLabel: de("Jetzt schnuppern als Zeichner/in EFZ Architektur"),
       dialogId: "application-schnuppertage",
       defaultApplicationType: "Schnuppertag",
       _orbi: { component: "SectionLehrstelleSplit" },
