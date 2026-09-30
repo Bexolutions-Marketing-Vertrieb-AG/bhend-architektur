@@ -36,7 +36,7 @@ export function beratungSections() {
       title: de("BERATUNG"),
       lead: de("BRANDSCHUTZPLANUNG UND QUALITÄTSSICHERUNG BRANDSCHUTZ"),
       body: de(
-        "Bei Bhend Architektur verstehen wir die Einzigartigkeit jedes Projekts und bieten daher Beratungsdienst-leistungen, die speziell auf Ihre Bedürfnisse zugeschnitten sind.\nUnser Ziel ist es, Lösungen zu entwickeln, die nicht nur Ihren Anforderungen gerecht werden, sondern auch Ihre Projektwünsche in die Realität umsetzen.",
+        "Bei Bhend Architektur verstehen wir die Einzigartigkeit jedes Projekts und bieten daher Beratungsdienstleistungen, die speziell auf Ihre Bedürfnisse zugeschnitten sind.\nUnser Ziel ist es, Lösungen zu entwickeln, die nicht nur Ihren Anforderungen gerecht werden, sondern auch Ihre Projektwünsche in die Realität umsetzen.",
       ),
       image: "/images/beratung/hero.jpg",
       imageAlt: de("Beratung bei Bhend Architektur"),
@@ -48,19 +48,19 @@ export function beratungSections() {
         {
           title: de("Persönliche Bedarfsanalyse"),
           text: de(
-            "Ihr Projekt im Fokus — Eine gründliche Analyse Ihrer Bedürfnisse ist der Ausgangspunkt unserer Zusammenarbeit. Wir nehmen uns die Zeit, um Ihre Anforderungen zu verstehen und entwickeln gemeinsam mit Ihnen Lösungen, die perfekt auf Ihr Projekt abgestimmt sind.",
+            "Ihr Projekt im Fokus.\nEine gründliche Analyse Ihrer Bedürfnisse ist der Ausgangspunkt unserer Zusammenarbeit. Wir nehmen uns die Zeit, um Ihre Anforderungen zu verstehen und entwickeln gemeinsam mit Ihnen Lösungen, die perfekt auf Ihr Projekt abgestimmt sind.",
           ),
         },
         {
           title: de("Professionelle Unterstützung"),
           text: de(
-            "Erfahrung, die zählt — Unser Team aus erfahrenen Experten begleitet Sie durch alle Phasen Ihres Projekts. Wir bieten umfassende Unterstützung und fachkundige Beratung, um den Erfolg Ihres Bauvorhabens zu gewährleisten.",
+            "Erfahrung, die zählt.\nUnser Team aus erfahrenen Experten begleitet Sie durch alle Phasen Ihres Projekts. Wir bieten umfassende Unterstützung und fachkundige Beratung, um den Erfolg Ihres Bauvorhabens zu gewährleisten.",
           ),
         },
         {
           title: de("Transparente Kommunikation"),
           text: de(
-            "Offene und klare Kommunikation liegt uns am Herzen. Wir halten Sie kontinuierlich über den Fortschritt Ihres Projekts informiert, damit Sie stets den Überblick behalten und gut informiert sind.",
+            "Offene und klare Kommunikation liegt uns am Herzen.\nWir halten Sie kontinuierlich über den Fortschritt Ihres Projekts auf dem Laufenden, damit Sie stets den Überblick behalten und gut informiert sind.",
           ),
         },
       ],
@@ -128,7 +128,7 @@ export function brandschutzSections() {
         {
           title: de("Brandschutzanalyse"),
           text: de(
-            "In einer ersten Analyse wird das bestehende Gebäude begutachtet und mit den Änderungswünschen verglichen. Schnell können Probleme aufgelöst oder Herausforderungen aufgezeigt werden. Mit einem Massnahmenkatalog können nötige Anpassungen strategisch festgehalten werden, im Optimalfall findet dieser Schritt zeitnah mit dem ersten Entwurf Architektur zusammen.",
+            "In einer ersten Analyse wird das bestehende Gebäude begutachtet und mit den Änderungswünschen verglichen. Schnell können Probleme aufgelöst oder Herausforderungen aufgezeigt werden. Mit einem Massnahmenkatalog können nötige Anpassungen strategisch festgehalten werden, im Optimalfall findet dieser Schritt zeitnah mit dem ersten Architektur Entwurf statt.",
           ),
         },
         {
@@ -193,13 +193,13 @@ export function realisierungSections() {
         {
           title: de("Effiziente\nProjektsteuerung"),
           text: de(
-            "Unser Team übernimmt die effiziente Steuerung und Koordination aller Bauprozesse. Ziel ist es, Ihr Projekt termingerecht und im Rahmen des veranschlagten Budgets erfolgreich abzuschliessen. Durch die präzise Planung und Überwachung aller Schritte sichern wir den reibungslosen Ablauf Ihres Vorhabens.",
+            "Unser Team übernimmt die Steuerung und Koordination aller Bauprozesse. Ziel ist es, Ihr Projekt termingerecht und im Rahmen des veranschlagten Budgets erfolgreich abzuschliessen. Durch die präzise Planung und Überwachung aller Schritte sichern wir den reibungslosen Ablauf Ihres Vorhabens.",
           ),
         },
         {
           title: de("Stetige\nQualitätssicherung"),
           text: de(
-            "Die Qualität Ihrer Bauprojekte ist unser grosses Anliegen. Durch die enge Zusammenarbeit mit ausgewählten Handwerkern und Zulieferern garantieren wir, dass jede Phase der Realisierung den höchsten Qualitätsstandards entspricht. Unsere Qualitätskontrollen auf der Baustelle gewährleisten die präzise Ausführung aller Arbeiten.",
+            "Die Qualität Ihrer Bauprojekte ist unser grosses Anliegen. Durch die enge Zusammenarbeit mit ausgewählten Handwerkern und Zulieferern garantieren wir, dass jede Phase der Realisierung den höchsten Qualitätsstandards entspricht. Unsere Qualitätskontrollen auf der Baustelle gewährleisten die exakte Ausführung aller Arbeiten.",
           ),
         },
         {
@@ -245,7 +245,7 @@ export function realisierungSections() {
           "Sicherstellung eines kontinuierlichen Informationsflusses zur Bauherrschaft\nEffektive Sicherstellung eines kontinuierlichen Informationsflusses zur Bauherrschaft.",
         ),
         splitTitleBody(
-          "Periodische Endkostenprognosen\nRegelmäßige Endkostenprognosen für eine transparente Budgetplanung.",
+          "Periodische Endkostenprognosen\nRegelmässige Endkostenprognosen für eine transparente Budgetplanung.",
         ),
       ],
       _orbi: { component: "SectionChecklistSplit" },

@@ -3,6 +3,11 @@
  * Prefer Graph API when tokens are set; optional JSON feed URL as fallback.
  */
 import { PUBLIC_INSTAGRAM_USERNAME } from "astro:env/client"
+import {
+  INSTAGRAM_ACCESS_TOKEN,
+  INSTAGRAM_FEED_JSON_URL,
+  INSTAGRAM_USER_ID,
+} from "astro:env/server"
 
 export type InstagramPost = {
   id: string
@@ -25,11 +30,6 @@ type FetchResult = {
   profile: InstagramProfile
   posts: InstagramPost[]
   source: "graph" | "json" | "empty"
-}
-
-function readSecret(name: string): string {
-  if (typeof process === "undefined") return ""
-  return (process.env[name] ?? "").trim()
 }
 
 function usernameFromEnv(fallback = "bhend.architektur"): string {
@@ -107,37 +107,57 @@ async function fetchJsonFeed(
     return []
   }
   const raw = (await res.json()) as unknown
+  // JSON Feed 1.1 (e.g. rss.app) puts posts under `items`, with `url` as the permalink.
+  const isJsonFeed = Array.isArray((raw as { items?: unknown }).items)
   const list = Array.isArray(raw)
     ? raw
-    : Array.isArray((raw as { posts?: unknown }).posts)
-      ? (raw as { posts: unknown[] }).posts
-      : Array.isArray((raw as { data?: unknown }).data)
-        ? (raw as { data: unknown[] }).data
-        : []
+    : isJsonFeed
+      ? (raw as { items: unknown[] }).items
+      : Array.isArray((raw as { posts?: unknown }).posts)
+        ? (raw as { posts: unknown[] }).posts
+        : Array.isArray((raw as { data?: unknown }).data)
+          ? (raw as { data: unknown[] }).data
+          : []
 
-  return list.slice(0, limit).flatMap((item, index) => {
-    if (!item || typeof item !== "object") return []
-    const row = item as Record<string, unknown>
-    const mediaUrl = String(
-      row.mediaUrl ?? row.media_url ?? row.image ?? row.url ?? "",
-    )
-    const permalink = String(row.permalink ?? row.link ?? row.href ?? "")
-    if (!mediaUrl || !permalink) return []
-    const post: InstagramPost = {
-      id: String(row.id ?? `json-${index}`),
-      permalink,
-      mediaUrl,
-      mediaType: String(row.mediaType ?? row.media_type ?? "IMAGE"),
-    }
-    if (typeof row.thumbnailUrl === "string")
-      post.thumbnailUrl = row.thumbnailUrl
-    else if (typeof row.thumbnail_url === "string")
-      post.thumbnailUrl = row.thumbnail_url
-    if (typeof row.caption === "string") post.caption = row.caption
-    else if (typeof row.title === "string") post.caption = row.title
-    if (typeof row.timestamp === "string") post.timestamp = row.timestamp
-    return [post]
-  })
+  return list
+    .flatMap((item, index) => {
+      if (!item || typeof item !== "object") return []
+      const row = item as Record<string, unknown>
+      const mediaUrl = String(
+        row.mediaUrl ??
+          row.media_url ??
+          row.image ??
+          (isJsonFeed ? "" : row.url) ??
+          "",
+      )
+      const permalink = String(
+        row.permalink ??
+          row.link ??
+          row.href ??
+          (isJsonFeed ? row.url : "") ??
+          "",
+      )
+      if (!mediaUrl || !permalink) return []
+      const post: InstagramPost = {
+        id: String(row.id ?? `json-${index}`),
+        permalink,
+        mediaUrl,
+        mediaType: String(row.mediaType ?? row.media_type ?? "IMAGE"),
+      }
+      if (typeof row.thumbnailUrl === "string")
+        post.thumbnailUrl = row.thumbnailUrl
+      else if (typeof row.thumbnail_url === "string")
+        post.thumbnailUrl = row.thumbnail_url
+      const caption = [row.caption, row.content_text, row.title].find(
+        (value): value is string =>
+          typeof value === "string" && value.trim() !== "",
+      )
+      if (caption) post.caption = caption
+      const timestamp = row.timestamp ?? row.date_published
+      if (typeof timestamp === "string") post.timestamp = timestamp
+      return [post]
+    })
+    .slice(0, limit)
 }
 
 /** Load latest posts for SSR. Never invents fake media. */
@@ -148,9 +168,9 @@ export async function fetchInstagramFeed(options?: {
   const limit = Math.min(24, Math.max(1, options?.limit ?? 12))
   const profile = instagramProfile(options?.username)
 
-  const token = readSecret("INSTAGRAM_ACCESS_TOKEN")
-  const userId = readSecret("INSTAGRAM_USER_ID")
-  const feedUrl = readSecret("INSTAGRAM_FEED_JSON_URL")
+  const token = (INSTAGRAM_ACCESS_TOKEN ?? "").trim()
+  const userId = (INSTAGRAM_USER_ID ?? "").trim()
+  const feedUrl = (INSTAGRAM_FEED_JSON_URL ?? "").trim()
 
   if (token && userId) {
     try {

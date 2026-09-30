@@ -96,7 +96,11 @@ const headingClass =
         {
           copy && (
             <p
-              class:list={[bodyClass, dark ? "text-brand-200" : "text-ink"]}
+              class:list={[
+                bodyClass,
+                "whitespace-pre-line",
+                dark ? "text-brand-200" : "text-ink",
+              ]}
               {...bf(`${section}.body`, "style_target", section)}
             >
               {copy}
