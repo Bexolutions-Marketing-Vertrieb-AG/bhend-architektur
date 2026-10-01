@@ -273,7 +273,9 @@ function homeSections() {
         "Alle unsere Kunden sind mit der Herausforderung konfrontiert, Nachhaltigkeit und Energieeffizienz zu einem fairen Preis in Einklang mit Ästhetik und Innovation zu bringen.",
       ),
       image: "/images/home/aesthetics.jpg",
-      imageAlt: de("Dachlandschaft moderner Gebäude"),
+      imageAlt: de(
+        "Modernes Wohnhaus mit Holzfassade und grossen Fensterfronten",
+      ),
       imagePosition: "right",
       _orbi: { component: "SectionSplit" },
     },
