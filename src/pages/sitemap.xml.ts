@@ -9,9 +9,14 @@ import { siteUrl } from "~/lib/site"
 
 export const prerender = false
 
+/** Operator-only pages that must never be indexed. */
+const EXCLUDED_SLUGS = new Set(["setup"])
+
 export const GET: APIRoute = async () => {
   const base = siteUrl()
-  const pages = await listPageSlugs()
+  const pages = (await listPageSlugs())
+    .filter((page) => !EXCLUDED_SLUGS.has(page.slug))
+    .sort((a, b) => sortKey(a.slug).localeCompare(sortKey(b.slug)))
   const posts = await listPublishedPostIds()
 
   const urls: string[] = []
@@ -20,30 +25,29 @@ export const GET: APIRoute = async () => {
     for (const locale of LOCALES) {
       const path = localePath(locale as Locale, page.slug)
       const loc = `${base}${path === "/" ? "/" : path}`
-      const lastmod = page.updated_at
-        ? `<lastmod>${new Date(page.updated_at).toISOString()}</lastmod>`
-        : ""
-      const alternates = LOCALES.map(
-        (alt) =>
-          `<xhtml:link rel="alternate" hreflang="${alt}" href="${base}${localePath(alt as Locale, page.slug)}" />`,
-      ).join("")
-      const xDefault = `<xhtml:link rel="alternate" hreflang="x-default" href="${base}${localePath(DEFAULT_LOCALE, page.slug)}" />`
+      const alternates =
+        LOCALES.length > 1
+          ? LOCALES.map(
+              (alt) =>
+                `<xhtml:link rel="alternate" hreflang="${alt}" href="${base}${localePath(alt as Locale, page.slug)}" />`,
+            ).join("") +
+            `<xhtml:link rel="alternate" hreflang="x-default" href="${base}${localePath(DEFAULT_LOCALE, page.slug)}" />`
+          : ""
       urls.push(
-        `<url><loc>${escapeXml(loc)}</loc>${lastmod}${alternates}${xDefault}</url>`,
+        `<url><loc>${escapeXml(loc)}</loc>${lastmod(page.updated_at)}${alternates}</url>`,
       )
     }
   }
 
   for (const post of posts) {
-    const slug = postTitleSlug(post.title)
-    const loc = `${base}${postPath(post.id, slug)}`
-    const lastmod = post.updated_at
-      ? `<lastmod>${new Date(post.updated_at).toISOString()}</lastmod>`
-      : ""
-    urls.push(`<url><loc>${escapeXml(loc)}</loc>${lastmod}</url>`)
+    const loc = `${base}${postPath(post.id, postTitleSlug(post.title))}`
+    urls.push(
+      `<url><loc>${escapeXml(loc)}</loc>${lastmod(post.updated_at)}</url>`,
+    )
   }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${urls.join("\n")}
@@ -55,6 +59,17 @@ ${urls.join("\n")}
       "Cache-Control": "public, max-age=300",
     },
   })
+}
+
+/** Home first, then pages alphabetically by path. */
+function sortKey(slug: string): string {
+  return slug === "home" ? "" : slug
+}
+
+function lastmod(updatedAt: string | undefined): string {
+  return updatedAt
+    ? `<lastmod>${new Date(updatedAt).toISOString()}</lastmod>`
+    : ""
 }
 
 function escapeXml(value: string): string {
