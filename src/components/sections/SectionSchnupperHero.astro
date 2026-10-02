@@ -44,7 +44,7 @@ const alt = translate(imageAlt, locale) || headline
 
 <section class="bg-white" {...bf(`${section}.shell`, "container", section)}>
   <div class="container-wide py-section-sm md:pt-section md:pb-section">
-    <div class="mx-auto flex max-w-[984px] flex-col gap-6 md:gap-8">
+    <div class="flex flex-col gap-6 md:gap-8">
       {
         headline && (
           <h1
@@ -58,7 +58,7 @@ const alt = translate(imageAlt, locale) || headline
       {
         leadText && (
           <p
-            class="heading-block text-ink"
+            class="heading-block text-ink uppercase"
             {...bf(`${section}.lead`, "style_target", section)}
           >
             {leadText}
@@ -79,7 +79,7 @@ const alt = translate(imageAlt, locale) || headline
         cta && (
           <button
             type="button"
-            class="btn-primary mt-2 w-fit max-w-full text-left normal-case"
+            class="btn-primary mt-2 w-fit max-w-full text-left"
             data-open-application={dialogId}
             data-application-type={defaultApplicationType}
             {...bf(`${section}.cta`, "chrome_denied", section)}
