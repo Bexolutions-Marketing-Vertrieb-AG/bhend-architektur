@@ -234,6 +234,13 @@ const headline = translate(heading ?? title, locale)
             status.classList.remove("hidden")
             status.textContent = "Wird gesendet…"
           }
+          const file = cvInput?.files?.[0]
+          if (file && file.size > 4 * 1024 * 1024) {
+            if (status) {
+              status.textContent = "Die Datei ist zu gross (max. 4 MB)."
+            }
+            return
+          }
           if (submit) submit.disabled = true
 
           try {
@@ -247,7 +254,12 @@ const headline = translate(heading ?? title, locale)
               message?: string
             }
             if (!res.ok || !data.ok) {
-              throw new Error(data.message || "Senden fehlgeschlagen")
+              throw new Error(
+                data.message ||
+                  (res.status === 413
+                    ? "Die Datei ist zu gross (max. 4 MB)."
+                    : "Senden fehlgeschlagen. Bitte später erneut versuchen oder per E-Mail an info@bhend-architektur.ch senden."),
+              )
             }
             if (status) {
               status.textContent =

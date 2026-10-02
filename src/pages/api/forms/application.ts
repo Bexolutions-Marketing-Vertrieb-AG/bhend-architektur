@@ -33,22 +33,39 @@ const schema = z.object({
   website: z.string().max(200).optional().default(""),
 })
 
-async function readBody(request: Request): Promise<Record<string, string>> {
+// Vercel rejects request bodies above ~4.5 MB before the function runs.
+const MAX_CV_BYTES = 4 * 1024 * 1024
+
+interface Body {
+  fields: Record<string, string>
+  cv?: File
+}
+
+async function readBody(request: Request): Promise<Body> {
   const contentType = request.headers.get("content-type") ?? ""
   if (contentType.includes("multipart/form-data")) {
     const form = await request.formData()
-    const out: Record<string, string> = {}
+    const fields: Record<string, string> = {}
+    let cv: File | undefined
     for (const [key, value] of form.entries()) {
       if (typeof value === "string") {
-        out[key] = value
+        fields[key] = value
         continue
       }
-      if (key === "cv" && value instanceof File && value.name) {
-        out.cvFilename = value.name
+      if (key === "cv" && value.name && value.size > 0) {
+        fields.cvFilename = value.name
+        cv = value
       }
     }
-    return out
+    return { fields, cv }
   }
+  return { fields: await readFields(request, contentType) }
+}
+
+async function readFields(
+  request: Request,
+  contentType: string,
+): Promise<Record<string, string>> {
   if (
     contentType.includes("application/x-www-form-urlencoded") ||
     contentType.includes("application/json")
@@ -77,22 +94,34 @@ export const POST: APIRoute = async ({ request }) => {
     windowMs: 60_000,
   })
   if (!limited.ok) {
-    return json({ ok: false, message: "Too many requests" }, 429, {
-      "Retry-After": String(limited.retryAfterSec),
-    })
+    return json(
+      {
+        ok: false,
+        message: "Zu viele Anfragen. Bitte kurz warten und erneut senden.",
+      },
+      429,
+      { "Retry-After": String(limited.retryAfterSec) },
+    )
   }
 
-  let raw: Record<string, string>
+  let body: Body
   try {
-    raw = await readBody(request)
+    body = await readBody(request)
   } catch {
-    return json({ ok: false, message: "Invalid request body" }, 400)
+    return json(
+      { ok: false, message: "Ungültige Anfrage. Bitte erneut versuchen." },
+      400,
+    )
   }
 
-  const parsed = schema.safeParse(raw)
+  const parsed = schema.safeParse(body.fields)
   if (!parsed.success) {
     return json(
-      { ok: false, message: "Validation failed", issues: parsed.error.issues },
+      {
+        ok: false,
+        message: "Bitte alle Pflichtfelder korrekt ausfüllen.",
+        issues: parsed.error.issues,
+      },
       400,
     )
   }
@@ -100,6 +129,24 @@ export const POST: APIRoute = async ({ request }) => {
   const data = parsed.data
   if (data.website) {
     return json({ ok: true, message: "Sent", emailed: false })
+  }
+
+  const cv = body.cv
+  if (cv) {
+    const isPdf =
+      cv.type === "application/pdf" || cv.name.toLowerCase().endsWith(".pdf")
+    if (!isPdf) {
+      return json(
+        { ok: false, message: "Bitte den Lebenslauf als PDF hochladen." },
+        400,
+      )
+    }
+    if (cv.size > MAX_CV_BYTES) {
+      return json(
+        { ok: false, message: "Die Datei ist zu gross (max. 4 MB)." },
+        400,
+      )
+    }
   }
 
   const topic = data.applicationType
@@ -133,6 +180,15 @@ export const POST: APIRoute = async ({ request }) => {
         ]
           .filter(Boolean)
           .join("\n"),
+        attachments: cv
+          ? [
+              {
+                content: Buffer.from(await cv.arrayBuffer()).toString("base64"),
+                filename: cv.name,
+                type: "application/pdf",
+              },
+            ]
+          : undefined,
       })
       emailed = true
     } catch (error) {
