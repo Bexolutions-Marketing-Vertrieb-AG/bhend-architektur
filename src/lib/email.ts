@@ -12,6 +12,14 @@ export interface EmailMessage {
   subject: string
   text: string
   html?: string
+  attachments?: EmailAttachment[]
+}
+
+export interface EmailAttachment {
+  /** Base64-encoded file content */
+  content: string
+  filename: string
+  type: string
 }
 
 export interface EmailProvider {
@@ -55,6 +63,14 @@ class SendGridEmailProvider implements EmailProvider {
     }
     if (message.replyTo) {
       body.reply_to = { email: message.replyTo }
+    }
+    if (message.attachments?.length) {
+      body.attachments = message.attachments.map((a) => ({
+        content: a.content,
+        filename: a.filename,
+        type: a.type,
+        disposition: "attachment",
+      }))
     }
 
     const response = await fetch("https://api.sendgrid.com/v3/mail/send", {

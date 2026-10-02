@@ -63,22 +63,34 @@ export const POST: APIRoute = async ({ request }) => {
     windowMs: 60_000,
   })
   if (!limited.ok) {
-    return json({ ok: false, message: "Too many requests" }, 429, {
-      "Retry-After": String(limited.retryAfterSec),
-    })
+    return json(
+      {
+        ok: false,
+        message: "Zu viele Anfragen. Bitte kurz warten und erneut senden.",
+      },
+      429,
+      { "Retry-After": String(limited.retryAfterSec) },
+    )
   }
 
   let raw: unknown
   try {
     raw = await readBody(request)
   } catch {
-    return json({ ok: false, message: "Invalid request body" }, 400)
+    return json(
+      { ok: false, message: "Ungültige Anfrage. Bitte erneut versuchen." },
+      400,
+    )
   }
 
   const parsed = schema.safeParse(raw)
   if (!parsed.success) {
     return json(
-      { ok: false, message: "Validation failed", issues: parsed.error.issues },
+      {
+        ok: false,
+        message: "Bitte alle Pflichtfelder korrekt ausfüllen.",
+        issues: parsed.error.issues,
+      },
       400,
     )
   }
