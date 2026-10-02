@@ -224,7 +224,7 @@ export function realisierungSections() {
       imageAlt: de("Bauleitung vor Ort"),
       items: [
         splitTitleBody(
-          "Koordination der Fachplaner\nEffektive Koordination verschiedener Fachplaner für eine reibungslose Projektabwicklung.",
+          "Koordination der Fachplaner\nKoordination und Kommunikation mit diversen Fachpartnern für eine reibungslose Projektabwicklung.",
         ),
         splitTitleBody(
           "Ausschreibung pro Gewerk, inklusive Kostenvergleich, Vergabe und Vertragswesen\nDetaillierte Ausschreibungen pro Gewerk, Kostenvergleiche, Vergabe und Vertragsmanagement.",

@@ -998,7 +998,7 @@ function schnupperSections() {
       heading: de("Architektur erleben"),
       lead: de("Zeichnen als Beruf - probiere es einen Tag lang aus!"),
       body: de(
-        "Erhalte Einblick in die Aufgaben und den Arbeitsalltag und entdecke, wie vielseitig und kreativ der Beruf als Zeichner/in sein kann.",
+        "Erhalte Einblick in die Aufgaben und den Arbeitsalltag und entdecke,\nwie vielseitig und kreativ der Beruf als Zeichner/in sein kann.",
       ),
       image: "/images/bei-uns-arbeiten/schnupper-hero.jpg",
       imageAlt: de("Das Team von Bhend Architektur auf der Baustelle"),

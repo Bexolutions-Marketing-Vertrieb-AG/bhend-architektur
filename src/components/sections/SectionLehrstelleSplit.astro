@@ -37,12 +37,18 @@ const section = id
 const headline = translate(heading ?? title, locale)
 const sub = translate(subheading, locale)
 const copy = translate(body, locale)
+const paragraphs = copy
+  .split("\n")
+  .map((paragraph) => paragraph.trim())
+  .filter(Boolean)
 const cta = translate(ctaLabel, locale)
 const alt = translate(imageAlt, locale) || headline
 ---
 
 <section class="bg-white" {...bf(`${section}.shell`, "container", section)}>
-  <div class="container-wide py-section-sm md:pb-section">
+  <div
+    class="container-wide pb-section-sm md:pt-section-sm md:pb-section pt-[10px]"
+  >
     <div
       class="grid items-start gap-10 lg:grid-cols-[minmax(0,685px)_minmax(0,465px)] lg:gap-12"
     >
@@ -50,7 +56,7 @@ const alt = translate(imageAlt, locale) || headline
         {
           headline && (
             <h2
-              class="font-display text-ink text-[32px] leading-10 font-bold break-words"
+              class="font-display text-ink text-[25.6px] leading-8 font-bold break-words md:text-[32px] md:leading-10"
               {...bf(`${section}.heading`, "style_target", section)}
             >
               {headline}
@@ -60,7 +66,7 @@ const alt = translate(imageAlt, locale) || headline
         {
           sub && (
             <p
-              class="font-display text-ink text-[28px] leading-10 font-bold break-words"
+              class="font-display text-ink text-[22.4px] leading-8 font-bold break-words md:text-[28px] md:leading-10"
               {...bf(`${section}.subheading`, "style_target", section)}
             >
               {sub}
@@ -69,19 +75,21 @@ const alt = translate(imageAlt, locale) || headline
         }
         {
           copy && (
-            <p
-              class="section-lead whitespace-pre-line"
+            <div
+              class="flex flex-col gap-4"
               {...bf(`${section}.body`, "style_target", section)}
             >
-              {copy}
-            </p>
+              {paragraphs.map((paragraph) => (
+                <p class="section-lead">{paragraph}</p>
+              ))}
+            </div>
           )
         }
         {
           cta && (
             <button
               type="button"
-              class="btn-primary mt-2 w-fit max-w-full text-left normal-case"
+              class="btn-primary mt-2 w-fit max-w-full text-left"
               data-open-application={dialogId}
               data-application-type={defaultApplicationType}
               {...bf(`${section}.cta`, "chrome_denied", section)}
