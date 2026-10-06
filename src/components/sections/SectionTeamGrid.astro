@@ -22,7 +22,10 @@
  * Alta/baja: skills /new-employe y /delete-employe (members[] por name.de).
  */
 import { bf } from "~/lib/bf"
+import JsonLd from "~/components/seo/JsonLd.astro"
 import type { Locale } from "~/config/locales"
+import { translate } from "~/lib/i18n"
+import { absoluteUrl, organizationName } from "~/lib/site"
 import TeamMemberCard, {
   type TeamMember,
 } from "./partials/TeamMemberCard.astro"
@@ -35,6 +38,23 @@ interface Props {
 
 const { id = "team", members = [], locale } = Astro.props
 const section = id
+const people = members.flatMap((member) => {
+  const name = translate(member.name, locale).trim()
+  if (!name) return []
+  const jobTitle = translate(member.role, locale).trim()
+  return [
+    {
+      "@type": "Person",
+      name,
+      ...(jobTitle ? { jobTitle } : {}),
+      url: absoluteUrl("/ueber-uns/team"),
+      worksFor: {
+        "@type": "Organization",
+        name: organizationName(),
+      },
+    },
+  ]
+})
 ---
 
 <section class="bg-white" {...bf(`${section}.shell`, "container", section)}>
@@ -52,4 +72,14 @@ const section = id
       }
     </ul>
   </div>
+  {
+    people.length > 0 && (
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@graph": people,
+        }}
+      />
+    )
+  }
 </section>

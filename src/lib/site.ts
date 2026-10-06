@@ -70,3 +70,34 @@ export function absoluteUrl(path: string): string {
   const base = siteUrl()
   return `${base}${path.startsWith("/") ? path : `/${path}`}`
 }
+
+/** Postal address and phone already shown in the site footer. */
+export function organizationProfile() {
+  return {
+    telephone: "+41 62 798 00 00",
+    email: "info@bhend-architektur.ch",
+    streetAddress: "Zofingerstrasse 43",
+    postalCode: "4665",
+    addressLocality: "Oftringen",
+    addressRegion: "Aargau",
+    addressCountry: "CH",
+  }
+}
+
+/**
+ * Google rating for the Oftringen listing: 5.0 from 13 reviews.
+ * Directories that mirror that Google listing report the same aggregate.
+ */
+export function organizationRating() {
+  return {
+    ratingValue: "5.0",
+    reviewCount: "13",
+    bestRating: "5",
+    worstRating: "1",
+  }
+}
+
+/** Opens the Google reviews panel for the Oftringen listing. */
+export function googleReviewsUrl(): string {
+  return "https://www.google.com/search?q=Bhend+Architektur+AG+Oftringen#lrd=0x47902f88ccc19e03:0xbcbf6546cd78d6ff,1"
+}

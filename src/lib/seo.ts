@@ -1,5 +1,6 @@
 import type { Locale } from "~/config/locales"
 import { LOCALES, DEFAULT_LOCALE } from "~/config/locales"
+import { isProjectCategory, PROJECT_CATEGORY_LABELS } from "~/config/projects"
 import { translate } from "~/lib/i18n"
 import { localePath } from "~/lib/i18n"
 import { stripHtml } from "~/lib/sanitize"
@@ -41,8 +42,78 @@ function truncate(text: string, max: number): string {
   return `${clean.slice(0, max - 1).trimEnd()}…`
 }
 
-function pageSlugPath(slug: string): string {
-  return slug === "home" ? "" : slug
+function meaningfulHead(head: Page["head"], key: string): string | undefined {
+  if (!head) return undefined
+  const value = head[key]
+  if (typeof value !== "string") return undefined
+  const trimmed = value.trim()
+  if (!trimmed || trimmed === "...") return undefined
+  return trimmed
+}
+
+function isoDate(value: string | undefined): string | undefined {
+  if (!value) return undefined
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return undefined
+  return date.toISOString()
+}
+
+function listItem(position: number, name: string, item: string) {
+  return {
+    "@type": "ListItem",
+    position,
+    name,
+    item,
+  }
+}
+
+function breadcrumbList(
+  crumbs: Array<{ name: string; item: string }>,
+): Record<string, unknown> {
+  return {
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((crumb, index) =>
+      listItem(index + 1, crumb.name, crumb.item),
+    ),
+  }
+}
+
+function asGraph(
+  nodes: Array<Record<string, unknown>>,
+): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@graph": nodes,
+  }
+}
+
+function pageBreadcrumb(
+  slug: string,
+  title: string,
+): Record<string, unknown> | null {
+  if (!slug || slug === "home") return null
+  return breadcrumbList([
+    { name: "Home", item: `${getSiteUrl()}/` },
+    { name: title, item: absoluteUrl(`/${slug}`) },
+  ])
+}
+
+function postBreadcrumb(
+  post: Post,
+  headline: string,
+  canonical: string,
+): Record<string, unknown> {
+  const crumbs = [{ name: "Home", item: `${getSiteUrl()}/` }]
+  if (post.category && isProjectCategory(post.category)) {
+    crumbs.push({
+      name: PROJECT_CATEGORY_LABELS[post.category],
+      item: absoluteUrl(`/${post.category}`),
+    })
+  } else if (!post.category) {
+    crumbs.push({ name: "Blog", item: absoluteUrl("/blog") })
+  }
+  crumbs.push({ name: headline, item: canonical })
+  return breadcrumbList(crumbs)
 }
 
 export function buildPageSeo(options: {
@@ -51,20 +122,21 @@ export function buildPageSeo(options: {
   path: string
 }): SeoData {
   const { page, locale, path } = options
-  const title = truncate(translate(page.title, locale) || siteName(), 60)
-  const rawDescription =
-    translate(page.lead, locale) ||
-    (typeof page.head?.["description"] === "string"
-      ? page.head["description"]
-      : "") ||
-    siteDescription()
-  const description = truncate(stripHtml(rawDescription), 160)
+  const pageTitle = translate(page.title, locale) || siteName()
+  const title = truncate(meaningfulHead(page.head, "title") || pageTitle, 60)
+  const description = truncate(
+    stripHtml(
+      meaningfulHead(page.head, "description") ||
+        translate(page.lead, locale) ||
+        siteDescription(),
+    ),
+    160,
+  )
   const keywords = Array.isArray(page.keywords)
     ? page.keywords.map(String).filter((k) => k && k !== "...")
     : []
 
   const canonical = absoluteUrl(path)
-  const slug = pageSlugPath(page.slug)
   const alternates: SeoAlternate[] = LOCALES.map((loc) => ({
     hreflang: loc,
     href: absoluteUrl(localePath(loc, page.slug)),
@@ -80,18 +152,30 @@ export function buildPageSeo(options: {
         `/api/og/page?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`,
       )
 
-  const headOverride =
-    page.head && typeof page.head === "object" ? page.head : {}
+  const webPage = {
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: canonical,
+    isPartOf: {
+      "@type": "WebSite",
+      name: siteName(),
+      url: getSiteUrl(),
+    },
+    publisher: {
+      "@type": "Organization",
+      name: organizationName(),
+      logo: {
+        "@type": "ImageObject",
+        url: organizationLogo(),
+      },
+    },
+  }
+  const breadcrumb = pageBreadcrumb(page.slug, pageTitle)
 
-  const seo: SeoData = {
-    title:
-      typeof headOverride["title"] === "string"
-        ? truncate(String(headOverride["title"]), 60)
-        : title,
-    description:
-      typeof headOverride["description"] === "string"
-        ? truncate(stripHtml(String(headOverride["description"])), 160)
-        : description,
+  return {
+    title,
+    description,
     keywords,
     canonical,
     alternates,
@@ -102,31 +186,8 @@ export function buildPageSeo(options: {
     twitterCard: "summary_large_image",
     twitterSite: "",
     twitterCreator: "",
-    jsonLd: {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      name: title,
-      description,
-      url: canonical,
-      isPartOf: {
-        "@type": "WebSite",
-        name: siteName(),
-        url: getSiteUrl(),
-      },
-      publisher: {
-        "@type": "Organization",
-        name: organizationName(),
-        logo: {
-          "@type": "ImageObject",
-          url: organizationLogo(),
-        },
-      },
-    },
+    jsonLd: asGraph(breadcrumb ? [webPage, breadcrumb] : [webPage]),
   }
-
-  // Suppress unused for slug (kept for clarity / future use)
-  void slug
-  return seo
 }
 
 export function buildPostSeo(options: {
@@ -135,7 +196,8 @@ export function buildPostSeo(options: {
   path: string
 }): SeoData {
   const { post, locale, path } = options
-  const title = truncate(translate(post.title, locale) || siteName(), 60)
+  const headline = translate(post.title, locale) || siteName()
+  const title = truncate(headline, 60)
   const description = truncate(
     stripHtml(translate(post.lead, locale) || siteDescription()),
     160,
@@ -146,6 +208,32 @@ export function buildPostSeo(options: {
     : absoluteUrl(
         `/api/og/post?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`,
       )
+  const isBlog = !post.category
+  const published = isoDate(post.created_at)
+  const modified = isoDate(post.updated_at) ?? published
+  const article: Record<string, unknown> = {
+    "@type": isBlog ? "BlogPosting" : "Article",
+    headline: title,
+    description,
+    url: canonical,
+    image: ogImage,
+    publisher: {
+      "@type": "Organization",
+      name: organizationName(),
+      logo: {
+        "@type": "ImageObject",
+        url: organizationLogo(),
+      },
+    },
+  }
+  if (isBlog) {
+    article.author = {
+      "@type": "Organization",
+      name: organizationName(),
+    }
+    if (published) article.datePublished = published
+    if (modified) article.dateModified = modified
+  }
 
   return {
     title,
@@ -165,21 +253,6 @@ export function buildPostSeo(options: {
     twitterCard: "summary_large_image",
     twitterSite: "",
     twitterCreator: "",
-    jsonLd: {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      headline: title,
-      description,
-      url: canonical,
-      image: ogImage,
-      publisher: {
-        "@type": "Organization",
-        name: organizationName(),
-        logo: {
-          "@type": "ImageObject",
-          url: organizationLogo(),
-        },
-      },
-    },
+    jsonLd: asGraph([article, postBreadcrumb(post, headline, canonical)]),
   }
 }
