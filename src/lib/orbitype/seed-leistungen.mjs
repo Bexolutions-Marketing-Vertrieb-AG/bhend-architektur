@@ -34,7 +34,7 @@ export function beratungSections() {
     {
       id: "beratungIntro",
       title: de("BERATUNG"),
-      lead: de("BRANDSCHUTZPLANUNG UND QUALITÄTSSICHERUNG BRANDSCHUTZ"),
+      lead: de("Beratung, die zu Ihrem Projekt passt"),
       body: de(
         "Bei Bhend Architektur verstehen wir die Einzigartigkeit jedes Projekts und bieten daher Beratungsdienstleistungen, die speziell auf Ihre Bedürfnisse zugeschnitten sind.\nUnser Ziel ist es, Lösungen zu entwickeln, die nicht nur Ihren Anforderungen gerecht werden, sondern auch Ihre Projektwünsche in die Realität umsetzen.",
       ),
@@ -114,7 +114,7 @@ export function brandschutzSections() {
     {
       id: "brandschutzIntro",
       title: de("BRANDSCHUTZ"),
-      lead: de("BRANDSCHUTZPLANUNG UND QUALITÄTSSICHERUNG BRANDSCHUTZ"),
+      lead: de("Frühzeitig planen, Spielraum sichern"),
       body: de(
         "Wir unterstützen, beraten und suchen nach den besten Lösungen im Brandschutz. Je früher die Brandschutzplanung in einem Umbau, einer Umnutzung, einer Sanierung oder bei einem Neubau eingebunden wird, desto grösser ist der Handlungsspielraum im Entwurf wie auch in den Baukosten.",
       ),

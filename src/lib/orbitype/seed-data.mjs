@@ -795,7 +795,7 @@ function planungSections() {
     {
       id: "planungIntro",
       title: de("PLANUNG"),
-      lead: de("BRANDSCHUTZPLANUNG UND QUALITÄTSSICHERUNG BRANDSCHUTZ"),
+      lead: de("Massgeschneiderte Planung für Ihr Bauvorhaben"),
       body: de(
         "Bei Bhend Architektur steht eine massgeschneiderte und präzise Planung im Zentrum unserer Arbeit, um optimale Ergebnisse für Ihr Bauvorhaben zu gewährleisten. Unser Ziel ist es, Ihre Vision mit höchster Sorgfalt und Genauigkeit in die Realität umzusetzen.",
       ),
