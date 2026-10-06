@@ -12,7 +12,8 @@ interface Props {
   defaultType: string
   brandImage?: string
   brandImageAlt?: string
-  dateOptions?: string[]
+  /** ISO dates (YYYY-MM-DD); past dates are dropped at render time. */
+  schnupperDates?: string[]
   locale: Locale
 }
 
@@ -23,13 +24,24 @@ const {
   defaultType,
   brandImage = "/images/bei-uns-arbeiten/application-brand.jpg",
   brandImageAlt = "Bhend Architektur Team",
-  dateOptions = [
-    "Donnerstag, 13. November 2025",
-    "Donnerstag, 27. November 2025",
-    "Donnerstag, 11. Dezember 2025",
-  ],
+  schnupperDates = ["2025-11-13", "2025-11-27", "2025-12-11"],
   locale: _locale,
 } = Astro.props
+
+const today = new Date().toISOString().slice(0, 10)
+const dateFormat = new Intl.DateTimeFormat("de-CH", {
+  weekday: "long",
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+  timeZone: "UTC",
+})
+const dateOptions = schnupperDates
+  .filter((iso) => iso >= today)
+  .map((iso) => dateFormat.format(new Date(`${iso}T00:00:00Z`)))
+const schnupperOpen = dateOptions.length > 0
+const initialType =
+  defaultType === "Schnuppertag" && !schnupperOpen ? "" : defaultType
 
 const types = [
   "Schnuppertag",
@@ -87,7 +99,7 @@ const types = [
         action="/api/forms/application"
         enctype="multipart/form-data"
         data-application-form
-        data-default-type={defaultType}
+        data-default-type={initialType}
       >
         <div class="flex items-center justify-end gap-4 pr-8">
           <span class="bg-brand-500 h-px w-24 sm:w-44" aria-hidden="true"
@@ -108,20 +120,34 @@ const types = [
           </p>
           <div class="flex flex-col gap-1.5">
             {
-              types.map((type) => (
-                <label class="text-muted flex cursor-pointer items-center gap-3.5 text-sm font-medium">
-                  <input
-                    type="radio"
-                    name="applicationType"
-                    value={type}
-                    class="application-type-radio border-muted checked:border-muted checked:bg-brand-500 size-3 shrink-0 appearance-none border"
-                    required
-                    checked={type === defaultType}
-                    data-application-type-option
-                  />
-                  <span>{type}</span>
-                </label>
-              ))
+              types.map((type) => {
+                const closed = type === "Schnuppertag" && !schnupperOpen
+                return (
+                  <label
+                    class:list={[
+                      "text-muted flex items-center gap-3.5 text-sm font-medium",
+                      closed
+                        ? "cursor-not-allowed opacity-50"
+                        : "cursor-pointer",
+                    ]}
+                  >
+                    <input
+                      type="radio"
+                      name="applicationType"
+                      value={type}
+                      class="application-type-radio border-muted checked:border-muted checked:bg-brand-500 size-3 shrink-0 appearance-none border"
+                      required
+                      checked={type === initialType}
+                      disabled={closed}
+                      data-application-type-option
+                    />
+                    <span>
+                      {type}
+                      {closed && " – neue Daten folgen"}
+                    </span>
+                  </label>
+                )
+              })
             }
           </div>
         </fieldset>

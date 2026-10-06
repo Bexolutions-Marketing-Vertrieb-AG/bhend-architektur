@@ -152,7 +152,7 @@ const alt = translate(imageAlt, locale) || headline
           const radio = form.querySelector<HTMLInputElement>(
             `input[name="applicationType"][value="${CSS.escape(preferred)}"]`,
           )
-          if (radio) radio.checked = true
+          if (radio && !radio.disabled) radio.checked = true
           syncDateField(form)
         }
         if (dialog.parentElement !== document.body) {
@@ -244,7 +244,7 @@ const alt = translate(imageAlt, locale) || headline
               const radio = form.querySelector<HTMLInputElement>(
                 `input[name="applicationType"][value="${CSS.escape(defaultType)}"]`,
               )
-              if (radio) radio.checked = true
+              if (radio && !radio.disabled) radio.checked = true
             }
             syncDateField(form)
             if (cvLabel) {
