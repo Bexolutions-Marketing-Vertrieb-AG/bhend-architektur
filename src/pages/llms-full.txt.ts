@@ -3,6 +3,7 @@ import { getPage, listPageSlugs } from "~/lib/orbitype/pages"
 import { getPost, listPublishedPostIds } from "~/lib/orbitype/posts"
 import { DEFAULT_LOCALE } from "~/config/locales"
 import { localePath, translate } from "~/lib/i18n"
+import { postPath } from "~/lib/post-slug"
 import { stripHtml } from "~/lib/sanitize"
 import { siteDescription, siteName, siteUrl } from "~/lib/site"
 
@@ -31,16 +32,12 @@ export const GET: APIRoute = async () => {
   for (const entry of posts) {
     const post = await getPost(entry.id)
     if (!post) continue
-    const slug = translate(post.title, DEFAULT_LOCALE)
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-|-$/g, "")
     const excerpt = stripHtml(translate(post.lead, DEFAULT_LOCALE)).slice(
       0,
       280,
     )
     postBlocks.push(
-      `### ${translate(post.title, DEFAULT_LOCALE)}\n\n${excerpt}\n\nURL: ${base}/posts/${post.id}/${slug}`,
+      `### ${translate(post.title, DEFAULT_LOCALE)}\n\n${excerpt}\n\nURL: ${base}${postPath(post)}`,
     )
   }
 

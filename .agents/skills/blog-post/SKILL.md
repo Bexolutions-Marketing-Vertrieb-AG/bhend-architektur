@@ -14,8 +14,25 @@ use `aktuell|wohnen|industrie-gewerbe|oeffentliche-bauten`).
 | Surface      | Route                                        |
 | ------------ | -------------------------------------------- |
 | Listing      | `/blog` (`SectionBlogFeed`)                  |
-| Detail       | `/posts/{id}/{title-slug}`                   |
+| Detail       | `/posts/{id}` (see URL rule below)           |
 | Article body | one `SectionBlogArticle` in `posts.sections` |
+
+## URL rule (`postPath` in `src/lib/post-slug.ts`)
+
+| Post                                                        | URL                        |
+| ----------------------------------------------------------- | -------------------------- |
+| Created before `POST_SLUG_V2_SINCE` (`src/config/posts.ts`) | unchanged legacy URL       |
+| New, kebab-case `id`                                        | `/posts/{id}`              |
+| New, random `id` (Orbitype default)                         | `/posts/{id}/{title-slug}` |
+
+- Choose the `id` as the URL: lowercase, words joined by `-`, umlauts spelled
+  out (`ä→ae`, `ö→oe`, `ü→ue`, `ß→ss`), no repeated title segment.
+- New-post title slugs transliterate umlauts the same way; legacy posts keep
+  their old slug so existing URLs never move.
+- Renaming the title of a post with a random id changes its URL (the old one
+  301s to the new one). Never rename an `id` after publishing.
+- Old WordPress URLs are mapped in `src/lib/legacy-redirects.ts`; check with
+  `node scripts/check-redirects-live.mjs <baseUrl>`.
 
 Listing cards are derived at render time from published blog posts
 (`listPosts` → `blogCardFromPost`). The article section is the CMS source of

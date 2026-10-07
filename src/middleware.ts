@@ -1,5 +1,29 @@
 import { defineMiddleware } from "astro:middleware"
-import { lookupLegacyRedirect } from "~/lib/legacy-redirects"
+import {
+  canonicalRequestPath,
+  lookupLegacyRedirect,
+  normalizeLegacyPath,
+} from "~/lib/legacy-redirects"
+import { resolveLegacyProject } from "~/lib/legacy-projects"
+
+const CANONICAL_ORIGIN = "https://www.bhend-architektur.ch"
+
+/**
+ * Hosts served by this project only to redirect to {@link CANONICAL_ORIGIN}.
+ * They must be attached to the Vercel project without a domain-level redirect,
+ * otherwise Vercel answers first (308) and old URLs take two hops.
+ */
+const ALIAS_HOSTS = new Set([
+  "bhend-architektur.ch",
+  "bexo.bhend-architektur.ch",
+])
+
+async function targetPath(pathname: string): Promise<string> {
+  const legacy = lookupLegacyRedirect(pathname)
+  if (legacy) return legacy.to
+  const project = await resolveLegacyProject(normalizeLegacyPath(pathname))
+  return project ?? canonicalRequestPath(pathname)
+}
 
 /**
  * Mandatory cache + robots + baseline security headers.
@@ -12,9 +36,13 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const isApi = pathname.startsWith("/api/")
 
   if (!isApi) {
-    const legacy = lookupLegacyRedirect(pathname)
-    if (legacy) {
-      return context.redirect(legacy.to, 301)
+    const path = await targetPath(pathname)
+    const query = context.url.search
+    if (ALIAS_HOSTS.has(context.url.hostname)) {
+      return context.redirect(`${CANONICAL_ORIGIN}${path}${query}`, 301)
+    }
+    if (path !== pathname) {
+      return context.redirect(`${path}${query}`, 301)
     }
   }
 

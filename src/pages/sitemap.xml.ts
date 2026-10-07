@@ -4,7 +4,7 @@ import { listPublishedPostIds } from "~/lib/orbitype/posts"
 import { LOCALES, DEFAULT_LOCALE } from "~/config/locales"
 import type { Locale } from "~/config/locales"
 import { localePath } from "~/lib/i18n"
-import { postPath, postTitleSlug } from "~/lib/post-slug"
+import { postPath } from "~/lib/post-slug"
 import { siteUrl } from "~/lib/site"
 
 export const prerender = false
@@ -40,7 +40,7 @@ export const GET: APIRoute = async () => {
   }
 
   for (const post of posts) {
-    const loc = `${base}${postPath(post.id, postTitleSlug(post.title))}`
+    const loc = `${base}${postPath(post)}`
     urls.push(
       `<url><loc>${escapeXml(loc)}</loc>${lastmod(post.updated_at)}</url>`,
     )

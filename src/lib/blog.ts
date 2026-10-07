@@ -1,9 +1,8 @@
 import type { Post } from "~/types/post"
 import type { Section } from "~/types/section"
 import type { I18nString } from "~/types/i18n"
-import { translate } from "~/lib/i18n"
+import { postPath } from "~/lib/post-slug"
 import { stripHtml } from "~/lib/sanitize"
-import { DEFAULT_LOCALE } from "~/config/locales"
 
 export type BlogCardFields = {
   id: string
@@ -14,13 +13,6 @@ export type BlogCardFields = {
   href: string
   publishedAt?: string
   ctaLabel?: I18nString
-}
-
-function slugifyTitle(title: I18nString): string {
-  return translate(title, DEFAULT_LOCALE)
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "")
 }
 
 function formatBlogDate(iso?: string): string {
@@ -51,14 +43,13 @@ function plainLead(lead?: I18nString): I18nString | undefined {
 
 /** Map a blog post row to SectionBlogFeed card props. */
 export function blogCardFromPost(post: Post): BlogCardFields {
-  const slug = slugifyTitle(post.title) || post.id
   return {
     id: post.id,
     title: post.title,
     lead: plainLead(post.lead),
     image: post.img || undefined,
     imageAlt: post.title,
-    href: `/posts/${post.id}/${slug}`,
+    href: postPath(post),
     publishedAt: formatBlogDate(post.created_at),
     ctaLabel: { de: "MEHR LESEN", en: "READ MORE" },
   }

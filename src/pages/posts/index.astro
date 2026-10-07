@@ -5,6 +5,7 @@ import { DEFAULT_LOCALE } from "~/config/locales"
 import { listPosts } from "~/lib/orbitype/posts"
 import { translate } from "~/lib/i18n"
 import { phrases } from "~/lib/phrases"
+import { postPath } from "~/lib/post-slug"
 import { absoluteUrl, siteDescription, siteName } from "~/lib/site"
 import { stripHtml } from "~/lib/sanitize"
 
@@ -52,13 +53,9 @@ const title = translate(phrases.posts, locale)
       ) : (
         <ul class="divide-y divide-neutral-200 border-y border-neutral-200">
           {posts.map((post) => {
-            const slug = translate(post.title, locale)
-              .toLowerCase()
-              .replace(/[^a-z0-9]+/g, "-")
-              .replace(/^-|-$/g, "")
             return (
               <li class="py-6">
-                <a href={`/posts/${post.id}/${slug}`} class="group block">
+                <a href={postPath(post)} class="group block">
                   <h2 class="group-hover:text-brand-700 text-xl font-semibold">
                     {translate(post.title, locale)}
                   </h2>

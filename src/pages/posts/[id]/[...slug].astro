@@ -7,7 +7,7 @@ import { DEFAULT_LOCALE } from "~/config/locales"
 import { getPost, listPublishedPostIds } from "~/lib/orbitype/posts"
 import { OrbitypeError } from "~/lib/orbitype/client"
 import { buildPostSeo } from "~/lib/seo"
-import { postPath, postTitleSlug } from "~/lib/post-slug"
+import { postPath } from "~/lib/post-slug"
 
 export const prerender = import.meta.env.RENDER_MODE === "static"
 
@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 
   const posts = await listPublishedPostIds()
   return posts.map((post) => {
-    const slug = postTitleSlug(post.title)
+    const slug = postPath(post).split("/").slice(3).join("/")
     return {
       params: {
         id: post.id,
@@ -53,16 +53,15 @@ try {
 }
 if (!post) return Astro.rewrite("/404")
 
-const canonicalSlug = postTitleSlug(post.title, locale)
+const canonicalPath = postPath(post)
+const canonicalSlug = canonicalPath.split("/").slice(3).join("/")
 const requestedSlug = Array.isArray(Astro.params.slug)
   ? Astro.params.slug.join("/")
   : (Astro.params.slug ?? "")
 
-if (canonicalSlug && requestedSlug !== canonicalSlug) {
-  return Astro.redirect(postPath(post.id, canonicalSlug), 301)
+if (requestedSlug !== canonicalSlug) {
+  return Astro.redirect(canonicalPath, 301)
 }
-
-const canonicalPath = postPath(post.id, canonicalSlug)
 
 if (Astro.cache.enabled) {
   Astro.cache.set({
