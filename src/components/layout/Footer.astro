@@ -1,18 +1,13 @@
 ---
 import { bf } from "~/lib/bf"
 import type { Locale } from "~/config/locales"
-import {
-  googleReviewsUrl,
-  organizationName,
-  organizationRating,
-} from "~/lib/site"
+import { organizationName } from "~/lib/site"
 
 interface Props {
   locale: Locale
 }
 
 const { locale: _locale } = Astro.props
-const rating = organizationRating()
 const year = new Date().getFullYear()
 
 type MenuChild = { href: string; label: string }
@@ -281,21 +276,13 @@ const socialLinks = [
         </svg>
         Impressum
       </a>
-      <p
-        class="mt-6 font-sans text-base leading-normal font-medium text-white md:text-[18px]"
-        {...bf("chrome.footer.copyright", "chrome_denied", "footer")}
-      >
-        {`© ${year} ${organizationName()}`}
-      </p>
-      <a
-        href={googleReviewsUrl()}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="enter:opacity-80 mt-3 inline-block font-sans text-base leading-normal font-medium text-white underline transition-opacity md:text-[18px]"
-        {...bf("chrome.footer.reviews", "chrome_denied", "footer")}
-      >
-        {`${rating.ratingValue} von 5 · ${rating.reviewCount} Rezensionen`}
-      </a>
     </div>
+
+    <p
+      class="col-span-2 font-sans text-xs leading-normal font-medium text-white min-[380px]:whitespace-nowrap sm:text-base lg:col-span-4"
+      {...bf("chrome.footer.copyright", "chrome_denied", "footer")}
+    >
+      {`© ${year} ${organizationName()}. Alle Rechte vorbehalten.`}
+    </p>
   </div>
 </footer>

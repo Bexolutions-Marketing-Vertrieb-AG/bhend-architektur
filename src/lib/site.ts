@@ -96,8 +96,3 @@ export function organizationRating() {
     worstRating: "1",
   }
 }
-
-/** Opens the Google reviews panel for the Oftringen listing. */
-export function googleReviewsUrl(): string {
-  return "https://www.google.com/search?q=Bhend+Architektur+AG+Oftringen#lrd=0x47902f88ccc19e03:0xbcbf6546cd78d6ff,1"
-}
