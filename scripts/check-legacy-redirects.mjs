@@ -1,26 +1,22 @@
 #!/usr/bin/env node
 /**
- * Contract tests for legacy redirect normalizer + empty upstream map.
+ * Contract tests for the legacy redirect map (Node ≥ 22.18 imports the
+ * dependency-free TS module directly): normalizer, no chains, no mass
+ * redirects to `/`, middleware wiring.
  */
 import fs from "node:fs"
 import path from "node:path"
 import { pathToFileURL } from "node:url"
 
-const modPath = pathToFileURL(path.resolve("src/lib/legacy-redirects.ts")).href
-
-// Load via dynamic import after a tiny transpile-free mirror for Node:
-// re-implement normalize here matching the TS source (asserted equal via source grep),
-// and import map emptiness from the TypeScript source text.
-
-const src = fs.readFileSync("src/lib/legacy-redirects.ts", "utf8")
-
-function normalizeLegacyPath(pathname) {
-  let p = pathname.split("?")[0]?.split("#")[0] ?? "/"
-  p = p.replace(/\/{2,}/g, "/")
-  if (p.length > 1 && p.endsWith("/")) p = p.slice(0, -1)
-  if (!p.startsWith("/")) p = `/${p}`
-  return p.toLowerCase()
-}
+const {
+  LEGACY_REDIRECTS,
+  LEGACY_PREFIX_REDIRECTS,
+  normalizeLegacyPath,
+  lookupLegacyRedirect,
+  canonicalRequestPath,
+} = await import(
+  pathToFileURL(path.resolve("src/lib/legacy-redirects.ts")).href
+)
 
 let failed = 0
 
@@ -46,46 +42,55 @@ assert(
   normalizeLegacyPath("/x?utm=1") === "/x",
   "query stripped when present in string",
 )
-
-// Empty map: no concrete redirect entries in LEGACY_REDIRECTS object body
-const mapBody = src.match(
-  /export const LEGACY_REDIRECTS[\s\S]*?=\s*\{([\s\S]*?)\}/,
-)
-assert(Boolean(mapBody), "LEGACY_REDIRECTS object found")
-const entries = (mapBody?.[1] ?? "")
-  .split("\n")
-  .map((l) => l.trim())
-  .filter((l) => l && !l.startsWith("//") && l.includes(":"))
+assert(canonicalRequestPath("/Wohnen/") === "/wohnen", "page path canonical")
 assert(
-  entries.length === 0,
-  "upstream LEGACY_REDIRECTS is empty (no mass redirects)",
+  canonicalRequestPath("/posts/3ClhWZ/x/") === "/posts/3ClhWZ/x",
+  "post ids keep case",
 )
 
+const targets = [
+  ...Object.values(LEGACY_REDIRECTS),
+  ...LEGACY_PREFIX_REDIRECTS.map(([, redirect]) => redirect),
+].map((redirect) => redirect.to)
+
+for (const [from, { to }] of Object.entries(LEGACY_REDIRECTS)) {
+  if (normalizeLegacyPath(from) !== from) {
+    assert(false, `key ${from} is not normalized`)
+  }
+  if (lookupLegacyRedirect(to)) {
+    assert(false, `chain: ${from} → ${to} is itself redirected`)
+  }
+}
 assert(
-  src.includes("normalizeLegacyPath"),
-  "normalizeLegacyPath exported in source",
+  targets.every((to) => to.startsWith("/") && to !== "/"),
+  `${targets.length} targets are paths and none is a mass redirect to /`,
 )
 assert(
-  !/\n\s*"\/[^"]+":\s*\{\s*to:\s*"\/"\s*\}/.test(src),
-  "no active mass-redirect to /",
+  targets.every((to) => canonicalRequestPath(to) === to),
+  "targets are canonical (no trailing slash, no case change)",
+)
+assert(
+  lookupLegacyRedirect("/Team/")?.to === "/ueber-uns/team",
+  "lookup handles case + trailing slash",
+)
+assert(
+  lookupLegacyRedirect("/freie-stelle/zeichner-in-schnuppertag")?.to ===
+    "/architektur-erleben",
+  "exact entry wins over prefix",
 )
 
-// Middleware must call lookup
 const mw = fs.readFileSync("src/middleware.ts", "utf8")
 assert(
-  mw.includes("lookupLegacyRedirect") || mw.includes("legacy-redirects"),
-  "middleware hooks legacy redirects",
+  mw.includes("lookupLegacyRedirect") && mw.includes("resolveLegacyProject"),
+  "middleware hooks legacy + project redirects",
 )
 
-// SEO builders use siteUrl / getSiteUrl / absoluteUrl (site helper)
 const seo = fs.readFileSync("src/lib/seo.ts", "utf8")
 assert(
   seo.includes('from "~/lib/site"') &&
     (seo.includes("siteUrl") || seo.includes("absoluteUrl")),
   "seo.ts imports site URL helpers",
 )
-
-void modPath
 
 if (failed > 0) {
   console.error(`\n${failed} legacy redirect contract(s) failed`)

@@ -151,17 +151,22 @@ export async function getProject(id: string): Promise<Post | null> {
 }
 
 export async function listPublishedPostIds(): Promise<
-  Array<Pick<Post, "id" | "title" | "updated_at">>
+  Array<Pick<Post, "id" | "title" | "created_at" | "updated_at">>
 > {
   if (isMockMode() || !hasSqlConfigured()) {
     return seedPosts()
       .filter((p) => p.status?.value === "published" && isBlogPost(p))
-      .map(({ id, title, updated_at }) => ({ id, title, updated_at }))
+      .map(({ id, title, created_at, updated_at }) => ({
+        id,
+        title,
+        created_at,
+        updated_at,
+      }))
   }
 
   try {
     return await orbitypeSql(
-      `SELECT id, title, updated_at FROM posts
+      `SELECT id, title, created_at, updated_at FROM posts
        WHERE status->>'value' = 'published'
          AND (category IS NULL OR category = '')
        ORDER BY updated_at DESC`,
