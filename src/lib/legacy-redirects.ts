@@ -118,9 +118,7 @@ export const LEGACY_REDIRECTS: Readonly<Record<string, LegacyRedirect>> = {
   "/ihr-individuelles-einfamilienhaus": {
     to: "/posts/ihr-individuelles-einfamilienhaus/ihr-individuelles-einfamilienhaus",
   },
-  "/wie-beeinflusst-die-wohnraumgestaltung-ihre-lebensqualitat": {
-    to: "/posts/wohnraumgestaltung/wohnraumgestaltung",
-  },
+  "/wie-beeinflusst-die-wohnraumgestaltung-ihre-lebensqualitat": BLOG,
 }
 
 /** Whole subtrees; exact entries in {@link LEGACY_REDIRECTS} win. */
