@@ -60,7 +60,7 @@ export const LEGACY_REDIRECTS: Readonly<Record<string, LegacyRedirect>> = {
   "/bei-uns-arbeiten/vakanzen": JOBS,
   "/bei-uns-arbeiten/bewerbung": JOBS,
   "/lehrstelle": LEHRSTELLE,
-  "/bei-uns-arbeiten/lehrstelle": LEHRSTELLE,
+  "/bei-uns-arbeiten/lehrstelle": JOBS,
   "/freie-stelle/zeichner-in-schnuppertag": LEHRSTELLE,
   "/bhend-architektur-blog": BLOG,
   "/category/uncategorized": BLOG,
