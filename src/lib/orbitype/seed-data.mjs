@@ -911,17 +911,6 @@ function careersSections() {
           reservationMode: "path",
           reservationTarget: "/architektur-erleben",
         },
-        {
-          id: "lehrstelle",
-          title: de("Zeichner/in EFZ ARCHITEKTUR (M/W) LEHRSTELLE"),
-          body: de(
-            "Du willst mitgestalten statt nur abzeichnen? Bei Bhend Architektur kombinieren wir Praxis, Herz und Verstand – fair, kompetent, visionär. Wenn dich Sinn, Teamgeist und sauberes Handwerk antreiben, bist du hier richtig.",
-          ),
-          image: "/images/bei-uns-arbeiten/job-lehrstelle.jpg",
-          imageAlt: de("Lehrstelle Architektur"),
-          ctaLabel: de("Bewerbung für Lehrstelle"),
-          dialogId: "application-lehrstelle",
-        },
       ],
       _orbi: { component: "SectionJobOpenings" },
     },
