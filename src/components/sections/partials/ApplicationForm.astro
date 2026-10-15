@@ -13,7 +13,7 @@ interface Props {
   brandImage?: string
   brandImageAlt?: string
   /** ISO dates (YYYY-MM-DD); past dates are dropped at render time. */
-  schnupperDates?: string[]
+  schnupperDates?: Array<{ date: string; note?: string }>
   locale: Locale
 }
 
@@ -24,21 +24,33 @@ const {
   defaultType,
   brandImage = "/images/bei-uns-arbeiten/application-brand.jpg",
   brandImageAlt = "Bhend Architektur Team",
-  schnupperDates = ["2025-11-13", "2025-11-27", "2025-12-11"],
+  schnupperDates = [
+    { date: "2027-03-11" },
+    { date: "2027-06-10" },
+    { date: "2027-09-09" },
+    { date: "2027-11-11", note: "Zukunftstag" },
+  ],
   locale: _locale,
 } = Astro.props
 
 const today = new Date().toISOString().slice(0, 10)
-const dateFormat = new Intl.DateTimeFormat("de-CH", {
+const weekdayFormat = new Intl.DateTimeFormat("de-CH", {
   weekday: "long",
-  day: "numeric",
-  month: "long",
+  timeZone: "UTC",
+})
+const dateFormat = new Intl.DateTimeFormat("de-CH", {
+  day: "2-digit",
+  month: "2-digit",
   year: "numeric",
   timeZone: "UTC",
 })
 const dateOptions = schnupperDates
-  .filter((iso) => iso >= today)
-  .map((iso) => dateFormat.format(new Date(`${iso}T00:00:00Z`)))
+  .filter(({ date }) => date >= today)
+  .map(({ date, note }) => {
+    const day = new Date(`${date}T00:00:00Z`)
+    const label = `${weekdayFormat.format(day)}, ${dateFormat.format(day)}`
+    return note ? `${label} (${note})` : label
+  })
 const schnupperOpen = dateOptions.length > 0
 const initialType =
   defaultType === "Schnuppertag" && !schnupperOpen ? "" : defaultType
@@ -157,8 +169,10 @@ const types = [
           <select
             name="date"
             class="text-muted w-full border border-neutral-300 bg-white px-4 py-2 text-sm font-medium"
+            required
             data-date-select
           >
+            <option value="" selected disabled>Datum wählen*</option>
             {dateOptions.map((opt) => <option value={opt}>{opt}</option>)}
           </select>
         </label>
