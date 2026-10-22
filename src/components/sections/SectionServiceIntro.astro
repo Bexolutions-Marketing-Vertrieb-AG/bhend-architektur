@@ -59,9 +59,9 @@ const href = resolveReservationHref({
 <section class="bg-white" {...bf(`${section}.shell`, "container", section)}>
   <div class="container-wide py-section-sm md:pb-section md:pt-section">
     <div
-      class="grid items-start gap-10 lg:grid-cols-[minmax(0,480px)_minmax(0,1fr)] lg:gap-16"
+      class="grid items-start gap-10 lg:grid-cols-[minmax(min-content,480px)_minmax(0,1fr)] lg:gap-16"
     >
-      <div class="flex flex-col gap-6">
+      <div class="flex min-w-0 flex-col gap-6">
         {
           headline && (
             <h1
@@ -108,11 +108,11 @@ const href = resolveReservationHref({
       </div>
       {
         image && (
-          <figure>
+          <figure class="min-w-0">
             <img
               src={image}
               alt={alt}
-              class="aspect-[581/652] w-full object-cover object-center lg:h-[652px] lg:w-[581px]"
+              class="aspect-[581/652] w-full max-w-[581px] object-cover object-center"
               width="581"
               height="652"
               loading="eager"
