@@ -63,6 +63,27 @@ const orgGraph = {
 <!doctype html>
 <html lang={locale}>
   <head>
+    <script is:inline>
+      window.addEventListener(
+        "error",
+        (event) => {
+          const target = event.target
+          if (!(target instanceof HTMLLinkElement)) return
+          if (target.rel !== "stylesheet") return
+          const href = target.getAttribute("href") ?? ""
+          if (!href.includes("/_astro/")) return
+          const key = "astro-css-reloaded"
+          try {
+            if (sessionStorage.getItem(key) === "1") return
+            sessionStorage.setItem(key, "1")
+          } catch {
+            return
+          }
+          location.reload()
+        },
+        true,
+      )
+    </script>
     <meta charset="utf-8" />
     <meta
       name="viewport"
