@@ -43,6 +43,7 @@ const {
 } = Astro.props
 const section = id
 const headline = translate(heading ?? title, locale)
+const compactTitle = headline.replace(/\s+/g, "").length > 14
 const kicker = translate(lead, locale)
 const copy = translate(body, locale)
 const alt = translate(imageAlt, locale) || headline
@@ -61,11 +62,21 @@ const href = resolveReservationHref({
     <div
       class="grid items-start gap-10 lg:grid-cols-[minmax(min-content,480px)_minmax(0,1fr)] lg:gap-16"
     >
-      <div class="flex min-w-0 flex-col gap-6">
+      <div
+        class:list={[
+          "flex min-w-0 flex-col gap-6",
+          compactTitle && "@container",
+        ]}
+      >
         {
           headline && (
             <h1
-              class="font-display text-4xl font-bold tracking-tight uppercase md:text-5xl"
+              class:list={[
+                "font-display font-bold tracking-tight uppercase",
+                compactTitle
+                  ? "text-[clamp(1.35rem,8.6cqi,2.25rem)] leading-tight sm:text-4xl sm:leading-10 md:text-5xl"
+                  : "text-4xl md:text-5xl",
+              ]}
               {...bf(`${section}.heading`, "style_target", section)}
             >
               {headline}
