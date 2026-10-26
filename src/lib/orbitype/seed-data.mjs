@@ -46,7 +46,7 @@ function teamSections() {
         teamMember({
           name: "Ueli Bhend",
           image: "/images/team/ueli-bhend.jpg",
-          phone: "+41 62 798 0707",
+          phone: "+41 62 798 07 07",
           email: "ueli.bhend@bhend-architektur.ch",
           role: "Geschäftsinhaber",
           studies: [
@@ -61,7 +61,7 @@ function teamSections() {
         teamMember({
           name: "Micha Bhend",
           image: "/images/team/micha-bhend.jpg",
-          phone: "+41 62 798 0909",
+          phone: "+41 62 798 09 09",
           email: "micha.bhend@bhend-architektur.ch",
           role: "Mitglied Geschäftsleitung / Partner",
           studies: ["Architekt HF", "Hochbaupolier"],
@@ -69,7 +69,7 @@ function teamSections() {
         teamMember({
           name: "Thomas Schweizer",
           image: "/images/team/thomas-schweizer.jpg",
-          phone: "+41 62 798 0404",
+          phone: "+41 62 798 04 04",
           email: "thomas.schweizer@bhend-architektur.ch",
           role: "Mitglied Geschäftsleitung / Partner",
           studies: [
@@ -83,7 +83,7 @@ function teamSections() {
         teamMember({
           name: "Patrick Zingg",
           image: "/images/team/patrick-zingg.jpg",
-          phone: "+41 62 798 1070",
+          phone: "+41 62 798 10 70",
           email: "patrick.zingg@bhend-architektur.ch",
           role: "Mitglied Geschäftsleitung / Partner",
           studies: [
@@ -99,7 +99,7 @@ function teamSections() {
         teamMember({
           name: "Christoph Ruesch",
           image: "/images/team/christoph-ruesch.jpg",
-          phone: "+41 62 798 1072",
+          phone: "+41 62 798 10 72",
           email: "christoph.ruesch@bhend-architektur.ch",
           role: "Architekt FH",
           studies: [
@@ -116,7 +116,7 @@ function teamSections() {
         teamMember({
           name: "Markus Moser",
           image: "/images/team/markus-moser.jpg",
-          phone: "+41 62 798 1076",
+          phone: "+41 62 798 10 76",
           email: "markus.moser@bhend-architektur.ch",
           role: "Bauleiter",
           studies: [
@@ -128,7 +128,7 @@ function teamSections() {
         teamMember({
           name: "Joel Gerber",
           image: "/images/team/joel-gerber.jpg",
-          phone: "+41 62 798 1076",
+          phone: "+41 62 798 10 76",
           email: "joel.gerber@bhend-architektur.ch",
           role: "Architekt HF",
           studies: ["Berufsbildner"],
@@ -136,7 +136,7 @@ function teamSections() {
         teamMember({
           name: "Brigitte Flükiger",
           image: "/images/team/brigitte-fluekiger.jpg",
-          phone: "+41 62 798 1077",
+          phone: "+41 62 798 10 77",
           email: "brigitte.flueckiger@bhend-architektur.ch",
           role: "Zeichnerin EFZ Architektur",
           studies: ["Hochbauzeichnerin", "Berufsbildnerin"],
@@ -144,14 +144,14 @@ function teamSections() {
         teamMember({
           name: "Stefanie Burren",
           image: "/images/team/stefanie-burren.jpg",
-          phone: "+41 62 798 1071",
+          phone: "+41 62 798 10 71",
           email: "stefanie.burren@bhend-architektur.ch",
           role: "Techniker HF i.A.",
         }),
         teamMember({
           name: "Simon Höchenberger",
           image: "/images/team/simon-hoechenberger.jpg",
-          phone: "+41 62 798 1073",
+          phone: "+41 62 798 10 73",
           email: "simon.hoechi@bhend-architektur.ch",
           role: "Techniker HF i.A.",
           studies: ["Maurer EFZ"],
@@ -159,28 +159,28 @@ function teamSections() {
         teamMember({
           name: "Jannik Wyss",
           image: "/images/team/jannik-wyss.jpg",
-          phone: "+41 62 798 0000",
+          phone: "+41 62 798 00 00",
           email: "jannik.wyss@bhend-architektur.ch",
           role: "Zeichner EFZ Architektur i.A",
         }),
         teamMember({
           name: "Mathilde de Almeida Rocha",
           image: "/images/team/mathilde-de-almeida-rocha.jpg",
-          phone: "+41 62 798 0000",
+          phone: "+41 62 798 00 00",
           email: "mathilde.rocha@bhend-architektur.ch",
           role: "Zeichnerin EFZ Architektur i.A.",
         }),
         teamMember({
           name: "Esther Wälchli",
           image: "/images/team/esther-waelchli.jpg",
-          phone: "+41 62 798 0000",
+          phone: "+41 62 798 00 00",
           email: "sekretariat@bhend-architektur.ch",
           role: "Administration",
         }),
         teamMember({
           name: "Selina Vonäsch",
           image: "/images/team/selina-vonaesch.jpg",
-          phone: "+41 62 798 0000",
+          phone: "+41 62 798 00 00",
           email: "selina.vonaesch@bhend-architektur.ch",
           role: "Zeichnerin EFZ Architektur i. A.",
         }),
