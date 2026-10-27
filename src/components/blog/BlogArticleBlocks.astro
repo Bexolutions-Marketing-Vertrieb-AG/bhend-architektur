@@ -1,0 +1,72 @@
+---
+import BlogRichField from "~/components/blog/BlogRichField.astro"
+import type { BlogBlock } from "~/components/blog/types"
+import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
+import type { Locale } from "~/config/locales"
+
+interface Props {
+  section: string
+  blocks?: BlogBlock[]
+  locale: Locale
+}
+
+const { section, blocks = [], locale } = Astro.props
+---
+
+<div class="flex flex-col gap-12">
+  {
+    blocks.map((block) => {
+      const blockId = (block.id ?? "").trim()
+      const blockHeading = translate(block.heading, locale)
+      const body = translate(block.body, locale)
+      const extras = (block.paragraphs ?? [])
+        .map((p) => translate(p, locale))
+        .filter(Boolean)
+      if (!blockId) return null
+      return (
+        <article
+          id={blockId}
+          class="scroll-mt-28"
+          {...bf(`${section}.block.${blockId}.shell`, "container", section)}
+        >
+          {blockHeading && (
+            <h2
+              class="font-display text-brand-500 mb-4 text-xl font-bold tracking-tight md:text-2xl"
+              {...bf(
+                `${section}.block.${blockId}.heading`,
+                "style_target",
+                section,
+              )}
+            >
+              {blockHeading}
+            </h2>
+          )}
+          {body && (
+            <div
+              {...bf(
+                `${section}.block.${blockId}.body`,
+                "style_target",
+                section,
+              )}
+            >
+              <BlogRichField value={body} />
+            </div>
+          )}
+          {extras.map((paragraph, index) => (
+            <p
+              class="section-lead mt-4 whitespace-pre-line"
+              {...bf(
+                `${section}.block.${blockId}.paragraph${index + 1}`,
+                "style_target",
+                section,
+              )}
+            >
+              {paragraph}
+            </p>
+          ))}
+        </article>
+      )
+    })
+  }
+</div>

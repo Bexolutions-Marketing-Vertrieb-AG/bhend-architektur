@@ -1,0 +1,225 @@
+{
+  "id": "baubewilligung-verfahren-schritt-fuer-schritt",
+  "title": { "de": "Baubewilligungsverfahren: Schritt für Schritt" },
+  "lead": {
+    "de": "Erfahren Sie alles zum Baubewilligung Verfahren im Kanton Aargau: Unterlagen, Prüfungsphasen, Nachbarschaftsbeteiligung und Tipps für reibungslose Abwicklung."
+  },
+  "img": "https://cdn.orbitype.com/dYoe8VEudVE6/blog-bilder/23-26_pfarrhaus_oftringen_sanierung_efh_1.JPG",
+  "status": {
+    "options": ["draft", "review", "published"],
+    "value": "published"
+  },
+  "keywords": ["blog", "baubewilligung", "verfahren"],
+  "sections": [
+    {
+      "id": "blogArticle",
+      "heading": { "de": "Baubewilligungsverfahren: Schritt für Schritt" },
+      "subheading": {
+        "de": "Von Thomas Schweizer, Mitglied Geschäftsleitung / Partner | 9. Oktober 2026 · 7 Min. Lesezeit"
+      },
+      "image": "https://cdn.orbitype.com/dYoe8VEudVE6/blog-bilder/23-26_pfarrhaus_oftringen_sanierung_efh_1.JPG",
+      "imageAlt": { "de": "Baubewilligungsverfahren: Schritt für Schritt" },
+      "tocLabel": { "de": "Inhaltsverzeichnis" },
+      "toc": [
+        { "id": "einleitung", "label": { "de": "Einleitung" } },
+        {
+          "id": "welche-unterlagen-werden-fuer-das-baugesuch-benoetigt",
+          "label": {
+            "de": "Welche Unterlagen werden für das Baugesuch benötigt?"
+          }
+        },
+        {
+          "id": "wie-wird-das-baugesuch-digital-eingereicht",
+          "label": { "de": "Wie wird das Baugesuch digital eingereicht?" }
+        },
+        {
+          "id": "wie-laeuft-die-pruefung-durch-die-baubehoerde-ab",
+          "label": { "de": "Wie läuft die Prüfung durch die Baubehörde ab?" }
+        },
+        {
+          "id": "was-kostet-das-baubewilligungsverfahren",
+          "label": { "de": "Was kostet das Baubewilligungsverfahren?" }
+        },
+        {
+          "id": "welche-varianten-des-baubewilligungsverfahrens-gibt-es",
+          "label": {
+            "de": "Welche Varianten des Baubewilligungsverfahrens gibt es?"
+          }
+        },
+        {
+          "id": "wie-lange-dauert-das-baubewilligungsverfahren",
+          "label": { "de": "Wie lange dauert das Baubewilligungsverfahren?" }
+        },
+        {
+          "id": "wie-kann-ich-das-baubewilligungsverfahren-starten",
+          "label": {
+            "de": "Wie kann ich das Baubewilligungsverfahren starten?"
+          }
+        },
+        {
+          "id": "welche-haeufigen-stolperfallen-gibt-es-im-baubewilligungsverfahren",
+          "label": {
+            "de": "Welche häufigen Stolperfallen gibt es im Baubewilligungsverfahren?"
+          }
+        },
+        {
+          "id": "haeufige-fragen",
+          "label": { "de": "Häufige Fragen zum Baubewilligungsverfahren" }
+        },
+        {
+          "id": "jetzt-loslegen",
+          "label": { "de": "Haben Sie weitere Fragen?" }
+        }
+      ],
+      "blocks": [
+        {
+          "id": "einleitung",
+          "heading": { "de": "Einleitung" },
+          "body": {
+            "de": "<p>Das <strong>Baubewilligungsverfahren</strong> ist ein strukturierter Prozess, der mehrere Phasen umfasst und etwa drei bis sechs Monate dauern kann. Die Kernpunkte sind: Einreichung eines vollständigen Baugesuchs, Prüfung durch die zuständige Behörde, allfällige Mitwirkung der Nachbarschaft und die finale Entscheidung. Dieser Artikel erklärt Ihnen jeden Schritt detailliert und zeigt, wie eine erfahrene Architekturfirma Sie unterstützen kann.</p>\n<p>Seit Jahren begleiten wir private Bauherrschaften, Firmen und Institutionen durch das gesamte <strong>Baubewilligungsverfahren</strong>. Wir sorgen dafür, dass alle Unterlagen vollständig sind, koordinieren die Kommunikation mit den Behörden und achten darauf, dass Ihr Projekt alle rechtlichen Anforderungen erfüllt.</p>"
+          }
+        },
+        {
+          "id": "welche-unterlagen-werden-fuer-das-baugesuch-benoetigt",
+          "heading": {
+            "de": "Welche Unterlagen werden für das Baugesuch benötigt?"
+          },
+          "body": {
+            "de": "<p>Ein vollständiges Baugesuch besteht aus mehreren Komponenten, die sorgfältig zusammengestellt werden müssen. Die Baubehörde prüft jedes Dokument und beanstandet fehlende Unterlagen, was zu erheblichen Verzögerungen führen kann.</p>\n<ul>\n<li>Baugesuchsformular mit allen Angaben zum Bauvorhaben</li>\n<li>Grundrisspläne, Fassadenpläne und Dachpläne im Massstab 1:100</li>\n<li>Situationsplan mit Angabe der Parzellennummern und der Nachbargrundstücke</li>\n<li>Bauvorschriftennachweis (Abstandslinien, Ausnützungsziffer)</li>\n<li>Energienachweis</li>\n<li>Brandschutzkonzept bei grösseren Gebäuden</li>\n<li>Erschliessungsnachweis (Zufahrt, Parkplätze, Kanalisationsleitung)</li>\n<li>Bei Umnutzungen: Nachweis der Zweckmässigkeit</li>\n</ul>\n<p>Je nach Bauvorhaben können weitere Unterlagen erforderlich sein, etwa für den Schutz von Kulturgütern oder bei Liegenschaften in Gewässerschutzzonen. Unsere Experten für die <a href=\"https://www.bhend-architektur.ch/planung\">Planung</a> und Bauleitung kennen die spezifischen Anforderungen und stellen sicher, dass Ihr Baugesuch von Beginn an vollständig eingereicht wird.</p>"
+          }
+        },
+        {
+          "id": "wie-wird-das-baugesuch-digital-eingereicht",
+          "heading": { "de": "Wie wird das Baugesuch digital eingereicht?" },
+          "body": {
+            "de": "<p>Mit eBau wird das Baubewilligungsverfahren zunehmend digital abgewickelt. Baugesuche, Pläne und weitere Nachweise werden dabei über ein Onlineportal eingereicht.<br><br>Im Kanton Aargau erfolgt die Einführung schrittweise. In Gemeinden, die das kantonale eBau-Portal bereits anbieten, ist die digitale Einreichung vorgeschrieben. In den übrigen Gemeinden wird weiterhin das kommunale Baugesuchsformular verwendet. Im Kanton Bern ist die elektronische Einreichung bereits seit März 2022 obligatorisch; zusätzlich sind weiterhin unterzeichnete Papierunterlagen erforderlich.<br><br>Für Bauherrschaften bedeutet dies: Der Einreichungsweg und die Anforderungen sind noch nicht überall gleich. Wir klären frühzeitig mit der zuständigen Gemeinde, welche Vorgaben gelten, und übernehmen die Zusammenstellung und Einreichung Ihres Baugesuchs.</p>"
+          }
+        },
+        {
+          "id": "wie-laeuft-die-pruefung-durch-die-baubehoerde-ab",
+          "heading": { "de": "Wie läuft die Prüfung durch die Baubehörde ab?" },
+          "body": {
+            "de": "<p>Nach Einreichung des Baugesuchs prüft die zuständige Baubewilligungsbehörde die Unterlagen auf ihre Vollständigkeit. Sind alle Dokumente vorhanden, wird das Gesuch öffentlich publiziert. Die Nachbarn erhalten die Gelegenheit, Einsprache zu erheben. Dieser Schritt ist wichtig, denn Einsprachen können den Prozess verlängern.</p>\n<p>Die Baubewilligungsbehörde fordert zudem die Stellungnahmen (die sogenannten Fachberichte) weiterer Ämter ein, wie etwa von der Feuerwehr, des kantonalen Amts für Umwelt oder der Denkmalpflege. Bei grösseren Projekten wird auch die kantonale Baudirektion und weitere kantonale Ämter einbezogen. Die Dauer dieser Phase hängt von der Komplexität des Bauvorhabens ab.</p>\n<p><strong>Welche Rolle spielt die Energieberatung im Baubewilligungsverfahren?</strong></p>\n<p>Im Kanton Aargau gelten die «Mustervorschriften der Kantone im Energiebereich» (MuKEn), die hohe Anforderungen an die Energieeffizienz stellen. Für jedes Neubauobjekt oder neue Bauteil muss ein Energienachweis erstellt werden, der die Einhaltung der Vorschriften belegt.</p>\n<p>Unsere Fachpersonen in der <a href=\"https://www.bhend-architektur.ch/energieberatung\">Energieberatung</a> unterstützen Sie bei der Erstellung dieses Nachweises und zeigen Ihnen Möglichkeiten auf, wie Sie die Anforderungen kostengünstig erfüllen können. Dabei berücksichtigen wir auch Förderprogramme des Kantons, die finanzielle Anreize für besonders energieeffiziente Lösungen bieten.</p>\n<p><strong>Warum ist das Brandschutzkonzept frühzeitig zu erstellen?</strong></p>\n<p>Der Brandschutz ist ein zentraler Bestandteil jedes Baugesuchs bei grösseren Bauten (Mehrfamilienhäuser, Gewerbebauten, Pflegeheime, Schulen, usw.) und muss bereits im frühen Planungsstadium berücksichtigt werden. Ein Brandschutzkonzept zeigt auf, welche Massnahmen zum Schutz von Personen und Sachwerten vorgesehen sind.</p>\n<p>Aus diesem Grund erstellen wir die Brandschutzanalyse bereits parallel zum ersten Architekturentwurf. So können wir Probleme frühzeitig erkennen und in die Planung integrieren, bevor kostenintensive Umplanungen nötig werden.</p>\n<figure><img src=\"https://cdn.orbitype.com/dYoe8VEudVE6/blog-bilder/23-26_pfarrhaus_oftringen_sanierung_efh_2.jpg\" alt=\"Baubewilligungsverfahren: Schritt für Schritt\"></figure>"
+          }
+        },
+        {
+          "id": "was-kostet-das-baubewilligungsverfahren",
+          "heading": { "de": "Was kostet das Baubewilligungsverfahren?" },
+          "body": {
+            "de": "<p>Die Kosten des Baubewilligungsverfahrens können von Gemeinde zu Gemeinde variieren. Die Gemeinden erheben Gebühren für die Bearbeitung des Baugesuchs, die sich nach dem Bauvorhaben richten. Hinzu kommen Kosten für die Fachberichte, wie beispielsweise für das Energiegutachten oder die Prüfung vom Brandschutzkonzept.</p>\n<p>Eine frühe Einbindung einer erfahrenen Architekturfirma kann Kosten sparen, weil Mängel im Baugesuch vermieden werden. </p>\n<table>\n<thead>\n<tr>\n<th>Kostenposition</th>\n<th>Geschätzte Kosten (CHF)</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Gemeindegebühren Baugesuch</td>\n<td>1'500 bis 3'000</td>\n</tr>\n<tr>\n<td>Energienachweis</td>\n<td>800 bis 1'500</td>\n</tr>\n<tr>\n<td>Vermessung und Pläne</td>\n<td>2'000 bis 4'000</td>\n</tr>\n</tbody>\n</table>"
+          }
+        },
+        {
+          "id": "welche-varianten-des-baubewilligungsverfahrens-gibt-es",
+          "heading": {
+            "de": "Welche Varianten des Baubewilligungsverfahrens gibt es?"
+          },
+          "body": {
+            "de": "<p>Es gibt zwei Hauptverfahren, die sich in Umfang und Dauer unterscheiden. Das ordentliche Verfahren kommt bei normalen Bauvorhaben zum Einsatz und dauert in der Regel drei bis sechs Monate. Das vereinfachte Verfahren ist für kleinere Bauvorhaben vorgesehen und kann schneller durchgeführt werden.</p>\n<table>\n<thead>\n<tr>\n<th>Kriterium</th>\n<th>Ordentliches Verfahren</th>\n<th>Vereinfachtes Verfahren</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Dauer</td>\n<td>3-6 Monate</td>\n<td>2-3 Monate</td>\n</tr>\n<tr>\n<td>Kosten (Gebühren)</td>\n<td>höhere, abhängig vom Aufwand</td>\n<td>niedrigere, pauschal</td>\n</tr>\n<tr>\n<td>Umfang der Unterlagen</td>\n<td>Vollständige Baugesuchsunterlagen inkl. Detailpläne</td>\n<td>Reduzierter Unterlagensatz, weniger Detailpläne</td>\n</tr>\n<tr>\n<td>Einbindung Nachbarschaft</td>\n<td>Öffentliche Auflage, Möglichkeit zur Einsprache</td>\n<td>Nachbarn müssen das Baugesuch mitunterzeichnen, keine öffentliche Auflage</td>\n</tr>\n</tbody>\n</table>\n<p>Welches Verfahren für Ihr Projekt anwendbar ist, hängt auch von der Lage des Grundstücks und der geplanten Nutzung ab.</p>"
+          }
+        },
+        {
+          "id": "wie-lange-dauert-das-baubewilligungsverfahren",
+          "heading": { "de": "Wie lange dauert das Baubewilligungsverfahren?" },
+          "body": {
+            "de": "<p>Die Dauer des Baubewilligungsverfahrens ist von mehreren Faktoren abhängig und kann stark variieren. Bei einfachen Bauvorhaben im vereinfachten Verfahren ist mit zwei bis drei Monaten zu rechnen. Komplexere Projekte im ordentlichen Verfahren können sechs Monate oder länger dauern.</p>\n<p>Verzögerungen entstehen häufig durch unvollständige Unterlagen, Einsprachen der Nachbarschaft oder lange Bearbeitungszeiten der beigezogenen Ämter. Eine sorgfältige Vorbereitung des Baugesuchs durch eine erfahrene Architekturfirma kann diese Zeit erheblich verkürzen.</p>"
+          }
+        },
+        {
+          "id": "wie-kann-ich-das-baubewilligungsverfahren-starten",
+          "heading": {
+            "de": "Wie kann ich das Baubewilligungsverfahren starten?"
+          },
+          "body": {
+            "de": "<p>Der erste Schritt ist ein persönliches Gespräch mit uns. Wir analysieren Ihr Bauvorhaben, klären die Anforderungen an das Baugesuch und erstellen einen Zeitplan für das gesamte Verfahren. Dabei berücksichtigen wir alle relevanten Faktoren wie Lage des Grundstücks, gesetzliche Vorgaben und Ihre persönlichen Wünsche.</p>\n<p>Ein aktuelles Beispiel unserer Arbeit ist das Projekt Pfarrhaus Oftringen 2025, bei dem wir eine energetische Sanierung umfassend geplant und begleitet haben. Dank früher Einbindung aller Fachplaner konnte das Baubewilligungsverfahren zügig abgeschlossen werden.</p>"
+          }
+        },
+        {
+          "id": "welche-haeufigen-stolperfallen-gibt-es-im-baubewilligungsverfahren",
+          "heading": {
+            "de": "Welche häufigen Stolperfallen gibt es im Baubewilligungsverfahren?"
+          },
+          "body": {
+            "de": "<p>Selbst erfahrene Bauherren stossen häufig auf wiederkehrende Herausforderungen, die den Zeitplan gefährden können. Zu den häufigsten Stolperfallen zählen:</p>\n<ul>\n<li>Unvollständige oder technisch unklare Baupläne, die Nachreichungen erforderlich machen</li>\n<li>Verzögerung durch Einsprachen der Nachbarschaft</li>\n<li>Fehlende Abstimmung mit Fachstellen wie Brandschutz oder Energie</li>\n<li>Unterschätzung von Lage- und Bodenbedingungen, die zu zusätzlichen Auflagen führen</li></ul>\n<p>Durch die frühe Einbindung von der Baubewilligungsbehörde und den nötigen Fachspezialisten können Sie viele dieser Risiken reduzieren.</p>"
+          }
+        }
+      ],
+      "midCtaLabel": { "de": "Jetzt Erstgespräch" },
+      "reservationMode": "mailto",
+      "reservationTarget": "info@bhend-architektur.ch",
+      "_orbi": { "component": "SectionBlogArticle" },
+      "title": { "de": "Baubewilligungsverfahren: Schritt für Schritt" },
+      "faqHeading": { "de": "Häufige Fragen zum Baubewilligungsverfahren" },
+      "faqAnchorId": "haeufige-fragen",
+      "faq": [
+        {
+          "question": {
+            "de": "Wie lange dauert das Baubewilligungsverfahren?"
+          },
+          "answer": {
+            "de": "<p>Die Dauer beträgt in der Regel drei bis sechs Monate beim ordentlichen Verfahren und zwei bis drei Monate beim vereinfachten Verfahren. Die genaue Dauer hängt von der Komplexität des Bauvorhabens und der Auslastung der Behörden ab.</p>"
+          }
+        },
+        {
+          "question": {
+            "de": "Welche Unterlagen sind für ein Baugesuch zwingend erforderlich?"
+          },
+          "answer": {
+            "de": "<p>Zu den Pflichtunterlagen gehören das ausgefüllte Baugesuchsformular, vollständige Plansätze mit Grundrissen, Fassaden- und Dachansichten, der Situationsplan, der Energienachweis sowie bei grösseren Vorhaben ein Brandschutzkonzept. Je nach Projekt können weitere Dokumente erforderlich sein.</p>"
+          }
+        },
+        {
+          "question": { "de": "Kann ich ein Baugesuch selbst einreichen?" },
+          "answer": {
+            "de": "<p>Theoretisch ist das selbstständige Einreichen möglich. Wir empfehlen allerdings ab Einfamilienhausgrösse und bei Anbauten zwingend einen Architekten zu beauftragen. Eine fehlerhafte oder unvollständige Einreichung führt zu Verzögerungen und zusätzlichen Kosten.</p>"
+          }
+        },
+        {
+          "question": {
+            "de": "Was passiert, wenn Nachbarn Einsprache erheben?"
+          },
+          "answer": {
+            "de": "<p>Die Einsprachen der Nachbarn werden von der Baubewilligungsbehörde geprüft und müssen bearbeitet werden. In vielen Fällen lassen sich Differenzen durch Anpassungen am Projekt oder durch Gespräche mit den Nachbarn klären.</p>"
+          }
+        },
+        {
+          "question": {
+            "de": "Gibt es eine Möglichkeit, das Verfahren zu beschleunigen?"
+          },
+          "answer": {
+            "de": "<p>Ja, durch eine sorgfältige Vorbereitung und vollständige Unterlagen kann das Verfahren beschleunigt werden. Auch eine frühe Abstimmung mit der Baubewilligungsbehörde und die Einbindung eines erfahrenen Architekturteams helfen, Verzögerungen zu vermeiden.</p>"
+          }
+        },
+        {
+          "question": { "de": "Welche Kosten kommen auf mich zu?" },
+          "answer": {
+            "de": "<p>Die Kosten setzen sich aus Gemeindegebühren, Gebühren für die Fachberichte und zusätzlichen Aufwänden zusammen. Für ein typisches Einfamilienhaus ist mit Gesamtkosten von etwa Fr. 5'000 bis 11'000 (ohne Pläne) für das Baubewilligungsverfahren zu rechnen.</p>"
+          }
+        }
+      ],
+      "closingAnchorId": "jetzt-loslegen",
+      "closingHeading": { "de": "Haben Sie weitere Fragen?" },
+      "closingBody": {
+        "de": "<p>Das Team von Bhend Architektur AG unterstützt Sie gerne bei Ihrem Vorhaben.</p>\n<p>Unsere Leistungen im Bereich <a href=\"https://www.bhend-architektur.ch/realisierung\">Realisierung</a> finden Sie auf unserer Website. Weitere Informationen zu unseren Projekten erhalten Sie in unserem <a href=\"https://www.bhend-architektur.ch/blog\">Blog</a>.</p>"
+      },
+      "closingCtaLabel": { "de": "Gespräch vereinbaren" },
+      "quote": {
+        "de": "«Ein gutes Baugesuch beginnt lange vor dem Einreichen – mit den richtigen Fragen und einer sorgfältigen Planung.»"
+      },
+      "quoteAttribution": {
+        "de": "Thomas Schweizer, Mitglied Geschäftsleitung / Partner"
+      },
+      "authorBox": {
+        "name": { "de": "Thomas Schweizer" },
+        "role": { "de": "Mitglied Geschäftsleitung / Partner" },
+        "credentials": [
+          { "de": "Techniker HF Holztechnik" },
+          { "de": "Brandschutzfachmann mit eidg. FA/VKF" },
+          { "de": "CAS Brandschutz für Architekten" },
+          { "de": "Brandschutztechnische Beurteilung von Bestandesbauten" },
+          { "de": "Berufsbildner" }
+        ]
+      }
+    }
+  ]
+}

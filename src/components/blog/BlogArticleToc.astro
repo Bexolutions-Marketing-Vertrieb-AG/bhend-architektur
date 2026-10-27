@@ -1,0 +1,75 @@
+---
+import type { BlogTocItem } from "~/components/blog/types"
+import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
+import type { I18nString } from "~/types/i18n"
+import type { Locale } from "~/config/locales"
+
+interface Props {
+  section: string
+  tocLabel?: I18nString
+  toc?: BlogTocItem[]
+  locale: Locale
+}
+
+const { section, tocLabel, toc = [], locale } = Astro.props
+const tocTitle = translate(tocLabel, locale) || "Inhaltsverzeichnis"
+---
+
+{
+  toc.length > 0 && (
+    <details
+      class="border-brand-200 mb-12 border"
+      open
+      {...bf(`${section}.toc`, "container", section)}
+    >
+      <summary
+        class="font-display text-brand-500 flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 text-lg font-bold tracking-tight"
+        {...bf(`${section}.tocLabel`, "style_target", section)}
+      >
+        <span>{tocTitle}</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.25"
+          class="shrink-0"
+          aria-hidden="true"
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </summary>
+      <nav class="border-brand-200 border-t px-4 py-3" aria-label={tocTitle}>
+        <ol class="flex flex-col gap-2">
+          {toc.map((item) => {
+            const itemId = (item.id ?? "").trim()
+            const label = translate(item.label, locale)
+            if (!itemId || !label) return null
+            return (
+              <li>
+                <a
+                  href={`#${itemId}`}
+                  class="text-ink enter:text-brand-500 text-base leading-snug"
+                >
+                  {label}
+                </a>
+              </li>
+            )
+          })}
+        </ol>
+      </nav>
+    </details>
+  )
+}
+
+<style>
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+  details[open] summary svg {
+    transform: rotate(180deg);
+  }
+</style>

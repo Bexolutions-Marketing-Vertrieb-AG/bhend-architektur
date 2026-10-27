@@ -132,9 +132,8 @@ export async function getPost(id: string): Promise<Post | null> {
       { id },
     )
     const row = rows[0]
-    if (row) return normalizePost(row)
-    const seeded = findSeedPost(id)
-    return seeded ? normalizePost(seeded) : null
+    // No seed fallback when SQL is live — deleted CMS posts must stay 404.
+    return row ? normalizePost(row) : null
   } catch (error) {
     if (error instanceof OrbitypeError && error.isUnavailable) throw error
     console.error("[orbitype] getPost failed:", error)
