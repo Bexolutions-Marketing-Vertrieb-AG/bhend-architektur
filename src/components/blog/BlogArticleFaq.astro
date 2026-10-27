@@ -1,0 +1,86 @@
+---
+import SafeHtml from "~/components/common/SafeHtml.astro"
+import type { BlogFaqItem } from "~/components/blog/types"
+import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
+import { looksLikeHtml } from "~/lib/sanitize"
+import type { I18nString } from "~/types/i18n"
+import type { Locale } from "~/config/locales"
+
+interface Props {
+  section: string
+  faqHeading?: I18nString
+  faq?: BlogFaqItem[]
+  faqAnchorId?: string
+  locale: Locale
+}
+
+const {
+  section,
+  faqHeading,
+  faq = [],
+  faqAnchorId = "faq",
+  locale,
+} = Astro.props
+
+const faqTitle = translate(faqHeading, locale)
+---
+
+{
+  (faqTitle || faq.length > 0) && (
+    <div
+      id={faqAnchorId}
+      class="mt-14 scroll-mt-28"
+      {...bf(`${section}.faq.shell`, "container", section)}
+    >
+      {faqTitle && (
+        <h2
+          class="font-display text-brand-500 mb-6 text-xl font-bold tracking-tight md:text-2xl"
+          {...bf(`${section}.faqHeading`, "style_target", section)}
+        >
+          {faqTitle}
+        </h2>
+      )}
+      <dl class="border-brand-200 divide-brand-200 divide-y border">
+        {faq.map((item, index) => {
+          const q = translate(item.question, locale)
+          const a = translate(item.answer, locale)
+          const n = index + 1
+          if (!q && !a) return null
+          return (
+            <div class="grid gap-0 md:grid-cols-1">
+              {q && (
+                <dt
+                  class="bg-brand-50 text-ink px-4 py-3 text-base font-semibold"
+                  {...bf(
+                    `${section}.faq.item${n}.question`,
+                    "style_target",
+                    section,
+                  )}
+                >
+                  {q}
+                </dt>
+              )}
+              {a && (
+                <dd
+                  class="text-ink px-4 py-3 text-base"
+                  {...bf(
+                    `${section}.faq.item${n}.answer`,
+                    "style_target",
+                    section,
+                  )}
+                >
+                  {looksLikeHtml(a) ? (
+                    <SafeHtml html={a} class="blog-prose blog-prose--faq" />
+                  ) : (
+                    a
+                  )}
+                </dd>
+              )}
+            </div>
+          )
+        })}
+      </dl>
+    </div>
+  )
+}

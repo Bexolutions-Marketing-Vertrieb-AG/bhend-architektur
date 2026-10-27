@@ -16,15 +16,22 @@ const blockSchema = z.object({
     .min(1)
     .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "id must be kebab-case"),
   heading: i18nStringSchema.optional(),
-  /** Plain text; newlines preserved */
+  /** HTML (sanitized allowlist) or plain text; newlines preserved for plain */
   body: i18nStringSchema.optional(),
-  /** Optional extra paragraphs after body */
+  /** Optional extra paragraphs after body (plain text) */
   paragraphs: z.array(i18nStringSchema).optional(),
 })
 
 const faqItemSchema = z.object({
   question: i18nStringSchema,
+  /** HTML or plain text */
   answer: i18nStringSchema,
+})
+
+const authorBoxSchema = z.object({
+  name: i18nStringSchema.optional(),
+  role: i18nStringSchema.optional(),
+  credentials: z.array(i18nStringSchema).optional(),
 })
 
 const kebabId = z
@@ -52,6 +59,9 @@ export const sectionBlogArticleSchema = z.object({
   closingBody: i18nStringSchema.optional(),
   closingCtaLabel: i18nStringSchema.optional(),
   closingAnchorId: kebabId.optional(),
+  quote: i18nStringSchema.optional(),
+  quoteAttribution: i18nStringSchema.optional(),
+  authorBox: authorBoxSchema.optional(),
   reservationMode: z.enum(RESERVATION_MODES).optional(),
   reservationTarget: z.string().optional(),
   ctaHref: z.string().optional(),

@@ -16,6 +16,28 @@ function loadSeedBlogPayloads() {
   return JSON.parse(raw)
 }
 
+/** V2 contract fixture (HTML bodies, quote, authorBox) for mock visual QA. */
+function loadBlogV2FixturePayload() {
+  const raw = readFileSync(
+    join(__dirname, "../../../tests/fixtures/blog-b08-v2.json"),
+    "utf8",
+  )
+  const fixture = JSON.parse(raw)
+  const article = fixture.sections?.[0]
+  if (!fixture?.id || !article) {
+    throw new Error("tests/fixtures/blog-b08-v2.json is incomplete")
+  }
+  return {
+    id: fixture.id,
+    title: fixture.title,
+    lead: fixture.lead,
+    img: fixture.img,
+    status: fixture.status,
+    keywords: fixture.keywords,
+    article,
+  }
+}
+
 function toSeedPost(payload, stamp) {
   const article = {
     ...payload.article,
@@ -84,11 +106,17 @@ const PUBLISHED_AT = {
   "wie-viel-planung-steckt-hinter-einer-erfolgreichen-sanierung":
     "2024-03-12T12:00:00.000Z",
   wohnraumgestaltung: "2024-01-16T12:00:00.000Z",
+  "baubewilligung-verfahren-schritt-fuer-schritt": "2026-10-09T12:00:00.000Z",
 }
 
 export function buildSeedBlogPosts(now = () => new Date().toISOString()) {
   const fallback = typeof now === "function" ? now() : now
-  return loadSeedBlogPayloads().map((payload) =>
+  const posts = loadSeedBlogPayloads().map((payload) =>
     toSeedPost(payload, PUBLISHED_AT[payload.id] ?? fallback),
   )
+  const v2 = loadBlogV2FixturePayload()
+  if (!posts.some((post) => post.id === v2.id)) {
+    posts.push(toSeedPost(v2, PUBLISHED_AT[v2.id] ?? fallback))
+  }
+  return posts
 }

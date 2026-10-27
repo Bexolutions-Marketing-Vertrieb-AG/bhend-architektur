@@ -1,0 +1,126 @@
+---
+import BlogRichField from "~/components/blog/BlogRichField.astro"
+import type { BlogAuthorBox } from "~/components/blog/types"
+import { translate } from "~/lib/i18n"
+import { bf } from "~/lib/bf"
+import type { I18nString } from "~/types/i18n"
+import type { Locale } from "~/config/locales"
+
+interface Props {
+  section: string
+  locale: Locale
+  summaryHeading?: I18nString
+  summaryBody?: I18nString
+  summaryAnchorId?: string
+  closingHeading?: I18nString
+  closingBody?: I18nString
+  closingCtaLabel?: I18nString
+  closingAnchorId?: string
+  authorBox?: BlogAuthorBox
+  href?: string
+}
+
+const {
+  section,
+  locale,
+  summaryHeading,
+  summaryBody,
+  summaryAnchorId = "summary",
+  closingHeading,
+  closingBody,
+  closingCtaLabel,
+  closingAnchorId = "closing",
+  authorBox,
+  href,
+} = Astro.props
+
+const summaryTitle = translate(summaryHeading, locale)
+const summaryCopy = translate(summaryBody, locale)
+const closingTitle = translate(closingHeading, locale)
+const closingCopy = translate(closingBody, locale)
+const closingCta = translate(closingCtaLabel, locale)
+const authorName = translate(authorBox?.name, locale)
+const authorRole = translate(authorBox?.role, locale)
+const authorCredentials = (authorBox?.credentials ?? [])
+  .map((item) => translate(item, locale))
+  .filter(Boolean)
+---
+
+{
+  (summaryTitle || summaryCopy) && (
+    <div
+      id={summaryAnchorId}
+      class="mt-14 scroll-mt-28"
+      {...bf(`${section}.summary.shell`, "container", section)}
+    >
+      {summaryTitle && (
+        <h2
+          class="font-display text-brand-500 mb-4 text-xl font-bold tracking-tight md:text-2xl"
+          {...bf(`${section}.summaryHeading`, "style_target", section)}
+        >
+          {summaryTitle}
+        </h2>
+      )}
+      {summaryCopy && (
+        <div {...bf(`${section}.summaryBody`, "style_target", section)}>
+          <BlogRichField value={summaryCopy} />
+        </div>
+      )}
+    </div>
+  )
+}
+
+{
+  (closingTitle || closingCopy || closingCta) && (
+    <div
+      id={closingAnchorId}
+      class="mt-14 scroll-mt-28"
+      {...bf(`${section}.closing.shell`, "container", section)}
+    >
+      {closingTitle && (
+        <h2
+          class="font-display text-brand-500 mb-4 text-xl font-bold tracking-tight md:text-2xl"
+          {...bf(`${section}.closingHeading`, "style_target", section)}
+        >
+          {closingTitle}
+        </h2>
+      )}
+      {closingCopy && (
+        <div
+          class="mb-6"
+          {...bf(`${section}.closingBody`, "style_target", section)}
+        >
+          <BlogRichField value={closingCopy} />
+        </div>
+      )}
+      {closingCta && href && (
+        <a
+          href={href}
+          class="btn-primary"
+          {...bf(`${section}.closingCta`, "chrome_denied", section)}
+        >
+          {closingCta}
+        </a>
+      )}
+    </div>
+  )
+}
+
+{
+  (authorName || authorRole || authorCredentials.length > 0) && (
+    <aside
+      class="blog-author"
+      {...bf(`${section}.authorBox`, "container", section)}
+    >
+      {authorName && <h2>{authorName}</h2>}
+      {authorRole && <p class="role">{authorRole}</p>}
+      {authorCredentials.length > 0 && (
+        <ul>
+          {authorCredentials.map((credential) => (
+            <li>{credential}</li>
+          ))}
+        </ul>
+      )}
+    </aside>
+  )
+}

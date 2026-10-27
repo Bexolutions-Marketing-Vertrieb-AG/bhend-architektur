@@ -1,28 +1,21 @@
 ---
 // SectionBlogArticle.astro — blog post template (hero + TOC + blocks + FAQ + CTAs)
+import BlogArticleBlocks from "~/components/blog/BlogArticleBlocks.astro"
+import BlogArticleClosing from "~/components/blog/BlogArticleClosing.astro"
+import BlogArticleFaq from "~/components/blog/BlogArticleFaq.astro"
+import BlogArticleToc from "~/components/blog/BlogArticleToc.astro"
+import type {
+  BlogAuthorBox,
+  BlogBlock,
+  BlogFaqItem,
+  BlogTocItem,
+} from "~/components/blog/types"
 import { translate } from "~/lib/i18n"
 import { bf } from "~/lib/bf"
 import { resolveReservationHref } from "~/lib/reservation"
 import type { ReservationMode } from "~/lib/reservation"
 import type { I18nString } from "~/types/i18n"
 import type { Locale } from "~/config/locales"
-
-interface TocItem {
-  id?: string
-  label?: I18nString
-}
-
-interface Block {
-  id?: string
-  heading?: I18nString
-  body?: I18nString
-  paragraphs?: I18nString[]
-}
-
-interface FaqItem {
-  question?: I18nString
-  answer?: I18nString
-}
 
 interface Props {
   id?: string
@@ -32,10 +25,10 @@ interface Props {
   image?: string
   imageAlt?: I18nString
   tocLabel?: I18nString
-  toc?: TocItem[]
-  blocks?: Block[]
+  toc?: BlogTocItem[]
+  blocks?: BlogBlock[]
   faqHeading?: I18nString
-  faq?: FaqItem[]
+  faq?: BlogFaqItem[]
   faqAnchorId?: string
   midCtaLabel?: I18nString
   summaryHeading?: I18nString
@@ -45,6 +38,9 @@ interface Props {
   closingBody?: I18nString
   closingCtaLabel?: I18nString
   closingAnchorId?: string
+  quote?: I18nString
+  quoteAttribution?: I18nString
+  authorBox?: BlogAuthorBox
   reservationMode?: ReservationMode
   reservationTarget?: string
   ctaHref?: string
@@ -72,6 +68,9 @@ const {
   closingBody,
   closingCtaLabel,
   closingAnchorId = "closing",
+  quote,
+  quoteAttribution,
+  authorBox,
   reservationMode = "mailto",
   reservationTarget = "info@bhend-architektur.ch",
   ctaHref,
@@ -82,14 +81,9 @@ const section = id
 const headline = translate(heading ?? title, locale)
 const sub = translate(subheading, locale)
 const alt = translate(imageAlt, locale) || headline
-const tocTitle = translate(tocLabel, locale) || "Inhaltsverzeichnis"
-const faqTitle = translate(faqHeading, locale)
 const midCta = translate(midCtaLabel, locale)
-const summaryTitle = translate(summaryHeading, locale)
-const summaryCopy = translate(summaryBody, locale)
-const closingTitle = translate(closingHeading, locale)
-const closingCopy = translate(closingBody, locale)
-const closingCta = translate(closingCtaLabel, locale)
+const quoteText = translate(quote, locale)
+const quoteAttr = translate(quoteAttribution, locale)
 const href = resolveReservationHref({
   reservationMode,
   reservationTarget,
@@ -138,170 +132,14 @@ const href = resolveReservationHref({
       )
     }
 
-    {
-      toc.length > 0 && (
-        <details
-          class="border-brand-200 mb-12 border"
-          open
-          {...bf(`${section}.toc`, "container", section)}
-        >
-          <summary
-            class="font-display text-brand-500 flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 text-lg font-bold tracking-tight"
-            {...bf(`${section}.tocLabel`, "style_target", section)}
-          >
-            <span>{tocTitle}</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.25"
-              class="shrink-0"
-              aria-hidden="true"
-            >
-              <path d="m6 9 6 6 6-6" />
-            </svg>
-          </summary>
-          <nav
-            class="border-brand-200 border-t px-4 py-3"
-            aria-label={tocTitle}
-          >
-            <ol class="flex flex-col gap-2">
-              {toc.map((item) => {
-                const itemId = (item.id ?? "").trim()
-                const label = translate(item.label, locale)
-                if (!itemId || !label) return null
-                return (
-                  <li>
-                    <a
-                      href={`#${itemId}`}
-                      class="text-ink enter:text-brand-500 text-base leading-snug"
-                    >
-                      {label}
-                    </a>
-                  </li>
-                )
-              })}
-            </ol>
-          </nav>
-        </details>
-      )
-    }
+    <BlogArticleToc
+      section={section}
+      tocLabel={tocLabel}
+      toc={toc}
+      locale={locale}
+    />
 
-    <div class="flex flex-col gap-12">
-      {
-        blocks.map((block) => {
-          const blockId = (block.id ?? "").trim()
-          const blockHeading = translate(block.heading, locale)
-          const body = translate(block.body, locale)
-          const extras = (block.paragraphs ?? [])
-            .map((p) => translate(p, locale))
-            .filter(Boolean)
-          if (!blockId) return null
-          return (
-            <article
-              id={blockId}
-              class="scroll-mt-28"
-              {...bf(`${section}.block.${blockId}.shell`, "container", section)}
-            >
-              {blockHeading && (
-                <h2
-                  class="font-display text-brand-500 mb-4 text-xl font-bold tracking-tight md:text-2xl"
-                  {...bf(
-                    `${section}.block.${blockId}.heading`,
-                    "style_target",
-                    section,
-                  )}
-                >
-                  {blockHeading}
-                </h2>
-              )}
-              {body && (
-                <p
-                  class="section-lead whitespace-pre-line"
-                  {...bf(
-                    `${section}.block.${blockId}.body`,
-                    "style_target",
-                    section,
-                  )}
-                >
-                  {body}
-                </p>
-              )}
-              {extras.map((paragraph, index) => (
-                <p
-                  class="section-lead mt-4 whitespace-pre-line"
-                  {...bf(
-                    `${section}.block.${blockId}.paragraph${index + 1}`,
-                    "style_target",
-                    section,
-                  )}
-                >
-                  {paragraph}
-                </p>
-              ))}
-            </article>
-          )
-        })
-      }
-    </div>
-
-    {
-      (faqTitle || faq.length > 0) && (
-        <div
-          id={faqAnchorId}
-          class="mt-14 scroll-mt-28"
-          {...bf(`${section}.faq.shell`, "container", section)}
-        >
-          {faqTitle && (
-            <h2
-              class="font-display text-brand-500 mb-6 text-xl font-bold tracking-tight md:text-2xl"
-              {...bf(`${section}.faqHeading`, "style_target", section)}
-            >
-              {faqTitle}
-            </h2>
-          )}
-          <dl class="border-brand-200 divide-brand-200 divide-y border">
-            {faq.map((item, index) => {
-              const q = translate(item.question, locale)
-              const a = translate(item.answer, locale)
-              const n = index + 1
-              if (!q && !a) return null
-              return (
-                <div class="grid gap-0 md:grid-cols-1">
-                  {q && (
-                    <dt
-                      class="bg-brand-50 text-ink px-4 py-3 text-base font-semibold"
-                      {...bf(
-                        `${section}.faq.item${n}.question`,
-                        "style_target",
-                        section,
-                      )}
-                    >
-                      {q}
-                    </dt>
-                  )}
-                  {a && (
-                    <dd
-                      class="text-ink px-4 py-3 text-base"
-                      {...bf(
-                        `${section}.faq.item${n}.answer`,
-                        "style_target",
-                        section,
-                      )}
-                    >
-                      {a}
-                    </dd>
-                  )}
-                </div>
-              )
-            })}
-          </dl>
-        </div>
-      )
-    }
+    <BlogArticleBlocks section={section} blocks={blocks} locale={locale} />
 
     {
       midCta && href && (
@@ -318,75 +156,37 @@ const href = resolveReservationHref({
     }
 
     {
-      (summaryTitle || summaryCopy) && (
-        <div
-          id={summaryAnchorId}
-          class="mt-14 scroll-mt-28"
-          {...bf(`${section}.summary.shell`, "container", section)}
+      quoteText && (
+        <blockquote
+          class="blog-quote"
+          {...bf(`${section}.quote`, "style_target", section)}
         >
-          {summaryTitle && (
-            <h2
-              class="font-display text-brand-500 mb-4 text-xl font-bold tracking-tight md:text-2xl"
-              {...bf(`${section}.summaryHeading`, "style_target", section)}
-            >
-              {summaryTitle}
-            </h2>
-          )}
-          {summaryCopy && (
-            <p
-              class="section-lead whitespace-pre-line"
-              {...bf(`${section}.summaryBody`, "style_target", section)}
-            >
-              {summaryCopy}
-            </p>
-          )}
-        </div>
+          <p>{quoteText}</p>
+          {quoteAttr && <footer>{quoteAttr}</footer>}
+        </blockquote>
       )
     }
 
-    {
-      (closingTitle || closingCopy || closingCta) && (
-        <div
-          id={closingAnchorId}
-          class="mt-14 scroll-mt-28"
-          {...bf(`${section}.closing.shell`, "container", section)}
-        >
-          {closingTitle && (
-            <h2
-              class="font-display text-brand-500 mb-4 text-xl font-bold tracking-tight md:text-2xl"
-              {...bf(`${section}.closingHeading`, "style_target", section)}
-            >
-              {closingTitle}
-            </h2>
-          )}
-          {closingCopy && (
-            <p
-              class="section-lead mb-6 whitespace-pre-line"
-              {...bf(`${section}.closingBody`, "style_target", section)}
-            >
-              {closingCopy}
-            </p>
-          )}
-          {closingCta && href && (
-            <a
-              href={href}
-              class="btn-primary"
-              {...bf(`${section}.closingCta`, "chrome_denied", section)}
-            >
-              {closingCta}
-            </a>
-          )}
-        </div>
-      )
-    }
+    <BlogArticleFaq
+      section={section}
+      faqHeading={faqHeading}
+      faq={faq}
+      faqAnchorId={faqAnchorId}
+      locale={locale}
+    />
+
+    <BlogArticleClosing
+      section={section}
+      locale={locale}
+      summaryHeading={summaryHeading}
+      summaryBody={summaryBody}
+      summaryAnchorId={summaryAnchorId}
+      closingHeading={closingHeading}
+      closingBody={closingBody}
+      closingCtaLabel={closingCtaLabel}
+      closingAnchorId={closingAnchorId}
+      authorBox={authorBox}
+      href={href}
+    />
   </div>
 </section>
-
-<style>
-  details > summary::-webkit-details-marker {
-    display: none;
-  }
-  details[open] summary svg {
-    transform: rotate(180deg);
-  }
-</style>

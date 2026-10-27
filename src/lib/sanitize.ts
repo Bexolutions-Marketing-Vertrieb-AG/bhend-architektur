@@ -43,6 +43,11 @@ export function sanitize(html: string): string {
   return sanitizeHtml(html, OPTIONS)
 }
 
+/** True when a CMS string looks like markup rather than plain text. */
+export function looksLikeHtml(value: string): boolean {
+  return /<[a-z][\s\S]*>/i.test(value)
+}
+
 /** Strip HTML tags for meta descriptions and plain-text excerpts. */
 export function stripHtml(html: string): string {
   return sanitizeHtml(html, { allowedTags: [], allowedAttributes: {} })

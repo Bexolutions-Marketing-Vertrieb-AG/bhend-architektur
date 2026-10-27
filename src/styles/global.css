@@ -103,6 +103,103 @@
     @apply text-ink font-sans text-xl leading-normal font-medium;
   }
 
+  /* Rich blog article bodies (SectionBlogArticle via SafeHtml). */
+  .blog-prose {
+    @apply text-ink font-sans text-xl leading-normal font-medium;
+  }
+
+  .blog-prose :where(p + p) {
+    @apply mt-4;
+  }
+
+  .blog-prose :where(ul, ol) {
+    @apply my-4 pl-6;
+  }
+
+  .blog-prose :where(ul) {
+    @apply list-disc;
+  }
+
+  .blog-prose :where(ol) {
+    @apply list-decimal;
+  }
+
+  .blog-prose :where(li + li) {
+    @apply mt-1;
+  }
+
+  .blog-prose :where(a) {
+    @apply text-brand-500 underline underline-offset-2;
+  }
+
+  .blog-prose :where(strong) {
+    @apply font-semibold;
+  }
+
+  .blog-prose :where(h3) {
+    @apply font-display text-brand-500 mt-6 mb-3 text-lg font-bold tracking-tight md:text-xl;
+  }
+
+  .blog-prose :where(table) {
+    @apply my-6 w-full border-collapse text-base;
+  }
+
+  .blog-prose :where(th, td) {
+    @apply border-brand-200 border px-3 py-2 text-left align-top;
+  }
+
+  .blog-prose :where(th) {
+    @apply bg-brand-50 font-semibold;
+  }
+
+  .blog-prose :where(figure) {
+    @apply my-8;
+  }
+
+  .blog-prose :where(img) {
+    @apply h-auto w-full;
+  }
+
+  .blog-prose :where(blockquote) {
+    @apply border-brand-500 my-6 border-l-4 pl-4 italic;
+  }
+
+  .blog-prose--faq {
+    @apply text-base;
+  }
+
+  .blog-quote {
+    @apply border-brand-500 text-ink my-10 border-l-4 pl-6;
+  }
+
+  .blog-quote p {
+    @apply font-display text-xl leading-snug font-bold tracking-tight italic md:text-2xl;
+  }
+
+  .blog-quote footer {
+    @apply text-muted mt-3 text-base font-medium not-italic;
+  }
+
+  .blog-author {
+    @apply border-brand-200 bg-brand-50 mt-14 border px-5 py-6;
+  }
+
+  .blog-author h2 {
+    @apply font-display text-brand-500 mb-2 text-xl font-bold tracking-tight;
+  }
+
+  .blog-author .role {
+    @apply text-muted mb-4 text-base font-medium;
+  }
+
+  .blog-author ul {
+    @apply list-disc pl-5 text-base;
+  }
+
+  .blog-author li + li {
+    @apply mt-1;
+  }
+
   /* Body copy on Leistungen service pages only (not global .section-lead). */
   .leistungen-body {
     @apply text-ink font-sans text-base leading-normal md:text-[20px];
