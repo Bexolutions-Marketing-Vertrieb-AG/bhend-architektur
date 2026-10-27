@@ -98,9 +98,21 @@ async function fetchGraphMedia(
 }
 
 async function fetchJsonFeed(feedUrl: string): Promise<InstagramPost[]> {
-  const res = await fetch(feedUrl, { headers: { Accept: "application/json" } })
+  const res = await fetch(feedUrl, {
+    headers: {
+      Accept: "application/json",
+      // rss.app sometimes answers 402 to bare Node fetches without a UA.
+      "User-Agent":
+        "Mozilla/5.0 (compatible; BhendArchitekturBot/1.0; +https://www.bhend-architektur.ch)",
+    },
+  })
   if (!res.ok) {
-    console.error("[instagram] JSON feed failed:", res.status)
+    const body = await res.text().catch(() => "")
+    console.error(
+      "[instagram] JSON feed failed:",
+      res.status,
+      body.slice(0, 120),
+    )
     return []
   }
   const raw = (await res.json()) as unknown
@@ -155,17 +167,7 @@ async function fetchJsonFeed(feedUrl: string): Promise<InstagramPost[]> {
   })
 }
 
-/** Stale rss.app / Instagram CDN hosts that routinely 403 outside IG's UI. */
-function looksExpiredCdn(url: string): boolean {
-  try {
-    return new URL(url).hostname.includes("fna.fbcdn.net")
-  } catch {
-    return true
-  }
-}
-
 async function mediaUrlReachable(url: string): Promise<boolean> {
-  if (looksExpiredCdn(url)) return false
   try {
     const res = await fetch(url, {
       method: "GET",
@@ -191,19 +193,24 @@ async function pickReachablePosts(
   posts: InstagramPost[],
   limit: number,
 ): Promise<InstagramPost[]> {
-  const preferred = posts.filter(
-    (post) => !looksExpiredCdn(post.thumbnailUrl || post.mediaUrl),
-  )
-  const checks = await Promise.all(
-    preferred.map(async (post) => ({
-      post,
-      ok: await mediaUrlReachable(post.thumbnailUrl || post.mediaUrl),
-    })),
-  )
-  return checks
-    .filter((entry) => entry.ok)
-    .map((entry) => entry.post)
-    .slice(0, limit)
+  // Probe in small batches so one slow CDN host cannot block the whole page.
+  const out: InstagramPost[] = []
+  const batchSize = 6
+  for (let i = 0; i < posts.length && out.length < limit; i += batchSize) {
+    const batch = posts.slice(i, i + batchSize)
+    const checks = await Promise.all(
+      batch.map(async (post) => ({
+        post,
+        ok: await mediaUrlReachable(post.thumbnailUrl || post.mediaUrl),
+      })),
+    )
+    for (const entry of checks) {
+      if (!entry.ok) continue
+      out.push(entry.post)
+      if (out.length >= limit) break
+    }
+  }
+  return out
 }
 
 /** Load latest posts for SSR. Never invents fake media. */
