@@ -97,10 +97,7 @@ async function fetchGraphMedia(
   })
 }
 
-async function fetchJsonFeed(
-  feedUrl: string,
-  limit: number,
-): Promise<InstagramPost[]> {
+async function fetchJsonFeed(feedUrl: string): Promise<InstagramPost[]> {
   const res = await fetch(feedUrl, { headers: { Accept: "application/json" } })
   if (!res.ok) {
     console.error("[instagram] JSON feed failed:", res.status)
@@ -119,44 +116,93 @@ async function fetchJsonFeed(
           ? (raw as { data: unknown[] }).data
           : []
 
-  return list
-    .flatMap((item, index) => {
-      if (!item || typeof item !== "object") return []
-      const row = item as Record<string, unknown>
-      const mediaUrl = String(
-        row.mediaUrl ??
-          row.media_url ??
-          row.image ??
-          (isJsonFeed ? "" : row.url) ??
-          "",
-      )
-      const permalink = String(
-        row.permalink ??
-          row.link ??
-          row.href ??
-          (isJsonFeed ? row.url : "") ??
-          "",
-      )
-      if (!mediaUrl || !permalink) return []
-      const post: InstagramPost = {
-        id: String(row.id ?? `json-${index}`),
-        permalink,
-        mediaUrl,
-        mediaType: String(row.mediaType ?? row.media_type ?? "IMAGE"),
-      }
-      if (typeof row.thumbnailUrl === "string")
-        post.thumbnailUrl = row.thumbnailUrl
-      else if (typeof row.thumbnail_url === "string")
-        post.thumbnailUrl = row.thumbnail_url
-      const caption = [row.caption, row.content_text, row.title].find(
-        (value): value is string =>
-          typeof value === "string" && value.trim() !== "",
-      )
-      if (caption) post.caption = caption
-      const timestamp = row.timestamp ?? row.date_published
-      if (typeof timestamp === "string") post.timestamp = timestamp
-      return [post]
+  return list.flatMap((item, index) => {
+    if (!item || typeof item !== "object") return []
+    const row = item as Record<string, unknown>
+    const mediaUrl = String(
+      row.mediaUrl ??
+        row.media_url ??
+        row.image ??
+        (isJsonFeed ? "" : row.url) ??
+        "",
+    )
+    const permalink = String(
+      row.permalink ??
+        row.link ??
+        row.href ??
+        (isJsonFeed ? row.url : "") ??
+        "",
+    )
+    if (!mediaUrl || !permalink) return []
+    const post: InstagramPost = {
+      id: String(row.id ?? `json-${index}`),
+      permalink,
+      mediaUrl,
+      mediaType: String(row.mediaType ?? row.media_type ?? "IMAGE"),
+    }
+    if (typeof row.thumbnailUrl === "string")
+      post.thumbnailUrl = row.thumbnailUrl
+    else if (typeof row.thumbnail_url === "string")
+      post.thumbnailUrl = row.thumbnail_url
+    const caption = [row.caption, row.content_text, row.title].find(
+      (value): value is string =>
+        typeof value === "string" && value.trim() !== "",
+    )
+    if (caption) post.caption = caption
+    const timestamp = row.timestamp ?? row.date_published
+    if (typeof timestamp === "string") post.timestamp = timestamp
+    return [post]
+  })
+}
+
+/** Stale rss.app / Instagram CDN hosts that routinely 403 outside IG's UI. */
+function looksExpiredCdn(url: string): boolean {
+  try {
+    return new URL(url).hostname.includes("fna.fbcdn.net")
+  } catch {
+    return true
+  }
+}
+
+async function mediaUrlReachable(url: string): Promise<boolean> {
+  if (looksExpiredCdn(url)) return false
+  try {
+    const res = await fetch(url, {
+      method: "GET",
+      signal: AbortSignal.timeout(2500),
+      headers: {
+        Accept: "image/*,*/*",
+        Referer: "https://www.instagram.com/",
+        "User-Agent":
+          "Mozilla/5.0 (compatible; BhendArchitekturBot/1.0; +https://www.bhend-architektur.ch)",
+      },
     })
+    if (res.body) {
+      await res.body.cancel().catch(() => undefined)
+    }
+    return res.ok
+  } catch {
+    return false
+  }
+}
+
+/** Keep posts whose image still loads; preserve order; stop at `limit`. */
+async function pickReachablePosts(
+  posts: InstagramPost[],
+  limit: number,
+): Promise<InstagramPost[]> {
+  const preferred = posts.filter(
+    (post) => !looksExpiredCdn(post.thumbnailUrl || post.mediaUrl),
+  )
+  const checks = await Promise.all(
+    preferred.map(async (post) => ({
+      post,
+      ok: await mediaUrlReachable(post.thumbnailUrl || post.mediaUrl),
+    })),
+  )
+  return checks
+    .filter((entry) => entry.ok)
+    .map((entry) => entry.post)
     .slice(0, limit)
 }
 
@@ -174,7 +220,13 @@ export async function fetchInstagramFeed(options?: {
 
   if (token && userId) {
     try {
-      const posts = await fetchGraphMedia(userId, token, limit)
+      // Over-fetch so dead CDN URLs can be replaced within `limit`.
+      const candidates = await fetchGraphMedia(
+        userId,
+        token,
+        Math.min(24, limit * 2),
+      )
+      const posts = await pickReachablePosts(candidates, limit)
       if (posts.length > 0) {
         return { profile, posts, source: "graph" }
       }
@@ -185,7 +237,8 @@ export async function fetchInstagramFeed(options?: {
 
   if (feedUrl) {
     try {
-      const posts = await fetchJsonFeed(feedUrl, limit)
+      const candidates = await fetchJsonFeed(feedUrl)
+      const posts = await pickReachablePosts(candidates, limit)
       if (posts.length > 0) {
         return { profile, posts, source: "json" }
       }
