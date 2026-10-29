@@ -4,7 +4,7 @@ import { fetchInstagramFeed } from "~/lib/instagram"
 export const prerender = false
 
 export const GET: APIRoute = async ({ url }) => {
-  const limit = Number(url.searchParams.get("limit") ?? "12")
+  const limit = Number(url.searchParams.get("limit") ?? "6")
   const username = url.searchParams.get("username") ?? undefined
   const feed = await fetchInstagramFeed({
     limit,

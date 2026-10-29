@@ -218,7 +218,7 @@ export async function fetchInstagramFeed(options?: {
   limit?: number
   username?: string
 }): Promise<FetchResult> {
-  const limit = Math.min(24, Math.max(1, options?.limit ?? 12))
+  const limit = Math.min(24, Math.max(1, options?.limit ?? 6))
   const profile = instagramProfile(options?.username)
 
   const token = (INSTAGRAM_ACCESS_TOKEN ?? "").trim()

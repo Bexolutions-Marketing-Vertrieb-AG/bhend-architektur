@@ -16,7 +16,7 @@ export async function enrichInstagramFeedSections(
     const limit =
       typeof section.limit === "number" && Number.isFinite(section.limit)
         ? section.limit
-        : 12
+        : 6
     const feed = await fetchInstagramFeed({ username, limit })
     out.push({
       ...section,

@@ -974,7 +974,7 @@ function careersSections() {
       id: "instagramFeed",
       username: "bhend.architektur",
       biography: de("Bauen für Menschen, gestalten für Generationen."),
-      limit: 12,
+      limit: 6,
       _orbi: { component: "SectionInstagramFeed" },
     },
   ]
