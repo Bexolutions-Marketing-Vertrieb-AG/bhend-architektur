@@ -10,6 +10,7 @@ interface Item {
   title?: I18nString
   text?: I18nString
   body?: I18nString
+  bullets?: I18nString[]
 }
 
 interface Props {
@@ -176,6 +177,9 @@ const headingClass =
               const n = index + 1
               const itemTitle = translate(item.title, locale)
               const itemBody = translate(item.text ?? item.body, locale)
+              const itemBullets = (item.bullets ?? [])
+                .map((bullet) => translate(bullet, locale))
+                .filter(Boolean)
               return (
                 <li class="flex gap-4">
                   <span
@@ -220,6 +224,32 @@ const headingClass =
                       >
                         {itemBody}
                       </p>
+                    )}
+                    {itemBullets.length > 0 && (
+                      <ul
+                        class:list={[
+                          "mt-2 list-disc space-y-2 pl-5",
+                          bodyClass,
+                          dark ? "text-brand-200" : "text-ink",
+                        ]}
+                        {...bf(
+                          `${section}.item${n}Bullets`,
+                          "style_target",
+                          section,
+                        )}
+                      >
+                        {itemBullets.map((bullet, bulletIndex) => (
+                          <li
+                            {...bf(
+                              `${section}.item${n}Bullet${bulletIndex + 1}`,
+                              "style_target",
+                              section,
+                            )}
+                          >
+                            {bullet}
+                          </li>
+                        ))}
+                      </ul>
                     )}
                   </div>
                 </li>
