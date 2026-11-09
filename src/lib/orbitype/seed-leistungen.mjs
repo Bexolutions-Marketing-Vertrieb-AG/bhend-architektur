@@ -312,9 +312,17 @@ export function energieberatungSections() {
         splitTitleBody(
           "Zielgerichtete Gebäudeanalysen\nDetaillierte und zielgerichtete Analysen Ihrer Gebäude für eine optimale Planung.",
         ),
-        splitTitleBody(
-          "Planung und Umsetzung von Modernisierungsstrategien\nProfessionelle Planung und Umsetzung von Modernisierungsstrategien für eine nachhaltige Gebäudeentwicklung.",
-        ),
+        {
+          ...splitTitleBody(
+            "Planung und Umsetzung von Modernisierungsstrategien\nProfessionelle Planung und Umsetzung von Modernisierungsstrategien für eine nachhaltige Gebäudeentwicklung.",
+          ),
+          bullets: [
+            de("GEAK mit Beratungsbericht"),
+            de("Minergie Standard"),
+            de("Minergie-P Standard"),
+            de("Minergie-A Standard"),
+          ],
+        },
       ],
       _orbi: { component: "SectionChecklistSplit" },
     },

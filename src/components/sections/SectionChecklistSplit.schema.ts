@@ -5,6 +5,8 @@ const itemSchema = z.object({
   title: i18nStringSchema.optional(),
   text: i18nStringSchema.optional(),
   body: i18nStringSchema.optional(),
+  /** Plain disc bullets under this item's body (no badge icons). */
+  bullets: z.array(i18nStringSchema).optional(),
 })
 
 export const sectionChecklistSplitSchema = z.object({
