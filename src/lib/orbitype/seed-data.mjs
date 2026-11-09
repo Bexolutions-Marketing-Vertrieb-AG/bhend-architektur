@@ -184,6 +184,18 @@ function teamSections() {
           email: "selina.vonaesch@bhend-architektur.ch",
           role: "Zeichnerin EFZ Architektur i. A.",
         }),
+        teamMember({
+          name: "Livia Siegenthaler",
+          image: "/images/team/livia-siegenthaler.jpg",
+          phone: "+41 62 798 00 00",
+          email: "livia.siegenthaler@bhend-architektur.ch",
+          role: "Marketing und Social Media",
+          studies: [
+            "Dipl. Betriebswirtschafterin HF",
+            "Dipl. Wirtschaftsfachfrau VSK",
+            "Kauffrau EFZ",
+          ],
+        }),
       ],
       _orbi: { component: "SectionTeamGrid" },
     },
