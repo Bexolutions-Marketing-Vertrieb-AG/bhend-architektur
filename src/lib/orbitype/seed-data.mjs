@@ -116,7 +116,7 @@ function teamSections() {
         teamMember({
           name: "Markus Moser",
           image: "/images/team/markus-moser.jpg",
-          phone: "+41 62 798 10 76",
+          phone: "+41 62 798 10 74",
           email: "markus.moser@bhend-architektur.ch",
           role: "Bauleiter",
           studies: [
@@ -128,7 +128,7 @@ function teamSections() {
         teamMember({
           name: "Joel Gerber",
           image: "/images/team/joel-gerber.jpg",
-          phone: "+41 62 798 10 76",
+          phone: "+41 62 798 10 74",
           email: "joel.gerber@bhend-architektur.ch",
           role: "Architekt HF",
           studies: ["Berufsbildner"],
