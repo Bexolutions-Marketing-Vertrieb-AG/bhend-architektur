@@ -29,7 +29,12 @@
     "paths": {
       "main": "/images/industrie-gewerbe/fassadensanierung-gewerbebetrieb-rothrist/main.jpg"
     },
-    "gallery": [],
+    "gallery": [
+      "/images/industrie-gewerbe/fassadensanierung-gewerbebetrieb-rothrist/gallery-1.jpg",
+      "/images/industrie-gewerbe/fassadensanierung-gewerbebetrieb-rothrist/gallery-2.jpg",
+      "/images/industrie-gewerbe/fassadensanierung-gewerbebetrieb-rothrist/gallery-3.jpg",
+      "/images/industrie-gewerbe/fassadensanierung-gewerbebetrieb-rothrist/gallery-4.jpg"
+    ],
     "node": "276:9448",
     "category": "industrie-gewerbe"
   },
@@ -44,7 +49,12 @@
     "paths": {
       "main": "/images/industrie-gewerbe/dachsanierung-sheddaecher-zofingen/main.jpg"
     },
-    "gallery": [],
+    "gallery": [
+      "/images/industrie-gewerbe/dachsanierung-sheddaecher-zofingen/gallery-1.jpg",
+      "/images/industrie-gewerbe/dachsanierung-sheddaecher-zofingen/gallery-2.jpg",
+      "/images/industrie-gewerbe/dachsanierung-sheddaecher-zofingen/gallery-3.jpg",
+      "/images/industrie-gewerbe/dachsanierung-sheddaecher-zofingen/gallery-4.jpg"
+    ],
     "node": "276:9467",
     "category": "industrie-gewerbe"
   }

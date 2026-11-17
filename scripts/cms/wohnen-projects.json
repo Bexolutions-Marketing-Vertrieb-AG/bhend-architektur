@@ -41,7 +41,11 @@
       "/images/wohnen/erweiterung-einfamilienhaus-projekt/gallery-1.jpg",
       "/images/wohnen/erweiterung-einfamilienhaus-projekt/gallery-2.jpg",
       "/images/wohnen/erweiterung-einfamilienhaus-projekt/gallery-3.jpg",
-      "/images/wohnen/erweiterung-einfamilienhaus-projekt/gallery-4.jpg"
+      "/images/wohnen/erweiterung-einfamilienhaus-projekt/gallery-4.jpg",
+      "/images/wohnen/erweiterung-einfamilienhaus-projekt/gallery-5.jpg",
+      "/images/wohnen/erweiterung-einfamilienhaus-projekt/gallery-6.jpg",
+      "/images/wohnen/erweiterung-einfamilienhaus-projekt/gallery-7.jpg",
+      "/images/wohnen/erweiterung-einfamilienhaus-projekt/gallery-8.jpg"
     ],
     "node": "274:9074",
     "category": "wohnen"
@@ -54,8 +58,17 @@
     "year": 2024,
     "description": "Nach einem schweren Brand konnte dieses Einfamilienhaus in Wikon umfassend saniert und für die betroffene Familie wieder bewohnbar gemacht werden. Das Obergeschoss wurde abgebrochen und neu mit grösserer Höhe wieder aufgebaut. Es entstanden ist ein modernes Zuhause mit interessanter Raumstruktur und verbessertem Wärmeschutz.",
     "projektId": "24-22 Rothenfluh",
-    "paths": {},
-    "gallery": [],
+    "paths": {
+      "main": "/images/wohnen/brandsanierung-einfamilienhaus-projekt/main.jpg"
+    },
+    "gallery": [
+      "/images/wohnen/brandsanierung-einfamilienhaus-projekt/gallery-1.jpg",
+      "/images/wohnen/brandsanierung-einfamilienhaus-projekt/gallery-2.jpg",
+      "/images/wohnen/brandsanierung-einfamilienhaus-projekt/gallery-3.jpg",
+      "/images/wohnen/brandsanierung-einfamilienhaus-projekt/gallery-4.jpg",
+      "/images/wohnen/brandsanierung-einfamilienhaus-projekt/gallery-5.jpg",
+      "/images/wohnen/brandsanierung-einfamilienhaus-projekt/gallery-6.jpg"
+    ],
     "node": "274:9075",
     "category": "wohnen"
   },
@@ -154,7 +167,11 @@
       "/images/wohnen/zwei-einfamilienhaeuser-neubau-safenwil/gallery-1.jpg",
       "/images/wohnen/zwei-einfamilienhaeuser-neubau-safenwil/gallery-2.jpg",
       "/images/wohnen/zwei-einfamilienhaeuser-neubau-safenwil/gallery-3.jpg",
-      "/images/wohnen/zwei-einfamilienhaeuser-neubau-safenwil/gallery-4.jpg"
+      "/images/wohnen/zwei-einfamilienhaeuser-neubau-safenwil/gallery-4.jpg",
+      "/images/wohnen/zwei-einfamilienhaeuser-neubau-safenwil/gallery-5.jpg",
+      "/images/wohnen/zwei-einfamilienhaeuser-neubau-safenwil/gallery-6.jpg",
+      "/images/wohnen/zwei-einfamilienhaeuser-neubau-safenwil/gallery-7.jpg",
+      "/images/wohnen/zwei-einfamilienhaeuser-neubau-safenwil/gallery-8.jpg"
     ],
     "node": "276:9200",
     "category": "wohnen"
@@ -266,7 +283,11 @@
       "/images/wohnen/zweifamilienhaus-mauensee/gallery-1.jpg",
       "/images/wohnen/zweifamilienhaus-mauensee/gallery-2.jpg",
       "/images/wohnen/zweifamilienhaus-mauensee/gallery-3.jpg",
-      "/images/wohnen/zweifamilienhaus-mauensee/gallery-4.jpg"
+      "/images/wohnen/zweifamilienhaus-mauensee/gallery-4.jpg",
+      "/images/wohnen/zweifamilienhaus-mauensee/gallery-5.jpg",
+      "/images/wohnen/zweifamilienhaus-mauensee/gallery-6.jpg",
+      "/images/wohnen/zweifamilienhaus-mauensee/gallery-7.jpg",
+      "/images/wohnen/zweifamilienhaus-mauensee/gallery-8.jpg"
     ],
     "node": "276:9331",
     "category": "wohnen"
@@ -285,7 +306,10 @@
     "gallery": [
       "/images/wohnen/doppeleinfamilienhaus-safenwil/gallery-1.jpg",
       "/images/wohnen/doppeleinfamilienhaus-safenwil/gallery-2.jpg",
-      "/images/wohnen/doppeleinfamilienhaus-safenwil/gallery-3.jpg"
+      "/images/wohnen/doppeleinfamilienhaus-safenwil/gallery-3.jpg",
+      "/images/wohnen/doppeleinfamilienhaus-safenwil/gallery-4.jpg",
+      "/images/wohnen/doppeleinfamilienhaus-safenwil/gallery-5.jpg",
+      "/images/wohnen/doppeleinfamilienhaus-safenwil/gallery-6.jpg"
     ],
     "node": "276:9361",
     "category": "wohnen"
@@ -305,7 +329,11 @@
       "/images/wohnen/zweifamilienhaus-rothrist/gallery-1.jpg",
       "/images/wohnen/zweifamilienhaus-rothrist/gallery-2.jpg",
       "/images/wohnen/zweifamilienhaus-rothrist/gallery-3.jpg",
-      "/images/wohnen/zweifamilienhaus-rothrist/gallery-4.jpg"
+      "/images/wohnen/zweifamilienhaus-rothrist/gallery-4.jpg",
+      "/images/wohnen/zweifamilienhaus-rothrist/gallery-5.jpg",
+      "/images/wohnen/zweifamilienhaus-rothrist/gallery-6.jpg",
+      "/images/wohnen/zweifamilienhaus-rothrist/gallery-7.jpg",
+      "/images/wohnen/zweifamilienhaus-rothrist/gallery-8.jpg"
     ],
     "node": "276:9388",
     "category": "wohnen"
@@ -487,7 +515,11 @@
       "/images/wohnen/b-b-gasthof-allegra-kuengoldingen-oftringn/gallery-1.jpg",
       "/images/wohnen/b-b-gasthof-allegra-kuengoldingen-oftringn/gallery-2.jpg",
       "/images/wohnen/b-b-gasthof-allegra-kuengoldingen-oftringn/gallery-3.jpg",
-      "/images/wohnen/b-b-gasthof-allegra-kuengoldingen-oftringn/gallery-4.jpg"
+      "/images/wohnen/b-b-gasthof-allegra-kuengoldingen-oftringn/gallery-4.jpg",
+      "/images/wohnen/b-b-gasthof-allegra-kuengoldingen-oftringn/gallery-5.jpg",
+      "/images/wohnen/b-b-gasthof-allegra-kuengoldingen-oftringn/gallery-6.jpg",
+      "/images/wohnen/b-b-gasthof-allegra-kuengoldingen-oftringn/gallery-7.jpg",
+      "/images/wohnen/b-b-gasthof-allegra-kuengoldingen-oftringn/gallery-8.jpg"
     ],
     "node": "427:3519",
     "category": "wohnen"
