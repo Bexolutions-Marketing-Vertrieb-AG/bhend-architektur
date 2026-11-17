@@ -42,6 +42,37 @@ function truncate(text: string, max: number): string {
   return `${clean.slice(0, max - 1).trimEnd()}…`
 }
 
+/** Append site name when the document title does not already include the brand. */
+function withBrand(title: string, max = 60): string {
+  const brand = siteName()
+  const clean = title.trim() || brand
+  if (clean.toLowerCase().includes(brand.toLowerCase())) {
+    return truncate(clean, max)
+  }
+  const suffix = ` | ${brand}`
+  const budget = max - suffix.length
+  if (budget < 12) return truncate(clean, max)
+  return `${truncate(clean, budget)}${suffix}`
+}
+
+function postMetaDescription(
+  post: Post,
+  locale: Locale,
+  headline: string,
+): string {
+  const lead = stripHtml(translate(post.lead, locale))
+  if (lead) return truncate(lead, 160)
+  const category = (post.category ?? "").toString().trim()
+  if (category && isProjectCategory(category)) {
+    const label = PROJECT_CATEGORY_LABELS[category]
+    return truncate(
+      `${headline} – Projekt (${label}) von ${organizationName()} in Oftringen, Aargau.`,
+      160,
+    )
+  }
+  return truncate(siteDescription(), 160)
+}
+
 function meaningfulHead(head: Page["head"], key: string): string | undefined {
   if (!head) return undefined
   const value = head[key]
@@ -123,7 +154,7 @@ export function buildPageSeo(options: {
 }): SeoData {
   const { page, locale, path } = options
   const pageTitle = translate(page.title, locale) || siteName()
-  const title = truncate(meaningfulHead(page.head, "title") || pageTitle, 60)
+  const title = withBrand(meaningfulHead(page.head, "title") || pageTitle)
   const description = truncate(
     stripHtml(
       meaningfulHead(page.head, "description") ||
@@ -197,11 +228,8 @@ export function buildPostSeo(options: {
 }): SeoData {
   const { post, locale, path } = options
   const headline = translate(post.title, locale) || siteName()
-  const title = truncate(headline, 60)
-  const description = truncate(
-    stripHtml(translate(post.lead, locale) || siteDescription()),
-    160,
-  )
+  const title = withBrand(headline)
+  const description = postMetaDescription(post, locale, headline)
   const canonical = absoluteUrl(path)
   const ogImage = post.img
     ? absoluteUrl(post.img)

@@ -2,7 +2,7 @@
 import type { SeoData } from "~/lib/seo"
 import { PUBLIC_TWITTER_CREATOR, PUBLIC_TWITTER_SITE } from "astro:env/client"
 
-type Props = SeoData
+type Props = SeoData & { robots?: string }
 
 const {
   title,
@@ -15,6 +15,7 @@ const {
   ogImage,
   ogType,
   twitterCard,
+  robots,
 } = Astro.props
 
 const twitterSite = PUBLIC_TWITTER_SITE || Astro.props.twitterSite
@@ -23,6 +24,7 @@ const twitterCreator = PUBLIC_TWITTER_CREATOR || Astro.props.twitterCreator
 
 <title>{title}</title>
 <meta name="description" content={description} />
+{robots && <meta name="robots" content={robots} />}
 {keywords.length > 0 && <meta name="keywords" content={keywords.join(", ")} />}
 <link rel="canonical" href={canonical} />
 {

@@ -63,8 +63,16 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const vercelEnv = process.env["VERCEL_ENV"]
   const forceNoindex = process.env["NOINDEX"] === "true"
   const isProduction = vercelEnv === "production"
+  // Operator welcome + orphan blog list (hub is /blog). Detail /posts/{id} stays indexed.
+  const isOperatorOrOrphanPath =
+    pathname === "/setup" ||
+    pathname.startsWith("/setup/") ||
+    pathname === "/posts"
   const shouldNoindex =
-    forceNoindex || isApi || (vercelEnv !== undefined && !isProduction)
+    forceNoindex ||
+    isApi ||
+    (vercelEnv !== undefined && !isProduction) ||
+    isOperatorOrOrphanPath
 
   if (shouldNoindex) {
     response.headers.set("X-Robots-Tag", "noindex, nofollow")

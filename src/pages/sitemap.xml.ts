@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro"
+import { EXCLUDED_INDEX_SLUGS } from "~/config/indexing"
 import { listPageSlugs } from "~/lib/orbitype/pages"
 import { listPublishedPostIds } from "~/lib/orbitype/posts"
 import { LOCALES, DEFAULT_LOCALE } from "~/config/locales"
@@ -9,13 +10,10 @@ import { siteUrl } from "~/lib/site"
 
 export const prerender = false
 
-/** Operator-only pages that must never be indexed. */
-const EXCLUDED_SLUGS = new Set(["setup"])
-
 export const GET: APIRoute = async () => {
   const base = siteUrl()
   const pages = (await listPageSlugs())
-    .filter((page) => !EXCLUDED_SLUGS.has(page.slug))
+    .filter((page) => !EXCLUDED_INDEX_SLUGS.has(page.slug))
     .sort((a, b) => sortKey(a.slug).localeCompare(sortKey(b.slug)))
   const posts = await listPublishedPostIds()
 

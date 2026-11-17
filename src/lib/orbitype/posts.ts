@@ -166,12 +166,13 @@ export async function getProject(id: string): Promise<Post | null> {
   return post
 }
 
+/** All published posts (blog + projects) for sitemap, llms, and static paths. */
 export async function listPublishedPostIds(): Promise<
   Array<Pick<Post, "id" | "title" | "created_at" | "updated_at">>
 > {
   if (isMockMode() || !hasSqlConfigured()) {
     return seedPosts()
-      .filter((p) => p.status?.value === "published" && isBlogPost(p))
+      .filter((p) => p.status?.value === "published")
       .map(({ id, title, created_at, updated_at }) => ({
         id,
         title,
@@ -184,7 +185,6 @@ export async function listPublishedPostIds(): Promise<
     return await orbitypeSql(
       `SELECT id, title, created_at, updated_at FROM posts
        WHERE status->>'value' = 'published'
-         AND (category IS NULL OR category = '')
        ORDER BY updated_at DESC`,
     )
   } catch (error) {
