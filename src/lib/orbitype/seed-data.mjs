@@ -1056,7 +1056,11 @@ export function buildSeedPages({
       },
       img: "/images/home/hero.jpg",
       keywords: ["architektur", "bauen", "oftringen", "bhend"],
-      head: {},
+      head: {
+        title: "Architektur Büro Oftringen",
+        description:
+          "Bhend Architektur AG in Oftringen plant und realisiert Wohn-, Gewerbe- und öffentliche Bauprojekte — massgeschneidert, nachhaltig und persönlich im Kanton Aargau.",
+      },
       created_at: now(),
       updated_at: now(),
       sections: homeSections(),
