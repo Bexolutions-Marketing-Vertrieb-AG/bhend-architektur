@@ -152,7 +152,7 @@ export function brandschutzSections() {
         "Als erfahrenes Architekturbüro übernehmen wir Gesamtplanungen von ganzen Bauvorhaben.",
       ),
       body: de(
-        "In der Brandschutzplanung fliessen nun alle Informationen zusammen, die genauen Wünsche der Bauherrschaft, die Architekturplanung, die Materialwahl, der Personen- oder der Sachwertschutz, die Arbeitsabläufe des Betriebes. Durch die Zusammenarbeit aller Beteiligten kann der Brandschutz effizient in die Gesamtplanung eingearbeitet werden. Der Abschluss der Planung wird mit einer amtlichen Brandschutzbewilligung erreicht.",
+        "Von der ersten Idee bis zur Fertigstellung begleiten wir Bauvorhaben mit einem Blick für das Ganze. Dabei koordinieren wir die verschiedenen Fachplaner, stimmen Abläufe aufeinander ab und berücksichtigen sowohl die gestalterischen als auch die technischen und wirtschaftlichen Anforderungen. So stellen wir sicher, dass alle Beteiligten optimal zusammenarbeiten und das Bauprojekt effizient und zielgerichtet umgesetzt wird.",
       ),
       lead: de(
         "Erfahrungen haben wir im Neubau vor allem aber im Umbau und im Sanierungsbereich bei:",
@@ -224,25 +224,25 @@ export function realisierungSections() {
       imageAlt: de("Bauleitung vor Ort"),
       items: [
         splitTitleBody(
-          "Koordination der Fachplaner\nKoordination und Kommunikation mit diversen Fachpartnern für eine reibungslose Projektabwicklung.",
+          "Koordination der Fachplaner\nKoordination verschiedener Fachplaner für eine zielgerichtete und reibungslose Projektabwicklung.",
         ),
         splitTitleBody(
-          "Ausschreibung pro Gewerk, inklusive Kostenvergleich, Vergabe und Vertragswesen\nDetaillierte Ausschreibungen pro Gewerk, Kostenvergleiche, Vergabe und Vertragsmanagement.",
+          "Ausschreibung pro Gewerk, inklusive Kostenvergleich, Vergabe und Vertragswesen\nAusschreibung, Kostenvergleich und Vergabe: Einholung passender Angebote pro Gewerk, sorgfältige Prüfung der Kosten und Sicherstellung einer klaren Vereinbarung mit den beauftragten Unternehmen.",
         ),
         splitTitleBody(
           "Erstellung und Überwachung des Bauterminplans\nPräzise Erstellung und kontinuierliche Überwachung des Bauterminplans.",
         ),
         splitTitleBody(
-          "Planung des Zahlungsflusses von der Bauherrschaft an die Unternehmer\nEffiziente Planung des Zahlungsflusses für eine reibungslose Abwicklung der Bauprojekte.",
+          "Planung des Zahlungsflusses\nEffiziente Planung des Zahlungsflusses von der Bauherrschaft an die Unternehmer für eine reibungslose Abwicklung der Bauprojekte.",
         ),
         splitTitleBody(
-          "Bauleitung bis zur Schlüsselübergabe\nProfessionelle Bauleitung und Begleitung bis zur Schlüsselübergabe.",
+          "Vom Anfang bis zum Schluss\nProfessionelle Bauleitung und Begleitung vom ersten Kontakt bis zur Schlüsselübergabe.",
         ),
         splitTitleBody(
           "Überwachung der Garantiezeiten\nKontinuierliche Überwachung der Garantiezeiten für langfristige Sicherheit.",
         ),
         splitTitleBody(
-          "Sicherstellung eines kontinuierlichen Informationsflusses zur Bauherrschaft\nEffektive Sicherstellung eines kontinuierlichen Informationsflusses zur Bauherrschaft.",
+          "Kommunikation\nEffektive Sicherstellung eines kontinuierlichen Informationsflusses zur Bauherrschaft.",
         ),
         splitTitleBody(
           "Periodische Endkostenprognosen\nRegelmässige Endkostenprognosen für eine transparente Budgetplanung.",

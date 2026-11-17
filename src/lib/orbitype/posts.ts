@@ -15,6 +15,14 @@ function isBlogPost(post: Post): boolean {
   return !category || !isProjectCategory(category)
 }
 
+function projectSortIndex(post: Post): number {
+  const section = post.sections?.[0] as { sortIndex?: unknown } | undefined
+  const value = section?.sortIndex
+  return typeof value === "number" && Number.isFinite(value)
+    ? value
+    : Number.MAX_SAFE_INTEGER
+}
+
 function isProjectPost(post: Post, category?: ProjectCategory): boolean {
   const value = (post.category ?? "").toString().trim()
   if (!isProjectCategory(value)) return false
@@ -93,6 +101,8 @@ export async function listProjects(
         (p) => (p.status?.value ?? "") === status && isProjectPost(p, category),
       )
       .sort((a, b) => {
+        const sortDiff = projectSortIndex(a) - projectSortIndex(b)
+        if (sortDiff !== 0) return sortDiff
         const yearDiff = (b.year ?? 0) - (a.year ?? 0)
         if (yearDiff !== 0) return yearDiff
         return (a.created_at ?? "").localeCompare(b.created_at ?? "")
@@ -106,7 +116,14 @@ export async function listProjects(
       `SELECT * FROM posts
        WHERE status->>'value' = :status
          AND category = :category
-       ORDER BY year DESC NULLS LAST, created_at ASC NULLS LAST
+       ORDER BY
+         CASE
+           WHEN sections->0->>'sortIndex' ~ '^[0-9]+$'
+           THEN (sections->0->>'sortIndex')::int
+           ELSE NULL
+         END ASC NULLS LAST,
+         year DESC NULLS LAST,
+         created_at ASC NULLS LAST
        LIMIT :limit`,
       { status, category, limit },
     )
