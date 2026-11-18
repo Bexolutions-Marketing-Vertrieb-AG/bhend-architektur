@@ -227,7 +227,7 @@ export function realisierungSections() {
           "Koordination der Fachplaner\nKoordination verschiedener Fachplaner für eine zielgerichtete und reibungslose Projektabwicklung.",
         ),
         splitTitleBody(
-          "Ausschreibung pro Gewerk, inklusive Kostenvergleich, Vergabe und Vertragswesen\nAusschreibung, Kostenvergleich und Vergabe: Einholung passender Angebote pro Gewerk, sorgfältige Prüfung der Kosten und Sicherstellung einer klaren Vereinbarung mit den beauftragten Unternehmen.",
+          "Ausschreibung, Kostenvergleich und Vergabe\nEinholung passender Angebote pro Gewerk, sorgfältige Prüfung der Kosten und Sicherstellung einer klaren Vereinbarung mit den beauftragten Unternehmen.",
         ),
         splitTitleBody(
           "Erstellung und Überwachung des Bauterminplans\nPräzise Erstellung und kontinuierliche Überwachung des Bauterminplans.",
