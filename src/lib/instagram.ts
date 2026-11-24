@@ -29,7 +29,26 @@ export type InstagramProfile = {
 type FetchResult = {
   profile: InstagramProfile
   posts: InstagramPost[]
-  source: "graph" | "json" | "empty"
+  source: "graph" | "json" | "static" | "empty"
+}
+
+/** Local previews used only when Graph API and JSON feed both fail. */
+const STATIC_PREVIEW_COUNT = 6
+
+function staticPreviewPosts(
+  profileUrl: string,
+  limit: number,
+): InstagramPost[] {
+  const count = Math.min(STATIC_PREVIEW_COUNT, limit)
+  return Array.from({ length: count }, (_, index) => {
+    const n = String(index + 1).padStart(2, "0")
+    return {
+      id: `static-${n}`,
+      permalink: profileUrl,
+      mediaUrl: `/images/instagram/${n}.jpg`,
+      mediaType: "IMAGE",
+    }
+  })
 }
 
 function usernameFromEnv(fallback = "bhend.architektur"): string {
@@ -252,6 +271,13 @@ export async function fetchInstagramFeed(options?: {
     } catch (error) {
       console.error("[instagram] JSON feed error:", error)
     }
+  }
+
+  // Temporary local previews while rss.app / Graph API are unavailable.
+  // Skip CDN reachability probes — these are same-origin files.
+  const staticPosts = staticPreviewPosts(profile.profileUrl, limit)
+  if (staticPosts.length > 0) {
+    return { profile, posts: staticPosts, source: "static" }
   }
 
   return { profile, posts: [], source: "empty" }
